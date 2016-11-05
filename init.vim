@@ -8,9 +8,16 @@ Plug 'chriskempson/base16-vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
 Plug 'ervandew/supertab'
+Plug 'Raimondi/delimitMate'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'mbbill/undotree'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'sebastianmarkow/deoplete-rust'
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+Plug 'fishbullet/deoplete-ruby'
+Plug 'zchee/deoplete-clang'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -25,18 +32,29 @@ Plug 'tpope/vim-rbenv'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'vim-scripts/peaksea'
 Plug 'tpope/vim-commentary'
-Plug 'puppetlabs/puppet-syntax-vim'
+" Plug 'puppetlabs/puppet-syntax-vim'
 Plug 'tpope/vim-eunuch'
 Plug 'bling/vim-airline'
 Plug 'chase/vim-ansible-yaml'
 Plug 'thoughtbot/vim-rspec'
-Plug 'rhysd/vim-crystal'
-Plug 'rust-lang/rust.vim'
+" Plug 'elixir-lang/vim-elixir'
+Plug 'vim-erlang/vim-erlang-runtime'
+Plug 'fsharp/vim-fsharp', {
+      \ 'for': 'fsharp',
+      \ 'do':  'make fsautocomplete',
+      \}
+Plug 'ElmCast/elm-vim'
+" Plug 'rhysd/vim-crystal'
+" Plug 'rust-lang/rust.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+Plug 'leafgarland/typescript-vim'
+Plug 'neovimhaskell/haskell-vim'
+" Plug 'ElmCast/elm-vim'
 Plug 'danro/rename.vim'
-Plug 'slim-template/vim-slim'
-Plug 'fatih/vim-go'
+" Plug 'slim-template/vim-slim'
+Plug 'neovimhaskell/haskell-vim'
+" Plug 'fatih/vim-go'
 " Plug 'tpope/vim-dispatch'
 " Plug 'msanders/snipmate.vim'
 " Plug 'tpope/vim-haml'
@@ -176,12 +194,51 @@ set splitright
 set splitbelow
 "}}}
 
-" Syntax Highlighting and File Types {{{
+" Syntax Highlighting and File Types {{{"{{{
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.ino setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.pp setlocal ft=puppet
 autocmd! BufNewFile,BufRead *.md setlocal ft=markdown
 "}}}
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" Syntastic settings
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+"}}}
+
+" Haskel-vim Config {{{
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+"}}}
+
+" Mapping for curly brace line split"{{{
+imap <C-c> <CR><Esc>O"}}}
+
+" Deoplete Config {{{
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
+"}}}
+
+" Syntastic {{{
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+" }}}
 
 " Spell Checking {{{
 autocmd Filetype gitcommit setlocal spell
@@ -284,9 +341,12 @@ let g:gitgutter_eager = 0
 let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','html','sh']
 "}}}
 
-" {{{ yankring
+" {{{ yankring"{{{
 let g:yankring_history_dir = '$VIM'
 "}}}
+
+"fix for yankring and neovim
+let g:yankring_clipboard_monitor=0"}}}
 
 " RSpec Stuff {{{
 autocmd FileType ruby
