@@ -37,8 +37,10 @@ Plug 'thoughtbot/vim-rspec'
 Plug 'rhysd/vim-crystal'
 Plug 'rust-lang/rust.vim'
 Plug 'derekwyatt/vim-scala'
+Plug 'neovimhaskell/haskell-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+Plug 'mattn/emmet-vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'danro/rename.vim'
 " Plug 'slim-template/vim-slim'
@@ -57,7 +59,8 @@ filetype plugin indent on    " required
 " available.
 " silent! colorscheme solarized
 " colorscheme solarized
-colorscheme herald
+" colorscheme herald
+colorscheme peachpuff
 "color ir_black
 "colorscheme Tomorrow-Night-Bright
 set background=dark
@@ -194,6 +197,23 @@ autocmd! BufNewFile,BufRead *.md setlocal ft=markdown
 imap <C-c> <CR><Esc>O
 " }}}
 
+" Emmet-vim Config {{{
+" Still requires trailing ,
+let g:user_emmet_leader_key='<C-Z>'
+"}}}
+
+" Toggle Relative Line Numbers {{{
+function! NumberToggle()
+    if(&relativenumber == 1)
+      set nornu
+    else
+      set relativenumber
+    endif
+endfunc
+set relativenumber
+nnoremap <leader>; :call NumberToggle()<CR>
+"}}}
+
 " Syntastic {{{
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -203,6 +223,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint', 'tern-lint']
 "}}}
 
 " Spell Checking {{{
