@@ -12,7 +12,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'ervandew/supertab'
 Plug 'vim-scripts/YankRing.vim'
-Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 Plug 'Raimondi/delimitMate'
 Plug 'mbbill/undotree'
 Plug 'godlygeek/tabular'
@@ -36,8 +36,12 @@ Plug 'chase/vim-ansible-yaml'
 Plug 'thoughtbot/vim-rspec'
 Plug 'rhysd/vim-crystal'
 Plug 'rust-lang/rust.vim'
-Plug 'derekwyatt/vim-scala'
-Plug 'neovimhaskell/haskell-vim'
+" Plug 'derekwyatt/vim-scala'
+" Plug 'neovimhaskell/haskell-vim'
+Plug 'fsharp/vim-fsharp', {
+      \ 'for': 'fsharp',
+      \ 'do':  'make fsautocomplete',
+      \}
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'mattn/emmet-vim'
