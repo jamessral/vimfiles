@@ -8,10 +8,14 @@ Plug 'chriskempson/base16-vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
 Plug 'ervandew/supertab'
 Plug 'Raimondi/delimitMate'
+<<<<<<< HEAD
 Plug 'mattn/emmet-vim'
 Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
+=======
+>>>>>>> 079f6da97b03ce42a5a8f4b7f302a5b790719fd2
 Plug 'vim-scripts/YankRing.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'mhartington/deoplete-typescript'
@@ -23,6 +27,11 @@ Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'scrooloose/syntastic'
 Plug 'mbbill/undotree'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'sebastianmarkow/deoplete-rust'
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+Plug 'fishbullet/deoplete-ruby'
+Plug 'zchee/deoplete-clang'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -42,14 +51,35 @@ Plug 'tpope/vim-eunuch'
 Plug 'bling/vim-airline'
 Plug 'chase/vim-ansible-yaml'
 Plug 'thoughtbot/vim-rspec'
+<<<<<<< HEAD
 " Plug 'rhysd/vim-crystal'
 Plug 'rust-lang/rust.vim'
+=======
+" Plug 'elixir-lang/vim-elixir'
+Plug 'vim-erlang/vim-erlang-runtime'
+Plug 'fsharp/vim-fsharp', {
+      \ 'for': 'fsharp',
+      \ 'do':  'make fsautocomplete',
+      \}
+Plug 'ElmCast/elm-vim'
+" Plug 'rhysd/vim-crystal'
+" Plug 'rust-lang/rust.vim'
+>>>>>>> 079f6da97b03ce42a5a8f4b7f302a5b790719fd2
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
+<<<<<<< HEAD
 " Plug 'arrufat/vala.vim'
 Plug 'danro/rename.vim'
 " Plug 'slim-template/vim-slim'
+=======
+Plug 'leafgarland/typescript-vim'
+Plug 'neovimhaskell/haskell-vim'
+" Plug 'ElmCast/elm-vim'
+Plug 'danro/rename.vim'
+" Plug 'slim-template/vim-slim'
+Plug 'neovimhaskell/haskell-vim'
+>>>>>>> 079f6da97b03ce42a5a8f4b7f302a5b790719fd2
 " Plug 'fatih/vim-go'
 " Plug 'tpope/vim-dispatch'
 " Plug 'msanders/snipmate.vim'
@@ -203,12 +233,55 @@ endfunc
 nnoremap <leader>; :call NumberToggle()<cr>
 "}}}
 
+<<<<<<< HEAD
 " Syntax Highlighting, linting, and File Types {{{
+=======
+" Syntax Highlighting and File Types {{{"{{{
+>>>>>>> 079f6da97b03ce42a5a8f4b7f302a5b790719fd2
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.ino setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.pp setlocal ft=puppet
 autocmd! BufNewFile,BufRead *.md setlocal ft=markdown
 "}}}
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" Syntastic settings
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+"}}}
+
+" Haskel-vim Config {{{
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+"}}}
+
+" Mapping for curly brace line split"{{{
+imap <C-c> <CR><Esc>O"}}}
+
+" Deoplete Config {{{
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
+"}}}
+
+" Syntastic {{{
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+" }}}
 
 " Syntastic {{{
 set statusline+=%#warningmsg#
@@ -345,9 +418,17 @@ let g:gitgutter_eager = 0
 let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','html','sh']
 "}}}
 
+<<<<<<< HEAD
 " {{{ yankring
 let g:yankring_history_dir = '$HOME/yankring_history'
+=======
+" {{{ yankring"{{{
+let g:yankring_history_dir = '$VIM'
+>>>>>>> 079f6da97b03ce42a5a8f4b7f302a5b790719fd2
 "}}}
+
+"fix for yankring and neovim
+let g:yankring_clipboard_monitor=0"}}}
 
 " RSpec Stuff {{{
 autocmd FileType ruby

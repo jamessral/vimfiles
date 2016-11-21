@@ -1,52 +1,60 @@
-set nocompatible                " choose no compatibility with legacy vi
+set nocompatible
 
-" For Vundle {{{
+" For Vim-Plug {{{
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin()
 
-Plugin 'chriskempson/vim-tomorrow-theme'
-Plugin 'tpope/vim-vividchalk'
-Plugin 'chriskempson/base16-vim'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'ervandew/supertab'
-Plugin 'vim-scripts/YankRing.vim'
-Plugin 'mbbill/undotree'
-Plugin 'godlygeek/tabular'
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-markdown'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-bundler'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-rails.git'
-Plugin 'mileszs/ack.vim'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'tpope/vim-rbenv'
-Plugin 'vim-scripts/bufexplorer.zip'
-Plugin 'vim-scripts/peaksea'
-Plugin 'tpope/vim-commentary'
-Plugin 'puppetlabs/puppet-syntax-vim'
-Plugin 'tpope/vim-eunuch'
-Plugin 'bling/vim-airline'
-Plugin 'chase/vim-ansible-yaml'
-Plugin 'thoughtbot/vim-rspec'
-Plugin 'rhysd/vim-crystal'
-Plugin 'rust-lang/rust.vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'danro/rename.vim'
-Plugin 'slim-template/vim-slim'
-Plugin 'fatih/vim-go'
-" Plugin 'tpope/vim-dispatch'
-" Plugin 'msanders/snipmate.vim'
-" Plugin 'tpope/vim-haml'
+Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'tpope/vim-vividchalk'
+Plug 'chriskempson/base16-vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'ervandew/supertab'
+Plug 'vim-scripts/YankRing.vim'
+" Plug 'Valloric/YouCompleteMe'
+Plug 'Raimondi/delimitMate'
+Plug 'mbbill/undotree'
+Plug 'godlygeek/tabular'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-rails'
+Plug 'mileszs/ack.vim'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'tpope/vim-rbenv'
+Plug 'vim-scripts/bufexplorer.zip'
+Plug 'vim-scripts/peaksea'
+Plug 'tpope/vim-commentary'
+Plug 'puppetlabs/puppet-syntax-vim'
+Plug 'tpope/vim-eunuch'
+Plug 'bling/vim-airline'
+Plug 'chase/vim-ansible-yaml'
+Plug 'thoughtbot/vim-rspec'
+Plug 'rhysd/vim-crystal'
+Plug 'rust-lang/rust.vim'
+" Plug 'derekwyatt/vim-scala'
+" Plug 'neovimhaskell/haskell-vim'
+Plug 'fsharp/vim-fsharp', {
+      \ 'for': 'fsharp',
+      \ 'do':  'make fsautocomplete',
+      \}
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'mattn/emmet-vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'danro/rename.vim'
+" Plug 'slim-template/vim-slim'
+" Plug 'fatih/vim-go'
+" Plug 'tpope/vim-dispatch'
+" Plug 'msanders/snipmate.vim'
+" Plug 'tpope/vim-haml'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
+call plug#end()            " required
 filetype plugin indent on    " required
 " }}}
 
@@ -54,7 +62,9 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 " silent! colorscheme solarized
-colorscheme solarized
+" colorscheme solarized
+" colorscheme herald
+colorscheme peachpuff
 "color ir_black
 "colorscheme Tomorrow-Night-Bright
 set background=dark
@@ -185,6 +195,39 @@ autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.ino setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.pp setlocal ft=puppet
 autocmd! BufNewFile,BufRead *.md setlocal ft=markdown
+"}}}
+
+" Split lines on braces (), {}, [] {{{
+imap <C-c> <CR><Esc>O
+" }}}
+
+" Emmet-vim Config {{{
+" Still requires trailing ,
+let g:user_emmet_leader_key='<C-Z>'
+"}}}
+
+" Toggle Relative Line Numbers {{{
+function! NumberToggle()
+    if(&relativenumber == 1)
+      set nornu
+    else
+      set relativenumber
+    endif
+endfunc
+set relativenumber
+nnoremap <leader>; :call NumberToggle()<CR>
+"}}}
+
+" Syntastic {{{
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint', 'tern-lint']
 "}}}
 
 " Spell Checking {{{
@@ -331,4 +374,3 @@ map <Leader>r :call RunCurrentSpecFile()<CR>
 map <Leader>e :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
-" }}}
