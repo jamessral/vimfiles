@@ -9,7 +9,19 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'ervandew/supertab'
+Plug 'Raimondi/delimitMate'
+Plug 'mattn/emmet-vim'
+Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
 Plug 'vim-scripts/YankRing.vim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'mhartington/deoplete-typescript'
+Plug 'sebastianmarkow/deoplete-rust'
+Plug '/JesseKPhillips/d.vim'
+Plug 'fishbullet/deoplete-ruby'
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+" Plug 'Valloric/YouCompleteMe'
+" Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+Plug 'scrooloose/syntastic'
 Plug 'mbbill/undotree'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-fugitive'
@@ -25,21 +37,22 @@ Plug 'tpope/vim-rbenv'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'vim-scripts/peaksea'
 Plug 'tpope/vim-commentary'
-Plug 'puppetlabs/puppet-syntax-vim'
+" Plug 'puppetlabs/puppet-syntax-vim'
 Plug 'tpope/vim-eunuch'
 Plug 'bling/vim-airline'
 Plug 'chase/vim-ansible-yaml'
 Plug 'thoughtbot/vim-rspec'
-Plug 'rhysd/vim-crystal'
+" Plug 'rhysd/vim-crystal'
 Plug 'rust-lang/rust.vim'
 Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
+" Plug 'arrufat/vala.vim'
 Plug 'danro/rename.vim'
-Plug 'slim-template/vim-slim'
-Plug 'fatih/vim-go'
+" Plug 'slim-template/vim-slim'
+" Plug 'fatih/vim-go'
 " Plug 'tpope/vim-dispatch'
 " Plug 'msanders/snipmate.vim'
-" Plug 'tpope/vim-haml'
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
@@ -50,9 +63,10 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 " silent! colorscheme solarized
-colorscheme solarized
+"colorscheme solarized
 "color ir_black
-"colorscheme Tomorrow-Night-Bright
+" colorscheme Tomorrow-Night-Bright
+colorscheme monokai
 set background=dark
 call togglebg#map("<F5>")
 " }}}
@@ -174,14 +188,61 @@ nnoremap <leader>-  yypv$r-
 :nnoremap <Space> za
 set splitright
 set splitbelow
+
+" Relative numbering
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set nornu
+    set number
+  else
+    set rnu
+  endif
+endfunc
+
+" Toggle between normal and relative numbering.
+nnoremap <leader>; :call NumberToggle()<cr>
 "}}}
 
-" Syntax Highlighting and File Types {{{
+" Syntax Highlighting, linting, and File Types {{{
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.ino setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.pp setlocal ft=puppet
 autocmd! BufNewFile,BufRead *.md setlocal ft=markdown
 "}}}
+
+" Syntastic {{{
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_typescript_checkers = ['tslint']
+let g:syntastic_javascript_checkers = ['eslint']
+"}}}
+
+" Use deoplete. {{{
+let g:deoplete#enable_at_startup = 1
+let g:python3_host_prog = '/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages'
+let g:tern_request_timeout = 1
+let g:tern_show_signature_in_pum = '0'  " This do disable full signature type on autocomplete
+"}}}
+
+" Emmet-vim {{{
+let g:user_emmet_leader_key='<C-Z>'
+"}}}
+
+" Line splitting for brackets in insert mode [] () {}"{{{
+imap <C-c> <CR><Esc>O
+"}}}
+
+" Hybrid Line Numbers {{{
+set relativenumber
+set number
+" }}}
 
 " Spell Checking {{{
 autocmd Filetype gitcommit setlocal spell
@@ -285,7 +346,7 @@ let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','html','sh']
 "}}}
 
 " {{{ yankring
-let g:yankring_history_dir = '$VIM'
+let g:yankring_history_dir = '$HOME/yankring_history'
 "}}}
 
 " RSpec Stuff {{{
