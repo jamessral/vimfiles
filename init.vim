@@ -6,19 +6,21 @@ Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'tpope/vim-vividchalk'
 Plug 'chriskempson/base16-vim'
 Plug 'altercation/vim-colors-solarized'
+Plug 'flazz/vim-colorschemes'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'ervandew/supertab'
 Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim'
-Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
+" Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
+" Plug 'vim-perl/vim-perl6'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'mhartington/deoplete-typescript'
-Plug 'sebastianmarkow/deoplete-rust'
+" Plug 'sebastianmarkow/deoplete-rust'
 Plug '/JesseKPhillips/d.vim'
 Plug 'fishbullet/deoplete-ruby'
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+" Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 " Plug 'Valloric/YouCompleteMe'
 " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'scrooloose/syntastic'
@@ -31,7 +33,7 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-rails'
-Plug 'mileszs/ack.vim'
+" Plug 'mileszs/ack.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-rbenv'
 Plug 'vim-scripts/bufexplorer.zip'
@@ -44,9 +46,13 @@ Plug 'chase/vim-ansible-yaml'
 Plug 'thoughtbot/vim-rspec'
 " Plug 'rhysd/vim-crystal'
 Plug 'rust-lang/rust.vim'
+Plug 'udalov/kotlin-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
+Plug 'ianks/vim-tsx'
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'Quramy/tsuquyomi'
 " Plug 'arrufat/vala.vim'
 Plug 'danro/rename.vim'
 " Plug 'slim-template/vim-slim'
@@ -66,7 +72,7 @@ filetype plugin indent on    " required
 "colorscheme solarized
 "color ir_black
 " colorscheme Tomorrow-Night-Bright
-colorscheme monokai
+colorscheme wombat256i
 set background=dark
 call togglebg#map("<F5>")
 " }}}
@@ -219,16 +225,25 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+:let g:syntastic_loc_list_height=5
 
 let g:syntastic_typescript_checkers = ['tslint']
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_ruby_checkers = ['rsense']
+let g:syntastic_python_checkers = ['pyflakes']
 "}}}
 
 " Use deoplete. {{{
 let g:deoplete#enable_at_startup = 1
-let g:python3_host_prog = '/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages'
+let g:python3_host_prog = '/Users/Lauren/.pyenv/shims/python3'
+let g:python_host_prog = '/Users/Lauern/.pyenv/shims/python2'
 let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = '0'  " This do disable full signature type on autocomplete
+"}}}
+
+" Typescript Config {{{
+autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
+autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
 "}}}
 
 " Emmet-vim {{{
