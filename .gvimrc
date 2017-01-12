@@ -1,9 +1,9 @@
-set nocompatible
+set nocompatible                " choose no compatibility with legacy vi
 
 " For Vim-Plug {{{
 filetype off
 call plug#begin()
-
+" All of your Plugins must be added before the following line
 Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'tpope/vim-vividchalk'
 Plug 'chriskempson/base16-vim'
@@ -13,18 +13,14 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'ervandew/supertab'
 Plug 'Raimondi/delimitMate'
+Plug 'jiangmiao/auto-pairs'
 Plug 'mattn/emmet-vim'
 " Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
 " Plug 'vim-perl/vim-perl6'
 Plug 'vim-scripts/YankRing.vim'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'mhartington/deoplete-typescript'
-" Plug 'sebastianmarkow/deoplete-rust'
 " Plug '/JesseKPhillips/d.vim'
-Plug 'fishbullet/deoplete-ruby'
-" Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-" Plug 'Valloric/YouCompleteMe'
-" Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+Plug 'Valloric/YouCompleteMe'
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'scrooloose/syntastic'
 Plug 'mbbill/undotree'
 Plug 'godlygeek/tabular'
@@ -52,21 +48,24 @@ Plug 'thoughtbot/vim-rspec'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
-Plug 'ianks/vim-tsx'
-Plug 'flowtype/vim-flow'
-Plug 'artur-shaik/vim-javacomplete2'
-" Plug 'zchee/deoplete-clang'
-" Plug 'landaire/deoplete-swift'
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'Quramy/tsuquyomi'
+" Plug 'ianks/vim-tsx'
+Plug 'flowtype/vim-flow', {
+            \ 'autoload': {
+            \     'filetypes': 'javascript'
+            \ }}
+" Plug 'artur-shaik/vim-javacomplete2'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+" Plug 'Quramy/tsuquyomi'
 " Plug 'arrufat/vala.vim'
 Plug 'danro/rename.vim'
 " Plug 'slim-template/vim-slim'
-" Plug 'fatih/vim-go'
+Plug 'fatih/vim-go'
+Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 " Plug 'tpope/vim-dispatch'
 " Plug 'msanders/snipmate.vim'
 
-" All of your Plugins must be added before the following line
+
+
 call plug#end()            " required
 filetype plugin indent on    " required
 " }}}
@@ -75,10 +74,9 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 " silent! colorscheme solarized
-"colorscheme solarized
-"color ir_black
-" colorscheme Tomorrow-Night-Bright
 colorscheme Monokai
+"color ir_black
+"colorscheme Tomorrow-Night-Bright
 set background=dark
 call togglebg#map("<F5>")
 " }}}
@@ -200,22 +198,20 @@ nnoremap <leader>-  yypv$r-
 :nnoremap <Space> za
 set splitright
 set splitbelow
-
-" Relative numbering
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set nornu
-    set number
-  else
-    set rnu
-  endif
-endfunc
-
-" Toggle between normal and relative numbering.
-nnoremap <leader>; :call NumberToggle()<cr>
 "}}}
 
-" Syntax Highlighting, linting, and File Types {{{
+" For MacVim {{{
+if has("gui_macvim")
+  set macmeta
+"  set transparency=15
+  set go=aem
+  set fu
+  map <D-t> :CommandT<CR>
+  "macmenu &File.New\ Tab key=<nop>
+endif
+"}}}
+
+" Syntax Highlighting and File Types {{{
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.ino setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.pp setlocal ft=puppet
@@ -237,16 +233,6 @@ let g:syntastic_typescript_checkers = ['tslint']
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_ruby_checkers = ['rsense']
 let g:syntastic_python_checkers = ['pyflakes']
-"}}}
-
-" Use deoplete. {{{
-let g:deoplete#enable_at_startup = 1
-let g:python3_host_prog = '/Users/Lauren/.pyenv/shims/python3'
-let g:python_host_prog = '/Users/Lauern/.pyenv/shims/python2'
-let g:tern_request_timeout = 1
-let g:tern_show_signature_in_pum = '0'  " This do disable full signature type on autocomplete
-let g:deoplete#sources#clang#libclang_path = '/usr/local/Cellar/llvm/3.9.1/lib/libclang.dylib'
-let g:deoplete#sources#clang#clang_header = 'usr/local/Cellar/llvm/lib/clang'
 "}}}
 
 " Typescript Config {{{
@@ -369,7 +355,7 @@ let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','html','sh']
 "}}}
 
 " {{{ yankring
-let g:yankring_history_dir = '$HOME/yankring_history'
+let g:yankring_history_dir = '~/yankring_history'
 "}}}
 
 " RSpec Stuff {{{
@@ -411,3 +397,4 @@ map <Leader>r :call RunCurrentSpecFile()<CR>
 map <Leader>e :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
+" }}}
