@@ -1,19 +1,27 @@
-set nocompatible
-
+set nocompatible                " choose no compatibility with legacy vi
+set noswapfile
 " For Vim-Plug {{{
 filetype off
 call plug#begin()
-
+" All of your Plugins must be added before the following line
 Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'tpope/vim-vividchalk'
 Plug 'chriskempson/base16-vim'
 Plug 'altercation/vim-colors-solarized'
+Plug 'flazz/vim-colorschemes'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'ervandew/supertab'
-Plug 'vim-scripts/YankRing.vim'
-" Plug 'Valloric/YouCompleteMe'
 Plug 'Raimondi/delimitMate'
+Plug 'jiangmiao/auto-pairs'
+Plug 'mattn/emmet-vim'
+" Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
+" Plug 'vim-perl/vim-perl6'
+Plug 'vim-scripts/YankRing.vim'
+" Plug '/JesseKPhillips/d.vim'
+Plug 'Valloric/YouCompleteMe'
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+Plug 'scrooloose/syntastic'
 Plug 'mbbill/undotree'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-fugitive'
@@ -23,37 +31,41 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-rails'
-Plug 'mileszs/ack.vim'
+" Plug 'mileszs/ack.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-rbenv'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'vim-scripts/peaksea'
 Plug 'tpope/vim-commentary'
-Plug 'puppetlabs/puppet-syntax-vim'
+" Plug 'puppetlabs/puppet-syntax-vim'
 Plug 'tpope/vim-eunuch'
 Plug 'bling/vim-airline'
 Plug 'chase/vim-ansible-yaml'
 Plug 'thoughtbot/vim-rspec'
-Plug 'rhysd/vim-crystal'
-Plug 'rust-lang/rust.vim'
-" Plug 'derekwyatt/vim-scala'
-" Plug 'neovimhaskell/haskell-vim'
-Plug 'fsharp/vim-fsharp', {
-      \ 'for': 'fsharp',
-      \ 'do':  'make fsautocomplete',
-      \}
+" Plug 'rhysd/vim-crystal'
+" Plug 'rust-lang/rust.vim'
+" Plug 'udalov/kotlin-vim'
 Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'mattn/emmet-vim'
 Plug 'leafgarland/typescript-vim'
+Plug 'mxw/vim-jsx'
+" Plug 'ianks/vim-tsx'
+Plug 'flowtype/vim-flow', {
+            \ 'autoload': {
+            \     'filetypes': 'javascript'
+            \ }}
+" Plug 'artur-shaik/vim-javacomplete2'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+" Plug 'Quramy/tsuquyomi'
+" Plug 'arrufat/vala.vim'
 Plug 'danro/rename.vim'
 " Plug 'slim-template/vim-slim'
-" Plug 'fatih/vim-go'
+Plug 'fatih/vim-go'
+Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 " Plug 'tpope/vim-dispatch'
 " Plug 'msanders/snipmate.vim'
-" Plug 'tpope/vim-haml'
 
-" All of your Plugins must be added before the following line
+
+
 call plug#end()            " required
 filetype plugin indent on    " required
 " }}}
@@ -62,9 +74,7 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 " silent! colorscheme solarized
-" colorscheme solarized
-" colorscheme herald
-colorscheme peachpuff
+colorscheme Monokai
 "color ir_black
 "colorscheme Tomorrow-Night-Bright
 set background=dark
@@ -190,32 +200,16 @@ set splitright
 set splitbelow
 "}}}
 
+" GUI Settings {{{
+set guifont=Source\ Code\ Pro\ 11
+set guioptions-=l guioptions-=r guioptions-=T guioptions-=R guioptions-=m
+" }}}
+
 " Syntax Highlighting and File Types {{{
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.ino setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.pp setlocal ft=puppet
 autocmd! BufNewFile,BufRead *.md setlocal ft=markdown
-"}}}
-
-" Split lines on braces (), {}, [] {{{
-imap <C-c> <CR><Esc>O
-" }}}
-
-" Emmet-vim Config {{{
-" Still requires trailing ,
-let g:user_emmet_leader_key='<C-Z>'
-"}}}
-
-" Toggle Relative Line Numbers {{{
-function! NumberToggle()
-    if(&relativenumber == 1)
-      set nornu
-    else
-      set relativenumber
-    endif
-endfunc
-set relativenumber
-nnoremap <leader>; :call NumberToggle()<CR>
 "}}}
 
 " Syntastic {{{
@@ -227,8 +221,31 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint', 'tern-lint']
+let g:syntastic_loc_list_height=5
+
+let g:syntastic_typescript_checkers = ['tslint']
+let g:syntastic_javascript_checkers = ['eslint', 'flow']
+let g:syntastic_ruby_checkers = ['rsense']
+let g:syntastic_python_checkers = ['pyflakes']
 "}}}
+
+" Typescript Config {{{
+autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
+autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
+"}}}
+
+" Emmet-vim {{{
+let g:user_emmet_leader_key='<C-Z>'
+"}}}
+
+" Line splitting for brackets in insert mode [] () {}"{{{
+imap <C-c> <CR><Esc>O
+"}}}
+
+" Hybrid Line Numbers {{{
+set relativenumber
+set number
+" }}}
 
 " Spell Checking {{{
 autocmd Filetype gitcommit setlocal spell
@@ -332,7 +349,7 @@ let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','html','sh']
 "}}}
 
 " {{{ yankring
-let g:yankring_history_dir = '$VIM'
+let g:yankring_history_dir = '~/yankring_history'
 "}}}
 
 " RSpec Stuff {{{
@@ -374,3 +391,4 @@ map <Leader>r :call RunCurrentSpecFile()<CR>
 map <Leader>e :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
+" }}}

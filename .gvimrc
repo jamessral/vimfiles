@@ -1,4 +1,5 @@
 set nocompatible                " choose no compatibility with legacy vi
+set noswapfile
 
 " For Vim-Plug {{{
 filetype off
@@ -200,16 +201,18 @@ set splitright
 set splitbelow
 "}}}
 
-" For MacVim {{{
-if has("gui_macvim")
-  set macmeta
-"  set transparency=15
-  set go=aem
-  set fu
-  map <D-t> :CommandT<CR>
-  "macmenu &File.New\ Tab key=<nop>
-endif
-"}}}
+" GUI Settings {{{
+set guifont=Source\ Code\ Pro\ 12
+set guioptions-=l
+set guioptions-=r
+set guioptions-=T
+set guioptions-=R
+set guioptions-=m
+set guioptions-=L
+" fullscreen
+map <silent> <F11>
+\    :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
+" }}}
 
 " Syntax Highlighting and File Types {{{
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
@@ -230,7 +233,7 @@ let g:syntastic_check_on_wq = 0
 :let g:syntastic_loc_list_height=5
 
 let g:syntastic_typescript_checkers = ['tslint']
-let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_checkers = ['eslint', 'flow']
 let g:syntastic_ruby_checkers = ['rsense']
 let g:syntastic_python_checkers = ['pyflakes']
 "}}}
