@@ -38,6 +38,7 @@ Plug 'mxw/vim-jsx'
 Plug 'flowtype/vim-flow'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'danro/rename.vim'
+Plug 'leafo/moonscript-vim'
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
@@ -50,9 +51,9 @@ filetype plugin indent on    " required
 " silent! colorscheme solarized
 "colorscheme solarized
 "color ir_black
-" colorscheme Tomorrow-Night-Bright
-colorscheme herald
-set background=dark
+" colorscheme summerfruit256
+colorscheme solarized
+set background=light
 call togglebg#map("<F5>")
 " }}}
 
@@ -202,7 +203,7 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_loc_list_height=5
 
@@ -215,7 +216,11 @@ let g:syntastic_python_checkers = ['pyflakes']
 "}}}
 
 " Use deoplete. {{{
+" use tab for complete and scrolling
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#file#enable_buffer_path = 1 "Use the current file for relative path
 let g:python3_host_prog = '/Users/jsral/.pyenv/shims/python'
 let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = '0'  " This do disable full signature type on autocomplete
