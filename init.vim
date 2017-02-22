@@ -1,4 +1,7 @@
 set nocompatible
+set ttimeout
+set ttimeoutlen=0
+set matchtime=0
 
 " For Vim-Plug {{{
 filetype off
@@ -14,6 +17,7 @@ Plug 'mattn/emmet-vim'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'fishbullet/deoplete-ruby'
+Plug 'kchmck/vim-coffee-script'
 Plug 'scrooloose/syntastic'
 Plug 'mbbill/undotree'
 Plug 'godlygeek/tabular'
@@ -49,10 +53,8 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 " silent! colorscheme solarized
-"colorscheme solarized
-"color ir_black
 " colorscheme summerfruit256
-colorscheme solarized
+colorscheme PaperColor
 set background=light
 call togglebg#map("<F5>")
 " }}}
@@ -106,10 +108,21 @@ set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital letter
 
 " easier navigation between split windows
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
+" nnoremap <c-j> <c-w>j
+" nnoremap <c-k> <c-w>k
+" nnoremap <c-h> <c-w>h
+" nnoremap <c-l> <c-w>l
+nnoremap <C-c> <esc>
+nnoremap <SPACE> <C-w>
+nnoremap <SPACE>v <C-w>v
+nnoremap <SPACE>s <C-w>s
+nnoremap <SPACE>h <C-w>h
+nnoremap <SPACE>j <C-w>j
+nnoremap <SPACE>k <C-w>k
+nnoremap <SPACE>l <C-w>l
+
+" save with space space
+nnoremap <space><space> :wa<cr>:w<cr>
 
 " Maps Alt-[h,j,k,l] to resizing a window split
 map <silent> <A-h> <C-w><
@@ -226,6 +239,11 @@ let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = '0'  " This do disable full signature type on autocomplete
 "}}}
 
+" For Love2d {{{
+" launch with leader + l
+nnoremap <Leader>l :!/Applications/love.app/Contents/MacOS/love .<CR>
+"}}}
+
 " Typescript Config {{{
 autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
 autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
@@ -236,7 +254,7 @@ let g:user_emmet_leader_key='<C-Z>'
 "}}}
 
 " Line splitting for brackets in insert mode [] () {}"{{{
-imap <C-c> <CR><Esc>O
+imap <C-l> <CR><Esc>O
 "}}}
 
 " Hybrid Line Numbers {{{
@@ -384,7 +402,7 @@ autocmd FileType ruby
 
 "let g:rspec_command = "!spring rspec {spec}"
 
-map <Leader>r :call RunCurrentSpecFile()<CR>
-map <Leader>e :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
+" map <Leader>r :call RunCurrentSpecFile()<CR>
+" map <Leader>e :call RunNearestSpec()<CR>
+" map <Leader>l :call RunLastSpec()<CR>
+" map <Leader>a :call RunAllSpecs()<CR>
