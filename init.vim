@@ -1,4 +1,5 @@
 set nocompatible
+set noswapfile
 set ttimeout
 set ttimeoutlen=0
 set matchtime=0
@@ -9,7 +10,9 @@ call plug#begin()
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'flazz/vim-colorschemes'
+Plug 'rakr/vim-one'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'gabesoft/vim-ags'
 Plug 'scrooloose/nerdtree'
 Plug 'ervandew/supertab'
 Plug 'Raimondi/delimitMate'
@@ -54,9 +57,14 @@ filetype plugin indent on    " required
 " available.
 " silent! colorscheme solarized
 " colorscheme summerfruit256
-colorscheme PaperColor
-set background=light
+colorscheme one
+set background=dark
 call togglebg#map("<F5>")
+
+" gui colors if iTerm
+if $TERM_PROGRAM =~ "iTerm"
+  set termguicolors
+endif
 " }}}
 
 " Vim Settings {{{
@@ -120,15 +128,16 @@ nnoremap <SPACE>h <C-w>h
 nnoremap <SPACE>j <C-w>j
 nnoremap <SPACE>k <C-w>k
 nnoremap <SPACE>l <C-w>l
+nnoremap <SPACE>c <C-w>c
 
 " save with space space
 nnoremap <space><space> :wa<cr>:w<cr>
 
 " Maps Alt-[h,j,k,l] to resizing a window split
-map <silent> <A-h> <C-w><
-map <silent> <A-j> <C-W>-
-map <silent> <A-k> <C-W>+
-map <silent> <A-l> <C-w>>
+map <silent> <M-h> <C-w><
+map <silent> <M-j> <C-W>-
+map <silent> <M-k> <C-W>+
+map <silent> <M-l> <C-w>>
 
 "set ai           " always set autoindenting on
 
