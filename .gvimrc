@@ -1,27 +1,27 @@
-set nocompatible                " choose no compatibility with legacy vi
+set nocompatible
 set noswapfile
+set ttimeout
+set ttimeoutlen=0
+set matchtime=0
 
 " For Vim-Plug {{{
 filetype off
 call plug#begin()
-" All of your Plugins must be added before the following line
-Plug 'chriskempson/vim-tomorrow-theme'
-Plug 'tpope/vim-vividchalk'
-Plug 'chriskempson/base16-vim'
+
 Plug 'altercation/vim-colors-solarized'
 Plug 'flazz/vim-colorschemes'
+Plug 'rakr/vim-one'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'gabesoft/vim-ags'
 Plug 'scrooloose/nerdtree'
 Plug 'ervandew/supertab'
 Plug 'Raimondi/delimitMate'
-Plug 'jiangmiao/auto-pairs'
 Plug 'mattn/emmet-vim'
-" Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
-" Plug 'vim-perl/vim-perl6'
 Plug 'vim-scripts/YankRing.vim'
-" Plug '/JesseKPhillips/d.vim'
 Plug 'Valloric/YouCompleteMe'
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'fishbullet/deoplete-ruby'
+Plug 'kchmck/vim-coffee-script'
 Plug 'scrooloose/syntastic'
 Plug 'mbbill/undotree'
 Plug 'godlygeek/tabular'
@@ -32,41 +32,23 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-rails'
-" Plug 'mileszs/ack.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-rbenv'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'vim-scripts/peaksea'
 Plug 'tpope/vim-commentary'
-" Plug 'puppetlabs/puppet-syntax-vim'
 Plug 'tpope/vim-eunuch'
 Plug 'bling/vim-airline'
 Plug 'chase/vim-ansible-yaml'
 Plug 'thoughtbot/vim-rspec'
-" Plug 'rhysd/vim-crystal'
-" Plug 'rust-lang/rust.vim'
-" Plug 'udalov/kotlin-vim'
 Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
-" Plug 'ianks/vim-tsx'
-Plug 'flowtype/vim-flow', {
-            \ 'autoload': {
-            \     'filetypes': 'javascript'
-            \ }}
-" Plug 'artur-shaik/vim-javacomplete2'
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-" Plug 'Quramy/tsuquyomi'
-" Plug 'arrufat/vala.vim'
+Plug 'flowtype/vim-flow'
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'danro/rename.vim'
-" Plug 'slim-template/vim-slim'
-Plug 'fatih/vim-go'
-Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
-" Plug 'tpope/vim-dispatch'
-" Plug 'msanders/snipmate.vim'
+Plug 'leafo/moonscript-vim'
 
-
-
+" All of your Plugins must be added before the following line
 call plug#end()            " required
 filetype plugin indent on    " required
 " }}}
@@ -75,11 +57,15 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 " silent! colorscheme solarized
-colorscheme Monokai
-"color ir_black
-"colorscheme Tomorrow-Night-Bright
-set background=dark
+" colorscheme summerfruit256
+silent! colorscheme one
+set background=light
 call togglebg#map("<F5>")
+
+" gui colors if iTerm
+if $TERM_PROGRAM =~ "iTerm"
+  set termguicolors
+endif
 " }}}
 
 " Vim Settings {{{
@@ -131,16 +117,28 @@ set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital letter
 
 " easier navigation between split windows
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
+" nnoremap <c-j> <c-w>j
+" nnoremap <c-k> <c-w>k
+" nnoremap <c-h> <c-w>h
+" nnoremap <c-l> <c-w>l
+nnoremap <C-c> <esc>
+nnoremap <SPACE> <C-w>
+nnoremap <SPACE>v <C-w>v
+nnoremap <SPACE>s <C-w>s
+nnoremap <SPACE>h <C-w>h
+nnoremap <SPACE>j <C-w>j
+nnoremap <SPACE>k <C-w>k
+nnoremap <SPACE>l <C-w>l
+nnoremap <SPACE>c <C-w>c
+
+" save with space space
+nnoremap <space><space> :wa<cr>:w<cr>
 
 " Maps Alt-[h,j,k,l] to resizing a window split
-map <silent> <A-h> <C-w><
-map <silent> <A-j> <C-W>-
-map <silent> <A-k> <C-W>+
-map <silent> <A-l> <C-w>>
+map <silent> <M-h> <C-w><
+map <silent> <M-j> <C-W>-
+map <silent> <M-k> <C-W>+
+map <silent> <M-l> <C-w>>
 
 "set ai           " always set autoindenting on
 
@@ -199,22 +197,30 @@ nnoremap <leader>-  yypv$r-
 :nnoremap <Space> za
 set splitright
 set splitbelow
+
+" Relative numbering
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set nornu
+    set number
+  else
+    set rnu
+  endif
+endfunc
+
+" Toggle between normal and relative numbering.
+nnoremap <leader>; :call NumberToggle()<cr>
 "}}}
 
 " GUI Settings {{{
-set guifont=Source\ Code\ Pro\ 12
-set guioptions-=l
-set guioptions-=r
-set guioptions-=T
 set guioptions-=R
-set guioptions-=m
+set guioptions-=r
 set guioptions-=L
-" fullscreen
-map <silent> <F11>
-\    :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
-" }}}
+set guioptions-=l
+set guifont=Source\ Code\ Pro:h13
+"}}}
 
-" Syntax Highlighting and File Types {{{
+" Syntax Highlighting, linting, and File Types {{{
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.ino setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.pp setlocal ft=puppet
@@ -228,14 +234,32 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-:let g:syntastic_loc_list_height=5
+let g:syntastic_loc_list_height=5
+
+let g:syntastic_javascript_flow_exe = 'flow check-contents'
 
 let g:syntastic_typescript_checkers = ['tslint']
 let g:syntastic_javascript_checkers = ['eslint', 'flow']
-let g:syntastic_ruby_checkers = ['rsense']
+let g:syntastic_ruby_checkers = ['rsense', 'rubocop']
 let g:syntastic_python_checkers = ['pyflakes']
+"}}}
+
+" Use deoplete. {{{
+" use tab for complete and scrolling
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#file#enable_buffer_path = 1 "Use the current file for relative path
+let g:python3_host_prog = '/Users/jsral/.pyenv/shims/python'
+let g:tern_request_timeout = 1
+let g:tern_show_signature_in_pum = '0'  " This do disable full signature type on autocomplete
+"}}}
+
+" For Love2d {{{
+" launch with leader + l
+nnoremap <Leader>l :!/Applications/love.app/Contents/MacOS/love .<CR>
 "}}}
 
 " Typescript Config {{{
@@ -248,7 +272,7 @@ let g:user_emmet_leader_key='<C-Z>'
 "}}}
 
 " Line splitting for brackets in insert mode [] () {}"{{{
-imap <C-c> <CR><Esc>O
+imap <C-l> <CR><Esc>O
 "}}}
 
 " Hybrid Line Numbers {{{
@@ -358,7 +382,7 @@ let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','html','sh']
 "}}}
 
 " {{{ yankring
-let g:yankring_history_dir = '~/yankring_history'
+let g:yankring_history_dir = '$HOME/yankring_history'
 "}}}
 
 " RSpec Stuff {{{
@@ -396,8 +420,7 @@ autocmd FileType ruby
 
 "let g:rspec_command = "!spring rspec {spec}"
 
-map <Leader>r :call RunCurrentSpecFile()<CR>
-map <Leader>e :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
-" }}}
+" map <Leader>r :call RunCurrentSpecFile()<CR>
+" map <Leader>e :call RunNearestSpec()<CR>
+" map <Leader>l :call RunLastSpec()<CR>
+" map <Leader>a :call RunAllSpecs()<CR>
