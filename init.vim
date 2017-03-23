@@ -11,6 +11,7 @@ call plug#begin()
 Plug 'altercation/vim-colors-solarized'
 Plug 'flazz/vim-colorschemes'
 Plug 'rakr/vim-one'
+Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'gabesoft/vim-ags'
 Plug 'scrooloose/nerdtree'
@@ -57,14 +58,14 @@ filetype plugin indent on    " required
 " available.
 " silent! colorscheme solarized
 " colorscheme summerfruit256
-colorscheme one
+colorscheme Monokai
 set background=dark
 call togglebg#map("<F5>")
 
 " gui colors if iTerm
-if $TERM_PROGRAM =~ "iTerm"
-  set termguicolors
-endif
+" if $TERM_PROGRAM =~ "iTerm"
+"   set termguicolors
+" endif
 " }}}
 
 " Vim Settings {{{
@@ -243,14 +244,9 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#file#enable_buffer_path = 1 "Use the current file for relative path
-let g:python3_host_prog = '/Users/jsral/.pyenv/shims/python'
+let g:python3_host_prog = '/Users/jamessral/.pyenv/shims/python'
 let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = '0'  " This do disable full signature type on autocomplete
-"}}}
-
-" For Love2d {{{
-" launch with leader + l
-nnoremap <Leader>l :!/Applications/love.app/Contents/MacOS/love .<CR>
 "}}}
 
 " Typescript Config {{{
