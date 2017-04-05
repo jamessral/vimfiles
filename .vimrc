@@ -51,7 +51,7 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 " silent! colorscheme solarized
-colorscheme Monokai
+colorscheme pencil
 "color ir_black
 "colorscheme Tomorrow-Night-Bright
 set background=dark
@@ -72,6 +72,8 @@ if &term =~ '^screen'
     " tmux knows the extended mouse mode
     set ttymouse=xterm2
 endif
+
+set term=screen-256color
 
 " From http://robots.thoughtbot.com/post/27041742805/vim-you-complete-me
 "set complete=.,b,u,]
