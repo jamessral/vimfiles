@@ -1,5 +1,9 @@
 set nocompatible                " choose no compatibility with legacy vi
 set noswapfile
+set ttimeout
+set ttimeoutlen=0
+set matchtime=0
+
 " For Vim-Plug {{{
 filetype off
 call plug#begin()
@@ -12,6 +16,7 @@ Plug 'ervandew/supertab'
 Plug 'Raimondi/delimitMate'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mattn/emmet-vim'
+Plug 'gabesoft/vim-ags'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'Valloric/YouCompleteMe'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
@@ -51,7 +56,7 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 " silent! colorscheme solarized
-colorscheme pencil
+colorscheme lucius
 "color ir_black
 "colorscheme Tomorrow-Night-Bright
 set background=dark
@@ -95,6 +100,7 @@ set backspace=indent,eol,start  " backspace through everything in insert mode
 " Use the OS clipboard by default
 set clipboard=unnamed
 
+set cursorline
 " Indicators
 set list                          " Show hidden characters (tab and eol)
 "set listchars=trail:⋅,nbsp:⋅,tab:▸\ ,eol:¬       " Use the same chars as textmate.
@@ -193,10 +199,7 @@ set guioptions-=l guioptions-=r guioptions-=T guioptions-=R guioptions-=m
 " }}}
 
 " Syntax Highlighting and File Types {{{
-autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
-autocmd! BufNewFile,BufRead *.ino setlocal ft=arduino
-autocmd! BufNewFile,BufRead *.pp setlocal ft=puppet
-autocmd! BufNewFile,BufRead *.md setlocal ft=markdown
+autocmd! BufNewFile,BufRead *.js setlocal ft=javascript.jsx
 "}}}
 
 " Syntastic {{{
@@ -206,7 +209,7 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_loc_list_height=5
 
