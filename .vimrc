@@ -9,7 +9,6 @@ set path+=**
 " For Vim-Plug {{{
 filetype off
 call plug#begin()
-" All of your Plugins must be added before the following line
 Plug 'altercation/vim-colors-solarized'
 Plug 'flazz/vim-colorschemes'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -50,6 +49,7 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'tpope/vim-dispatch'
 Plug 'danro/rename.vim'
 
+" All of your Plugins must be added before the following line
 call plug#end()            " required
 filetype plugin indent on    " required
 " }}}

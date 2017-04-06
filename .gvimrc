@@ -4,24 +4,23 @@ set ttimeout
 set ttimeoutlen=0
 set matchtime=0
 
+set path+=**
+
 " For Vim-Plug {{{
 filetype off
 call plug#begin()
-
 Plug 'altercation/vim-colors-solarized'
 Plug 'flazz/vim-colorschemes'
-Plug 'rakr/vim-one'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'gabesoft/vim-ags'
 Plug 'scrooloose/nerdtree'
 Plug 'ervandew/supertab'
 Plug 'Raimondi/delimitMate'
+Plug 'jiangmiao/auto-pairs'
 Plug 'mattn/emmet-vim'
+Plug 'gabesoft/vim-ags'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'Valloric/YouCompleteMe'
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'fishbullet/deoplete-ruby'
-Plug 'kchmck/vim-coffee-script'
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'scrooloose/syntastic'
 Plug 'mbbill/undotree'
 Plug 'godlygeek/tabular'
@@ -29,24 +28,26 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-rails'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'tpope/vim-rbenv'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'vim-scripts/peaksea'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'bling/vim-airline'
 Plug 'chase/vim-ansible-yaml'
-Plug 'thoughtbot/vim-rspec'
 Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
-Plug 'flowtype/vim-flow'
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'flowtype/vim-flow', {
+            \ 'autoload': {
+            \     'filetypes': 'javascript'
+            \ }}
+Plug 'artur-shaik/vim-javacomplete2'
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'tpope/vim-dispatch'
 Plug 'danro/rename.vim'
-Plug 'leafo/moonscript-vim'
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
@@ -58,7 +59,7 @@ filetype plugin indent on    " required
 " available.
 " silent! colorscheme solarized
 " colorscheme summerfruit256
-silent! colorscheme one
+silent! colorscheme lucius
 set background=light
 call togglebg#map("<F5>")
 
@@ -103,6 +104,7 @@ set backspace=indent,eol,start  " backspace through everything in insert mode
 " Use the OS clipboard by default
 set clipboard=unnamed
 
+set cursorline
 " Indicators
 set list                          " Show hidden characters (tab and eol)
 "set listchars=trail:⋅,nbsp:⋅,tab:▸\ ,eol:¬       " Use the same chars as textmate.
@@ -221,10 +223,8 @@ set guifont=Source\ Code\ Pro:h13
 "}}}
 
 " Syntax Highlighting, linting, and File Types {{{
-autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
-autocmd! BufNewFile,BufRead *.ino setlocal ft=arduino
-autocmd! BufNewFile,BufRead *.pp setlocal ft=puppet
-autocmd! BufNewFile,BufRead *.md setlocal ft=markdown
+autocmd! BufNewFile,BufRead *.js setlocal ft=javascript.jsx
+autocmd! BufNewFile,BufRead *.java setlocal tabstop=4 shiftwidth=4
 "}}}
 
 " Syntastic {{{
@@ -246,15 +246,41 @@ let g:syntastic_ruby_checkers = ['rsense', 'rubocop']
 let g:syntastic_python_checkers = ['pyflakes']
 "}}}
 
-" Use deoplete. {{{
-" use tab for complete and scrolling
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+"{{{ Java config
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+nmap <leader>jI <Plug>(JavaComplete-Imports-AddMissing)
+nmap <leader>jR <Plug>(JavaComplete-Imports-RemoveUnused)
+nmap <leader>ji <Plug>(JavaComplete-Imports-AddSmart)
+nmap <leader>jii <Plug>(JavaComplete-Imports-Add)
 
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#file#enable_buffer_path = 1 "Use the current file for relative path
-let g:python3_host_prog = '/Users/jsral/.pyenv/shims/python'
-let g:tern_request_timeout = 1
-let g:tern_show_signature_in_pum = '0'  " This do disable full signature type on autocomplete
+imap <C-j>I <Plug>(JavaComplete-Imports-AddMissing)
+imap <C-j>R <Plug>(JavaComplete-Imports-RemoveUnused)
+imap <C-j>i <Plug>(JavaComplete-Imports-AddSmart)
+imap <C-j>ii <Plug>(JavaComplete-Imports-Add)
+
+nmap <leader>jM <Plug>(JavaComplete-Generate-AbstractMethods)
+
+imap <C-j>jM <Plug>(JavaComplete-Generate-AbstractMethods)
+
+nmap <leader>jA <Plug>(JavaComplete-Generate-Accessors)
+nmap <leader>js <Plug>(JavaComplete-Generate-AccessorSetter)
+nmap <leader>jg <Plug>(JavaComplete-Generate-AccessorGetter)
+nmap <leader>ja <Plug>(JavaComplete-Generate-AccessorSetterGetter)
+nmap <leader>jts <Plug>(JavaComplete-Generate-ToString)
+nmap <leader>jeq <Plug>(JavaComplete-Generate-EqualsAndHashCode)
+nmap <leader>jc <Plug>(JavaComplete-Generate-Constructor)
+nmap <leader>jcc <Plug>(JavaComplete-Generate-DefaultConstructor)
+
+imap <C-j>s <Plug>(JavaComplete-Generate-AccessorSetter)
+imap <C-j>g <Plug>(JavaComplete-Generate-AccessorGetter)
+imap <C-j>a <Plug>(JavaComplete-Generate-AccessorSetterGetter)
+
+vmap <leader>js <Plug>(JavaComplete-Generate-AccessorSetter)
+vmap <leader>jg <Plug>(JavaComplete-Generate-AccessorGetter)
+vmap <leader>ja <Plug>(JavaComplete-Generate-AccessorSetterGetter)
+
+nmap <silent> <buffer> <leader>jn <Plug>(JavaComplete-Generate-NewClass)
+nmap <silent> <buffer> <leader>jN <Plug>(JavaComplete-Generate-ClassInFile)
 "}}}
 
 " For Love2d {{{
@@ -384,43 +410,3 @@ let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','html','sh']
 " {{{ yankring
 let g:yankring_history_dir = '$HOME/yankring_history'
 "}}}
-
-" RSpec Stuff {{{
-autocmd FileType ruby
-  \ if expand("%") =~# '_spec\.rb$' |
-  \   compiler rspec | setl makeprg=spring\ rspec\ $*|
-  \ else |
-  \   compiler ruby | setl makeprg=ruby\ -wc\ \"%:p\" |
-  \ endif
-
-" http://blog.santosvelasco.com/2012/07/04/vim-and-rspec-run-the-test-under-the-cursor/
-" function! RSpecFile()
-"   "execute("!clear && rspec " . expand("%p"))
-"   execute("!rspec " . expand("%p"))
-" endfunction
-" map <leader>R :call RSpecFile() <CR>
-" command! RSpecFile call RSpecFile()
-
-" function! RSpecCurrent()
-" "  execute("!clear && rspec " . expand("%p") . ":" . line("."))
-"   execute("!rspec " . expand("%p") . ":" . line("."))
-" endfunction
-" map <leader>r :call RSpecCurrent() <CR>
-" command! RSpecCurrent call RSpecCurrent()
-
-" function! RSpecParse()
-"   execute("Make " . expand("%") . ":" . line("."))
-" endfunction
-" map <leader>e :call RSpecParse() <CR>
-" command! RSpecParse call RSpecParse()
-
-" vim-ruby is required for this to work. Probably because
-" of older version of vim on work machine.
-"Plugin 'vim-ruby/vim-ruby'
-
-"let g:rspec_command = "!spring rspec {spec}"
-
-" map <Leader>r :call RunCurrentSpecFile()<CR>
-" map <Leader>e :call RunNearestSpec()<CR>
-" map <Leader>l :call RunLastSpec()<CR>
-" map <Leader>a :call RunAllSpecs()<CR>
