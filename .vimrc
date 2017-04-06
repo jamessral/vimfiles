@@ -4,6 +4,8 @@ set ttimeout
 set ttimeoutlen=0
 set matchtime=0
 
+set path+=**
+
 " For Vim-Plug {{{
 filetype off
 call plug#begin()
@@ -43,10 +45,10 @@ Plug 'flowtype/vim-flow', {
             \     'filetypes': 'javascript'
             \ }}
 Plug 'artur-shaik/vim-javacomplete2'
+Plug 'OmniSharp/omnisharp-vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'tpope/vim-dispatch'
 Plug 'danro/rename.vim'
-
-
 
 call plug#end()            " required
 filetype plugin indent on    " required
@@ -98,7 +100,7 @@ set expandtab                   " use spaces, not tabs (optional)
 set backspace=indent,eol,start  " backspace through everything in insert mode
 
 " Use the OS clipboard by default
-set clipboard=unnamed
+set clipboard=system
 
 set cursorline
 " Indicators
@@ -200,6 +202,7 @@ set guioptions-=l guioptions-=r guioptions-=T guioptions-=R guioptions-=m
 
 " Syntax Highlighting and File Types {{{
 autocmd! BufNewFile,BufRead *.js setlocal ft=javascript.jsx
+autocmd! BufNewFile,BufRead *.java setlocal tabstop=4 shiftwidth=4
 "}}}
 
 " Syntastic {{{
@@ -226,13 +229,46 @@ autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol
 
 "{{{ Java config
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
+nmap <leader>jI <Plug>(JavaComplete-Imports-AddMissing)
+nmap <leader>jR <Plug>(JavaComplete-Imports-RemoveUnused)
+nmap <leader>ji <Plug>(JavaComplete-Imports-AddSmart)
+nmap <leader>jii <Plug>(JavaComplete-Imports-Add)
+
+imap <C-j>I <Plug>(JavaComplete-Imports-AddMissing)
+imap <C-j>R <Plug>(JavaComplete-Imports-RemoveUnused)
+imap <C-j>i <Plug>(JavaComplete-Imports-AddSmart)
+imap <C-j>ii <Plug>(JavaComplete-Imports-Add)
+
+nmap <leader>jM <Plug>(JavaComplete-Generate-AbstractMethods)
+
+imap <C-j>jM <Plug>(JavaComplete-Generate-AbstractMethods)
+
+nmap <leader>jA <Plug>(JavaComplete-Generate-Accessors)
+nmap <leader>js <Plug>(JavaComplete-Generate-AccessorSetter)
+nmap <leader>jg <Plug>(JavaComplete-Generate-AccessorGetter)
+nmap <leader>ja <Plug>(JavaComplete-Generate-AccessorSetterGetter)
+nmap <leader>jts <Plug>(JavaComplete-Generate-ToString)
+nmap <leader>jeq <Plug>(JavaComplete-Generate-EqualsAndHashCode)
+nmap <leader>jc <Plug>(JavaComplete-Generate-Constructor)
+nmap <leader>jcc <Plug>(JavaComplete-Generate-DefaultConstructor)
+
+imap <C-j>s <Plug>(JavaComplete-Generate-AccessorSetter)
+imap <C-j>g <Plug>(JavaComplete-Generate-AccessorGetter)
+imap <C-j>a <Plug>(JavaComplete-Generate-AccessorSetterGetter)
+
+vmap <leader>js <Plug>(JavaComplete-Generate-AccessorSetter)
+vmap <leader>jg <Plug>(JavaComplete-Generate-AccessorGetter)
+vmap <leader>ja <Plug>(JavaComplete-Generate-AccessorSetterGetter)
+
+nmap <silent> <buffer> <leader>jn <Plug>(JavaComplete-Generate-NewClass)
+nmap <silent> <buffer> <leader>jN <Plug>(JavaComplete-Generate-ClassInFile)
 "}}}
 
 " Emmet-vim {{{
 let g:user_emmet_leader_key='<C-Z>'
 "}}}
 
-" Line splitting for brackets in insert mode [] () {}"{{{
+" Line s"plitting for brackets in insert mode [] () {}"{{{
 imap <C-l> <CR><Esc>O
 "}}}
 
@@ -269,6 +305,13 @@ map <leader>t :CtrlP<CR>
 let g:ctrlp_custom_ignore = 'vendor/bundle'
 let g:ctrlp_working_path_mode = 'ra'
 " }}}
+
+"{{{ File Browsing
+let g:netrw_banner=0        " no more annoying banner!
+let g:netrw_browse_split=4  " open in previous window
+let g:netrw_altv=1          " open s"plits to the right
+let g:netrw_liststyle=3     " tree view
+"}}}
 
 " NERD Tree {{{
 " Put focus to the NERD Tree with F3 (tricked by quickly closing it and
