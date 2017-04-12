@@ -9,13 +9,14 @@ set path+=**
 " For Vim-Plug {{{
 filetype off
 call plug#begin()
+" All of your Plugins must be added before the following line
 Plug 'altercation/vim-colors-solarized'
 Plug 'flazz/vim-colorschemes'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'ervandew/supertab'
 Plug 'Raimondi/delimitMate'
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 Plug 'mattn/emmet-vim'
 Plug 'gabesoft/vim-ags'
 Plug 'vim-scripts/YankRing.vim'
@@ -49,7 +50,6 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'tpope/vim-dispatch'
 Plug 'danro/rename.vim'
 
-" All of your Plugins must be added before the following line
 call plug#end()            " required
 filetype plugin indent on    " required
 " }}}
@@ -58,7 +58,7 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 " silent! colorscheme solarized
-colorscheme lucius
+colorscheme solarized
 "color ir_black
 "colorscheme Tomorrow-Night-Bright
 set background=dark
@@ -100,7 +100,7 @@ set expandtab                   " use spaces, not tabs (optional)
 set backspace=indent,eol,start  " backspace through everything in insert mode
 
 " Use the OS clipboard by default
-set clipboard=system
+set clipboard=unnamed
 
 set cursorline
 " Indicators
@@ -268,8 +268,8 @@ nmap <silent> <buffer> <leader>jN <Plug>(JavaComplete-Generate-ClassInFile)
 let g:user_emmet_leader_key='<C-Z>'
 "}}}
 
-" Line s"plitting for brackets in insert mode [] () {}"{{{
-imap <C-l> <CR><Esc>O
+" Line splitting for brackets in insert mode [] () {}"{{{
+imap <C-l> <CR><Esc>O<Tab>
 "}}}
 
 "{{{ Remove trailing whitespace on save
@@ -309,7 +309,7 @@ let g:ctrlp_working_path_mode = 'ra'
 "{{{ File Browsing
 let g:netrw_banner=0        " no more annoying banner!
 let g:netrw_browse_split=4  " open in previous window
-let g:netrw_altv=1          " open s"plits to the right
+let g:netrw_altv=1          " open splits to the right
 let g:netrw_liststyle=3     " tree view
 "}}}
 
