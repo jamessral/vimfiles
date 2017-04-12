@@ -37,7 +37,8 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'bling/vim-airline'
 Plug 'chase/vim-ansible-yaml'
-Plug 'pangloss/vim-javascript'
+" Plug 'pangloss/vim-javascript'
+Plug 'othree/yajs.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
 Plug 'flowtype/vim-flow', {
@@ -201,8 +202,10 @@ set guioptions-=l guioptions-=r guioptions-=T guioptions-=R guioptions-=m
 " }}}
 
 " Syntax Highlighting and File Types {{{
-autocmd! BufNewFile,BufRead *.js setlocal ft=javascript.jsx
 autocmd! BufNewFile,BufRead *.java setlocal tabstop=4 shiftwidth=4
+
+" Use JSX for .js
+let g:jsx_ext_required = 0
 "}}}
 
 " Syntastic {{{
