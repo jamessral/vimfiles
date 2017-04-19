@@ -237,6 +237,10 @@ autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()
 autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
 "}}}
 
+"{{{ Dlang config
+let g:dutyl_stdImportPaths=['/usr/local/include/dlang/dmd']
+"}}}
+
 "{{{ Java config
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
 nmap <leader>jI <Plug>(JavaComplete-Imports-AddMissing)
