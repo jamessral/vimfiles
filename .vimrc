@@ -41,6 +41,7 @@ Plug 'chase/vim-ansible-yaml'
 Plug 'othree/yajs.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
+Plug 'jdonaldson/vaxe'
 Plug 'flowtype/vim-flow', {
             \ 'autoload': {
             \     'filetypes': 'javascript'
@@ -50,6 +51,7 @@ Plug 'OmniSharp/omnisharp-vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'tpope/vim-dispatch'
 Plug 'danro/rename.vim'
+Plug 'idanarye/vim-dutyl'
 
 call plug#end()            " required
 filetype plugin indent on    " required
@@ -59,7 +61,7 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 " silent! colorscheme solarized
-colorscheme solarized
+colorscheme Monokai
 "color ir_black
 "colorscheme Tomorrow-Night-Bright
 set background=dark
@@ -136,6 +138,11 @@ map <silent> <A-h> <C-w><
 map <silent> <A-j> <C-W>-
 map <silent> <A-k> <C-W>+
 map <silent> <A-l> <C-w>>
+map <silent> <Space>< <C-w><
+map <silent> <Space>- <C-W>-
+map <silent> <Space>+ <C-W>+
+map <silent> <Space>> <C-w>>
+
 
 "set ai           " always set autoindenting on
 
