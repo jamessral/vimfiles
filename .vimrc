@@ -17,6 +17,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'ervandew/supertab'
 Plug 'Raimondi/delimitMate'
 " Plug 'jiangmiao/auto-pairs'
+Plug 'terryma/vim-smooth-scroll'
 Plug 'mattn/emmet-vim'
 Plug 'gabesoft/vim-ags'
 Plug 'vim-scripts/YankRing.vim'
@@ -51,6 +52,7 @@ Plug 'OmniSharp/omnisharp-vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'tpope/vim-dispatch'
 Plug 'danro/rename.vim'
+Plug 'JesseKPhillips/d.vim'
 Plug 'idanarye/vim-dutyl'
 
 call plug#end()            " required
@@ -204,9 +206,16 @@ set splitbelow
 "}}}
 
 " GUI Settings {{{
-set guifont=Source\ Code\ Pro\ 11
-set guioptions-=l guioptions-=r guioptions-=T guioptions-=R guioptions-=m
+set guifont=Source\ Code\ Pro:h13
+set guioptions-=l guioptions-=L guioptions-=r guioptions-=T guioptions-=R guioptions-=m
 " }}}
+
+"{{{ Vim Smooth Scroll
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+"}}}
 
 " Syntax Highlighting and File Types {{{
 autocmd! BufNewFile,BufRead *.java setlocal tabstop=4 shiftwidth=4
