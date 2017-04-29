@@ -16,13 +16,11 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'ervandew/supertab'
 Plug 'Raimondi/delimitMate'
-" Plug 'jiangmiao/auto-pairs'
-" Plug 'terryma/vim-smooth-scroll'
 Plug 'mattn/emmet-vim'
 Plug 'gabesoft/vim-ags'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'Valloric/YouCompleteMe'
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+" Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'scrooloose/syntastic'
 Plug 'mbbill/undotree'
 Plug 'godlygeek/tabular'
@@ -47,7 +45,7 @@ Plug 'flowtype/vim-flow', {
             \ 'autoload': {
             \     'filetypes': 'javascript'
             \ }}
-Plug 'artur-shaik/vim-javacomplete2'
+" Plug 'artur-shaik/vim-javacomplete2'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'tpope/vim-dispatch'
@@ -64,10 +62,10 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 " silent! colorscheme solarized
-colorscheme PaperColor
+colorscheme solarized
 "color ir_black
 "colorscheme Tomorrow-Night-Bright
-set background=light
+set background=dark
 call togglebg#map("<F5>")
 " }}}
 
