@@ -50,9 +50,8 @@ Plug 'OmniSharp/omnisharp-vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'tpope/vim-dispatch'
 Plug 'danro/rename.vim'
-Plug 'rust-lang/rust.vim'
-" Plug 'JesseKPhillips/d.vim'
-" Plug 'idanarye/vim-dutyl'
+Plug 'fatih/vim-go'
+" Plug 'rust-lang/rust.vim'
 
 call plug#end()            " required
 filetype plugin indent on    " required
@@ -62,7 +61,7 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 " silent! colorscheme solarized
-colorscheme solarized
+colorscheme onedark
 "color ir_black
 "colorscheme Tomorrow-Night-Bright
 set background=dark
@@ -211,7 +210,8 @@ set guioptions-=l guioptions-=L guioptions-=r guioptions-=T guioptions-=R guiopt
 
 " Syntax Highlighting and File Types {{{
 autocmd! BufNewFile,BufRead *.java setlocal tabstop=4 shiftwidth=4
-
+autocmd! BufNewFile,BufRead *.hx setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.hxml setlocal tabstop=4 shiftwidth=4
 " Use JSX for .js
 let g:jsx_ext_required = 0
 "}}}
@@ -231,6 +231,10 @@ let g:syntastic_typescript_checkers = ['tslint']
 let g:syntastic_javascript_checkers = ['eslint', 'flow']
 let g:syntastic_ruby_checkers = ['rsense']
 let g:syntastic_python_checkers = ['pyflakes']
+"}}}
+
+"{{{ Launch Love2d
+nnoremap <leader>l :!love .<CR>
 "}}}
 
 " Typescript Config {{{
