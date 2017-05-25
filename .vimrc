@@ -20,10 +20,10 @@ Plug 'mattn/emmet-vim'
 Plug 'gabesoft/vim-ags'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'Valloric/YouCompleteMe'
-" Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'scrooloose/syntastic'
 Plug 'mbbill/undotree'
-Plug 'godlygeek/tabular'
+" Plug 'godlygeek/tabular'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-markdown'
@@ -40,6 +40,7 @@ Plug 'chase/vim-ansible-yaml'
 Plug 'othree/yajs.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
+Plug 'janko-m/vim-test'
 Plug 'jdonaldson/vaxe'
 Plug 'flowtype/vim-flow', {
             \ 'autoload': {
@@ -51,7 +52,7 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'tpope/vim-dispatch'
 Plug 'danro/rename.vim'
 Plug 'fatih/vim-go'
-" Plug 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim'
 
 call plug#end()            " required
 filetype plugin indent on    " required
@@ -61,7 +62,7 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 " silent! colorscheme solarized
-colorscheme onedark
+colorscheme Monokai
 "color ir_black
 "colorscheme Tomorrow-Night-Bright
 set background=dark
@@ -212,6 +213,8 @@ set guioptions-=l guioptions-=L guioptions-=r guioptions-=T guioptions-=R guiopt
 autocmd! BufNewFile,BufRead *.java setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.hx setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.hxml setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.h, *.c, *.hpp, *.cpp setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.scss setlocal tabstop=2 shiftwidth=2
 " Use JSX for .js
 let g:jsx_ext_required = 0
 "}}}
@@ -233,13 +236,23 @@ let g:syntastic_ruby_checkers = ['rsense']
 let g:syntastic_python_checkers = ['pyflakes']
 "}}}
 
+"{{{ Test Runner
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>A :TestSuite<CR>
+nmap <silent> <leader>L :TestLast<CR>
+nmap <silent> <leader>G :TestVisit<CR>
+
+let test#strategy = "vimproc"
+"}}}
+
 "{{{ Launch Love2d
 nnoremap <leader>l :!love .<CR>
 "}}}
 
 " Typescript Config {{{
-autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
-autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
+"autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
+"autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
 "}}}
 
 "{{{ Dlang config
@@ -360,7 +373,8 @@ let NERDTreeMouseMode=2
 
 " Don't display these kinds of files
 let NERDTreeIgnore=[ '\.swp$','\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
-            \ '\.o$', '\.so$', '\.egg$', '^\.git$', '\.DS_Store$', '^\.bundle$', '\.keep$']
+            \ '\.o$', '\.so$', '\.egg$', '^\.git$', '\.DS_Store$', '^\.bundle$',
+            \ 'node_modules', '\.keep$']
 
 " Quit vim if nerdtree is last buffer
 " https://github.com/scrooloose/nerdtree/issues/21
@@ -371,21 +385,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 " Undotree {{{
 nnoremap <leader>u :UndotreeToggle<cr>
-" }}}
-
-" Tabular {{{
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a{ :Tabularize /{<CR>
-vmap <Leader>a{ :Tabularize /{<CR>
-nmap <Leader>a: :Tabularize /:\zs<CR>
-vmap <Leader>a: :Tabularize /:\zs<CR>
-nmap <Leader>a, :Tabularize /,\zs<CR>
-vmap <Leader>a, :Tabularize /,\zs<CR>
-nmap <Leader>a> :Tabularize /=><CR>
-vmap <Leader>a> :Tabularize /=><CR>
-nmap <Leader>a\| :Tabularize /\|<CR>
-vmap <Leader>a\| :Tabularize /\|<CR>
 " }}}
 
 " Fugitive {{{
