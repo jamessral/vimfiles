@@ -24,7 +24,7 @@ Plug 'fishbullet/deoplete-ruby'
 Plug 'kchmck/vim-coffee-script'
 Plug 'scrooloose/syntastic'
 Plug 'mbbill/undotree'
-Plug 'godlygeek/tabular'
+" Plug 'godlygeek/tabular'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-markdown'
@@ -41,14 +41,29 @@ Plug 'tpope/vim-eunuch'
 Plug 'bling/vim-airline'
 Plug 'chase/vim-ansible-yaml'
 Plug 'thoughtbot/vim-rspec'
-Plug 'pangloss/vim-javascript'
+Plug 'othree/yajs.vim'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'mxw/vim-jsx'
 Plug 'flowtype/vim-flow'
+Plug 'janko-m/vim-test'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'artur-shaik/vim-javacomplete2'
+" Plug 'artur-shaik/vim-javacomplete2'
 Plug 'jdonaldson/vaxe'
 Plug 'danro/rename.vim'
+" Plug 'Valloric/YouCompleteMe'
+" Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+Plug 'jdonaldson/vaxe'
+Plug 'flowtype/vim-flow', {
+            \ 'autoload': {
+            \     'filetypes': 'javascript'
+            \ }}
+" Plug 'artur-shaik/vim-javacomplete2'
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'tpope/vim-dispatch'
+Plug 'danro/rename.vim'
+Plug 'fatih/vim-go'
+Plug 'rust-lang/rust.vim'
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
@@ -59,15 +74,11 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 " silent! colorscheme solarized
-" colorscheme summerfruit256
-colorscheme lucius
+colorscheme Monokai
+"color ir_black
+"colorscheme Tomorrow-Night-Bright
 set background=dark
 call togglebg#map("<F5>")
-
-" gui colors if iTerm
-" if $TERM_PROGRAM =~ "iTerm"
-"   set termguicolors
-" endif
 " }}}
 
 " Vim Settings {{{
@@ -84,6 +95,7 @@ if &term =~ '^screen'
     " tmux knows the extended mouse mode
     set ttymouse=xterm2
 endif
+
 
 " From http://robots.thoughtbot.com/post/27041742805/vim-you-complete-me
 "set complete=.,b,u,]
@@ -105,6 +117,7 @@ set backspace=indent,eol,start  " backspace through everything in insert mode
 " Use the OS clipboard by default
 set clipboard=unnamed
 
+set cursorline
 " Indicators
 set list                          " Show hidden characters (tab and eol)
 "set listchars=trail:⋅,nbsp:⋅,tab:▸\ ,eol:¬       " Use the same chars as textmate.
@@ -119,28 +132,29 @@ set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital letter
 
 " easier navigation between split windows
-" nnoremap <c-j> <c-w>j
-" nnoremap <c-k> <c-w>k
-" nnoremap <c-h> <c-w>h
-" nnoremap <c-l> <c-w>l
-nnoremap <C-c> <esc>
-nnoremap <SPACE> <C-w>
-nnoremap <SPACE>v <C-w>v
-nnoremap <SPACE>s <C-w>s
-nnoremap <SPACE>h <C-w>h
-nnoremap <SPACE>j <C-w>j
-nnoremap <SPACE>k <C-w>k
-nnoremap <SPACE>l <C-w>l
-nnoremap <SPACE>c <C-w>c
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
 
-" save with space space
-nnoremap <space><space> :wa<cr>:w<cr>
+nnoremap <Space>j <c-w>j
+nnoremap <Space>k <c-w>k
+nnoremap <Space>h <c-w>h
+nnoremap <Space>l <c-w>l
+nnoremap <Space>v <c-w>v
+nnoremap <Space>s <c-w>s
+nnoremap <Space>c <c-w>c
 
 " Maps Alt-[h,j,k,l] to resizing a window split
-map <silent> <M-h> <C-w><
-map <silent> <M-j> <C-W>-
-map <silent> <M-k> <C-W>+
-map <silent> <M-l> <C-w>>
+map <silent> <A-h> <C-w><
+map <silent> <A-j> <C-W>-
+map <silent> <A-k> <C-W>+
+map <silent> <A-l> <C-w>>
+map <silent> <Space>< <C-w><
+map <silent> <Space>- <C-W>-
+map <silent> <Space>+ <C-W>+
+map <silent> <Space>> <C-w>>
+
 
 "set ai           " always set autoindenting on
 
@@ -199,29 +213,30 @@ nnoremap <leader>-  yypv$r-
 :nnoremap <Space> za
 set splitright
 set splitbelow
-
-" Relative numbering
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set nornu
-    set number
-  else
-    set rnu
-  endif
-endfunc
-
-" Toggle between normal and relative numbering.
-nnoremap <leader>; :call NumberToggle()<cr>
 "}}}
 
-"{{{ Remove Trailing Whitespace on save
-autocmd BufWritePre * %s/\s\+$//e
+"{{{ Deoplete
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#file#enable_buffer_path = 1 "Use the current file for relative path
+let g:python_host_prog = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
 "}}}
 
-" Syntax Highlighting, linting, and File Types {{{
-autocmd! BufNewFile,BufRead *.md setlocal ft=markdown
-autocmd! BufNewFile,BufRead *.js setlocal ft=javascript.jsx
+" GUI Settings {{{
+set guifont=Source\ Code\ Pro:h13
+set guioptions-=l guioptions-=L guioptions-=r guioptions-=T guioptions-=R guioptions-=m
+" }}}
 
+" Syntax Highlighting and File Types {{{
+autocmd! BufNewFile,BufRead *.java setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.hx setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.hxml setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.h setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.c setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.hpp setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.scss setlocal tabstop=2 shiftwidth=2
+" Use JSX for .js
 let g:jsx_ext_required = 0
 "}}}
 
@@ -236,44 +251,37 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_loc_list_height=5
 
-let g:syntastic_javascript_flow_exe = 'flow check-contents'
-
 let g:syntastic_typescript_checkers = ['tslint']
 let g:syntastic_javascript_checkers = ['eslint', 'flow']
-let g:syntastic_ruby_checkers = ['rsense', 'rubocop']
+let g:syntastic_ruby_checkers = ['rsense']
 let g:syntastic_python_checkers = ['pyflakes']
 "}}}
 
-" Use deoplete. {{{
-" use tab for complete and scrolling
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+"{{{ Test Runner
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>A :TestSuite<CR>
+nmap <silent> <leader>L :TestLast<CR>
+nmap <silent> <leader>G :TestVisit<CR>
 
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#file#enable_buffer_path = 1 "Use the current file for relative path
-let g:python3_host_prog = '/Users/jamessral/.pyenv/shims/python'
-let g:tern_request_timeout = 1
-let g:tern_show_signature_in_pum = '0'  " This do disable full signature type on autocomplete
+let test#strategy = "vimproc"
+"}}}
+
+"{{{ Launch Love2d
+nnoremap <leader>l :!love .<CR>
 "}}}
 
 " Typescript Config {{{
-autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
-autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
+"autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
+"autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
 "}}}
 
-"{{{ Java Config
+"{{{ Dlang config
+let g:dutyl_stdImportPaths=['/usr/local/include/dlang/dmd']
+"}}}
+
+"{{{ Java config
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
-nmap <F4> <Plug>(JavaComplete-Imports-AddSmart)
-imap <F4> <Plug>(JavaComplete-Imports-AddSmart)
-
-nmap <F5> <Plug>(JavaComplete-Imports-Add)
-imap <F5> <Plug>(JavaComplete-Imports-Add)
-
-nmap <F6> <Plug>(JavaComplete-Imports-AddMissing)
-imap <F6> <Plug>(JavaComplete-Imports-AddMissing)
-
-nmap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
-imap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
-
 nmap <leader>jI <Plug>(JavaComplete-Imports-AddMissing)
 nmap <leader>jR <Plug>(JavaComplete-Imports-RemoveUnused)
 nmap <leader>ji <Plug>(JavaComplete-Imports-AddSmart)
@@ -314,7 +322,11 @@ let g:user_emmet_leader_key='<C-Z>'
 "}}}
 
 " Line splitting for brackets in insert mode [] () {}"{{{
-imap <C-l> <CR><Esc>O
+imap <C-l> <CR><Esc>O<Tab>
+"}}}
+
+"{{{ Remove trailing whitespace on save
+autocmd BufWritePre * %s/\s\+$//e
 "}}}
 
 " Hybrid Line Numbers {{{
@@ -347,6 +359,13 @@ let g:ctrlp_custom_ignore = 'vendor/bundle'
 let g:ctrlp_working_path_mode = 'ra'
 " }}}
 
+"{{{ File Browsing
+let g:netrw_banner=0        " no more annoying banner!
+let g:netrw_browse_split=4  " open in previous window
+let g:netrw_altv=1          " open splits to the right
+let g:netrw_liststyle=3     " tree view
+"}}}
+
 " NERD Tree {{{
 " Put focus to the NERD Tree with F3 (tricked by quickly closing it and
 " immediately showing it again, since there is no :NERDTreeFocus command)
@@ -375,7 +394,8 @@ let NERDTreeMouseMode=2
 
 " Don't display these kinds of files
 let NERDTreeIgnore=[ '\.swp$','\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
-            \ '\.o$', '\.so$', '\.egg$', '^\.git$', '\.DS_Store$', '^\.bundle$', '\.keep$']
+            \ '\.o$', '\.so$', '\.egg$', '^\.git$', '\.DS_Store$', '^\.bundle$',
+            \ 'node_modules', '\.keep$']
 
 " Quit vim if nerdtree is last buffer
 " https://github.com/scrooloose/nerdtree/issues/21
@@ -386,21 +406,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 " Undotree {{{
 nnoremap <leader>u :UndotreeToggle<cr>
-" }}}
-
-" Tabular {{{
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a{ :Tabularize /{<CR>
-vmap <Leader>a{ :Tabularize /{<CR>
-nmap <Leader>a: :Tabularize /:\zs<CR>
-vmap <Leader>a: :Tabularize /:\zs<CR>
-nmap <Leader>a, :Tabularize /,\zs<CR>
-vmap <Leader>a, :Tabularize /,\zs<CR>
-nmap <Leader>a> :Tabularize /=><CR>
-vmap <Leader>a> :Tabularize /=><CR>
-nmap <Leader>a\| :Tabularize /\|<CR>
-vmap <Leader>a\| :Tabularize /\|<CR>
 " }}}
 
 " Fugitive {{{
@@ -424,45 +429,6 @@ let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','html','sh']
 "}}}
 
 " {{{ yankring
-let g:yankring_history_dir = '$HOME/yankring_history'
+let g:yankring_history_dir = '~/yankring_history'
 "}}}
 
-" RSpec Stuff {{{
-autocmd FileType ruby
-  \ if expand("%") =~# '_spec\.rb$' |
-  \   compiler rspec | setl makeprg=spring\ rspec\ $*|
-  \ else |
-  \   compiler ruby | setl makeprg=ruby\ -wc\ \"%:p\" |
-  \ endif
-
-" http://blog.santosvelasco.com/2012/07/04/vim-and-rspec-run-the-test-under-the-cursor/
-" function! RSpecFile()
-"   "execute("!clear && rspec " . expand("%p"))
-"   execute("!rspec " . expand("%p"))
-" endfunction
-" map <leader>R :call RSpecFile() <CR>
-" command! RSpecFile call RSpecFile()
-
-" function! RSpecCurrent()
-" "  execute("!clear && rspec " . expand("%p") . ":" . line("."))
-"   execute("!rspec " . expand("%p") . ":" . line("."))
-" endfunction
-" map <leader>r :call RSpecCurrent() <CR>
-" command! RSpecCurrent call RSpecCurrent()
-
-" function! RSpecParse()
-"   execute("Make " . expand("%") . ":" . line("."))
-" endfunction
-" map <leader>e :call RSpecParse() <CR>
-" command! RSpecParse call RSpecParse()
-
-" vim-ruby is required for this to work. Probably because
-" of older version of vim on work machine.
-"Plugin 'vim-ruby/vim-ruby'
-
-"let g:rspec_command = "!spring rspec {spec}"
-
-" map <Leader>r :call RunCurrentSpecFile()<CR>
-" map <Leader>e :call RunNearestSpec()<CR>
-" map <Leader>l :call RunLastSpec()<CR>
-" map <Leader>a :call RunAllSpecs()<CR>
