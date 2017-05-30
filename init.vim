@@ -5,6 +5,7 @@ set ttimeoutlen=0
 set matchtime=0
 
 set path+=**
+
 " For Vim-Plug {{{
 filetype off
 call plug#begin()
@@ -21,6 +22,10 @@ Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim'
+Plug 'zchee/deoplete-go'
+Plug 'carlitux/deoplete-ternjs'
+Plug 'zchee/deoplete-clang'
 Plug 'fishbullet/deoplete-ruby'
 Plug 'kchmck/vim-coffee-script'
 Plug 'scrooloose/syntastic'
@@ -89,6 +94,9 @@ set encoding=utf-8
 set showcmd                     " display incomplete commands
 set ttyfast
 set wildmenu
+" set wildmode=list:longest,full
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/.tmp/*,*/.sass-cache/*,*/node_modules/*,*.keep,*.DS_Store,*/.git/*
+
 set mouse=a
 
 " # http://superuser.com/questions/549930/cant-resize-vim-splits-inside-tmux
@@ -221,6 +229,26 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#file#enable_buffer_path = 1 "Use the current file for relative path
 let g:python_host_prog = '/usr/local/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
+let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+
+" deoplete tab-complete
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" tern
+autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
+"}}}
+
+"{{{ Ags
+if executable('ag')
+    let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+      \ --ignore .git
+      \ --ignore .svn
+      \ --ignore .hg
+      \ --ignore .DS_Store
+      \ --ignore node_modules
+      \ --ignore "**/*.pyc"
+      \ -g ""'
+endif
 "}}}
 
 " GUI Settings {{{
@@ -323,7 +351,7 @@ let g:user_emmet_leader_key='<C-Z>'
 "}}}
 
 " Line splitting for brackets in insert mode [] () {}"{{{
-imap <C-l> <CR><Esc>O<Tab>
+imap <C-l> <CR><Esc>O
 "}}}
 
 "{{{ Remove trailing whitespace on save
