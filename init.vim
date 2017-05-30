@@ -4,6 +4,7 @@ set ttimeout
 set ttimeoutlen=0
 set matchtime=0
 
+set path+=**
 " For Vim-Plug {{{
 filetype off
 call plug#begin()
