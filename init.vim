@@ -11,6 +11,7 @@ filetype off
 call plug#begin()
 
 Plug 'altercation/vim-colors-solarized'
+Plug 'romainl/Apprentice'
 Plug 'flazz/vim-colorschemes'
 Plug 'rakr/vim-one'
 Plug 'kristijanhusak/vim-hybrid-material'
@@ -63,11 +64,21 @@ Plug 'flowtype/vim-flow', {
             \ 'autoload': {
             \     'filetypes': 'javascript'
             \ }}
+Plug 'fsharp/vim-fsharp', {
+      \ 'for': 'fsharp',
+      \ 'do':  'make fsautocomplete',
+      \}
+Plug 'callmekohei/deoplete-fsharp'
+Plug 'neovimhaskell/haskell-vim'
+Plug 'eagletmt/neco-ghc'
 " Plug 'artur-shaik/vim-javacomplete2'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'tpope/vim-dispatch'
 Plug 'danro/rename.vim'
+Plug 'tpope/vim-fireplace'
+Plug 'vim-scripts/paredit.vim'
+Plug 'wlangstroth/vim-racket'
 Plug 'fatih/vim-go'
 Plug 'rust-lang/rust.vim'
 
