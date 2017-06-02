@@ -213,7 +213,10 @@ set guioptions-=l guioptions-=L guioptions-=r guioptions-=T guioptions-=R guiopt
 autocmd! BufNewFile,BufRead *.java setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.hx setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.hxml setlocal tabstop=4 shiftwidth=4
-autocmd! BufNewFile,BufRead *.h, *.c, *.hpp, *.cpp setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.h setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.c setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.hpp setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.scss setlocal tabstop=2 shiftwidth=2
 " Use JSX for .js
 let g:jsx_ext_required = 0
@@ -229,7 +232,13 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_loc_list_height=5
-
+" find the local version of eslint
+" http://blog.pixelastic.com/2015/10/05/use-local-eslint-in-syntastic/
+function! StrTrim(txt)
+  return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+endfunction
+let g:syntastic_javascript_eslint_exec = StrTrim(system('npm-which eslint'))
+let g:syntastic_typescript_checkers = ['tslint']
 let g:syntastic_typescript_checkers = ['tslint']
 let g:syntastic_javascript_checkers = ['eslint', 'flow']
 let g:syntastic_ruby_checkers = ['rsense']
@@ -410,3 +419,4 @@ let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','html','sh']
 " {{{ yankring
 let g:yankring_history_dir = '~/yankring_history'
 "}}}
+autocmd FileType ocaml source /Users/jamessral/.opam/system/share/typerex/ocp-indent/ocp-indent.vim

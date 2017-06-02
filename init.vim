@@ -79,6 +79,7 @@ Plug 'danro/rename.vim'
 Plug 'tpope/vim-fireplace'
 Plug 'vim-scripts/paredit.vim'
 Plug 'wlangstroth/vim-racket'
+Plug 'rgrinberg/vim-ocaml'
 Plug 'fatih/vim-go'
 Plug 'rust-lang/rust.vim'
 
@@ -151,6 +152,8 @@ set incsearch                   " incremental searching
 set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital letter
 
+inoremap jk <Esc>
+xnoremap jk <Esc>
 " easier navigation between split windows
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
@@ -280,6 +283,13 @@ autocmd! BufNewFile,BufRead *.scss setlocal tabstop=2 shiftwidth=2
 let g:jsx_ext_required = 0
 "}}}
 
+"{{{ Ocaml
+:set rtp+=<SHARE_DIR>/merlin/vim
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
+autocmd FileType ocaml source /Users/jamessral/.opam/system/share/typerex/ocp-indent/ocp-indent.vim
+"}}}
+
 " Syntastic {{{
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -290,7 +300,12 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_loc_list_height=5
-
+" find the local version of eslint
+" http://blog.pixelastic.com/2015/10/05/use-local-eslint-in-syntastic/
+function! StrTrim(txt)
+  return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+endfunction
+let g:syntastic_javascript_eslint_exec = StrTrim(system('npm-which eslint'))
 let g:syntastic_typescript_checkers = ['tslint']
 let g:syntastic_javascript_checkers = ['eslint', 'flow']
 let g:syntastic_ruby_checkers = ['rsense']
