@@ -18,6 +18,7 @@ Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'gabesoft/vim-ags'
 Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
 Plug 'ervandew/supertab'
 Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim'
@@ -28,7 +29,6 @@ Plug 'zchee/deoplete-go'
 Plug 'carlitux/deoplete-ternjs'
 Plug 'zchee/deoplete-clang'
 Plug 'fishbullet/deoplete-ruby'
-Plug 'kchmck/vim-coffee-script'
 Plug 'scrooloose/syntastic'
 Plug 'mbbill/undotree'
 " Plug 'godlygeek/tabular'
@@ -285,6 +285,7 @@ let g:jsx_ext_required = 0
 
 "{{{ Ocaml
 :set rtp+=<SHARE_DIR>/merlin/vim
+:set rtp+=<SHARE_DIR>/ocp-indent/vim
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
 autocmd FileType ocaml source /Users/jamessral/.opam/system/share/typerex/ocp-indent/ocp-indent.vim
@@ -301,12 +302,30 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_loc_list_height=5
 " find the local version of eslint
-" http://blog.pixelastic.com/2015/10/05/use-local-eslint-in-syntastic/
-function! StrTrim(txt)
-  return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+" Syntastic local linter support
+
+let g:syntastic_javascript_checkers = []
+
+function CheckJavaScriptLinter(filepath, linter)
+  if exists('b:syntastic_checkers')
+    return
+  endif
+  if filereadable(a:filepath)
+    let b:syntastic_checkers = [a:linter]
+    let {'b:syntastic_' . a:linter . '_exec'} = a:filepath
+  endif
 endfunction
-let g:syntastic_javascript_eslint_exec = StrTrim(system('npm-which eslint'))
-let g:syntastic_typescript_checkers = ['tslint']
+
+function SetupJavaScriptLinter()
+  let l:current_folder = expand('%:p:h')
+  let l:bin_folder = fnamemodify(syntastic#util#findFileInParent('package.json', l:current_folder), ':h')
+  let l:bin_folder = l:bin_folder . '/node_modules/.bin/'
+  call CheckJavaScriptLinter(l:bin_folder . 'standard', 'standard')
+  call CheckJavaScriptLinter(l:bin_folder . 'eslint', 'eslint')
+endfunction
+
+autocmd FileType javascript call SetupJavaScriptLinter()
+
 let g:syntastic_javascript_checkers = ['eslint', 'flow']
 let g:syntastic_ruby_checkers = ['rsense']
 let g:syntastic_python_checkers = ['pyflakes']
