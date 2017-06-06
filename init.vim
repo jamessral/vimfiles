@@ -82,6 +82,7 @@ Plug 'wlangstroth/vim-racket'
 Plug 'rgrinberg/vim-ocaml'
 Plug 'fatih/vim-go'
 Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
@@ -92,10 +93,10 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 " silent! colorscheme solarized
-colorscheme Monokai
+" colorscheme solarized
 "color ir_black
-"colorscheme Tomorrow-Night-Bright
-set background=dark
+colorscheme solarized
+set background=light
 call togglebg#map("<F5>")
 " }}}
 
@@ -123,7 +124,7 @@ endif
 "set wildmode=longest,list:longest
 
 " Map ESC
-let mapleader = ","               " The default leader key isn't very intuitive.
+let mapleader = ","              " The default leader key isn't very intuitive.
 
 set number
 set showmatch                   " matching brace/parenthesis/etc.
@@ -160,19 +161,24 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
-nnoremap <Space>j <c-w>j
-nnoremap <Space>k <c-w>k
-nnoremap <Space>h <c-w>h
-nnoremap <Space>l <c-w>l
-nnoremap <Space>v <c-w>v
-nnoremap <Space>s <c-w>s
-nnoremap <Space>c <c-w>c
+" nnoremap <Space>j <c-w>j
+" nnoremap <Space>k <c-w>k
+" nnoremap <Space>h <c-w>h
+" nnoremap <Space>l <c-w>l
+" nnoremap <Space>v <c-w>v
+" nnoremap <Space>s <c-w>s
+" nnoremap <Space>c <c-w>c
 
 " Maps Alt-[h,j,k,l] to resizing a window split
 map <silent> <A-h> <C-w><
 map <silent> <A-j> <C-W>-
 map <silent> <A-k> <C-W>+
 map <silent> <A-l> <C-w>>
+" For navigating even in Nvim terminal
+tnoremap <A-h> <C-\><C-N><C-w>h
+tnoremap <A-j> <C-\><C-N><C-w>j
+tnoremap <A-k> <C-\><C-N><C-w>k
+tnoremap <A-l> <C-\><C-N><C-w>l
 map <silent> <Space>< <C-w><
 map <silent> <Space>- <C-W>-
 map <silent> <Space>+ <C-W>+
@@ -247,7 +253,7 @@ let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
 let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
 
 " deoplete tab-complete
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " tern
 autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 "}}}
@@ -284,11 +290,21 @@ let g:jsx_ext_required = 0
 "}}}
 
 "{{{ Ocaml
-:set rtp+=<SHARE_DIR>/merlin/vim
-:set rtp+=<SHARE_DIR>/ocp-indent/vim
+" set rtp^="/Users/jamessral/.opam/system/share/merlin/vim"
+" set rtp^="/Users/jamessral/.opam/system/share/ocp-indent/vim"
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
-autocmd FileType ocaml source /Users/jamessral/.opam/system/share/typerex/ocp-indent/ocp-indent.vim
+execute "set rtp+=" . g:opamshare . "/ocp-indent/vim"
+
+"}}}
+
+"{{{ Rust
+set hidden
+let g:racer_cmd = "/Users/jamessral/.cargo/bin/racer"
+au FileType rust nmap gd <Plug>(rust-def)
+au FileType rust nmap gs <Plug>(rust-def-split)
+au FileType rust nmap gx <Plug>(rust-def-vertical)
+au FileType rust nmap <leader>gd <Plug>(rust-doc)
 "}}}
 
 " Syntastic {{{
@@ -505,4 +521,3 @@ let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','html','sh']
 " {{{ yankring
 let g:yankring_history_dir = '~/yankring_history'
 "}}}
-
