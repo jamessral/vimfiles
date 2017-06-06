@@ -83,7 +83,9 @@ Plug 'rgrinberg/vim-ocaml'
 Plug 'fatih/vim-go'
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
-
+Plug 'vim-erlang/vim-erlang-omnicomplete'
+Plug 'vim-erlang/vim-dialyzer'
+Plug 'l04m33/vlime'
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 filetype plugin indent on    " required
@@ -95,7 +97,7 @@ filetype plugin indent on    " required
 " silent! colorscheme solarized
 " colorscheme solarized
 "color ir_black
-colorscheme solarized
+colorscheme Monokai
 set background=light
 call togglebg#map("<F5>")
 " }}}
