@@ -55,7 +55,7 @@ Plug 'flowtype/vim-flow'
 Plug 'janko-m/vim-test'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 " Plug 'artur-shaik/vim-javacomplete2'
-Plug 'jdonaldson/vaxe'
+" Plug 'jdonaldson/vaxe'
 Plug 'danro/rename.vim'
 " Plug 'Valloric/YouCompleteMe'
 " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
@@ -80,12 +80,16 @@ Plug 'tpope/vim-fireplace'
 Plug 'vim-scripts/paredit.vim'
 Plug 'wlangstroth/vim-racket'
 Plug 'rgrinberg/vim-ocaml'
+Plug 'elixir-lang/vim-elixir'
+Plug 'slashmili/alchemist.vim'
+Plug 'ElmCast/elm-vim'
 Plug 'fatih/vim-go'
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
 Plug 'vim-erlang/vim-erlang-omnicomplete'
 Plug 'vim-erlang/vim-dialyzer'
 Plug 'l04m33/vlime'
+Plug 'kovisoft/slimv'
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 filetype plugin indent on    " required
@@ -95,9 +99,9 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 " silent! colorscheme solarized
-" colorscheme solarized
+colorscheme solarized
 "color ir_black
-colorscheme Monokai
+" colorscheme Monokai
 set background=light
 call togglebg#map("<F5>")
 " }}}
@@ -298,6 +302,10 @@ let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
 execute "set rtp+=" . g:opamshare . "/ocp-indent/vim"
 
+"}}}
+
+"{{{ Common Lisp
+let g:slimv_swank_cmd = '!osascript -e "tell application \"Terminal\" to do script \"sbcl --load ~/.vim/slime/start-swank.lisp\""'
 "}}}
 
 "{{{ Rust
