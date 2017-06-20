@@ -16,6 +16,8 @@ Plug 'flazz/vim-colorschemes'
 Plug 'rakr/vim-one'
 Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'leshill/vim-json'
 Plug 'gabesoft/vim-ags'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
@@ -29,7 +31,8 @@ Plug 'zchee/deoplete-go'
 Plug 'carlitux/deoplete-ternjs'
 Plug 'zchee/deoplete-clang'
 Plug 'fishbullet/deoplete-ruby'
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
 Plug 'mbbill/undotree'
 " Plug 'godlygeek/tabular'
 Plug 'tpope/vim-fugitive'
@@ -321,42 +324,62 @@ au FileType rust nmap <leader>gd <Plug>(rust-doc)
 
 " Syntastic {{{
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_loc_list_height=5
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 0
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_loc_list_height=5
 " find the local version of eslint
 " Syntastic local linter support
 
-let g:syntastic_javascript_checkers = []
+" let g:syntastic_javascript_checkers = []
 
-function CheckJavaScriptLinter(filepath, linter)
-  if exists('b:syntastic_checkers')
-    return
-  endif
-  if filereadable(a:filepath)
-    let b:syntastic_checkers = [a:linter]
-    let {'b:syntastic_' . a:linter . '_exec'} = a:filepath
-  endif
+" function CheckJavaScriptLinter(filepath, linter)
+"   if exists('b:syntastic_checkers')
+"     return
+"   endif
+"   if filereadable(a:filepath)
+"     let b:syntastic_checkers = [a:linter]
+"     let {'b:syntastic_' . a:linter . '_exec'} = a:filepath
+"   endif
+" endfunction
+
+" function SetupJavaScriptLinter()
+"   let l:current_folder = expand('%:p:h')
+"   let l:bin_folder = fnamemodify(syntastic#util#findFileInParent('package.json', l:current_folder), ':h')
+"   let l:bin_folder = l:bin_folder . '/node_modules/.bin/'
+"   call CheckJavaScriptLinter(l:bin_folder . 'standard', 'standard')
+"   call CheckJavaScriptLinter(l:bin_folder . 'eslint', 'eslint')
+" endfunction
+
+" autocmd FileType javascript call SetupJavaScriptLinter()
+
+" let g:syntastic_javascript_checkers = ['eslint', 'flow']
+" let g:syntastic_ruby_checkers = ['rsense']
+" let g:syntastic_python_checkers = ['pyflakes']
+"}}}
+
+"{{{ Ale Linting
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? 'OK' : printf(
+    \   '%dW %dE',
+    \   all_non_errors,
+    \   all_errors
+    \)
 endfunction
 
-function SetupJavaScriptLinter()
-  let l:current_folder = expand('%:p:h')
-  let l:bin_folder = fnamemodify(syntastic#util#findFileInParent('package.json', l:current_folder), ':h')
-  let l:bin_folder = l:bin_folder . '/node_modules/.bin/'
-  call CheckJavaScriptLinter(l:bin_folder . 'standard', 'standard')
-  call CheckJavaScriptLinter(l:bin_folder . 'eslint', 'eslint')
-endfunction
-
-autocmd FileType javascript call SetupJavaScriptLinter()
-
-let g:syntastic_javascript_checkers = ['eslint', 'flow']
-let g:syntastic_ruby_checkers = ['rsense']
-let g:syntastic_python_checkers = ['pyflakes']
+set statusline=%{LinterStatus()}
+let g:ale_linters = {
+\  'javscript': ['eslint'],
+\}
 "}}}
 
 "{{{ Test Runner
