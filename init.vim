@@ -363,6 +363,8 @@ set statusline+=%*
 "}}}
 
 "{{{ Ale Linting
+" Always keep gutter open to avoid flickering
+let g:ale_sign_column_always = 1
 function! LinterStatus() abort
     let l:counts = ale#statusline#Count(bufnr(''))
 
