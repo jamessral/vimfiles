@@ -31,6 +31,7 @@ Plug 'zchee/deoplete-go'
 Plug 'carlitux/deoplete-ternjs'
 Plug 'zchee/deoplete-clang'
 Plug 'fishbullet/deoplete-ruby'
+Plug 'rhysd/vim-crystal'
 " Plug 'scrooloose/syntastic'
 Plug 'w0rp/ale'
 Plug 'mbbill/undotree'
@@ -49,6 +50,7 @@ Plug 'vim-scripts/peaksea'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'chase/vim-ansible-yaml'
 Plug 'thoughtbot/vim-rspec'
 Plug 'othree/yajs.vim'
@@ -102,10 +104,9 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 " silent! colorscheme solarized
-colorscheme Monokai
 "color ir_black
-" colorscheme gruvbox
-set background=light
+colorscheme hybrid
+set background=dark
 call togglebg#map("<F5>")
 " }}}
 
@@ -295,7 +296,7 @@ autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.hpp setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.scss setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.ex setlocal tabstop=2 shiftwidth=2
-autocmd! BufNewFile,BufRead *.exs setlocal tabstop=2 shiftwidth=2
+autocmd! BufNewFile,BufRead *.exs setlocal tabstop=2 shiftwidth=2 syntax=elixir
 " Use JSX for .js
 let g:jsx_ext_required = 0
 "}}}
