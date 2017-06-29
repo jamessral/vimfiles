@@ -11,11 +11,14 @@ filetype off
 call plug#begin()
 
 Plug 'altercation/vim-colors-solarized'
-Plug 'romainl/Apprentice'
 Plug 'flazz/vim-colorschemes'
-Plug 'rakr/vim-one'
 Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'trevordmiller/nova-vim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'mxw/vim-jsx'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'jceb/vim-orgmode'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'leshill/vim-json'
 Plug 'gabesoft/vim-ags'
@@ -31,6 +34,8 @@ Plug 'zchee/deoplete-go'
 Plug 'carlitux/deoplete-ternjs'
 Plug 'zchee/deoplete-clang'
 Plug 'fishbullet/deoplete-ruby'
+Plug 'python-mode/python-mode'
+Plug 'davidhalter/jedi-vim'
 Plug 'rhysd/vim-crystal'
 " Plug 'scrooloose/syntastic'
 Plug 'w0rp/ale'
@@ -95,6 +100,7 @@ Plug 'vim-erlang/vim-erlang-omnicomplete'
 Plug 'vim-erlang/vim-dialyzer'
 Plug 'l04m33/vlime'
 Plug 'kovisoft/slimv'
+Plug 'quabug/vim-gdscript'
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 filetype plugin indent on    " required
@@ -104,8 +110,10 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 " silent! colorscheme solarized
-"color ir_black
-colorscheme hybrid
+  colorscheme nova
+" colorscheme gruvbox
+let g:gruvbox_contrast_dark="hard"
+let g:gruvbox_contrast_light="hard"
 set background=dark
 call togglebg#map("<F5>")
 " }}}
@@ -281,8 +289,20 @@ if executable('ag')
 endif
 "}}}
 
+"{{{ Airline & Devicons
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline_powerline_fonts = 1
+"let g:webdevicons_enable_nerdtree = 1
+"let g:webdevicons_enable_airline_tabline = 1
+"let g:webdevicons_enable_airline_statusline = 1
+"let g:webdevicons_enable_ctrlp = 1
+"let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
+"}}}
+
 " GUI Settings {{{
-set guifont=Source\ Code\ Pro:h13
+set guifont=Sauce\ Code\ Pro\ Nerd\ Font\ Complete\ Mono:h13
 set guioptions-=l guioptions-=L guioptions-=r guioptions-=T guioptions-=R guioptions-=m
 " }}}
 
@@ -397,6 +417,10 @@ let test#strategy = "vimproc"
 
 "{{{ Launch Love2d
 nnoremap <leader>l :!love .<CR>
+"}}}
+
+"{{{ Python
+let g:pymode_python = 'python3'
 "}}}
 
 " Typescript Config {{{
