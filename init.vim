@@ -12,8 +12,8 @@ call plug#begin()
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'flazz/vim-colorschemes'
-Plug 'kristijanhusak/vim-hybrid-material'
-Plug 'trevordmiller/nova-vim'
+"Plug 'kristijanhusak/vim-hybrid-material'
+"Plug 'trevordmiller/nova-vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'mxw/vim-jsx'
@@ -69,16 +69,16 @@ Plug 'artur-shaik/vim-javacomplete2'
 Plug 'danro/rename.vim'
 " Plug 'Valloric/YouCompleteMe'
 " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
-Plug 'jdonaldson/vaxe'
+"Plug 'jdonaldson/vaxe'
 Plug 'flowtype/vim-flow', {
             \ 'autoload': {
             \     'filetypes': 'javascript'
             \ }}
-Plug 'fsharp/vim-fsharp', {
-      \ 'for': 'fsharp',
-      \ 'do':  'make fsautocomplete',
-      \}
-Plug 'callmekohei/deoplete-fsharp'
+"Plug 'fsharp/vim-fsharp', {
+      "\ 'for': 'fsharp',
+      "\ 'do':  'make fsautocomplete',
+      "\}
+"Plug 'callmekohei/deoplete-fsharp'
 Plug 'neovimhaskell/haskell-vim'
 Plug 'eagletmt/neco-ghc'
 " Plug 'artur-shaik/vim-javacomplete2'
@@ -86,9 +86,9 @@ Plug 'OmniSharp/omnisharp-vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'tpope/vim-dispatch'
 Plug 'danro/rename.vim'
-Plug 'tpope/vim-fireplace'
+"Plug 'tpope/vim-fireplace'
 Plug 'vim-scripts/paredit.vim'
-Plug 'wlangstroth/vim-racket'
+"Plug 'wlangstroth/vim-racket'
 Plug 'rgrinberg/vim-ocaml'
 Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
@@ -96,8 +96,8 @@ Plug 'ElmCast/elm-vim'
 Plug 'fatih/vim-go'
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
-Plug 'vim-erlang/vim-erlang-omnicomplete'
-Plug 'vim-erlang/vim-dialyzer'
+"Plug 'vim-erlang/vim-erlang-omnicomplete'
+"Plug 'vim-erlang/vim-dialyzer'
 Plug 'l04m33/vlime'
 Plug 'kovisoft/slimv'
 Plug 'quabug/vim-gdscript'
@@ -110,12 +110,12 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 " silent! colorscheme solarized
-colorscheme Tomorrow-Night-Bright
+colorscheme railscasts
 " colorscheme PaperColor
 " colorscheme gruvbox
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
-set background=dark
+"set background=light
 call togglebg#map("<F5>")
 " }}}
 
@@ -271,6 +271,10 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
 let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
 
+" wait for at least 3 input characters
+let g:deoplete#source#attribute#min_pattern_length = 3
+" wait longer to start getting completions
+let g:deoplete#auto_complete_delay = 100
 " deoplete tab-complete
 inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " tern
@@ -387,6 +391,8 @@ let g:syntastic_python_checkers = ['pyflakes']
 
 "{{{ Ale Linting
 " Always keep gutter open to avoid flickering
+" Add more of a delay so as to not slow down so much
+let g:ale_lint_delay = 500
 let g:ale_sign_column_always = 1
 function! LinterStatus() abort
     let l:counts = ale#statusline#Count(bufnr(''))
