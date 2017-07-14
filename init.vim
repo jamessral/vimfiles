@@ -64,7 +64,7 @@ Plug 'mxw/vim-jsx'
 Plug 'flowtype/vim-flow'
 Plug 'janko-m/vim-test'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-" Plug 'artur-shaik/vim-javacomplete2'
+Plug 'artur-shaik/vim-javacomplete2'
 " Plug 'jdonaldson/vaxe'
 Plug 'danro/rename.vim'
 " Plug 'Valloric/YouCompleteMe'
@@ -110,7 +110,8 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 " silent! colorscheme solarized
-  colorscheme nova
+colorscheme Tomorrow-Night-Bright
+" colorscheme PaperColor
 " colorscheme gruvbox
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
@@ -290,6 +291,7 @@ endif
 "}}}
 
 "{{{ Airline & Devicons
+let g:airline_theme='luna'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -380,7 +382,7 @@ set statusline+=%*
 
 " let g:syntastic_javascript_checkers = ['eslint', 'flow']
 " let g:syntastic_ruby_checkers = ['rsense']
-" let g:syntastic_python_checkers = ['pyflakes']
+let g:syntastic_python_checkers = ['pyflakes']
 "}}}
 
 "{{{ Ale Linting
@@ -421,6 +423,7 @@ nnoremap <leader>l :!love .<CR>
 
 "{{{ Python
 let g:pymode_python = 'python3'
+let g:jedi#usages_command = "<leader>j"
 "}}}
 
 " Typescript Config {{{
