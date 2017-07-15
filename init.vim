@@ -12,7 +12,6 @@ call plug#begin()
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'flazz/vim-colorschemes'
-"Plug 'kristijanhusak/vim-hybrid-material'
 "Plug 'trevordmiller/nova-vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'hail2u/vim-css3-syntax'
@@ -110,12 +109,13 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 " silent! colorscheme solarized
-colorscheme railscasts
-" colorscheme PaperColor
-" colorscheme gruvbox
+"colorscheme Tomorrow-Night-Eighties
+let g:hybrid_custom_term_colors = 1
+let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
+colorscheme hybrid
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
-"set background=light
+set background=dark
 call togglebg#map("<F5>")
 " }}}
 
@@ -188,15 +188,15 @@ nnoremap <c-l> <c-w>l
 " nnoremap <Space>s <c-w>s
 " nnoremap <Space>c <c-w>c
 
-" Maps Alt-[h,j,k,l] to resizing a window split
-map <silent> <A-h> <C-w><
-map <silent> <A-j> <C-W>-
-map <silent> <A-k> <C-W>+
-map <silent> <A-l> <C-w>>
+" Maps Alt-[H,J,K,L] to resizing a window split
+map <silent> <M-H> <C-w><
+map <silent> <M-J> <C-W>-
+map <silent> <M-K> <C-W>+
+map <silent> <M-L> <C-w>>
 " For navigating even in Nvim terminal
-tnoremap <A-h> <C-\><C-N><C-w>h
-tnoremap <A-j> <C-\><C-N><C-w>j
-tnoremap <A-k> <C-\><C-N><C-w>k
+tnoremap <M-h> <C-\><C-N><C-w>h
+tnoremap <M-j> <C-\><C-N><C-w>j
+tnoremap <M-k> <C-\><C-N><C-w>k
 tnoremap <A-l> <C-\><C-N><C-w>l
 map <silent> <Space>< <C-w><
 map <silent> <Space>- <C-W>-
@@ -295,7 +295,7 @@ endif
 "}}}
 
 "{{{ Airline & Devicons
-let g:airline_theme='luna'
+let g:airline_theme='hybrid'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -323,6 +323,8 @@ autocmd! BufNewFile,BufRead *.hpp setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.scss setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.ex setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.exs setlocal tabstop=2 shiftwidth=2 syntax=elixir
+autocmd! BufNewFile,BufRead *.php setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.php setlocal tabstop=4 shiftwidth=4
 " Use JSX for .js
 let g:jsx_ext_required = 0
 "}}}
@@ -516,7 +518,7 @@ nnoremap <leader>ft Vatzf
 
 " Ctrl-P plugin {{{
 map <leader>t :CtrlP<CR>
-let g:ctrlp_custom_ignore = 'vendor/bundle'
+let g:ctrlp_custom_ignore = 'vendor/bundle/node_modules'
 let g:ctrlp_working_path_mode = 'ra'
 " }}}
 
