@@ -11,8 +11,10 @@ filetype off
 call plug#begin()
 " All of your Plugins must be added before the following line
 Plug 'altercation/vim-colors-solarized'
+Plug 'w0ng/vim-hybrid'
 Plug 'flazz/vim-colorschemes'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
 Plug 'ervandew/supertab'
 Plug 'Raimondi/delimitMate'
@@ -23,7 +25,6 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'scrooloose/syntastic'
 Plug 'mbbill/undotree'
-" Plug 'godlygeek/tabular'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-markdown'
@@ -32,26 +33,32 @@ Plug 'tpope/vim-surround'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'vim-scripts/peaksea'
+Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'chase/vim-ansible-yaml'
-" Plug 'pangloss/vim-javascript'
 Plug 'othree/yajs.vim'
+Plug 'shawncplus/phpcomplete.vim'
+Plug 'tbastos/vim-lua'
 Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
+Plug 'posva/vim-vue'
 Plug 'janko-m/vim-test'
 Plug 'jdonaldson/vaxe'
 Plug 'flowtype/vim-flow', {
             \ 'autoload': {
             \     'filetypes': 'javascript'
             \ }}
-" Plug 'artur-shaik/vim-javacomplete2'
+Plug 'artur-shaik/vim-javacomplete2'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'tpope/vim-dispatch'
 Plug 'danro/rename.vim'
 Plug 'fatih/vim-go'
+Plug 'ElmCast/elm-vim'
+Plug 'elixir-lang/vim-elixir'
 Plug 'rust-lang/rust.vim'
 
 call plug#end()            " required
@@ -62,12 +69,27 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 " silent! colorscheme solarized
-colorscheme Monokai
+colorscheme gruvbox
+let g:gruvbox_contrast_dark="medium"
+let g:gruvbox_contrast_light="hard"
 "color ir_black
 "colorscheme Tomorrow-Night-Bright
 set background=dark
 call togglebg#map("<F5>")
 " }}}
+
+"{{{ Airline & Devicons
+let g:airline_theme='hybrid'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline_powerline_fonts = 1
+"let g:webdevicons_enable_nerdtree = 1
+"let g:webdevicons_enable_airline_tabline = 1
+"let g:webdevicons_enable_airline_statusline = 1
+"let g:webdevicons_enable_ctrlp = 1
+"let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
+"}}}
 
 " Vim Settings {{{
 set colorcolumn=80
@@ -77,6 +99,7 @@ set showcmd                     " display incomplete commands
 set ttyfast
 set wildmenu
 set mouse=a
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/.tmp/*,*/.sass-cache/*,*/node_modules/*,*.keep,*.DS_Store,*/.git/*
 
 " # http://superuser.com/questions/549930/cant-resize-vim-splits-inside-tmux
 if &term =~ '^screen'
@@ -120,14 +143,17 @@ set incsearch                   " incremental searching
 set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital letter
 
+inoremap jk <Esc>
+xnoremap jk <Esc>
+
 " easier navigation between split windows
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
-nnoremap <Space>j <c-w>j
-nnoremap <Space>k <c-w>k
+" nnoremap <Space>j <c-w>j
+" nnoremap <Space>k <c-w>k
 nnoremap <Space>h <c-w>h
 nnoremap <Space>l <c-w>l
 nnoremap <Space>v <c-w>v
@@ -202,6 +228,34 @@ nnoremap <leader>-  yypv$r-
 :nnoremap <Space> za
 set splitright
 set splitbelow
+"}}}
+
+"{{{ Ale Linting
+" Always keep gutter open to avoid flickering
+" Add more of a delay so as to not slow down so much
+let g:ale_lint_delay = 500
+let g:ale_sign_column_always = 1
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? 'OK' : printf(
+    \   '%dW %dE',
+    \   all_non_errors,
+    \   all_errors
+    \)
+endfunction
+
+set statusline=%{LinterStatus()}
+let g:ale_linters = {
+\  'javscript': ['eslint'],
+\}
+"}}}
+
+" Emmet-vim {{{
+let g:user_emmet_leader_key='<C-Z>'
 "}}}
 
 " GUI Settings {{{

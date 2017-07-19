@@ -12,7 +12,6 @@ call plug#begin()
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'flazz/vim-colorschemes'
-"Plug 'trevordmiller/nova-vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'mxw/vim-jsx'
@@ -28,7 +27,6 @@ Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/deoplete.nvim'
 Plug 'zchee/deoplete-go'
 Plug 'carlitux/deoplete-ternjs'
 Plug 'zchee/deoplete-clang'
@@ -36,10 +34,8 @@ Plug 'fishbullet/deoplete-ruby'
 Plug 'python-mode/python-mode'
 Plug 'davidhalter/jedi-vim'
 Plug 'rhysd/vim-crystal'
-" Plug 'scrooloose/syntastic'
 Plug 'w0rp/ale'
 Plug 'mbbill/undotree'
-" Plug 'godlygeek/tabular'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-markdown'
@@ -60,34 +56,24 @@ Plug 'thoughtbot/vim-rspec'
 Plug 'othree/yajs.vim'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'mxw/vim-jsx'
+Plug 'tbastos/vim-lua'
+Plug 'posva/vim-vue'
 Plug 'flowtype/vim-flow'
+Plug 'shawncplus/phpcomplete.vim'
 Plug 'janko-m/vim-test'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'artur-shaik/vim-javacomplete2'
-" Plug 'jdonaldson/vaxe'
+Plug 'jdonaldson/vaxe'
 Plug 'danro/rename.vim'
-" Plug 'Valloric/YouCompleteMe'
-" Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
-"Plug 'jdonaldson/vaxe'
 Plug 'flowtype/vim-flow', {
             \ 'autoload': {
             \     'filetypes': 'javascript'
             \ }}
-"Plug 'fsharp/vim-fsharp', {
-      "\ 'for': 'fsharp',
-      "\ 'do':  'make fsautocomplete',
-      "\}
-"Plug 'callmekohei/deoplete-fsharp'
-Plug 'neovimhaskell/haskell-vim'
 Plug 'eagletmt/neco-ghc'
-" Plug 'artur-shaik/vim-javacomplete2'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'tpope/vim-dispatch'
 Plug 'danro/rename.vim'
-"Plug 'tpope/vim-fireplace'
-Plug 'vim-scripts/paredit.vim'
-"Plug 'wlangstroth/vim-racket'
 Plug 'rgrinberg/vim-ocaml'
 Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
@@ -95,10 +81,6 @@ Plug 'ElmCast/elm-vim'
 Plug 'fatih/vim-go'
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
-"Plug 'vim-erlang/vim-erlang-omnicomplete'
-"Plug 'vim-erlang/vim-dialyzer'
-Plug 'l04m33/vlime'
-Plug 'kovisoft/slimv'
 Plug 'quabug/vim-gdscript'
 " All of your Plugins must be added before the following line
 call plug#end()            " required
@@ -110,11 +92,11 @@ filetype plugin indent on    " required
 " available.
 " silent! colorscheme solarized
 "colorscheme Tomorrow-Night-Eighties
+colorscheme gruvbox
+let g:gruvbox_contrast_dark="medium"
+let g:gruvbox_contrast_light="hard"
 let g:hybrid_custom_term_colors = 1
 let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
-colorscheme hybrid
-let g:gruvbox_contrast_dark="hard"
-let g:gruvbox_contrast_light="hard"
 set background=dark
 call togglebg#map("<F5>")
 " }}}
@@ -266,7 +248,7 @@ set splitbelow
 "{{{ Deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#file#enable_buffer_path = 1 "Use the current file for relative path
-let g:python_host_prog = '/usr/local/bin/python'
+let g:python_host_prog = '/usr/local/bin/python2'
 let g:python3_host_prog = '/usr/local/bin/python3'
 let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
 let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
@@ -323,7 +305,6 @@ autocmd! BufNewFile,BufRead *.hpp setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.scss setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.ex setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.exs setlocal tabstop=2 shiftwidth=2 syntax=elixir
-autocmd! BufNewFile,BufRead *.php setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.php setlocal tabstop=4 shiftwidth=4
 " Use JSX for .js
 let g:jsx_ext_required = 0
@@ -437,10 +418,6 @@ let g:jedi#usages_command = "<leader>j"
 " Typescript Config {{{
 "autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
 "autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
-"}}}
-
-"{{{ Dlang config
-let g:dutyl_stdImportPaths=['/usr/local/include/dlang/dmd']
 "}}}
 
 "{{{ Java config
