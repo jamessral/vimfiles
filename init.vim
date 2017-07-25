@@ -29,12 +29,14 @@ Plug 'vim-scripts/YankRing.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-go'
 Plug 'carlitux/deoplete-ternjs'
-Plug 'zchee/deoplete-clang'
+"Plug 'zchee/deoplete-clang'
+Plug 'tweekmonster/deoplete-clang2'
 Plug 'fishbullet/deoplete-ruby'
 Plug 'python-mode/python-mode'
 Plug 'davidhalter/jedi-vim'
 Plug 'rhysd/vim-crystal'
 Plug 'w0rp/ale'
+Plug 'keith/swift.vim'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -140,7 +142,7 @@ set backspace=indent,eol,start  " backspace through everything in insert mode
 " Use the OS clipboard by default
 set clipboard=unnamed
 
-set cursorline
+"set cursorline
 " Indicators
 set list                          " Show hidden characters (tab and eol)
 "set listchars=trail:⋅,nbsp:⋅,tab:▸\ ,eol:¬       " Use the same chars as textmate.
@@ -277,10 +279,11 @@ endif
 "}}}
 
 "{{{ Airline & Devicons
-let g:airline_theme='hybrid'
+let g:airline_theme='understated'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_powerline_fonts = 1
 "let g:webdevicons_enable_nerdtree = 1
 "let g:webdevicons_enable_airline_tabline = 1
@@ -375,7 +378,7 @@ let g:syntastic_python_checkers = ['pyflakes']
 "{{{ Ale Linting
 " Always keep gutter open to avoid flickering
 " Add more of a delay so as to not slow down so much
-let g:ale_lint_delay = 500
+let g:ale_lint_delay = 300
 let g:ale_sign_column_always = 1
 function! LinterStatus() abort
     let l:counts = ale#statusline#Count(bufnr(''))
