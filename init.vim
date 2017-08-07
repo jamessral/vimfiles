@@ -16,6 +16,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'mxw/vim-jsx'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'rhysd/nyaovim-mini-browser'
 Plug 'jceb/vim-orgmode'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'leshill/vim-json'
@@ -58,7 +59,10 @@ Plug 'thoughtbot/vim-rspec'
 Plug 'othree/yajs.vim'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'mxw/vim-jsx'
+Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/tsuquyomi'
 Plug 'tbastos/vim-lua'
+Plug 'justinj/vim-pico8-syntax'
 Plug 'posva/vim-vue'
 Plug 'flowtype/vim-flow'
 Plug 'shawncplus/phpcomplete.vim'
@@ -419,8 +423,8 @@ let g:jedi#usages_command = "<leader>j"
 "}}}
 
 " Typescript Config {{{
-"autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
-"autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
+autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
+autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
 "}}}
 
 "{{{ Java config
