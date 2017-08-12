@@ -16,7 +16,8 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'mxw/vim-jsx'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'rhysd/nyaovim-mini-browser'
+"Plug 'rhysd/nyaovim-mini-browser'
+Plug 'junegunn/goyo.vim'
 Plug 'jceb/vim-orgmode'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'leshill/vim-json'
@@ -24,6 +25,7 @@ Plug 'gabesoft/vim-ags'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'ervandew/supertab'
+Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim'
 Plug 'vim-scripts/YankRing.vim'
@@ -35,9 +37,9 @@ Plug 'tweekmonster/deoplete-clang2'
 Plug 'fishbullet/deoplete-ruby'
 Plug 'python-mode/python-mode'
 Plug 'davidhalter/jedi-vim'
-Plug 'rhysd/vim-crystal'
+"Plug 'rhysd/vim-crystal'
 Plug 'w0rp/ale'
-Plug 'keith/swift.vim'
+"Plug 'keith/swift.vim'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -63,7 +65,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/tsuquyomi'
 Plug 'tbastos/vim-lua'
 Plug 'justinj/vim-pico8-syntax'
-Plug 'posva/vim-vue'
+"Plug 'posva/vim-vue'
 Plug 'flowtype/vim-flow'
 Plug 'shawncplus/phpcomplete.vim'
 Plug 'janko-m/vim-test'
@@ -75,19 +77,19 @@ Plug 'flowtype/vim-flow', {
             \ 'autoload': {
             \     'filetypes': 'javascript'
             \ }}
-Plug 'eagletmt/neco-ghc'
+"Plug 'eagletmt/neco-ghc'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'tpope/vim-dispatch'
 Plug 'danro/rename.vim'
-Plug 'rgrinberg/vim-ocaml'
+"Plug 'rgrinberg/vim-ocaml'
 Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
 Plug 'ElmCast/elm-vim'
 Plug 'fatih/vim-go'
-Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
-Plug 'quabug/vim-gdscript'
+"Plug 'rust-lang/rust.vim'
+"Plug 'racer-rust/vim-racer'
+"Plug 'quabug/vim-gdscript'
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 filetype plugin indent on    " required
@@ -96,9 +98,8 @@ filetype plugin indent on    " required
 " Set Color Scheme {{{
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
-" silent! colorscheme solarized
-"colorscheme Tomorrow-Night-Eighties
-colorscheme gruvbox
+colorscheme railscasts
+"colorscheme Tomorrow-Night-Bright
 let g:gruvbox_contrast_dark="medium"
 let g:gruvbox_contrast_light="hard"
 let g:hybrid_custom_term_colors = 1
@@ -294,6 +295,14 @@ let g:airline_powerline_fonts = 1
 "let g:webdevicons_enable_airline_statusline = 1
 "let g:webdevicons_enable_ctrlp = 1
 "let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
+"}}}
+
+"{{{ Goyo (Distraction Free)
+nnoremap <leader>z Goyo 120
+"}}}
+
+"{{{ Easymotion
+
 "}}}
 
 " GUI Settings {{{
