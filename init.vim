@@ -98,13 +98,13 @@ filetype plugin indent on    " required
 " Set Color Scheme {{{
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
+set background=dark
 colorscheme railscasts
 "colorscheme Tomorrow-Night-Bright
 let g:gruvbox_contrast_dark="medium"
 let g:gruvbox_contrast_light="hard"
 let g:hybrid_custom_term_colors = 1
 let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
-set background=dark
 call togglebg#map("<F5>")
 " }}}
 
@@ -298,7 +298,8 @@ let g:airline_powerline_fonts = 1
 "}}}
 
 "{{{ Goyo (Distraction Free)
-nnoremap <leader>z Goyo 120
+let g:goyo_width=120
+nnoremap <leader>z Goyo<CR>
 "}}}
 
 "{{{ Easymotion
