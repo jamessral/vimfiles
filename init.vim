@@ -3,6 +3,7 @@ set noswapfile
 set ttimeout
 set ttimeoutlen=0
 set matchtime=0
+set termguicolors
 
 set path+=**
 
@@ -16,6 +17,8 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'mxw/vim-jsx'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
 "Plug 'rhysd/nyaovim-mini-browser'
 Plug 'junegunn/goyo.vim'
 Plug 'jceb/vim-orgmode'
@@ -60,6 +63,7 @@ Plug 'chase/vim-ansible-yaml'
 Plug 'thoughtbot/vim-rspec'
 Plug 'othree/yajs.vim'
 Plug 'jelera/vim-javascript-syntax'
+Plug 'othree/html5.vim'
 Plug 'mxw/vim-jsx'
 Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/tsuquyomi'
@@ -99,8 +103,7 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 set background=dark
-colorscheme railscasts
-"colorscheme Tomorrow-Night-Bright
+colorscheme Tomorrow-Night-Eighties
 let g:gruvbox_contrast_dark="medium"
 let g:gruvbox_contrast_light="hard"
 let g:hybrid_custom_term_colors = 1
@@ -186,7 +189,7 @@ map <silent> <M-L> <C-w>>
 tnoremap <M-h> <C-\><C-N><C-w>h
 tnoremap <M-j> <C-\><C-N><C-w>j
 tnoremap <M-k> <C-\><C-N><C-w>k
-tnoremap <A-l> <C-\><C-N><C-w>l
+tnoremap <M-l> <C-\><C-N><C-w>l
 map <silent> <Space>< <C-w><
 map <silent> <Space>- <C-W>-
 map <silent> <Space>+ <C-W>+
@@ -270,6 +273,13 @@ inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 "}}}
 
+"{{{ Snippets
+" Note: It must be \"imap" and \"smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+"}}}
+
 "{{{ Ags
 if executable('ag')
     let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
@@ -299,7 +309,8 @@ let g:airline_powerline_fonts = 1
 
 "{{{ Goyo (Distraction Free)
 let g:goyo_width=120
-nnoremap <leader>z Goyo<CR>
+
+nnoremap <leader>z :Goyo<CR>
 "}}}
 
 "{{{ Easymotion
@@ -313,7 +324,7 @@ set guioptions-=l guioptions-=L guioptions-=r guioptions-=T guioptions-=R guiopt
 
 " Syntax Highlighting and File Types {{{
 autocmd! BufNewFile,BufRead *.java setlocal tabstop=4 shiftwidth=4
-autocmd! BufNewFile,BufRead *.hx setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.hx setlocal tabstop=4 shiftwidth=4 syntax=haxe
 autocmd! BufNewFile,BufRead *.hxml setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.h setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.c setlocal tabstop=4 shiftwidth=4
