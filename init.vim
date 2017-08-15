@@ -22,6 +22,7 @@ Plug 'Shougo/neosnippet-snippets'
 "Plug 'rhysd/nyaovim-mini-browser'
 Plug 'junegunn/goyo.vim'
 Plug 'jceb/vim-orgmode'
+Plug 'tpope/vim-speeddating'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'leshill/vim-json'
 Plug 'gabesoft/vim-ags'
@@ -31,7 +32,7 @@ Plug 'ervandew/supertab'
 Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim'
-Plug 'vim-scripts/YankRing.vim'
+"Plug 'vim-scripts/YankRing.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-go'
 Plug 'carlitux/deoplete-ternjs'
@@ -69,7 +70,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/tsuquyomi'
 Plug 'tbastos/vim-lua'
 Plug 'justinj/vim-pico8-syntax'
-"Plug 'posva/vim-vue'
+Plug 'posva/vim-vue'
 Plug 'flowtype/vim-flow'
 Plug 'shawncplus/phpcomplete.vim'
 Plug 'janko-m/vim-test'
@@ -103,7 +104,7 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 set background=dark
-colorscheme Tomorrow-Night-Eighties
+colorscheme hybrid
 let g:gruvbox_contrast_dark="medium"
 let g:gruvbox_contrast_light="hard"
 let g:hybrid_custom_term_colors = 1
@@ -294,7 +295,7 @@ endif
 "}}}
 
 "{{{ Airline & Devicons
-let g:airline_theme='understated'
+let g:airline_theme='hybrid'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -425,11 +426,11 @@ let g:ale_linters = {
 "}}}
 
 "{{{ Test Runner
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>T :TestFile<CR>
-nmap <silent> <leader>A :TestSuite<CR>
-nmap <silent> <leader>L :TestLast<CR>
-nmap <silent> <leader>G :TestVisit<CR>
+nnoremap <silent> <leader>t :TestNearest<CR>
+nnoremap <silent> <leader>T :TestFile<CR>
+nnoremap <silent> <leader>A :TestSuite<CR>
+nnoremap <silent> <leader>L :TestLast<CR>
+nnoremap <silent> <leader>G :TestVisit<CR>
 
 let test#strategy = "vimproc"
 "}}}
@@ -522,7 +523,7 @@ nnoremap <leader>ft Vatzf
 "}}}
 
 " Ctrl-P plugin {{{
-map <leader>t :CtrlP<CR>
+nnoremap <C-p> :CtrlP<CR>
 let g:ctrlp_custom_ignore = 'vendor/bundle/node_modules'
 let g:ctrlp_working_path_mode = 'ra'
 " }}}
