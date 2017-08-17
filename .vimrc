@@ -15,15 +15,20 @@ Plug 'w0ng/vim-hybrid'
 Plug 'flazz/vim-colorschemes'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ryanoasis/vim-devicons'
+Plug 'junegunn/goyo.vim'
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'easymotion/vim-easymotion'
 Plug 'scrooloose/nerdtree'
 Plug 'ervandew/supertab'
 Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim'
 Plug 'gabesoft/vim-ags'
-Plug 'vim-scripts/YankRing.vim'
+"Plug 'vim-scripts/YankRing.vim'
 Plug 'Valloric/YouCompleteMe'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -69,9 +74,11 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 " silent! colorscheme solarized
-colorscheme gruvbox
+colorscheme Monokai
 let g:gruvbox_contrast_dark="medium"
 let g:gruvbox_contrast_light="hard"
+let g:hybrid_custom_term_colors = 1
+let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 "color ir_black
 "colorscheme Tomorrow-Night-Bright
 set background=dark
@@ -152,19 +159,11 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
-" nnoremap <Space>j <c-w>j
-" nnoremap <Space>k <c-w>k
-nnoremap <Space>h <c-w>h
-nnoremap <Space>l <c-w>l
-nnoremap <Space>v <c-w>v
-nnoremap <Space>s <c-w>s
-nnoremap <Space>c <c-w>c
-
-" Maps Alt-[h,j,k,l] to resizing a window split
-map <silent> <A-h> <C-w><
-map <silent> <A-j> <C-W>-
-map <silent> <A-k> <C-W>+
-map <silent> <A-l> <C-w>>
+"" Maps Alt-[h,j,k,l] to resizing a window split
+map <silent> <M-h> <C-w><
+map <silent> <M-j> <C-W>-
+map <silent> <M-k> <C-W>+
+map <silent> <M-l> <C-w>>
 map <silent> <Space>< <C-w><
 map <silent> <Space>- <C-W>-
 map <silent> <Space>+ <C-W>+
@@ -230,6 +229,16 @@ set splitright
 set splitbelow
 "}}}
 
+"{{{ Goyo (Distraction Free)
+let g:goyo_width=120
+
+nnoremap <leader>z :Goyo<CR>
+"}}}
+
+"{{{ Easymotion
+
+"}}}
+
 "{{{ Ale Linting
 " Always keep gutter open to avoid flickering
 " Add more of a delay so as to not slow down so much
@@ -259,7 +268,7 @@ let g:user_emmet_leader_key='<C-Z>'
 "}}}
 
 " GUI Settings {{{
-set guifont=Source\ Code\ Pro:h13
+set guifont=FuraCode\ Nerd\ Font:h13
 set guioptions-=l guioptions-=L guioptions-=r guioptions-=T guioptions-=R guioptions-=m
 " }}}
 
@@ -272,6 +281,7 @@ autocmd! BufNewFile,BufRead *.c setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.hpp setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.scss setlocal tabstop=2 shiftwidth=2
+autocmd FileType ocaml source /Users/jamessral/.opam/system/share/typerex/ocp-indent/ocp-indent.vim
 " Use JSX for .js
 let g:jsx_ext_required = 0
 "}}}
@@ -297,6 +307,30 @@ let g:syntastic_typescript_checkers = ['tslint']
 let g:syntastic_javascript_checkers = ['eslint', 'flow']
 let g:syntastic_ruby_checkers = ['rsense']
 let g:syntastic_python_checkers = ['pyflakes']
+"}}}
+
+"{{{ Ale Linting
+" Always keep gutter open to avoid flickering
+" Add more of a delay so as to not slow down so much
+let g:ale_lint_delay = 300
+let g:ale_sign_column_always = 1
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? 'OK' : printf(
+    \   '%dW %dE',
+    \   all_non_errors,
+    \   all_errors
+    \)
+endfunction
+
+set statusline=%{LinterStatus()}
+let g:ale_linters = {
+\  'javscript': ['eslint'],
+\}
 "}}}
 
 "{{{ Test Runner
@@ -396,7 +430,7 @@ nnoremap <leader>ft Vatzf
 "}}}
 
 " Ctrl-P plugin {{{
-map <leader>t :CtrlP<CR>
+map <C-p> :CtrlP<CR>
 let g:ctrlp_custom_ignore = 'vendor/bundle'
 let g:ctrlp_working_path_mode = 'ra'
 " }}}
@@ -473,4 +507,3 @@ let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','html','sh']
 " {{{ yankring
 let g:yankring_history_dir = '~/yankring_history'
 "}}}
-autocmd FileType ocaml source /Users/jamessral/.opam/system/share/typerex/ocp-indent/ocp-indent.vim

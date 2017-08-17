@@ -14,6 +14,7 @@ call plug#begin()
 Plug 'altercation/vim-colors-solarized'
 Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'mxw/vim-jsx'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -104,7 +105,7 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 set background=dark
-colorscheme hybrid
+colorscheme Monokai
 let g:gruvbox_contrast_dark="medium"
 let g:gruvbox_contrast_light="hard"
 let g:hybrid_custom_term_colors = 1
@@ -295,7 +296,7 @@ endif
 "}}}
 
 "{{{ Airline & Devicons
-let g:airline_theme='hybrid'
+let g:airline_theme='understated'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -433,6 +434,7 @@ nnoremap <silent> <leader>L :TestLast<CR>
 nnoremap <silent> <leader>G :TestVisit<CR>
 
 let test#strategy = "vimproc"
+let test#javascript#jest#file_pattern = '**.jest.js'
 "}}}
 
 "{{{ Launch Love2d
