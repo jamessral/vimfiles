@@ -22,6 +22,11 @@ Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 "Plug 'rhysd/nyaovim-mini-browser'
 Plug 'junegunn/goyo.vim'
+Plug 'neovimhaskell/haskell-vim'
+Plug 'eagletmt/neco-ghc'
+Plug 'JesseKPhillips/d.vim'
+Plug 'idanarye/vim-dutyl'
+Plug 'Plug landaire/deoplete-d'
 Plug 'jceb/vim-orgmode'
 Plug 'tpope/vim-speeddating'
 Plug 'christoomey/vim-tmux-navigator'
@@ -88,7 +93,7 @@ Plug 'OmniSharp/omnisharp-vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'tpope/vim-dispatch'
 Plug 'danro/rename.vim'
-"Plug 'rgrinberg/vim-ocaml'
+Plug 'rgrinberg/vim-ocaml'
 Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
 Plug 'ElmCast/elm-vim'
@@ -105,7 +110,7 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 set background=dark
-colorscheme Monokai
+colorscheme PaperColor
 let g:gruvbox_contrast_dark="medium"
 let g:gruvbox_contrast_light="hard"
 let g:hybrid_custom_term_colors = 1
@@ -297,10 +302,10 @@ endif
 
 "{{{ Airline & Devicons
 let g:airline_theme='understated'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#buffer_nr_show = 1
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#left_sep = ' '
+"let g:airline#extensions#tabline#left_alt_sep = '|'
+"let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_powerline_fonts = 1
 "let g:webdevicons_enable_nerdtree = 1
 "let g:webdevicons_enable_airline_tabline = 1
@@ -336,13 +341,15 @@ autocmd! BufNewFile,BufRead *.scss setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.ex setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.exs setlocal tabstop=2 shiftwidth=2 syntax=elixir
 autocmd! BufNewFile,BufRead *.php setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.hs setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.d setlocal tabstop=4 shiftwidth=4
 " Use JSX for .js
 let g:jsx_ext_required = 0
 "}}}
 
 "{{{ Ocaml
-" set rtp^="/Users/jamessral/.opam/system/share/merlin/vim"
-" set rtp^="/Users/jamessral/.opam/system/share/ocp-indent/vim"
+set rtp^="/Users/jamessral/.opam/system/share/merlin/vim"
+set rtp^="/Users/jamessral/.opam/system/share/ocp-indent/vim"
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
 execute "set rtp+=" . g:opamshare . "/ocp-indent/vim"
@@ -449,6 +456,10 @@ let g:jedi#usages_command = "<leader>j"
 " Typescript Config {{{
 autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
 autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
+"}}}
+
+"{{{ Dlang
+let g:dutyl_stdImportPaths=['/usr/local/include/dlang/dmd']
 "}}}
 
 "{{{ Java config
