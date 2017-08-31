@@ -16,11 +16,20 @@ Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'hail2u/vim-css3-syntax'
+Plug 'mxw/vim-jsx'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
+"Plug 'rhysd/nyaovim-mini-browser'
 Plug 'junegunn/goyo.vim'
+Plug 'neovimhaskell/haskell-vim'
+Plug 'eagletmt/neco-ghc'
+Plug 'JesseKPhillips/d.vim'
+Plug 'idanarye/vim-dutyl'
+Plug 'Plug landaire/deoplete-d'
+Plug 'jceb/vim-orgmode'
 Plug 'tpope/vim-speeddating'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'leshill/vim-json'
 Plug 'gabesoft/vim-ags'
 Plug 'scrooloose/nerdtree'
@@ -29,12 +38,18 @@ Plug 'ervandew/supertab'
 Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim'
+"Plug 'vim-scripts/YankRing.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-go'
 Plug 'carlitux/deoplete-ternjs'
+"Plug 'zchee/deoplete-clang'
 Plug 'tweekmonster/deoplete-clang2'
 Plug 'fishbullet/deoplete-ruby'
+Plug 'python-mode/python-mode'
+Plug 'davidhalter/jedi-vim'
+"Plug 'rhysd/vim-crystal'
 Plug 'w0rp/ale'
+"Plug 'keith/swift.vim'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -46,6 +61,7 @@ Plug 'tpope/vim-rails'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-rbenv'
 Plug 'vim-scripts/bufexplorer.zip'
+Plug 'vim-scripts/peaksea'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'bling/vim-airline'
@@ -60,16 +76,32 @@ Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/tsuquyomi'
 Plug 'tbastos/vim-lua'
 Plug 'justinj/vim-pico8-syntax'
+Plug 'posva/vim-vue'
 Plug 'flowtype/vim-flow'
+Plug 'shawncplus/phpcomplete.vim'
 Plug 'janko-m/vim-test'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'artur-shaik/vim-javacomplete2'
+Plug 'jdonaldson/vaxe'
 Plug 'danro/rename.vim'
 Plug 'flowtype/vim-flow', {
             \ 'autoload': {
             \     'filetypes': 'javascript'
             \ }}
+"Plug 'eagletmt/neco-ghc'
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'tpope/vim-dispatch'
 Plug 'danro/rename.vim'
+Plug 'rgrinberg/vim-ocaml'
+Plug 'elixir-lang/vim-elixir'
+Plug 'slashmili/alchemist.vim'
+Plug 'ElmCast/elm-vim'
+Plug 'fatih/vim-go'
+"Plug 'rust-lang/rust.vim'
+"Plug 'racer-rust/vim-racer'
+"Plug 'quabug/vim-gdscript'
+" All of your Plugins must be added before the following line
 call plug#end()            " required
 filetype plugin indent on    " required
 " }}}
@@ -103,6 +135,11 @@ if &term =~ '^screen'
     " tmux knows the extended mouse mode
     set ttymouse=xterm2
 endif
+
+
+" From http://robots.thoughtbot.com/post/27041742805/vim-you-complete-me
+"set complete=.,b,u,]
+"set wildmode=longest,list:longest
 
 " Map ESC
 let mapleader = ","              " The default leader key isn't very intuitive.
@@ -142,6 +179,14 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
+" nnoremap <Space>j <c-w>j
+" nnoremap <Space>k <c-w>k
+" nnoremap <Space>h <c-w>h
+" nnoremap <Space>l <c-w>l
+" nnoremap <Space>v <c-w>v
+" nnoremap <Space>s <c-w>s
+" nnoremap <Space>c <c-w>c
+
 " Maps Alt-[H,J,K,L] to resizing a window split
 map <silent> <M-H> <C-w><
 map <silent> <M-J> <C-W>-
@@ -152,6 +197,13 @@ tnoremap <M-h> <C-\><C-N><C-w>h
 tnoremap <M-j> <C-\><C-N><C-w>j
 tnoremap <M-k> <C-\><C-N><C-w>k
 tnoremap <M-l> <C-\><C-N><C-w>l
+map <silent> <Space>< <C-w><
+map <silent> <Space>- <C-W>-
+map <silent> <Space>+ <C-W>+
+map <silent> <Space>> <C-w>>
+
+
+"set ai           " always set autoindenting on
 
 set backup       " keep a backup file
 set backupdir=~/.vim/backup//
@@ -170,6 +222,11 @@ set autoread " load change files
 
 " Clears the search register
 nmap <silent> <leader>/ :nohlsearch<CR>
+
+" select last pasted
+nnoremap gp `[v`]
+
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 nnoremap <leader>q gqip
 
 " Reselect visual block after indent/outdent
@@ -183,8 +240,26 @@ noremap <leader>v <C-w>v
 noremap <leader>s <C-w>s
 
 " Edit the vimrc file
-nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
-nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
+"nmap <silent> <leader>ev :e $MYVIMRC<CR>
+"nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
+nmap <silent> <leader>h :set invlist<CR>
+"nmap <silent> <leader>l :set invnumber<CR>
+nmap <silent> <leader>p :set invpaste<CR>
+
+" Open last buffer: http://www.vimbits.com/bits/22
+noremap <Leader><Leader> <C-^>
+
+" Under/Over line current line
+" http://www.vimbits.com/bits/12
+nnoremap <leader>== yyPv$r=jyypv$r=
+nnoremap <leader>** yyPv$r*jyypv$r*
+nnoremap <leader>=  yypv$r=
+nnoremap <leader>-  yypv$r-
+
+:nnoremap <Space> za
+set splitright
+set splitbelow
 "}}}
 
 "{{{ Deoplete
@@ -272,6 +347,68 @@ autocmd! BufNewFile,BufRead *.d setlocal tabstop=4 shiftwidth=4
 let g:jsx_ext_required = 0
 "}}}
 
+"{{{ Ocaml
+set rtp^="/Users/jamessral/.opam/system/share/merlin/vim"
+set rtp^="/Users/jamessral/.opam/system/share/ocp-indent/vim"
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
+execute "set rtp+=" . g:opamshare . "/ocp-indent/vim"
+
+"}}}
+
+"{{{ Common Lisp
+let g:slimv_swank_cmd = '!osascript -e "tell application \"Terminal\" to do script \"sbcl --load ~/.vim/slime/start-swank.lisp\""'
+"}}}
+
+"{{{ Rust
+set hidden
+let g:racer_cmd = "/Users/jamessral/.cargo/bin/racer"
+au FileType rust nmap gd <Plug>(rust-def)
+au FileType rust nmap gs <Plug>(rust-def-split)
+au FileType rust nmap gx <Plug>(rust-def-vertical)
+au FileType rust nmap <leader>gd <Plug>(rust-doc)
+"}}}
+
+" Syntastic {{{
+set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 0
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_loc_list_height=5
+" find the local version of eslint
+" Syntastic local linter support
+
+" let g:syntastic_javascript_checkers = []
+
+" function CheckJavaScriptLinter(filepath, linter)
+"   if exists('b:syntastic_checkers')
+"     return
+"   endif
+"   if filereadable(a:filepath)
+"     let b:syntastic_checkers = [a:linter]
+"     let {'b:syntastic_' . a:linter . '_exec'} = a:filepath
+"   endif
+" endfunction
+
+" function SetupJavaScriptLinter()
+"   let l:current_folder = expand('%:p:h')
+"   let l:bin_folder = fnamemodify(syntastic#util#findFileInParent('package.json', l:current_folder), ':h')
+"   let l:bin_folder = l:bin_folder . '/node_modules/.bin/'
+"   call CheckJavaScriptLinter(l:bin_folder . 'standard', 'standard')
+"   call CheckJavaScriptLinter(l:bin_folder . 'eslint', 'eslint')
+" endfunction
+
+" autocmd FileType javascript call SetupJavaScriptLinter()
+
+" let g:syntastic_javascript_checkers = ['eslint', 'flow']
+" let g:syntastic_ruby_checkers = ['rsense']
+let g:syntastic_python_checkers = ['pyflakes']
+"}}}
+
 "{{{ Ale Linting
 " Always keep gutter open to avoid flickering
 " Add more of a delay so as to not slow down so much
@@ -307,9 +444,22 @@ let test#strategy = "vimproc"
 let test#javascript#jest#file_pattern = '**.jest.js'
 "}}}
 
+"{{{ Launch Love2d
+nnoremap <leader>l :!love .<CR>
+"}}}
+
+"{{{ Python
+let g:pymode_python = 'python3'
+let g:jedi#usages_command = "<leader>j"
+"}}}
+
 " Typescript Config {{{
 autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
 autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
+"}}}
+
+"{{{ Dlang
+let g:dutyl_stdImportPaths=['/usr/local/include/dlang/dmd']
 "}}}
 
 "{{{ Java config
@@ -458,4 +608,8 @@ let g:gitgutter_eager = 0
 
 " {{{ markdown
 let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','html','sh']
+"}}}
+
+" {{{ yankring
+let g:yankring_history_dir = '~/yankring_history'
 "}}}
