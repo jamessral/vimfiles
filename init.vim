@@ -31,6 +31,11 @@ Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-go'
+Plug 'tpope/vim-fireplace'
+Plug 'venantius/vim-eastwood'
+Plug 'venantius/vim-cljfmt'
+Plug 'guns/vim-sexp'
+Plug 'kien/rainbow_parentheses.vim'
 Plug 'carlitux/deoplete-ternjs'
 Plug 'tweekmonster/deoplete-clang2'
 Plug 'fishbullet/deoplete-ruby'
@@ -116,6 +121,12 @@ set nowrap                      " don't wrap lines
 set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
 set expandtab                   " use spaces, not tabs (optional)
 set backspace=indent,eol,start  " backspace through everything in insert mode
+
+" Vertical split to right
+set splitright
+
+" Horizontal split below
+set splitbelow
 
 " Use the OS clipboard by default
 set clipboard=unnamed
@@ -255,7 +266,7 @@ set guioptions-=l guioptions-=L guioptions-=r guioptions-=T guioptions-=R guiopt
 " }}}
 
 " Syntax Highlighting and File Types {{{
-autocmd! BufNewFile,BufRead *.java setlocal tabstop=4 shiftwidth=4
+autocmd! FileType java setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.hx setlocal tabstop=4 shiftwidth=4 syntax=haxe
 autocmd! BufNewFile,BufRead *.hxml setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.h setlocal tabstop=4 shiftwidth=4
@@ -263,11 +274,11 @@ autocmd! BufNewFile,BufRead *.c setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.hpp setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.scss setlocal tabstop=2 shiftwidth=2
-autocmd! BufNewFile,BufRead *.ex setlocal tabstop=2 shiftwidth=2
+autocmd! FileType elixir *.ex setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.exs setlocal tabstop=2 shiftwidth=2 syntax=elixir
-autocmd! BufNewFile,BufRead *.php setlocal tabstop=4 shiftwidth=4
-autocmd! BufNewFile,BufRead *.hs setlocal tabstop=4 shiftwidth=4
-autocmd! BufNewFile,BufRead *.d setlocal tabstop=4 shiftwidth=4
+autocmd! FileType php *.php setlocal tabstop=4 shiftwidth=4
+autocmd! FileType haskell *.hs setlocal tabstop=4 shiftwidth=4
+autocmd! FileType dlang *.d setlocal tabstop=4 shiftwidth=4
 " Use JSX for .js
 let g:jsx_ext_required = 0
 "}}}
@@ -310,43 +321,6 @@ let test#javascript#jest#file_pattern = '**.jest.js'
 " Typescript Config {{{
 autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
 autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
-"}}}
-
-"{{{ Java config
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
-nmap <leader>jI <Plug>(JavaComplete-Imports-AddMissing)
-nmap <leader>jR <Plug>(JavaComplete-Imports-RemoveUnused)
-nmap <leader>ji <Plug>(JavaComplete-Imports-AddSmart)
-nmap <leader>jii <Plug>(JavaComplete-Imports-Add)
-
-imap <C-j>I <Plug>(JavaComplete-Imports-AddMissing)
-imap <C-j>R <Plug>(JavaComplete-Imports-RemoveUnused)
-imap <C-j>i <Plug>(JavaComplete-Imports-AddSmart)
-imap <C-j>ii <Plug>(JavaComplete-Imports-Add)
-
-nmap <leader>jM <Plug>(JavaComplete-Generate-AbstractMethods)
-
-imap <C-j>jM <Plug>(JavaComplete-Generate-AbstractMethods)
-
-nmap <leader>jA <Plug>(JavaComplete-Generate-Accessors)
-nmap <leader>js <Plug>(JavaComplete-Generate-AccessorSetter)
-nmap <leader>jg <Plug>(JavaComplete-Generate-AccessorGetter)
-nmap <leader>ja <Plug>(JavaComplete-Generate-AccessorSetterGetter)
-nmap <leader>jts <Plug>(JavaComplete-Generate-ToString)
-nmap <leader>jeq <Plug>(JavaComplete-Generate-EqualsAndHashCode)
-nmap <leader>jc <Plug>(JavaComplete-Generate-Constructor)
-nmap <leader>jcc <Plug>(JavaComplete-Generate-DefaultConstructor)
-
-imap <C-j>s <Plug>(JavaComplete-Generate-AccessorSetter)
-imap <C-j>g <Plug>(JavaComplete-Generate-AccessorGetter)
-imap <C-j>a <Plug>(JavaComplete-Generate-AccessorSetterGetter)
-
-vmap <leader>js <Plug>(JavaComplete-Generate-AccessorSetter)
-vmap <leader>jg <Plug>(JavaComplete-Generate-AccessorGetter)
-vmap <leader>ja <Plug>(JavaComplete-Generate-AccessorSetterGetter)
-
-nmap <silent> <buffer> <leader>jn <Plug>(JavaComplete-Generate-NewClass)
-nmap <silent> <buffer> <leader>jN <Plug>(JavaComplete-Generate-ClassInFile)
 "}}}
 
 " Emmet-vim {{{
