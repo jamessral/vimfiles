@@ -14,6 +14,7 @@ call plug#begin()
 Plug 'altercation/vim-colors-solarized'
 Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
+Plug 'terryma/vim-multiple-cursors'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -26,10 +27,13 @@ Plug 'gabesoft/vim-ags'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'ervandew/supertab'
+Plug 'neovimhaskell/haskell-vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'purescript-contrib/purescript-vim'
+Plug 'frigoeu/psc-ide-vim'
 Plug 'zchee/deoplete-go'
 Plug 'tpope/vim-fireplace'
 Plug 'venantius/vim-eastwood'
@@ -69,6 +73,10 @@ Plug 'flowtype/vim-flow'
 Plug 'janko-m/vim-test'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'danro/rename.vim'
+Plug 'fsharp/vim-fsharp', {
+      \ 'for': 'fsharp',
+      \ 'do':  'make fsautocomplete',
+      \}
 Plug 'flowtype/vim-flow', {
             \ 'autoload': {
             \     'filetypes': 'javascript'
@@ -83,7 +91,7 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 set background=dark
-colorscheme PaperColor
+colorscheme Tomorrow-Night-Eighties
 let g:gruvbox_contrast_dark="medium"
 let g:gruvbox_contrast_light="hard"
 let g:hybrid_custom_term_colors = 1
@@ -260,6 +268,13 @@ nnoremap <leader>z :Goyo<CR>
 
 "}}}
 
+"{{{ Multiple Cursors
+let g:multi_cursor_next_key='<C-f>'
+let g:multi_cursor_prev_key='<C-b>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
+"}}}
+
 " GUI Settings {{{
 set guifont=Sauce\ Code\ Pro\ Nerd\ Font\ Complete\ Mono:h13
 set guioptions-=l guioptions-=L guioptions-=r guioptions-=T guioptions-=R guioptions-=m
@@ -274,6 +289,7 @@ autocmd! BufNewFile,BufRead *.c setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.hpp setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.scss setlocal tabstop=2 shiftwidth=2
+autocmd! BufNewFile,BufRead *.purs setlocal syntax=purescript
 autocmd! FileType elixir *.ex setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.exs setlocal tabstop=2 shiftwidth=2 syntax=elixir
 autocmd! FileType php *.php setlocal tabstop=4 shiftwidth=4
@@ -308,11 +324,11 @@ let g:ale_linters = {
 "}}}
 
 "{{{ Test Runner
-nnoremap <silent> <leader>t :TestNearest<CR>
-nnoremap <silent> <leader>T :TestFile<CR>
-nnoremap <silent> <leader>A :TestSuite<CR>
-nnoremap <silent> <leader>L :TestLast<CR>
-nnoremap <silent> <leader>G :TestVisit<CR>
+nnoremap <silent> <leader> <leader>t :TestNearest<CR>
+nnoremap <silent> <leader> <leader>T :TestFile<CR>
+nnoremap <silent> <leader> <leader>A :TestSuite<CR>
+nnoremap <silent> <leader> <leader>L :TestLast<CR>
+nnoremap <silent> <leader> <leader>G :TestVisit<CR>
 
 let test#strategy = "vimproc"
 let test#javascript#jest#file_pattern = '**.jest.js'
@@ -321,6 +337,23 @@ let test#javascript#jest#file_pattern = '**.jest.js'
 " Typescript Config {{{
 autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
 autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
+"}}}
+
+"{{{ Purescript Config
+function PurescriptBinding()
+  nm <buffer> <silent> <leader>t :<C-U>call PSCIDEtype(PSCIDEgetKeyword(), v:true)<CR>
+  nm <buffer> <silent> <leader>T :<C-U>call PSCIDEaddTypeAnnotation(matchstr(getline(line(".")), '^\s*\zs\k\+\ze'))<CR>
+  nm <buffer> <silent> <leader>s :<C-U>call PSCIDEapplySuggestion()<CR>
+  nm <buffer> <silent> <leader>a :<C-U>call PSCIDEaddTypeAnnotation()<CR>
+  nm <buffer> <silent> <leader>i :<C-U>call PSCIDEimportIdentifier(PSCIDEgetKeyword())<CR>
+  nm <buffer> <silent> <leader>r :<C-U>call PSCIDEload()<CR>
+  nm <buffer> <silent> <leader>p :<C-U>call PSCIDEpursuit(PSCIDEgetKeyword())<CR>
+  nm <buffer> <silent> <leader>C :<C-U>call PSCIDEcaseSplit("!")<CR>
+  nm <buffer> <silent> <leader>f :<C-U>call PSCIDEaddClause("")<CR>
+  nm <buffer> <silent> <leader>qa :<C-U>call PSCIDEaddImportQualifications()<CR>
+  nm <buffer> <silent> ]d :<C-U>call PSCIDEgoToDefinition("", PSCIDEgetKeyword())<CR>
+endfunction
+autocmd FileType purescript :PurescriptBindings()
 "}}}
 
 " Emmet-vim {{{
