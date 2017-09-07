@@ -3,7 +3,7 @@ set noswapfile
 set ttimeout
 set ttimeoutlen=0
 set matchtime=0
-set termguicolors
+"set termguicolors
 
 set path+=**
 
@@ -12,6 +12,7 @@ filetype off
 call plug#begin()
 
 Plug 'altercation/vim-colors-solarized'
+Plug 'icymind/NeoSolarized'
 Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'terryma/vim-multiple-cursors'
@@ -20,6 +21,7 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'junegunn/goyo.vim'
 Plug 'tpope/vim-speeddating'
 Plug 'leshill/vim-json'
@@ -69,7 +71,6 @@ Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/tsuquyomi'
 Plug 'tbastos/vim-lua'
 Plug 'justinj/vim-pico8-syntax'
-Plug 'flowtype/vim-flow'
 Plug 'janko-m/vim-test'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'danro/rename.vim'
@@ -91,7 +92,8 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 set background=dark
-colorscheme Tomorrow-Night-Eighties
+silent! colorscheme NeoSolarized
+let g:solarized_termcolors=256
 let g:gruvbox_contrast_dark="medium"
 let g:gruvbox_contrast_light="hard"
 let g:hybrid_custom_term_colors = 1
@@ -221,6 +223,15 @@ let g:deoplete#auto_complete_delay = 100
 " deoplete tab-complete
 inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " tern
+let g:deoplete#sources#ternjs#tern_bin = '/Users/jamessral/.nvm/versions/v8.1.3/bin'
+let g:deoplete#sources#ternjs#types = 1
+let g:deoplete#sources#ternjs#docs = 1
+let g:deoplete#sources#ternjs#filetypes = [
+                \ 'jsx',
+                \ 'js',
+                \ 'vue']
+let g:tern#command = ["tern"]
+let g:tern#arguments = ["--persistent"]
 autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 "}}}
 
@@ -319,8 +330,13 @@ endfunction
 
 set statusline=%{LinterStatus()}
 let g:ale_linters = {
-\  'javscript': ['eslint'],
+\  'javscript': ['eslint', 'flow'],
 \}
+"}}}
+
+"{{{ Flow
+nnoremap <silent> <leader>d :FlowJumpToDef
+let g:flow#showquickfix = 0
 "}}}
 
 "{{{ Test Runner
@@ -340,7 +356,7 @@ autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol
 "}}}
 
 "{{{ Purescript Config
-function PurescriptBinding()
+function! PurescriptBinding()
   nm <buffer> <silent> <leader>t :<C-U>call PSCIDEtype(PSCIDEgetKeyword(), v:true)<CR>
   nm <buffer> <silent> <leader>T :<C-U>call PSCIDEaddTypeAnnotation(matchstr(getline(line(".")), '^\s*\zs\k\+\ze'))<CR>
   nm <buffer> <silent> <leader>s :<C-U>call PSCIDEapplySuggestion()<CR>
