@@ -3,7 +3,7 @@ set noswapfile
 set ttimeout
 set ttimeoutlen=0
 set matchtime=0
-"set termguicolors
+set termguicolors
 
 set path+=**
 
@@ -13,19 +13,30 @@ call plug#begin()
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'icymind/NeoSolarized'
+Plug 'ayu-theme/ayu-vim'
+Plug 'j-tom/vim-old-hope'
+Plug 'sheerun/vim-polyglot'
 Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'rgrinberg/vim-ocaml'
+Plug 'derekwyatt/vim-scala'
+Plug 'slashmili/alchemist.vim'
+Plug 'zchee/deoplete-jedi'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'junegunn/goyo.vim'
 Plug 'tpope/vim-speeddating'
+Plug 'ElmCast/elm-vim'
 Plug 'leshill/vim-json'
 Plug 'gabesoft/vim-ags'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'ervandew/supertab'
@@ -92,12 +103,19 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 set background=dark
-silent! colorscheme NeoSolarized
+silent! colorscheme gruvbox
+
+"let ayucolor="light"  " for light version of theme
+"let ayucolor="mirage" " for mirage version of theme
+"let ayucolor="dark"   " for dark version of theme
+
 let g:solarized_termcolors=256
+
 let g:gruvbox_contrast_dark="medium"
 let g:gruvbox_contrast_light="hard"
 let g:hybrid_custom_term_colors = 1
 let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
+
 call togglebg#map("<F5>")
 " }}}
 
@@ -301,7 +319,7 @@ autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.hpp setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.scss setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.purs setlocal syntax=purescript
-autocmd! FileType elixir *.ex setlocal tabstop=2 shiftwidth=2
+autocmd! BufNewFile,BufRead *.ex setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.exs setlocal tabstop=2 shiftwidth=2 syntax=elixir
 autocmd! FileType php *.php setlocal tabstop=4 shiftwidth=4
 autocmd! FileType haskell *.hs setlocal tabstop=4 shiftwidth=4
@@ -335,7 +353,7 @@ let g:ale_linters = {
 "}}}
 
 "{{{ Flow
-nnoremap <silent> <leader>d :FlowJumpToDef
+"nnoremap <silent> <leader>d :FlowJumpToDef
 let g:flow#showquickfix = 0
 "}}}
 
@@ -350,26 +368,33 @@ let test#strategy = "vimproc"
 let test#javascript#jest#file_pattern = '**.jest.js'
 "}}}
 
+"{{{ OCaml
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
+"}}}
+
+"{{{ Elm
+autocmd FileType purescript nmap <buffer> <leader>d <Plug>(ElmShowDocs)
+let g:polyglot_disabled = ["elm"]
+"}}}
+
 " Typescript Config {{{
 autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
 autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
 "}}}
 
 "{{{ Purescript Config
-function! PurescriptBinding()
-  nm <buffer> <silent> <leader>t :<C-U>call PSCIDEtype(PSCIDEgetKeyword(), v:true)<CR>
-  nm <buffer> <silent> <leader>T :<C-U>call PSCIDEaddTypeAnnotation(matchstr(getline(line(".")), '^\s*\zs\k\+\ze'))<CR>
-  nm <buffer> <silent> <leader>s :<C-U>call PSCIDEapplySuggestion()<CR>
-  nm <buffer> <silent> <leader>a :<C-U>call PSCIDEaddTypeAnnotation()<CR>
-  nm <buffer> <silent> <leader>i :<C-U>call PSCIDEimportIdentifier(PSCIDEgetKeyword())<CR>
-  nm <buffer> <silent> <leader>r :<C-U>call PSCIDEload()<CR>
-  nm <buffer> <silent> <leader>p :<C-U>call PSCIDEpursuit(PSCIDEgetKeyword())<CR>
-  nm <buffer> <silent> <leader>C :<C-U>call PSCIDEcaseSplit("!")<CR>
-  nm <buffer> <silent> <leader>f :<C-U>call PSCIDEaddClause("")<CR>
-  nm <buffer> <silent> <leader>qa :<C-U>call PSCIDEaddImportQualifications()<CR>
-  nm <buffer> <silent> ]d :<C-U>call PSCIDEgoToDefinition("", PSCIDEgetKeyword())<CR>
-endfunction
-autocmd FileType purescript :PurescriptBindings()
+"nnoremap <buffer> <silent> <leader>t :<C-U>call PSCIDEtype(PSCIDEgetKeyword(), v:true)<CR>
+"nnoremap <buffer> <silent> <leader>T :<C-U>call PSCIDEaddTypeAnnotation(matchstr(getline(line(".")), '^\s*\zs\k\+\ze'))<CR>
+"nnoremap <buffer> <silent> <leader>s :<C-U>call PSCIDEapplySuggestion()<CR>
+"nnoremap <buffer> <silent> <leader>a :<C-U>call PSCIDEaddTypeAnnotation()<CR>
+"nnoremap <buffer> <silent> <leader>i :<C-U>call PSCIDEimportIdentifier(PSCIDEgetKeyword())<CR>
+"nnoremap <buffer> <silent> <leader>r :<C-U>call PSCIDEload()<CR>
+"nnoremap <buffer> <silent> <leader>p :<C-U>call PSCIDEpursuit(PSCIDEgetKeyword())<CR>
+"nnoremap <buffer> <silent> <leader>C :<C-U>call PSCIDEcaseSplit("!")<CR>
+"nnoremap <buffer> <silent> <leader>f :<C-U>call PSCIDEaddClause("")<CR>
+"nnoremap <buffer> <silent> <leader>a :<C-U>call PSCIDEaddImportQualifications()<CR>
+"nnoremap <buffer> <silent> ]d :<C-U>call PSCIDEgoToDefinition("", PSCIDEgetKeyword())<CR>
 "}}}
 
 " Emmet-vim {{{
