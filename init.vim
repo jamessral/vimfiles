@@ -23,10 +23,10 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'rgrinberg/vim-ocaml'
-Plug 'derekwyatt/vim-scala'
 Plug 'slashmili/alchemist.vim'
+Plug 'elixir-lang/vim-elixir'
 Plug 'zchee/deoplete-jedi'
+Plug 'davidhalter/jedi-vim'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
@@ -40,18 +40,15 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'ervandew/supertab'
-Plug 'neovimhaskell/haskell-vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'purescript-contrib/purescript-vim'
-Plug 'frigoeu/psc-ide-vim'
+Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go'
-Plug 'tpope/vim-fireplace'
-Plug 'venantius/vim-eastwood'
-Plug 'venantius/vim-cljfmt'
-Plug 'guns/vim-sexp'
+Plug 'rust-lang/rust.vim'
+Plug 'sebastianmarkow/deoplete-rust'
+Plug 'python-mode/python-mode'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'carlitux/deoplete-ternjs'
 Plug 'tweekmonster/deoplete-clang2'
@@ -85,10 +82,6 @@ Plug 'justinj/vim-pico8-syntax'
 Plug 'janko-m/vim-test'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'danro/rename.vim'
-Plug 'fsharp/vim-fsharp', {
-      \ 'for': 'fsharp',
-      \ 'do':  'make fsautocomplete',
-      \}
 Plug 'flowtype/vim-flow', {
             \ 'autoload': {
             \     'filetypes': 'javascript'
@@ -273,6 +266,10 @@ if executable('ag')
 endif
 "}}}
 
+"{{{ Fzf
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+"}}}
+
 "{{{ Airline & Devicons
 let g:airline_theme='understated'
 "let g:airline#extensions#tabline#enabled = 1
@@ -368,9 +365,9 @@ let test#strategy = "vimproc"
 let test#javascript#jest#file_pattern = '**.jest.js'
 "}}}
 
-"{{{ OCaml
-let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-execute "set rtp+=" . g:opamshare . "/merlin/vim"
+"{{{ Rust
+let g:deoplete#sources#rust#racer_binary='~/.cargo/bin/racer'
+let g:deoplete#sources#rust#rust_source_path='~/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src'
 "}}}
 
 "{{{ Elm
@@ -381,20 +378,6 @@ let g:polyglot_disabled = ["elm"]
 " Typescript Config {{{
 autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
 autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
-"}}}
-
-"{{{ Purescript Config
-"nnoremap <buffer> <silent> <leader>t :<C-U>call PSCIDEtype(PSCIDEgetKeyword(), v:true)<CR>
-"nnoremap <buffer> <silent> <leader>T :<C-U>call PSCIDEaddTypeAnnotation(matchstr(getline(line(".")), '^\s*\zs\k\+\ze'))<CR>
-"nnoremap <buffer> <silent> <leader>s :<C-U>call PSCIDEapplySuggestion()<CR>
-"nnoremap <buffer> <silent> <leader>a :<C-U>call PSCIDEaddTypeAnnotation()<CR>
-"nnoremap <buffer> <silent> <leader>i :<C-U>call PSCIDEimportIdentifier(PSCIDEgetKeyword())<CR>
-"nnoremap <buffer> <silent> <leader>r :<C-U>call PSCIDEload()<CR>
-"nnoremap <buffer> <silent> <leader>p :<C-U>call PSCIDEpursuit(PSCIDEgetKeyword())<CR>
-"nnoremap <buffer> <silent> <leader>C :<C-U>call PSCIDEcaseSplit("!")<CR>
-"nnoremap <buffer> <silent> <leader>f :<C-U>call PSCIDEaddClause("")<CR>
-"nnoremap <buffer> <silent> <leader>a :<C-U>call PSCIDEaddImportQualifications()<CR>
-"nnoremap <buffer> <silent> ]d :<C-U>call PSCIDEgoToDefinition("", PSCIDEgetKeyword())<CR>
 "}}}
 
 " Emmet-vim {{{
