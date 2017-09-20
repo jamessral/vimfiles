@@ -48,7 +48,7 @@ Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go'
 Plug 'rust-lang/rust.vim'
 Plug 'sebastianmarkow/deoplete-rust'
-Plug 'python-mode/python-mode'
+Plug 'python-mode/python-mode'  " this takes over
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'carlitux/deoplete-ternjs'
 Plug 'tweekmonster/deoplete-clang2'
@@ -267,6 +267,8 @@ endif
 "}}}
 
 "{{{ Fzf
+nnoremap <C-o> :Files<CR>
+nnoremap <C-b> :Buffers<CR>
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
@@ -363,6 +365,17 @@ nnoremap <silent> <leader> <leader>G :TestVisit<CR>
 
 let test#strategy = "vimproc"
 let test#javascript#jest#file_pattern = '**.jest.js'
+"}}}
+
+"{{{ Python
+let g:pymode_python = 'python3'
+let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_definitions_command = ""
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<leader>N"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#rename_command = "<leader>r"
 "}}}
 
 "{{{ Rust
