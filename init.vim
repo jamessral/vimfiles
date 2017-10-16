@@ -15,6 +15,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'icymind/NeoSolarized'
 Plug 'ayu-theme/ayu-vim'
 Plug 'j-tom/vim-old-hope'
+Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
 Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
@@ -31,8 +32,10 @@ Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'junegunn/goyo.vim'
+Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
 Plug 'tpope/vim-speeddating'
 Plug 'ElmCast/elm-vim'
+Plug 'parsonsmatt/intero-neovim'
 Plug 'leshill/vim-json'
 Plug 'gabesoft/vim-ags'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -124,6 +127,9 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/.tmp/*,*/.sass-cache/*,*/node_modules
 
 set mouse=a
 
+" Don't use a line cursor in insert mode
+set guicursor=
+
 " # http://superuser.com/questions/549930/cant-resize-vim-splits-inside-tmux
 if &term =~ '^screen'
     " tmux knows the extended mouse mode
@@ -154,10 +160,9 @@ set clipboard=unnamed
 
 "set cursorline
 " Indicators
-set list                          " Show hidden characters (tab and eol)
+"set list                          " Show hidden characters (tab and eol)
 "set listchars=trail:⋅,nbsp:⋅,tab:▸\ ,eol:¬       " Use the same chars as textmate.
-set listchars=trail:⋅,nbsp:⋅,tab:▸\
-"set listchars=tab:▸\ ,trail:•,extends:❯,precedes:❮
+"set listchars=trail:⋅,nbsp:⋅,tab:❯
 set showbreak=↪\
 
 " Searching
@@ -251,6 +256,10 @@ autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+let g:neosnippet#snippets_directory='~/.vim/plugged/neosnippet-snippets/neosnippets'
 "}}}
 
 "{{{ Ags
@@ -273,7 +282,7 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
 "{{{ Airline & Devicons
-let g:airline_theme='understated'
+let g:airline_theme='deus'
 let g:airline_left_sep=' '
 let g:airline_left_alt_sep = ' '
 let g:airline_right_sep=' '
@@ -327,6 +336,7 @@ autocmd! BufNewFile,BufRead *.exs setlocal tabstop=2 shiftwidth=2 syntax=elixir
 autocmd! FileType php *.php setlocal tabstop=4 shiftwidth=4
 autocmd! FileType haskell *.hs setlocal tabstop=4 shiftwidth=4
 autocmd! FileType dlang *.d setlocal tabstop=4 shiftwidth=4
+autocmd! FileType go setlocal tabstop=4 shiftwidth=4
 " Use JSX for .js
 let g:jsx_ext_required = 0
 "}}}
@@ -358,6 +368,7 @@ let g:ale_linters = {
 "{{{ Flow
 "nnoremap <silent> <leader>d :FlowJumpToDef
 let g:flow#showquickfix = 0
+let g:flow#enable = 0
 "}}}
 
 "{{{ Test Runner
@@ -380,11 +391,16 @@ let g:jedi#documentation_command = "K"
 let g:jedi#usages_command = "<leader>N"
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>r"
+let g:jedi#completions_enabled = 0
+let g:jedi#popup_select_first = 0
 "}}}
 
 "{{{ Rust
-let g:deoplete#sources#rust#racer_binary='~/.cargo/bin/racer'
-let g:deoplete#sources#rust#rust_source_path='~/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src'
+let g:deoplete#sources#rust#racer_binary='/Users/jamessral/.cargo/bin/racer'
+let g:deoplete#sources#rust#rust_source_path='/Users/jamessral/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src'
+
+" User rustfmt on save
+let g:rustfmt_autosave = 1
 "}}}
 
 "{{{ Elm
