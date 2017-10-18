@@ -30,6 +30,7 @@ Plug 'zchee/deoplete-jedi'
 Plug 'davidhalter/jedi-vim'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'junegunn/goyo.vim'
 Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
@@ -99,7 +100,7 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 set background=dark
-silent! colorscheme gruvbox
+silent! colorscheme molokai
 
 "let ayucolor="light"  " for light version of theme
 "let ayucolor="mirage" " for mirage version of theme
@@ -256,9 +257,16 @@ autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
 let g:neosnippet#snippets_directory='~/.vim/plugged/neosnippet-snippets/neosnippets'
 "}}}
 
@@ -282,7 +290,7 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
 "{{{ Airline & Devicons
-let g:airline_theme='deus'
+let g:airline_theme='molokai'
 let g:airline_left_sep=' '
 let g:airline_left_alt_sep = ' '
 let g:airline_right_sep=' '
@@ -346,6 +354,7 @@ let g:jsx_ext_required = 0
 " Add more of a delay so as to not slow down so much
 let g:ale_lint_delay = 300
 let g:ale_sign_column_always = 1
+let g:ale_set_quickfix = 1
 function! LinterStatus() abort
     let l:counts = ale#statusline#Count(bufnr(''))
 
@@ -460,6 +469,11 @@ let g:netrw_banner=0        " no more annoying banner!
 let g:netrw_browse_split=4  " open in previous window
 let g:netrw_altv=1          " open splits to the right
 let g:netrw_liststyle=3     " tree view
+"}}}
+
+"{{{ CTags
+" generate Ctags
+nnoremap <leader>. :Tags<CR>
 "}}}
 
 " NERD Tree {{{
