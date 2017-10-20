@@ -19,6 +19,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-unimpaired'
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/denite.nvim'
+Plug 'chemzqm/vim-easygit'
+Plug 'chemzqm/denite-git'
 Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'christoomey/vim-tmux-navigator'
@@ -330,6 +332,30 @@ nnoremap <leader>z :Goyo<CR>
 
 "}}}
 
+"{{{ Denite
+nnoremap <leader>gl :Denite gitlog<CR>
+call denite#custom#map(
+      \ 'normal',
+      \ 'a',
+      \ '<denite:do_action:add>',
+      \ 'noremap'
+      \)
+
+call denite#custom#map(
+      \ 'normal',
+      \ 'd',
+      \ '<denite:do_action:delete>',
+      \ 'noremap'
+      \)
+
+call denite#custom#map(
+      \ 'normal',
+      \ 'r',
+      \ '<denite:do_action:reset>',
+      \ 'noremap'
+      \)
+"}}}
+
 "{{{ Multiple Cursors
 let g:multi_cursor_next_key='<C-f>'
 let g:multi_cursor_prev_key='<C-b>'
@@ -535,7 +561,6 @@ nnoremap <leader>u :UndotreeToggle<cr>
 noremap <leader>gs :Gstatus<cr>
 noremap <leader>gc :Gcommit<cr>
 noremap <leader>ga :Gwrite<cr>
-noremap <leader>gl :Glog<cr>
 noremap <leader>gd :Gdiff<cr>
 "}}}
 
