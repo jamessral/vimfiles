@@ -1,71 +1,92 @@
-set nocompatible                " choose no compatibility with legacy vi
+set nocompatible
 set noswapfile
 set ttimeout
 set ttimeoutlen=0
 set matchtime=0
+"set termguicolors
 
 set path+=**
 
 " For Vim-Plug {{{
 filetype off
 call plug#begin()
-" All of your Plugins must be added before the following line
+
 Plug 'altercation/vim-colors-solarized'
-Plug 'w0ng/vim-hybrid'
+Plug 'icymind/NeoSolarized'
+Plug 'ayu-theme/ayu-vim'
+Plug 'j-tom/vim-old-hope'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-unimpaired'
+Plug 'maralla/completor.vim'
+Plug 'sheerun/vim-polyglot'
 Plug 'flazz/vim-colorschemes'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ryanoasis/vim-devicons'
-Plug 'junegunn/goyo.vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'slashmili/alchemist.vim'
+Plug 'elixir-lang/vim-elixir'
+Plug 'davidhalter/jedi-vim'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
-Plug 'easymotion/vim-easymotion'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
+Plug 'reasonml-editor/vim-reason'
+Plug 'tpope/vim-speeddating'
+Plug 'ElmCast/elm-vim'
+Plug 'leshill/vim-json'
+Plug 'gabesoft/vim-ags'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
 Plug 'ervandew/supertab'
+Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim'
-Plug 'gabesoft/vim-ags'
-"Plug 'vim-scripts/YankRing.vim'
-Plug 'Valloric/YouCompleteMe'
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
-"Plug 'scrooloose/syntastic'
+Plug 'wokalski/autocomplete-flow'
+Plug 'fatih/vim-go'
+Plug 'rust-lang/rust.vim'
+Plug 'python-mode/python-mode'  " this takes over
+Plug 'kien/rainbow_parentheses.vim'
 Plug 'w0rp/ale'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-rails'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'tpope/vim-rbenv'
 Plug 'vim-scripts/bufexplorer.zip'
-Plug 'vim-scripts/peaksea'
-Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
-Plug 'bling/vim-airline'
+Plug 'itchyny/lightline.vim'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'chase/vim-ansible-yaml'
+Plug 'thoughtbot/vim-rspec'
 Plug 'othree/yajs.vim'
-Plug 'shawncplus/phpcomplete.vim'
-Plug 'tbastos/vim-lua'
-Plug 'leafgarland/typescript-vim'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'othree/html5.vim'
 Plug 'mxw/vim-jsx'
-Plug 'posva/vim-vue'
+Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/tsuquyomi'
+Plug 'tbastos/vim-lua'
+Plug 'justinj/vim-pico8-syntax'
 Plug 'janko-m/vim-test'
-Plug 'jdonaldson/vaxe'
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'danro/rename.vim'
 Plug 'flowtype/vim-flow', {
             \ 'autoload': {
             \     'filetypes': 'javascript'
             \ }}
-Plug 'artur-shaik/vim-javacomplete2'
-Plug 'OmniSharp/omnisharp-vim'
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'tpope/vim-dispatch'
 Plug 'danro/rename.vim'
-Plug 'fatih/vim-go'
-Plug 'ElmCast/elm-vim'
-Plug 'elixir-lang/vim-elixir'
-Plug 'rust-lang/rust.vim'
-
 call plug#end()            " required
 filetype plugin indent on    " required
 " }}}
@@ -73,30 +94,22 @@ filetype plugin indent on    " required
 " Set Color Scheme {{{
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
-" silent! colorscheme solarized
-colorscheme Monokai
+set background=light
+silent! colorscheme NeoSolarized
+
+"let ayucolor="light"  " for light version of theme
+"let ayucolor="mirage" " for mirage version of theme
+"let ayucolor="dark"   " for dark version of theme
+
+let g:solarized_termcolors=256
+
 let g:gruvbox_contrast_dark="medium"
 let g:gruvbox_contrast_light="hard"
 let g:hybrid_custom_term_colors = 1
 let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
-"color ir_black
-"colorscheme Tomorrow-Night-Bright
-set background=dark
+
 call togglebg#map("<F5>")
 " }}}
-
-"{{{ Airline & Devicons
-let g:airline_theme='hybrid'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline_powerline_fonts = 1
-"let g:webdevicons_enable_nerdtree = 1
-"let g:webdevicons_enable_airline_tabline = 1
-"let g:webdevicons_enable_airline_statusline = 1
-"let g:webdevicons_enable_ctrlp = 1
-"let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
-"}}}
 
 " Vim Settings {{{
 set colorcolumn=80
@@ -105,8 +118,13 @@ set encoding=utf-8
 set showcmd                     " display incomplete commands
 set ttyfast
 set wildmenu
-set mouse=a
+" set wildmode=list:longest,full
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/.tmp/*,*/.sass-cache/*,*/node_modules/*,*.keep,*.DS_Store,*/.git/*
+
+set mouse=a
+
+" Don't use a line cursor in insert mode
+set guicursor=
 
 " # http://superuser.com/questions/549930/cant-resize-vim-splits-inside-tmux
 if &term =~ '^screen'
@@ -114,14 +132,8 @@ if &term =~ '^screen'
     set ttymouse=xterm2
 endif
 
-set term=screen-256color
-
-" From http://robots.thoughtbot.com/post/27041742805/vim-you-complete-me
-"set complete=.,b,u,]
-"set wildmode=longest,list:longest
-
 " Map ESC
-let mapleader = ","               " The default leader key isn't very intuitive.
+let mapleader = ","              " The default leader key isn't very intuitive.
 
 set number
 set showmatch                   " matching brace/parenthesis/etc.
@@ -133,15 +145,20 @@ set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
 set expandtab                   " use spaces, not tabs (optional)
 set backspace=indent,eol,start  " backspace through everything in insert mode
 
+" Vertical split to right
+set splitright
+
+" Horizontal split below
+set splitbelow
+
 " Use the OS clipboard by default
 set clipboard=unnamed
 
-set cursorline
+"set cursorline
 " Indicators
-set list                          " Show hidden characters (tab and eol)
+"set list                          " Show hidden characters (tab and eol)
 "set listchars=trail:⋅,nbsp:⋅,tab:▸\ ,eol:¬       " Use the same chars as textmate.
-set listchars=trail:⋅,nbsp:⋅,tab:▸\
-"set listchars=tab:▸\ ,trail:•,extends:❯,precedes:❮
+"set listchars=trail:⋅,nbsp:⋅,tab:❯
 set showbreak=↪\
 
 " Searching
@@ -152,25 +169,17 @@ set smartcase                   " ... unless they contain at least one capital l
 
 inoremap jk <Esc>
 xnoremap jk <Esc>
-
 " easier navigation between split windows
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
-"" Maps Alt-[h,j,k,l] to resizing a window split
-map <silent> <M-h> <C-w><
-map <silent> <M-j> <C-W>-
-map <silent> <M-k> <C-W>+
-map <silent> <M-l> <C-w>>
-map <silent> <Space>< <C-w><
-map <silent> <Space>- <C-W>-
-map <silent> <Space>+ <C-W>+
-map <silent> <Space>> <C-w>>
-
-
-"set ai           " always set autoindenting on
+" Maps Alt-[H,J,K,L] to resizing a window split
+map <silent> <M-H> <C-w><
+map <silent> <M-J> <C-W>-
+map <silent> <M-K> <C-W>+
+map <silent> <M-L> <C-w>>
 
 set backup       " keep a backup file
 set backupdir=~/.vim/backup//
@@ -189,11 +198,6 @@ set autoread " load change files
 
 " Clears the search register
 nmap <silent> <leader>/ :nohlsearch<CR>
-
-" select last pasted
-nnoremap gp `[v`]
-
-nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 nnoremap <leader>q gqip
 
 " Reselect visual block after indent/outdent
@@ -207,26 +211,79 @@ noremap <leader>v <C-w>v
 noremap <leader>s <C-w>s
 
 " Edit the vimrc file
-"nmap <silent> <leader>ev :e $MYVIMRC<CR>
-"nmap <silent> <leader>sv :so $MYVIMRC<CR>
+nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
+nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
+"}}}
 
-nmap <silent> <leader>h :set invlist<CR>
-"nmap <silent> <leader>l :set invnumber<CR>
-nmap <silent> <leader>p :set invpaste<CR>
+"{{{ Deoplete
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#file#enable_buffer_path = 1 "Use the current file for relative path
+let g:python_host_prog = '/usr/local/bin/python2'
+let g:python3_host_prog = '/usr/local/bin/python3'
+let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
 
-" Open last buffer: http://www.vimbits.com/bits/22
-noremap <Leader><Leader> <C-^>
+" wait for at least 3 input characters
+let g:deoplete#source#attribute#min_pattern_length = 3
+" wait longer to start getting completions
+let g:deoplete#auto_complete_delay = 100
+" deoplete tab-complete
+inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" tern
+let g:deoplete#sources#ternjs#tern_bin = '/Users/jamessral/.nvm/versions/v8.1.3/bin'
+let g:deoplete#sources#ternjs#types = 1
+let g:deoplete#sources#ternjs#docs = 1
+let g:deoplete#sources#ternjs#filetypes = [
+                \ 'jsx',
+                \ 'js',
+                \ 'vue']
+let g:tern#command = ["tern"]
+let g:tern#arguments = ["--persistent"]
+autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
+"}}}
 
-" Under/Over line current line
-" http://www.vimbits.com/bits/12
-nnoremap <leader>== yyPv$r=jyypv$r=
-nnoremap <leader>** yyPv$r*jyypv$r*
-nnoremap <leader>=  yypv$r=
-nnoremap <leader>-  yypv$r-
+"{{{ Snippets
+" Note: It must be \"imap" and \"smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
 
-:nnoremap <Space> za
-set splitright
-set splitbelow
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+let g:neosnippet#snippets_directory='~/.vim/plugged/neosnippet-snippets/neosnippets'
+"}}}
+
+"{{{ Ags
+if executable('ag')
+    let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+      \ --ignore .git
+      \ --ignore .svn
+      \ --ignore .hg
+      \ --ignore .DS_Store
+      \ --ignore node_modules
+      \ --ignore "**/*.pyc"
+      \ -g ""'
+endif
+"}}}
+
+"{{{ Fzf
+nnoremap <C-o> :Files<CR>
+nnoremap <C-b> :Buffers<CR>
+nnoremap <leader>r :Tags<CR>
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+"}}}
+
+"{{{ Lightline
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ }
 "}}}
 
 "{{{ Goyo (Distraction Free)
@@ -239,74 +296,36 @@ nnoremap <leader>z :Goyo<CR>
 
 "}}}
 
-"{{{ Ale Linting
-" Always keep gutter open to avoid flickering
-" Add more of a delay so as to not slow down so much
-let g:ale_lint_delay = 500
-let g:ale_sign_column_always = 1
-function! LinterStatus() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
-
-    let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_non_errors = l:counts.total - l:all_errors
-
-    return l:counts.total == 0 ? 'OK' : printf(
-    \   '%dW %dE',
-    \   all_non_errors,
-    \   all_errors
-    \)
-endfunction
-
-set statusline=%{LinterStatus()}
-let g:ale_linters = {
-\  'javscript': ['eslint'],
-\}
-"}}}
-
-" Emmet-vim {{{
-let g:user_emmet_leader_key='<C-Z>'
+"{{{ Multiple Cursors
+let g:multi_cursor_next_key='<C-f>'
+let g:multi_cursor_prev_key='<C-b>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
 "}}}
 
 " GUI Settings {{{
-set guifont=FuraCode\ Nerd\ Font:h13
+set guifont=Sauce\ Code\ Pro\ Nerd\ Font\ Complete\ Mono:h13
 set guioptions-=l guioptions-=L guioptions-=r guioptions-=T guioptions-=R guioptions-=m
 " }}}
 
 " Syntax Highlighting and File Types {{{
-autocmd! BufNewFile,BufRead *.java setlocal tabstop=4 shiftwidth=4
-autocmd! BufNewFile,BufRead *.hx setlocal tabstop=4 shiftwidth=4
+autocmd! FileType java setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.hx setlocal tabstop=4 shiftwidth=4 syntax=haxe
 autocmd! BufNewFile,BufRead *.hxml setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.h setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.c setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.hpp setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.scss setlocal tabstop=2 shiftwidth=2
-autocmd FileType ocaml source /Users/jamessral/.opam/system/share/typerex/ocp-indent/ocp-indent.vim
+autocmd! BufNewFile,BufRead *.purs setlocal syntax=purescript
+autocmd! BufNewFile,BufRead *.ex setlocal tabstop=2 shiftwidth=2
+autocmd! BufNewFile,BufRead *.exs setlocal tabstop=2 shiftwidth=2 syntax=elixir
+autocmd! FileType php *.php setlocal tabstop=4 shiftwidth=4
+autocmd! FileType haskell *.hs setlocal tabstop=4 shiftwidth=4
+autocmd! FileType dlang *.d setlocal tabstop=4 shiftwidth=4
+autocmd! FileType go setlocal tabstop=4 shiftwidth=4
 " Use JSX for .js
 let g:jsx_ext_required = 0
-"}}}
-
-" Syntastic {{{
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_loc_list_height=5
-" find the local version of eslint
-" http://blog.pixelastic.com/2015/10/05/use-local-eslint-in-syntastic/
-function! StrTrim(txt)
-  return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
-endfunction
-let g:syntastic_javascript_eslint_exec = StrTrim(system('npm-which eslint'))
-let g:syntastic_typescript_checkers = ['tslint']
-let g:syntastic_typescript_checkers = ['tslint']
-let g:syntastic_javascript_checkers = ['eslint', 'flow']
-let g:syntastic_ruby_checkers = ['rsense']
-let g:syntastic_python_checkers = ['pyflakes']
 "}}}
 
 "{{{ Ale Linting
@@ -314,6 +333,7 @@ let g:syntastic_python_checkers = ['pyflakes']
 " Add more of a delay so as to not slow down so much
 let g:ale_lint_delay = 300
 let g:ale_sign_column_always = 1
+let g:ale_set_quickfix = 1
 function! LinterStatus() abort
     let l:counts = ale#statusline#Count(bufnr(''))
 
@@ -329,68 +349,56 @@ endfunction
 
 set statusline=%{LinterStatus()}
 let g:ale_linters = {
-\  'javscript': ['eslint'],
+\  'javscript': ['eslint', 'flow'],
 \}
 "}}}
 
-"{{{ Test Runner
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>T :TestFile<CR>
-nmap <silent> <leader>A :TestSuite<CR>
-nmap <silent> <leader>L :TestLast<CR>
-nmap <silent> <leader>G :TestVisit<CR>
-
-let test#strategy = "vimproc"
+"{{{ Flow
+"nnoremap <silent> <leader>d :FlowJumpToDef
+let g:flow#showquickfix = 0
+let g:flow#enable = 0
 "}}}
 
-"{{{ Launch Love2d
-nnoremap <leader>l :!love .<CR>
+"{{{ Test Runner
+nnoremap <silent> <leader> <leader>t :TestNearest<CR>
+nnoremap <silent> <leader> <leader>T :TestFile<CR>
+nnoremap <silent> <leader> <leader>A :TestSuite<CR>
+nnoremap <silent> <leader> <leader>L :TestLast<CR>
+nnoremap <silent> <leader> <leader>G :TestVisit<CR>
+
+let test#strategy = "vimproc"
+let test#javascript#jest#file_pattern = '**.jest.js'
+"}}}
+
+"{{{ Python
+let g:pymode_python = 'python3'
+let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_definitions_command = ""
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<leader>N"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#rename_command = "<leader>r"
+let g:jedi#completions_enabled = 0
+let g:jedi#popup_select_first = 0
+"}}}
+
+"{{{ Rust
+let g:deoplete#sources#rust#racer_binary='/Users/jamessral/.cargo/bin/racer'
+let g:deoplete#sources#rust#rust_source_path='/Users/jamessral/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src'
+
+" User rustfmt on save
+let g:rustfmt_autosave = 1
+"}}}
+
+"{{{ Elm
+autocmd FileType purescript nmap <buffer> <leader>d <Plug>(ElmShowDocs)
+let g:polyglot_disabled = ["elm"]
 "}}}
 
 " Typescript Config {{{
-"autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
-"autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
-"}}}
-
-"{{{ Dlang config
-let g:dutyl_stdImportPaths=['/usr/local/include/dlang/dmd']
-"}}}
-
-"{{{ Java config
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
-nmap <leader>jI <Plug>(JavaComplete-Imports-AddMissing)
-nmap <leader>jR <Plug>(JavaComplete-Imports-RemoveUnused)
-nmap <leader>ji <Plug>(JavaComplete-Imports-AddSmart)
-nmap <leader>jii <Plug>(JavaComplete-Imports-Add)
-
-imap <C-j>I <Plug>(JavaComplete-Imports-AddMissing)
-imap <C-j>R <Plug>(JavaComplete-Imports-RemoveUnused)
-imap <C-j>i <Plug>(JavaComplete-Imports-AddSmart)
-imap <C-j>ii <Plug>(JavaComplete-Imports-Add)
-
-nmap <leader>jM <Plug>(JavaComplete-Generate-AbstractMethods)
-
-imap <C-j>jM <Plug>(JavaComplete-Generate-AbstractMethods)
-
-nmap <leader>jA <Plug>(JavaComplete-Generate-Accessors)
-nmap <leader>js <Plug>(JavaComplete-Generate-AccessorSetter)
-nmap <leader>jg <Plug>(JavaComplete-Generate-AccessorGetter)
-nmap <leader>ja <Plug>(JavaComplete-Generate-AccessorSetterGetter)
-nmap <leader>jts <Plug>(JavaComplete-Generate-ToString)
-nmap <leader>jeq <Plug>(JavaComplete-Generate-EqualsAndHashCode)
-nmap <leader>jc <Plug>(JavaComplete-Generate-Constructor)
-nmap <leader>jcc <Plug>(JavaComplete-Generate-DefaultConstructor)
-
-imap <C-j>s <Plug>(JavaComplete-Generate-AccessorSetter)
-imap <C-j>g <Plug>(JavaComplete-Generate-AccessorGetter)
-imap <C-j>a <Plug>(JavaComplete-Generate-AccessorSetterGetter)
-
-vmap <leader>js <Plug>(JavaComplete-Generate-AccessorSetter)
-vmap <leader>jg <Plug>(JavaComplete-Generate-AccessorGetter)
-vmap <leader>ja <Plug>(JavaComplete-Generate-AccessorSetterGetter)
-
-nmap <silent> <buffer> <leader>jn <Plug>(JavaComplete-Generate-NewClass)
-nmap <silent> <buffer> <leader>jN <Plug>(JavaComplete-Generate-ClassInFile)
+autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
+autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
 "}}}
 
 " Emmet-vim {{{
@@ -398,7 +406,7 @@ let g:user_emmet_leader_key='<C-Z>'
 "}}}
 
 " Line splitting for brackets in insert mode [] () {}"{{{
-imap <C-l> <CR><Esc>O<Tab>
+imap <C-l> <CR><Esc>O
 "}}}
 
 "{{{ Remove trailing whitespace on save
@@ -430,8 +438,8 @@ nnoremap <leader>ft Vatzf
 "}}}
 
 " Ctrl-P plugin {{{
-map <C-p> :CtrlP<CR>
-let g:ctrlp_custom_ignore = 'vendor/bundle'
+nnoremap <C-p> :CtrlP<CR>
+let g:ctrlp_custom_ignore = 'vendor/bundle/node_modules'
 let g:ctrlp_working_path_mode = 'ra'
 " }}}
 
@@ -440,6 +448,11 @@ let g:netrw_banner=0        " no more annoying banner!
 let g:netrw_browse_split=4  " open in previous window
 let g:netrw_altv=1          " open splits to the right
 let g:netrw_liststyle=3     " tree view
+"}}}
+
+"{{{ CTags
+" generate Ctags
+nnoremap <leader>. :Tags<CR>
 "}}}
 
 " NERD Tree {{{
@@ -502,8 +515,4 @@ let g:gitgutter_eager = 0
 
 " {{{ markdown
 let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','html','sh']
-"}}}
-
-" {{{ yankring
-let g:yankring_history_dir = '~/yankring_history'
 "}}}
