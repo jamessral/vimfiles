@@ -3,7 +3,7 @@ set noswapfile
 set ttimeout
 set ttimeoutlen=0
 set matchtime=0
-set termguicolors
+"set termguicolors
 
 set path+=**
 
@@ -16,7 +16,9 @@ Plug 'icymind/NeoSolarized'
 Plug 'ayu-theme/ayu-vim'
 Plug 'j-tom/vim-old-hope'
 Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-unimpaired'
 Plug 'sheerun/vim-polyglot'
+Plug 'Shougo/denite.nvim'
 Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'christoomey/vim-tmux-navigator'
@@ -34,6 +36,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'junegunn/goyo.vim'
 Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
+Plug 'reasonml-editor/vim-reason'
 Plug 'tpope/vim-speeddating'
 Plug 'ElmCast/elm-vim'
 Plug 'parsonsmatt/intero-neovim'
@@ -48,6 +51,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'wokalski/autocomplete-flow'
 Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go'
 Plug 'rust-lang/rust.vim'
@@ -71,7 +75,8 @@ Plug 'tpope/vim-rbenv'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
-Plug 'bling/vim-airline'
+"Plug 'bling/vim-airline'
+Plug 'itchyny/lightline.vim'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'chase/vim-ansible-yaml'
 Plug 'thoughtbot/vim-rspec'
@@ -99,8 +104,8 @@ filetype plugin indent on    " required
 " Set Color Scheme {{{
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
-set background=dark
-silent! colorscheme molokai
+set background=light
+silent! colorscheme NeoSolarized
 
 "let ayucolor="light"  " for light version of theme
 "let ayucolor="mirage" " for mirage version of theme
@@ -286,15 +291,23 @@ endif
 "{{{ Fzf
 nnoremap <C-o> :Files<CR>
 nnoremap <C-b> :Buffers<CR>
+nnoremap <leader>r :Tags<CR>
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
+"{{{ Lightline
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ }
+"}}}
+
 "{{{ Airline & Devicons
-let g:airline_theme='molokai'
+let g:airline_theme='solarized'
 let g:airline_left_sep=' '
 let g:airline_left_alt_sep = ' '
 let g:airline_right_sep=' '
 let g:airline_right_alt_sep = ' '
+
 "let g:airline#extensions#tabline#enabled = 1
 "let g:airline#extensions#tabline#left_sep = ' '
 "let g:airline#extensions#tabline#left_alt_sep = '|'
