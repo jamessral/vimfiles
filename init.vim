@@ -3,7 +3,7 @@ set noswapfile
 set ttimeout
 set ttimeoutlen=0
 set matchtime=0
-"set termguicolors
+set termguicolors
 
 set path+=**
 
@@ -13,8 +13,9 @@ call plug#begin()
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'icymind/NeoSolarized'
-Plug 'ayu-theme/ayu-vim'
-Plug 'j-tom/vim-old-hope'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tyrannicaltoucan/vim-quantum'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-unimpaired'
 Plug 'sheerun/vim-polyglot'
@@ -27,7 +28,6 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'hail2u/vim-css3-syntax'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'slashmili/alchemist.vim'
 Plug 'elixir-lang/vim-elixir'
 Plug 'zchee/deoplete-jedi'
@@ -77,8 +77,6 @@ Plug 'tpope/vim-rbenv'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
-"Plug 'bling/vim-airline'
-Plug 'itchyny/lightline.vim'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'chase/vim-ansible-yaml'
 Plug 'thoughtbot/vim-rspec'
@@ -106,12 +104,11 @@ filetype plugin indent on    " required
 " Set Color Scheme {{{
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
-set background=light
-silent! colorscheme NeoSolarized
+set background=dark
+let g:quantum_black=1
+let g:quantum_italics=1
 
-"let ayucolor="light"  " for light version of theme
-"let ayucolor="mirage" " for mirage version of theme
-"let ayucolor="dark"   " for dark version of theme
+silent! colorscheme hybrid
 
 let g:solarized_termcolors=256
 
@@ -277,55 +274,24 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 let g:neosnippet#snippets_directory='~/.vim/plugged/neosnippet-snippets/neosnippets'
 "}}}
 
-"{{{ Ags
-if executable('ag')
-    let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-      \ --ignore .git
-      \ --ignore .svn
-      \ --ignore .hg
-      \ --ignore .DS_Store
-      \ --ignore node_modules
-      \ --ignore "**/*.pyc"
-      \ -g ""'
-endif
-"}}}
-
 "{{{ Fzf
-nnoremap <C-o> :Files<CR>
+nnoremap <C-p> :Files<CR>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <leader>r :Tags<CR>
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
-"{{{ Lightline
-let g:lightline = {
-      \ 'colorscheme': 'solarized',
-      \ }
-"}}}
-
-"{{{ Airline & Devicons
-let g:airline_theme='solarized'
-let g:airline_left_sep=' '
-let g:airline_left_alt_sep = ' '
-let g:airline_right_sep=' '
-let g:airline_right_alt_sep = ' '
-
-"let g:airline#extensions#tabline#enabled = 1
+"{{{ Airline
+let g:airline_theme='hybrid'
+"let g:airline_left_sep=' '
+"let g:airline_left_alt_sep = ' '
+"let g:airline_right_sep=' '
+"let g:airline_right_alt_sep = ' '
+let g:airline#extensions#tabline#enabled = 1
 "let g:airline#extensions#tabline#left_sep = ' '
 "let g:airline#extensions#tabline#left_alt_sep = '|'
-"let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_powerline_fonts = 1
-"let g:webdevicons_enable_nerdtree = 1
-"let g:webdevicons_enable_airline_tabline = 1
-"let g:webdevicons_enable_airline_statusline = 1
-"let g:webdevicons_enable_ctrlp = 1
-"let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
-"}}}
-
-"{{{ Goyo (Distraction Free)
-let g:goyo_width=120
-
-nnoremap <leader>z :Goyo<CR>
 "}}}
 
 "{{{ Easymotion
@@ -380,7 +346,7 @@ autocmd! BufNewFile,BufRead *.scss setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.purs setlocal syntax=purescript
 autocmd! BufNewFile,BufRead *.ex setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.exs setlocal tabstop=2 shiftwidth=2 syntax=elixir
-autocmd! FileType php *.php setlocal tabstop=4 shiftwidth=4
+autocmd! FileType php setlocal tabstop=4 shiftwidth=4
 autocmd! FileType haskell *.hs setlocal tabstop=4 shiftwidth=4
 autocmd! FileType dlang *.d setlocal tabstop=4 shiftwidth=4
 autocmd! FileType go setlocal tabstop=4 shiftwidth=4
@@ -497,22 +463,11 @@ set foldmethod=marker
 nnoremap <leader>ft Vatzf
 "}}}
 
-" Ctrl-P plugin {{{
-nnoremap <C-p> :CtrlP<CR>
-let g:ctrlp_custom_ignore = 'vendor/bundle/node_modules'
-let g:ctrlp_working_path_mode = 'ra'
-" }}}
-
 "{{{ File Browsing
 let g:netrw_banner=0        " no more annoying banner!
 let g:netrw_browse_split=4  " open in previous window
 let g:netrw_altv=1          " open splits to the right
 let g:netrw_liststyle=3     " tree view
-"}}}
-
-"{{{ CTags
-" generate Ctags
-nnoremap <leader>. :Tags<CR>
 "}}}
 
 " NERD Tree {{{
