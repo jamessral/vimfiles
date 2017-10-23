@@ -383,6 +383,8 @@ let g:ale_linters = {
 "nnoremap <silent> <leader>d :FlowJumpToDef
 let g:flow#showquickfix = 0
 let g:flow#enable = 0
+let g:autocomplete_flow#insert_paren_after_function = 0
+nnoremap <leader><leader>t :FlowType<CR>
 "}}}
 
 "{{{ Test Runner
