@@ -13,11 +13,13 @@ call plug#begin()
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'icymind/NeoSolarized'
+Plug 'drewtempelmeyer/palenight.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tyrannicaltoucan/vim-quantum'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-unimpaired'
+Plug 'chrisbra/NrrwRgn'
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/denite.nvim'
 Plug 'chemzqm/vim-easygit'
@@ -32,6 +34,7 @@ Plug 'slashmili/alchemist.vim'
 Plug 'elixir-lang/vim-elixir'
 Plug 'zchee/deoplete-jedi'
 Plug 'davidhalter/jedi-vim'
+Plug 'OmniSharp/omnisharp-vim'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'AndrewRadev/splitjoin.vim'
@@ -57,6 +60,9 @@ Plug 'wokalski/autocomplete-flow'
 Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go'
 Plug 'rust-lang/rust.vim'
+Plug 'tpope/vim-fireplace'
+Plug 'l04m33/vlime', {'rtp': 'vim/'}
+Plug 'jpalardy/vim-slime'
 Plug 'sebastianmarkow/deoplete-rust'
 Plug 'python-mode/python-mode'  " this takes over
 Plug 'kien/rainbow_parentheses.vim'
@@ -108,14 +114,14 @@ set background=dark
 let g:quantum_black=1
 let g:quantum_italics=1
 
-silent! colorscheme hybrid
+silent! colorscheme NeoSolarized
 
 let g:solarized_termcolors=256
 
 let g:gruvbox_contrast_dark="medium"
 let g:gruvbox_contrast_light="hard"
 let g:hybrid_custom_term_colors = 1
-let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
+"let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 
 call togglebg#map("<F5>")
 " }}}
@@ -282,7 +288,7 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='hybrid'
+let g:airline_theme='solarized'
 "let g:airline_left_sep=' '
 "let g:airline_left_alt_sep = ' '
 "let g:airline_right_sep=' '
@@ -410,6 +416,11 @@ let g:jedi#rename_command = "<leader>r"
 let g:jedi#completions_enabled = 0
 let g:jedi#popup_select_first = 0
 "}}}
+
+"{{{ Common Lisp
+let g:slime_target = "neovim"
+"}}}
+
 
 "{{{ Rust
 let g:deoplete#sources#rust#racer_binary='/Users/jamessral/.cargo/bin/racer'
