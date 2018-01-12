@@ -115,7 +115,7 @@ set background=dark
 let g:quantum_black=1
 let g:quantum_italics=1
 
-silent! colorscheme onedark
+silent! colorscheme NeoSolarized
 
 let g:solarized_termcolors=256
 
