@@ -69,6 +69,7 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug 'carlitux/deoplete-ternjs'
 Plug 'tweekmonster/deoplete-clang2'
 Plug 'fishbullet/deoplete-ruby'
+Plug 'rhysd/vim-crystal'
 Plug 'w0rp/ale'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-fugitive'
@@ -114,7 +115,7 @@ set background=dark
 let g:quantum_black=1
 let g:quantum_italics=1
 
-silent! colorscheme NeoSolarized
+silent! colorscheme onedark
 
 let g:solarized_termcolors=256
 
@@ -262,6 +263,11 @@ let g:tern#arguments = ["--persistent"]
 autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 "}}}
 
+"{{{ Goyo
+let g:goyo_width = 100
+nnoremap <leader>z :Goyo<CR>
+"}}}
+
 "{{{ Snippets
 " Note: It must be \"imap" and \"smap".  It uses <Plug> mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -288,14 +294,14 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='solarized'
-"let g:airline_left_sep=' '
-"let g:airline_left_alt_sep = ' '
-"let g:airline_right_sep=' '
-"let g:airline_right_alt_sep = ' '
+let g:airline_theme='understated'
+let g:airline_left_sep=''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep=''
+let g:airline_right_alt_sep = ''
 let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#left_sep = ' '
-"let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_powerline_fonts = 1
 "}}}
@@ -420,7 +426,6 @@ let g:jedi#popup_select_first = 0
 "{{{ Common Lisp
 let g:slime_target = "neovim"
 "}}}
-
 
 "{{{ Rust
 let g:deoplete#sources#rust#racer_binary='/Users/jamessral/.cargo/bin/racer'
