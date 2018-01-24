@@ -13,6 +13,7 @@ call plug#begin()
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'icymind/NeoSolarized'
+Plug 'rakr/vim-one'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -111,11 +112,11 @@ filetype plugin indent on    " required
 " Set Color Scheme {{{
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
-set background=dark
+set background=light
 let g:quantum_black=1
 let g:quantum_italics=1
 
-silent! colorscheme NeoSolarized
+silent! colorscheme one
 
 let g:solarized_termcolors=256
 
@@ -135,7 +136,7 @@ set showcmd                     " display incomplete commands
 set ttyfast
 set wildmenu
 " set wildmode=list:longest,full
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/.tmp/*,*/.sass-cache/*,*/node_modules/*,*.keep,*.DS_Store,*/.git/*
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/.tmp/*,*/.sass-cache/*,*/node_modules/*,*.keep,*.DS_Store,*/.git/*,*/__pychache__/*
 
 set mouse=a
 
@@ -149,7 +150,7 @@ if &term =~ '^screen'
 endif
 
 " Map ESC
-let mapleader = ","              " The default leader key isn't very intuitive.
+let mapleader = " "              " The default leader key isn't very intuitive.
 
 set number
 set showmatch                   " matching brace/parenthesis/etc.
@@ -412,6 +413,7 @@ let test#javascript#jest#file_pattern = '**.jest.js'
 
 "{{{ Python
 let g:pymode_python = 'python3'
+let g:pymode_rope_complete_on_dot = 0
 let g:jedi#goto_command = "<leader>d"
 let g:jedi#goto_assignments_command = "<leader>g"
 let g:jedi#goto_definitions_command = ""
