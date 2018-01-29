@@ -158,7 +158,7 @@ set hidden                      " http://nvie.com/posts/how-i-boosted-my-vim/
 
 "" Whitespace
 set nowrap                      " don't wrap lines
-set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
+set tabstop=4 shiftwidth=4      " a tab is four spaces (or set this to 4)
 set expandtab                   " use spaces, not tabs (optional)
 set backspace=indent,eol,start  " backspace through everything in insert mode
 
@@ -363,23 +363,11 @@ set guioptions-=l guioptions-=L guioptions-=r guioptions-=T guioptions-=R guiopt
 " }}}
 
 " Syntax Highlighting and File Types {{{
-autocmd! FileType java setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.hx setlocal tabstop=4 shiftwidth=4 syntax=haxe
-autocmd! BufNewFile,BufRead *.hxml setlocal tabstop=4 shiftwidth=4
-autocmd! BufNewFile,BufRead *.h setlocal tabstop=4 shiftwidth=4
-autocmd! BufNewFile,BufRead *.c setlocal tabstop=4 shiftwidth=4
-autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4
-autocmd! BufNewFile,BufRead *.hpp setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.css setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.scss setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.purs setlocal syntax=purescript
 autocmd! BufNewFile,BufRead *.ex setlocal tabstop=2 shiftwidth=2
-autocmd! BufNewFile,BufRead *.exs setlocal tabstop=2 shiftwidth=2 syntax=elixir
-autocmd! FileType php setlocal tabstop=4 shiftwidth=4
-autocmd! FileType haskell *.hs setlocal tabstop=4 shiftwidth=4
-autocmd! FileType dlang *.d setlocal tabstop=4 shiftwidth=4
-autocmd! FileType go setlocal tabstop=4 shiftwidth=4
-autocmd! FileType rust setlocal tabstop=4 shiftwidth=4
-autocmd! FileType asm setlocal tabstop=4 shiftwidth=4
 " Use JSX for .js
 let g:jsx_ext_required = 0
 "}}}
