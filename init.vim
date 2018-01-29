@@ -14,10 +14,10 @@ call plug#begin()
 Plug 'altercation/vim-colors-solarized'
 Plug 'icymind/NeoSolarized'
 Plug 'rakr/vim-one'
-Plug 'drewtempelmeyer/palenight.vim'
+" Plug 'drewtempelmeyer/palenight.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'tyrannicaltoucan/vim-quantum'
+" Plug 'tyrannicaltoucan/vim-quantum'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-unimpaired'
 Plug 'chrisbra/NrrwRgn'
@@ -31,18 +31,17 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'hail2u/vim-css3-syntax'
-Plug 'slashmili/alchemist.vim'
-Plug 'elixir-lang/vim-elixir'
+" Plug 'elixir-lang/vim-elixir'
+" Plug 'slashmili/alchemist.vim'
 Plug 'zchee/deoplete-jedi'
 Plug 'davidhalter/jedi-vim'
-Plug 'OmniSharp/omnisharp-vim'
+" Plug 'OmniSharp/omnisharp-vim'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'junegunn/goyo.vim'
-Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
-Plug 'reasonml-editor/vim-reason'
+" Plug 'reasonml-editor/vim-reason'
 Plug 'tpope/vim-speeddating'
 Plug 'ElmCast/elm-vim'
 Plug 'parsonsmatt/intero-neovim'
@@ -61,16 +60,16 @@ Plug 'wokalski/autocomplete-flow'
 Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go'
 Plug 'rust-lang/rust.vim'
-Plug 'tpope/vim-fireplace'
-Plug 'l04m33/vlime', {'rtp': 'vim/'}
-Plug 'jpalardy/vim-slime'
+" Plug 'tpope/vim-fireplace'
+" Plug 'l04m33/vlime', {'rtp': 'vim/'}
+" Plug 'jpalardy/vim-slime'
 Plug 'sebastianmarkow/deoplete-rust'
 Plug 'python-mode/python-mode'  " this takes over
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'carlitux/deoplete-ternjs'
-Plug 'tweekmonster/deoplete-clang2'
+" Plug 'tweekmonster/deoplete-clang2'
 Plug 'fishbullet/deoplete-ruby'
-Plug 'rhysd/vim-crystal'
+" Plug 'rhysd/vim-crystal'
 Plug 'w0rp/ale'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-fugitive'
@@ -81,7 +80,7 @@ Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-rails'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'tpope/vim-rbenv'
+" Plug 'tpope/vim-rbenv'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
@@ -92,10 +91,11 @@ Plug 'othree/yajs.vim'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'othree/html5.vim'
 Plug 'mxw/vim-jsx'
+Plug 'mhartington/nvim-typescript'
 Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/tsuquyomi'
 Plug 'tbastos/vim-lua'
-Plug 'justinj/vim-pico8-syntax'
+" Plug 'justinj/vim-pico8-syntax'
 Plug 'janko-m/vim-test'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'danro/rename.vim'
@@ -112,11 +112,11 @@ filetype plugin indent on    " required
 " Set Color Scheme {{{
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
-set background=light
+set background=dark
 let g:quantum_black=1
 let g:quantum_italics=1
 
-silent! colorscheme one
+silent! colorscheme gruvbox
 
 let g:solarized_termcolors=256
 
@@ -242,6 +242,23 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#file#enable_buffer_path = 1 "Use the current file for relative path
 let g:python_host_prog = '/usr/local/bin/python2'
 let g:python3_host_prog = '/usr/local/bin/python3'
+
+" deoplete tab-complete
+" inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+" disable deoplete auto complete. Ask for it manually
+" with TAB
+let g:deoplete#disable_auto_complete = 1
+inoremap <silent><expr> <TAB>
+\ pumvisible() ? "\<C-n>" :
+\ <SID>check_back_space() ? "\<TAB>" :
+\ deoplete#mappings#manual_complete()
+function! s:check_back_space() abort "{{{
+let col = col('.') - 1
+return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+"}}}
+
 let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
 let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
 
@@ -249,8 +266,6 @@ let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const
 let g:deoplete#source#attribute#min_pattern_length = 3
 " wait longer to start getting completions
 let g:deoplete#auto_complete_delay = 100
-" deoplete tab-complete
-inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " tern
 let g:deoplete#sources#ternjs#tern_bin = '/Users/jamessral/.nvm/versions/v8.1.3/bin'
 let g:deoplete#sources#ternjs#types = 1
@@ -295,12 +310,12 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='understated'
+let g:airline_theme='one'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
 let g:airline_right_alt_sep = ''
-let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#buffer_nr_show = 1
@@ -363,6 +378,8 @@ autocmd! FileType php setlocal tabstop=4 shiftwidth=4
 autocmd! FileType haskell *.hs setlocal tabstop=4 shiftwidth=4
 autocmd! FileType dlang *.d setlocal tabstop=4 shiftwidth=4
 autocmd! FileType go setlocal tabstop=4 shiftwidth=4
+autocmd! FileType rust setlocal tabstop=4 shiftwidth=4
+autocmd! FileType asm setlocal tabstop=4 shiftwidth=4
 " Use JSX for .js
 let g:jsx_ext_required = 0
 "}}}
