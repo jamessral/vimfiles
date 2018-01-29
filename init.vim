@@ -363,6 +363,11 @@ set guioptions-=l guioptions-=L guioptions-=r guioptions-=T guioptions-=R guiopt
 " }}}
 
 " Syntax Highlighting and File Types {{{
+autocmd! FileType ruby setlocal tabstop=2 shiftwidth=2
+autocmd! BufNewFile,BufRead *.js setlocal tabstop=2 shiftwidth=2
+autocmd! BufNewFile,BufRead *.jsx setlocal tabstop=2 shiftwidth=2
+autocmd! BufNewFile,BufRead *.ts setlocal tabstop=2 shiftwidth=2
+autocmd! BufNewFile,BufRead *.tsx setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.hx setlocal tabstop=4 shiftwidth=4 syntax=haxe
 autocmd! BufNewFile,BufRead *.css setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.scss setlocal tabstop=2 shiftwidth=2
