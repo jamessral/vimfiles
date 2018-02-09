@@ -112,11 +112,11 @@ filetype plugin indent on    " required
 " Set Color Scheme {{{
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
-set background=dark
+set background=light
 let g:quantum_black=1
 let g:quantum_italics=1
 
-silent! colorscheme gruvbox
+silent! colorscheme NeoSolarized
 
 let g:solarized_termcolors=256
 
@@ -141,7 +141,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/.tmp/*,*/.sass-cache/*,*/node_modules
 set mouse=a
 
 " Don't use a line cursor in insert mode
-set guicursor=
+" set guicursor=
 
 " # http://superuser.com/questions/549930/cant-resize-vim-splits-inside-tmux
 if &term =~ '^screen'
@@ -240,24 +240,11 @@ nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
 "{{{ Deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#file#enable_buffer_path = 1 "Use the current file for relative path
-let g:python_host_prog = '/usr/local/bin/python2'
-let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python_host_prog = '/Users/jamessral/.pyenv/shims/python'
+let g:python3_host_prog = '/Users/jamessral/.pyenv/shims/python3.6'
 
 " deoplete tab-complete
-" inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
-" disable deoplete auto complete. Ask for it manually
-" with TAB
-let g:deoplete#disable_auto_complete = 1
-inoremap <silent><expr> <TAB>
-\ pumvisible() ? "\<C-n>" :
-\ <SID>check_back_space() ? "\<TAB>" :
-\ deoplete#mappings#manual_complete()
-function! s:check_back_space() abort "{{{
-let col = col('.') - 1
-return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-"}}}
+inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
 let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
@@ -277,6 +264,7 @@ let g:deoplete#sources#ternjs#filetypes = [
 let g:tern#command = ["tern"]
 let g:tern#arguments = ["--persistent"]
 autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
+autocmd FileType css,sass,scss setlocal omnifunc=csscomplete#CompleteCSS
 "}}}
 
 "{{{ Goyo
@@ -310,11 +298,13 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='one'
+let g:airline_theme='solarized'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
 let g:airline_right_alt_sep = ''
+" keep branch name lenghts under control
+let g:airline#extensions#branch#displayed_head_limit = 10
 " let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -364,9 +354,9 @@ set guioptions-=l guioptions-=L guioptions-=r guioptions-=T guioptions-=R guiopt
 
 " Syntax Highlighting and File Types {{{
 autocmd! FileType ruby setlocal tabstop=2 shiftwidth=2
-autocmd! BufNewFile,BufRead *.js setlocal tabstop=2 shiftwidth=2
+autocmd! FileType javascript setlocal tabstop=2 shiftwidth=2
+autocmd! FileType typescript setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.jsx setlocal tabstop=2 shiftwidth=2
-autocmd! BufNewFile,BufRead *.ts setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.tsx setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.hx setlocal tabstop=4 shiftwidth=4 syntax=haxe
 autocmd! BufNewFile,BufRead *.css setlocal tabstop=2 shiftwidth=2
@@ -407,17 +397,19 @@ let g:ale_linters = {
 let g:flow#showquickfix = 0
 let g:flow#enable = 0
 let g:autocomplete_flow#insert_paren_after_function = 0
-nnoremap <leader><leader>t :FlowType<CR>
+" nnoremap <leader><leader>t :FlowType<CR>
 "}}}
 
 "{{{ Test Runner
-nnoremap <silent> <leader> <leader>t :TestNearest<CR>
-nnoremap <silent> <leader> <leader>T :TestFile<CR>
-nnoremap <silent> <leader> <leader>A :TestSuite<CR>
-nnoremap <silent> <leader> <leader>L :TestLast<CR>
-nnoremap <silent> <leader> <leader>G :TestVisit<CR>
+nnoremap <silent><leader><leader>t :TestNearest<CR>
+nnoremap <silent><leader><leader>T :TestFile<CR>
+nnoremap <silent><leader><leader>A :TestSuite<CR>
+nnoremap <silent><leader><leader>L :TestLast<CR>
+nnoremap <silent><leader><leader>G :TestVisit<CR>
 
-let test#strategy = "vimproc"
+let test#strategy = "neovim"
+let test#javascript#jest#executable = 'yarn jest --verbose=false'
+let g:test#preserve_screen = 1
 let test#javascript#jest#file_pattern = '**.jest.js'
 "}}}
 
