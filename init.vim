@@ -14,6 +14,8 @@ call plug#begin()
 Plug 'altercation/vim-colors-solarized'
 Plug 'icymind/NeoSolarized'
 Plug 'rakr/vim-one'
+Plug 'KabbAmine/yowish.vim'
+Plug 'kitten/vim-adventurous'
 " Plug 'drewtempelmeyer/palenight.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -116,7 +118,7 @@ set background=light
 let g:quantum_black=1
 let g:quantum_italics=1
 
-silent! colorscheme NeoSolarized
+silent! colorscheme yowish
 
 let g:solarized_termcolors=256
 
@@ -243,8 +245,11 @@ let g:deoplete#file#enable_buffer_path = 1 "Use the current file for relative pa
 let g:python_host_prog = '/Users/jamessral/.pyenv/shims/python'
 let g:python3_host_prog = '/Users/jamessral/.pyenv/shims/python3.6'
 
+let g:deoplete#disable_auto_complete = 1
+inoremap <expr> <C-n>  deoplete#mappings#manual_complete()
+
 " deoplete tab-complete
-inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
 let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
@@ -410,7 +415,7 @@ nnoremap <silent><leader><leader>G :TestVisit<CR>
 let test#strategy = "neovim"
 let test#javascript#jest#executable = 'yarn jest --verbose=false'
 let g:test#preserve_screen = 1
-let test#javascript#jest#file_pattern = '**.jest.js'
+let test#javascript#jest#file_pattern = '[**.jest.js | **.test.js]'
 "}}}
 
 "{{{ Python
