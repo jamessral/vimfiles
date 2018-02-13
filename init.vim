@@ -114,11 +114,11 @@ filetype plugin indent on    " required
 " Set Color Scheme {{{
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
-set background=light
+set background=dark
 let g:quantum_black=1
 let g:quantum_italics=1
 
-silent! colorscheme yowish
+silent! colorscheme Tomorrow-Night-Eighties
 
 let g:solarized_termcolors=256
 
@@ -303,7 +303,7 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='solarized'
+let g:airline_theme='understated'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
