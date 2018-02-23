@@ -118,7 +118,7 @@ set background=dark
 let g:quantum_black=1
 let g:quantum_italics=1
 
-silent! colorscheme Tomorrow-Night-Eighties
+silent! colorscheme gruvbox
 
 let g:solarized_termcolors=256
 
@@ -303,7 +303,7 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='understated'
+let g:airline_theme='lucius'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
