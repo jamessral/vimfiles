@@ -33,8 +33,8 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'hail2u/vim-css3-syntax'
-" Plug 'elixir-lang/vim-elixir'
-" Plug 'slashmili/alchemist.vim'
+Plug 'elixir-lang/vim-elixir'
+Plug 'slashmili/alchemist.vim'
 Plug 'zchee/deoplete-jedi'
 Plug 'davidhalter/jedi-vim'
 " Plug 'OmniSharp/omnisharp-vim'
@@ -43,7 +43,7 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'junegunn/goyo.vim'
-" Plug 'reasonml-editor/vim-reason'
+Plug 'reasonml-editor/vim-reason-plus'
 Plug 'tpope/vim-speeddating'
 Plug 'ElmCast/elm-vim'
 Plug 'parsonsmatt/intero-neovim'
@@ -57,13 +57,20 @@ Plug 'ervandew/supertab'
 Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'wokalski/autocomplete-flow'
 Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go'
 Plug 'rust-lang/rust.vim'
-" Plug 'tpope/vim-fireplace'
-" Plug 'l04m33/vlime', {'rtp': 'vim/'}
+Plug 'tpope/vim-fireplace'
+Plug 'l04m33/vlime', {'rtp': 'vim/'}
 " Plug 'jpalardy/vim-slime'
 Plug 'sebastianmarkow/deoplete-rust'
 Plug 'python-mode/python-mode'  " this takes over
@@ -89,10 +96,12 @@ Plug 'tpope/vim-eunuch'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'chase/vim-ansible-yaml'
 Plug 'thoughtbot/vim-rspec'
-Plug 'othree/yajs.vim'
-Plug 'jelera/vim-javascript-syntax'
+" Plug 'othree/yajs.vim'
+" Plug 'jelera/vim-javascript-syntax'
+Plug 'pangloss/vim-javascript'
+Plug 'maxmellon/vim-jsx-pretty'
 Plug 'othree/html5.vim'
-Plug 'mxw/vim-jsx'
+" Plug 'mxw/vim-jsx'
 Plug 'mhartington/nvim-typescript'
 Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/tsuquyomi'
@@ -122,7 +131,7 @@ silent! colorscheme gruvbox
 
 let g:solarized_termcolors=256
 
-let g:gruvbox_contrast_dark="medium"
+let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
 let g:hybrid_custom_term_colors = 1
 "let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
@@ -393,7 +402,7 @@ endfunction
 
 set statusline=%{LinterStatus()}
 let g:ale_linters = {
-\  'javscript': ['eslint', 'flow'],
+\  'javascript': ['eslint', 'flow'],
 \}
 "}}}
 
@@ -403,6 +412,10 @@ let g:flow#showquickfix = 0
 let g:flow#enable = 0
 let g:autocomplete_flow#insert_paren_after_function = 0
 " nnoremap <leader><leader>t :FlowType<CR>
+"}}}
+
+"{{{ Prettier
+"
 "}}}
 
 "{{{ Test Runner
@@ -436,6 +449,19 @@ let g:jedi#popup_select_first = 0
 let g:slime_target = "neovim"
 "}}}
 
+"{{{ LanaguageClient
+let g:LanguageClient_serverCommands = {
+    \ 'reason': ['ocaml-language-server', '--stdio'],
+    \ 'ocaml': ['ocaml-language-server', '--stdio'],
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ }
+"}}}
+
+"{{{ Reason
+autocmd! FileType reason nmap <silent> <leader><leader>F :call LanguageClient_textDocument_formatting()<cr>
+autocmd! FileType reason setlocal tabstop=2 shiftwidth=2
+"}}}
+
 "{{{ Rust
 let g:deoplete#sources#rust#racer_binary='/Users/jamessral/.cargo/bin/racer'
 let g:deoplete#sources#rust#rust_source_path='/Users/jamessral/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src'
@@ -446,7 +472,7 @@ let g:rustfmt_autosave = 1
 
 "{{{ Elm
 autocmd FileType purescript nmap <buffer> <leader>d <Plug>(ElmShowDocs)
-let g:polyglot_disabled = ["elm"]
+let g:polyglot_disabled = ["elm", "javascript"]
 "}}}
 
 " Typescript Config {{{
