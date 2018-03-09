@@ -38,6 +38,7 @@ Plug 'slashmili/alchemist.vim'
 Plug 'zchee/deoplete-jedi'
 Plug 'davidhalter/jedi-vim'
 " Plug 'OmniSharp/omnisharp-vim'
+Plug 'jdonaldson/vaxe'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'AndrewRadev/splitjoin.vim'
@@ -127,7 +128,7 @@ set background=dark
 let g:quantum_black=1
 let g:quantum_italics=1
 
-silent! colorscheme gruvbox
+silent! colorscheme PaperColor
 
 let g:solarized_termcolors=256
 
