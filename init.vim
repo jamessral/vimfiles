@@ -427,8 +427,8 @@ nnoremap <silent><leader><leader>L :TestLast<CR>
 nnoremap <silent><leader><leader>G :TestVisit<CR>
 
 let test#strategy = "neovim"
-let test#javascript#jest#executable = 'yarn jest --verbose=false'
 let g:test#preserve_screen = 1
+let test#javascript#jest#executable = 'yarn jest'
 let test#javascript#jest#file_pattern = '[**.jest.js | **.test.js]'
 "}}}
 
