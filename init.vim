@@ -124,7 +124,7 @@ filetype plugin indent on    " required
 " Set Color Scheme {{{
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
-set background=light
+set background=dark
 let g:quantum_black=1
 let g:quantum_italics=1
 
@@ -405,6 +405,11 @@ set statusline=%{LinterStatus()}
 let g:ale_linters = {
 \  'javascript': ['eslint', 'flow'],
 \}
+"}}}
+
+"{{{ Prettier
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.vue PrettierAsync
 "}}}
 
 "{{{ Flow
