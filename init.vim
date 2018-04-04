@@ -399,6 +399,14 @@ let g:autocomplete_flow#insert_paren_after_function = 0
 " nnoremap <leader><leader>t :FlowType<CR>
 "}}}
 
+"{{{ Testing Functions
+" Make a new jest test base on the current filename
+function! MakeJestTest()
+    execute " vs | e " . expand('%:r') . '.jest.js'
+endfunction
+nnoremap <leader>ct :call MakeJestTest()<cr>
+"}}}
+
 "{{{ Test Runner
 nnoremap <silent><leader><leader>t :TestNearest<CR>
 nnoremap <silent><leader><leader>T :TestFile<CR>
@@ -412,13 +420,15 @@ let test#javascript#jest#executable = 'yarn jest'
 let test#javascript#jest#file_pattern = '[**.jest.js | **.test.js]'
 "}}}
 
-" Tslime (For REPLs)
+"{{{  Tslime (For REPLs)
 vmap \t <Plug>SendSelectionToTmux
 nmap \t <Plug>NormalModeSendToTmux
 nmap \T <Plug>SetTmuxVars
+"}}}
 
 "{{{ Common Lisp
 " let g:slime_target = "neovim"
+let g:slimv_swank_cmd = '! xterm -e sbcl --load /usr/share/common-lisp/source/slime/start-swank.lisp &'
 "}}}
 
 "{{{ LanaguageClient
