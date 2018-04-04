@@ -14,15 +14,10 @@ call plug#begin()
 Plug 'altercation/vim-colors-solarized'
 Plug 'icymind/NeoSolarized'
 Plug 'rakr/vim-one'
-Plug 'KabbAmine/yowish.vim'
-Plug 'kitten/vim-adventurous'
-" Plug 'drewtempelmeyer/palenight.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Plug 'tyrannicaltoucan/vim-quantum'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-unimpaired'
-Plug 'chrisbra/NrrwRgn'
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/denite.nvim'
 Plug 'chemzqm/vim-easygit'
@@ -33,21 +28,12 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'hail2u/vim-css3-syntax'
-Plug 'elixir-lang/vim-elixir'
-Plug 'slashmili/alchemist.vim'
-Plug 'zchee/deoplete-jedi'
-Plug 'davidhalter/jedi-vim'
-" Plug 'OmniSharp/omnisharp-vim'
-Plug 'jdonaldson/vaxe'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'junegunn/goyo.vim'
-Plug 'reasonml-editor/vim-reason-plus'
 Plug 'tpope/vim-speeddating'
-Plug 'ElmCast/elm-vim'
-Plug 'parsonsmatt/intero-neovim'
 Plug 'leshill/vim-json'
 Plug 'gabesoft/vim-ags'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -57,10 +43,9 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'ervandew/supertab'
 Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
-Plug 'mattn/emmet-vim'
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
+" Plug 'prettier/vim-prettier', {
+"   \ 'do': 'yarn install',
+"   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
@@ -70,47 +55,40 @@ Plug 'wokalski/autocomplete-flow'
 Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go'
 Plug 'rust-lang/rust.vim'
-Plug 'tpope/vim-fireplace'
-Plug 'l04m33/vlime', {'rtp': 'vim/'}
 " Plug 'jpalardy/vim-slime'
+Plug 'l04m33/vlime', {'rtp': 'vim/'}
+Plug 'jgdavey/tslime.vim'
+Plug 'tpope/vim-fireplace'
 Plug 'sebastianmarkow/deoplete-rust'
-Plug 'python-mode/python-mode'  " this takes over
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'carlitux/deoplete-ternjs'
 " Plug 'tweekmonster/deoplete-clang2'
 Plug 'fishbullet/deoplete-ruby'
-" Plug 'rhysd/vim-crystal'
 Plug 'w0rp/ale'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-markdown'
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-bundler'
+" Plug 'tpope/vim-endwise'
+" Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-rails'
+" Plug 'tpope/vim-rails'
 Plug 'nathanaelkane/vim-indent-guides'
-" Plug 'tpope/vim-rbenv'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'chase/vim-ansible-yaml'
-Plug 'thoughtbot/vim-rspec'
-" Plug 'othree/yajs.vim'
-" Plug 'jelera/vim-javascript-syntax'
+" Plug 'thoughtbot/vim-rspec'
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'othree/html5.vim'
-" Plug 'mxw/vim-jsx'
 Plug 'mhartington/nvim-typescript'
 Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/tsuquyomi'
 Plug 'tbastos/vim-lua'
-" Plug 'justinj/vim-pico8-syntax'
 Plug 'janko-m/vim-test'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'danro/rename.vim'
 Plug 'flowtype/vim-flow', {
             \ 'autoload': {
             \     'filetypes': 'javascript'
@@ -128,7 +106,7 @@ set background=dark
 let g:quantum_black=1
 let g:quantum_italics=1
 
-silent! colorscheme one
+silent! colorscheme gruvbox
 
 let g:solarized_termcolors=256
 
@@ -255,11 +233,11 @@ let g:deoplete#file#enable_buffer_path = 1 "Use the current file for relative pa
 let g:python_host_prog = '/Users/jamessral/.pyenv/shims/python'
 let g:python3_host_prog = '/Users/jamessral/.pyenv/shims/python3.6'
 
-let g:deoplete#disable_auto_complete = 1
-inoremap <expr> <C-n>  deoplete#mappings#manual_complete()
+" let g:deoplete#disable_auto_complete = 1
+" inoremap <expr> <C-n>  deoplete#mappings#manual_complete()
 
 " deoplete tab-complete
-" inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
 let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
@@ -269,7 +247,7 @@ let g:deoplete#source#attribute#min_pattern_length = 3
 " wait longer to start getting completions
 let g:deoplete#auto_complete_delay = 100
 " tern
-let g:deoplete#sources#ternjs#tern_bin = '/Users/jamessral/.nvm/versions/v8.1.3/bin'
+let g:deoplete#sources#ternjs#tern_bin = '/Users/jamessral/.nvm/versions/v8.5.0/bin'
 let g:deoplete#sources#ternjs#types = 1
 let g:deoplete#sources#ternjs#docs = 1
 let g:deoplete#sources#ternjs#filetypes = [
@@ -313,7 +291,7 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='one'
+let g:airline_theme='lucius'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
@@ -368,6 +346,7 @@ set guioptions-=l guioptions-=L guioptions-=r guioptions-=T guioptions-=R guiopt
 " }}}
 
 " Syntax Highlighting and File Types {{{
+autocmd! FileType lua setlocal tabstop=4 shiftwidth=4
 autocmd! FileType ruby setlocal tabstop=2 shiftwidth=2
 autocmd! FileType javascript setlocal tabstop=2 shiftwidth=2
 autocmd! FileType typescript setlocal tabstop=2 shiftwidth=2
@@ -408,8 +387,8 @@ let g:ale_linters = {
 "}}}
 
 "{{{ Prettier
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.vue PrettierAsync
+" let g:prettier#autoformat = 0
+" autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.vue PrettierAsync
 "}}}
 
 "{{{ Flow
@@ -418,10 +397,6 @@ let g:flow#showquickfix = 0
 let g:flow#enable = 0
 let g:autocomplete_flow#insert_paren_after_function = 0
 " nnoremap <leader><leader>t :FlowType<CR>
-"}}}
-
-"{{{ Prettier
-"
 "}}}
 
 "{{{ Test Runner
@@ -437,22 +412,13 @@ let test#javascript#jest#executable = 'yarn jest'
 let test#javascript#jest#file_pattern = '[**.jest.js | **.test.js]'
 "}}}
 
-"{{{ Python
-let g:pymode_python = 'python3'
-let g:pymode_rope_complete_on_dot = 0
-let g:jedi#goto_command = "<leader>d"
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = ""
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>N"
-let g:jedi#completions_command = "<C-Space>"
-let g:jedi#rename_command = "<leader>r"
-let g:jedi#completions_enabled = 0
-let g:jedi#popup_select_first = 0
-"}}}
+" Tslime (For REPLs)
+vmap \t <Plug>SendSelectionToTmux
+nmap \t <Plug>NormalModeSendToTmux
+nmap \T <Plug>SetTmuxVars
 
 "{{{ Common Lisp
-let g:slime_target = "neovim"
+" let g:slime_target = "neovim"
 "}}}
 
 "{{{ LanaguageClient
@@ -463,11 +429,6 @@ let g:LanguageClient_serverCommands = {
     \ }
 "}}}
 
-"{{{ Reason
-autocmd! FileType reason nmap <silent> <leader><leader>F :call LanguageClient_textDocument_formatting()<cr>
-autocmd! FileType reason setlocal tabstop=2 shiftwidth=2
-"}}}
-
 "{{{ Rust
 let g:deoplete#sources#rust#racer_binary='/Users/jamessral/.cargo/bin/racer'
 let g:deoplete#sources#rust#rust_source_path='/Users/jamessral/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src'
@@ -476,18 +437,9 @@ let g:deoplete#sources#rust#rust_source_path='/Users/jamessral/.rustup/toolchain
 let g:rustfmt_autosave = 1
 "}}}
 
-"{{{ Elm
-autocmd FileType purescript nmap <buffer> <leader>d <Plug>(ElmShowDocs)
-let g:polyglot_disabled = ["elm", "javascript"]
-"}}}
-
 " Typescript Config {{{
 autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
 autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
-"}}}
-
-" Emmet-vim {{{
-let g:user_emmet_leader_key='<C-Z>'
 "}}}
 
 " Line splitting for brackets in insert mode [] () {}"{{{
