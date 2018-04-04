@@ -56,7 +56,8 @@ Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go'
 Plug 'rust-lang/rust.vim'
 " Plug 'jpalardy/vim-slime'
-Plug 'l04m33/vlime', {'rtp': 'vim/'}
+" Plug 'l04m33/vlime', {'rtp': 'vim/'}
+Plug 'kovisoft/slimv'
 Plug 'jgdavey/tslime.vim'
 Plug 'tpope/vim-fireplace'
 Plug 'sebastianmarkow/deoplete-rust'
@@ -427,8 +428,8 @@ nmap \T <Plug>SetTmuxVars
 "}}}
 
 "{{{ Common Lisp
-" let g:slime_target = "neovim"
-let g:slimv_swank_cmd = '! xterm -e sbcl --load /usr/share/common-lisp/source/slime/start-swank.lisp &'
+" let g:slime_target = \"neovim"
+let g:slimv_swank_cmd = '!osascript -e "tell application \"Terminal\" to do script \"sbcl --load ~/.config/nvim/plugged/slimv/slime/start-swank.lisp\""'
 "}}}
 
 "{{{ LanaguageClient
