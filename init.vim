@@ -13,7 +13,6 @@ call plug#begin()
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'icymind/NeoSolarized'
-Plug 'rakr/vim-one'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jiangmiao/auto-pairs'
@@ -21,7 +20,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/denite.nvim'
 Plug 'chemzqm/vim-easygit'
-Plug 'chemzqm/denite-git'
 Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'christoomey/vim-tmux-navigator'
@@ -30,7 +28,6 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
-Plug 'AndrewRadev/splitjoin.vim'
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'junegunn/goyo.vim'
 Plug 'tpope/vim-speeddating'
@@ -54,13 +51,10 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'wokalski/autocomplete-flow'
 Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go'
-Plug 'rust-lang/rust.vim'
 " Plug 'jpalardy/vim-slime'
 " Plug 'l04m33/vlime', {'rtp': 'vim/'}
 Plug 'kovisoft/slimv'
 Plug 'jgdavey/tslime.vim'
-Plug 'tpope/vim-fireplace'
-Plug 'sebastianmarkow/deoplete-rust'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'carlitux/deoplete-ternjs'
 " Plug 'tweekmonster/deoplete-clang2'
@@ -70,17 +64,16 @@ Plug 'mbbill/undotree'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-markdown'
-" Plug 'tpope/vim-endwise'
-" Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-surround'
-" Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rails'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-eunuch'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'chase/vim-ansible-yaml'
-" Plug 'thoughtbot/vim-rspec'
+Plug 'thoughtbot/vim-rspec'
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'othree/html5.vim'
@@ -103,11 +96,11 @@ filetype plugin indent on    " required
 " Set Color Scheme {{{
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
-set background=dark
+set background=light
 let g:quantum_black=1
 let g:quantum_italics=1
 
-silent! colorscheme gruvbox
+silent! colorscheme NeoSolarized
 
 let g:solarized_termcolors=256
 
@@ -132,7 +125,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/.tmp/*,*/.sass-cache/*,*/node_modules
 set mouse=a
 
 " Don't use a line cursor in insert mode
-" set guicursor=
+set guicursor=
 
 " # http://superuser.com/questions/549930/cant-resize-vim-splits-inside-tmux
 if &term =~ '^screen'
@@ -162,7 +155,7 @@ set splitbelow
 " Use the OS clipboard by default
 set clipboard=unnamed
 
-"set cursorline
+set cursorline
 " Indicators
 "set list                          " Show hidden characters (tab and eol)
 "set listchars=trail:⋅,nbsp:⋅,tab:▸\ ,eol:¬       " Use the same chars as textmate.
@@ -275,10 +268,6 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 " SuperTab like snippets behavior.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"imap <expr><TAB>
-" \ pumvisible() ? "\<C-n>" :
-" \ neosnippet#expandable_or_jumpable() ?
-" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 let g:neosnippet#snippets_directory='~/.vim/plugged/neosnippet-snippets/neosnippets'
@@ -310,41 +299,12 @@ let g:airline_powerline_fonts = 1
 
 "}}}
 
-"{{{ Denite
-nnoremap <leader>gl :Denite gitlog<CR>
-call denite#custom#map(
-      \ 'normal',
-      \ 'a',
-      \ '<denite:do_action:add>',
-      \ 'noremap'
-      \)
-
-call denite#custom#map(
-      \ 'normal',
-      \ 'd',
-      \ '<denite:do_action:delete>',
-      \ 'noremap'
-      \)
-
-call denite#custom#map(
-      \ 'normal',
-      \ 'r',
-      \ '<denite:do_action:reset>',
-      \ 'noremap'
-      \)
-"}}}
-
 "{{{ Multiple Cursors
 let g:multi_cursor_next_key='<C-f>'
 let g:multi_cursor_prev_key='<C-b>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 "}}}
-
-" GUI Settings {{{
-set guifont=Sauce\ Code\ Pro\ Nerd\ Font\ Complete\ Mono:h13
-set guioptions-=l guioptions-=L guioptions-=r guioptions-=T guioptions-=R guioptions-=m
-" }}}
 
 " Syntax Highlighting and File Types {{{
 autocmd! FileType lua setlocal tabstop=4 shiftwidth=4
@@ -429,6 +389,8 @@ nmap \T <Plug>SetTmuxVars
 
 "{{{ Common Lisp
 " let g:slime_target = \"neovim"
+" open split vertically to right
+let g:slimv_repl_split = 4
 let g:slimv_swank_cmd = '!osascript -e "tell application \"Terminal\" to do script \"sbcl --load ~/.config/nvim/plugged/slimv/slime/start-swank.lisp\""'
 "}}}
 
@@ -438,14 +400,6 @@ let g:LanguageClient_serverCommands = {
     \ 'ocaml': ['ocaml-language-server', '--stdio'],
     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
     \ }
-"}}}
-
-"{{{ Rust
-let g:deoplete#sources#rust#racer_binary='/Users/jamessral/.cargo/bin/racer'
-let g:deoplete#sources#rust#rust_source_path='/Users/jamessral/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src'
-
-" User rustfmt on save
-let g:rustfmt_autosave = 1
 "}}}
 
 " Typescript Config {{{
@@ -473,12 +427,6 @@ autocmd Filetype markdown setlocal spell
 
 " Folding {{{
 set foldmethod=marker
-
-" http://vim.wikia.com/wiki/Use_folds_in_your_program
-" augroup vimrc
-"   au BufReadPre * setlocal foldmethod=indent
-"   au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
-" augroup END
 
 "Fold Tag
 "http://stevelosh.com/blog/2010/09/coming-home-to-vim/
