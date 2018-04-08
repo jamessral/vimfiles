@@ -15,7 +15,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'icymind/NeoSolarized'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-unimpaired'
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/denite.nvim'
@@ -52,6 +52,7 @@ Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go'
 " Plug 'jpalardy/vim-slime'
 " Plug 'l04m33/vlime', {'rtp': 'vim/'}
+Plug 'tpope/vim-fireplace'
 Plug 'kovisoft/slimv'
 Plug 'jgdavey/tslime.vim'
 Plug 'kien/rainbow_parentheses.vim'
@@ -99,7 +100,7 @@ set background=light
 let g:quantum_black=1
 let g:quantum_italics=1
 
-silent! colorscheme NeoSolarized
+silent! colorscheme Tomorrow-Night-Bright
 
 let g:solarized_termcolors=256
 
@@ -280,7 +281,7 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='solarized'
+let g:airline_theme='lucius'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
@@ -386,9 +387,16 @@ nmap \t <Plug>NormalModeSendToTmux
 nmap \T <Plug>SetTmuxVars
 "}}}
 
+"{{{ Clojure & Racket
+autocmd FileType clojure let b:delimitMate_quotes = "\""
+autocmd FileType racket let b:delimitMate_quotes = "\""
+"}}}
+
 "{{{ Common Lisp
 " let g:slime_target = \"neovim"
 " open split vertically to right
+autocmd FileType lisp let b:delimitMate_quotes = "\""
+"}}}
 let g:slimv_repl_split = 4
 let g:slimv_swank_cmd = '!osascript -e "tell application \"Terminal\" to do script \"sbcl --load ~/.config/nvim/plugged/slimv/slime/start-swank.lisp\""'
 "}}}
