@@ -15,7 +15,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'icymind/NeoSolarized'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Plug 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-unimpaired'
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/denite.nvim'
@@ -52,6 +52,7 @@ Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go'
 " Plug 'jpalardy/vim-slime'
 " Plug 'l04m33/vlime', {'rtp': 'vim/'}
+" Plug 'tpope/vim-salve'
 Plug 'tpope/vim-fireplace'
 Plug 'kovisoft/slimv'
 Plug 'jgdavey/tslime.vim'
@@ -396,7 +397,6 @@ autocmd FileType racket let b:delimitMate_quotes = "\""
 " let g:slime_target = \"neovim"
 " open split vertically to right
 autocmd FileType lisp let b:delimitMate_quotes = "\""
-"}}}
 let g:slimv_repl_split = 4
 let g:slimv_swank_cmd = '!osascript -e "tell application \"Terminal\" to do script \"sbcl --load ~/.config/nvim/plugged/slimv/slime/start-swank.lisp\""'
 "}}}
