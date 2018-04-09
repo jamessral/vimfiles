@@ -255,6 +255,11 @@ autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 autocmd FileType css,sass,scss setlocal omnifunc=csscomplete#CompleteCSS
 "}}}
 
+"{{{ Vim Polyglot
+" Disable javscript in favor of other plugins for js/jsx
+let g:polyglot_disabled = ['javascript', 'jsx']
+"}}}
+
 "{{{ Goyo
 let g:goyo_width = 100
 nnoremap <leader>z :Goyo<CR>
@@ -271,7 +276,7 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
     \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-let g:neosnippet#snippets_directory='~/.vim/plugged/neosnippet-snippets/neosnippets'
+let g:neosnippet#snippets_directory='~/.config/nvim/plugged/neosnippet-snippets/neosnippets'
 "}}}
 
 "{{{ Fzf
