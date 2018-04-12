@@ -39,15 +39,16 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
-" Plug 'prettier/vim-prettier', {
-"   \ 'do': 'yarn install',
-"   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
+Plug 'prettier/vim-prettier', {
+   \ 'do': 'yarn install',
+   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'wokalski/autocomplete-flow'
+Plug 'davidhalter/jedi-vim'
 Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go'
 " Plug 'jpalardy/vim-slime'
@@ -97,11 +98,11 @@ filetype plugin indent on    " required
 " Set Color Scheme {{{
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
-set background=light
+set background=dark
 let g:quantum_black=1
 let g:quantum_italics=1
 
-silent! colorscheme Tomorrow-Night-Bright
+silent! colorscheme dracula
 
 let g:solarized_termcolors=256
 
@@ -317,6 +318,7 @@ autocmd! FileType lua setlocal tabstop=4 shiftwidth=4
 autocmd! FileType ruby setlocal tabstop=2 shiftwidth=2
 autocmd! FileType javascript setlocal tabstop=2 shiftwidth=2
 autocmd! FileType typescript setlocal tabstop=2 shiftwidth=2
+autocmd! BufNewFile,BufRead *.html.erb setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.jsx setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.tsx setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.hx setlocal tabstop=4 shiftwidth=4 syntax=haxe
@@ -364,6 +366,10 @@ let g:flow#showquickfix = 0
 let g:flow#enable = 0
 let g:autocomplete_flow#insert_paren_after_function = 0
 " nnoremap <leader><leader>t :FlowType<CR>
+"}}}
+
+"{{{ Python
+let g:jedi#usages_command = '<leader>i'
 "}}}
 
 "{{{ Testing Functions
