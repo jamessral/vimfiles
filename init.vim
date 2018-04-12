@@ -76,8 +76,9 @@ Plug 'tpope/vim-commentary'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'chase/vim-ansible-yaml'
 Plug 'thoughtbot/vim-rspec'
-Plug 'pangloss/vim-javascript'
-Plug 'maxmellon/vim-jsx-pretty'
+" Plug 'pangloss/vim-javascript'
+" Plug 'maxmellon/vim-jsx-pretty'
+Plug 'chemzqm/vim-jsx-improve'
 Plug 'othree/html5.vim'
 Plug 'mhartington/nvim-typescript'
 Plug 'leafgarland/typescript-vim'
@@ -99,17 +100,12 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 set background=dark
-let g:quantum_black=1
-let g:quantum_italics=1
-
-silent! colorscheme dracula
+silent! colorscheme gruvbox
 
 let g:solarized_termcolors=256
 
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
-let g:hybrid_custom_term_colors = 1
-"let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 
 call togglebg#map("<F5>")
 " }}}
