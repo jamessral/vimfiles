@@ -4,6 +4,7 @@ set ttimeout
 set ttimeoutlen=0
 set matchtime=0
 set termguicolors
+" set t_Co=256
 
 set path+=**
 
@@ -13,6 +14,7 @@ call plug#begin()
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'icymind/NeoSolarized'
+Plug 'rakr/vim-one'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jiangmiao/auto-pairs'
@@ -100,7 +102,7 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 set background=dark
-silent! colorscheme gruvbox
+silent! colorscheme one
 
 let g:solarized_termcolors=256
 
@@ -284,7 +286,7 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='lucius'
+let g:airline_theme='one'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
