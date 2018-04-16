@@ -4,6 +4,7 @@ set ttimeout
 set ttimeoutlen=0
 set matchtime=0
 set termguicolors
+set encoding=UTF-8
 " set t_Co=256
 
 set path+=**
@@ -356,6 +357,7 @@ let g:ale_linters = {
 "{{{ Prettier
 " let g:prettier#autoformat = 0
 " autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.vue PrettierAsync
+nnoremap <leader>F :PrettierAsync<cr>
 "}}}
 
 "{{{ Flow
