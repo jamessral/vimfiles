@@ -107,7 +107,7 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 set background=dark
-silent! colorscheme PaperColor
+silent! colorscheme molokai
 
 let g:ayucolor = "mirage"
 
@@ -291,7 +291,7 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='understated'
+let g:airline_theme='molokai'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
