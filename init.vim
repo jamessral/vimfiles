@@ -14,6 +14,7 @@ filetype off
 call plug#begin()
 
 Plug 'altercation/vim-colors-solarized'
+Plug 'challenger-deep-theme/vim'
 Plug 'icymind/NeoSolarized'
 Plug 'ayu-theme/ayu-vim'
 Plug 'rakr/vim-one'
@@ -22,9 +23,11 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-unimpaired'
 Plug 'sheerun/vim-polyglot'
+Plug 'lvht/phpcd.vim'
 Plug 'Shougo/denite.nvim'
 Plug 'chemzqm/vim-easygit'
 Plug 'flazz/vim-colorschemes'
+Plug 'daylerees/colour-schemes', { 'rtp': 'vim/' }
 Plug 'ryanoasis/vim-devicons'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'terryma/vim-multiple-cursors'
@@ -307,6 +310,8 @@ let g:airline_powerline_fonts = 1
 "}}}
 
 "{{{ Multiple Cursors
+let g:multi_cursor_use_default_mapping=0
+let g:multi_cursor_start_key='gb'
 let g:multi_cursor_next_key='<C-f>'
 let g:multi_cursor_prev_key='<C-b>'
 let g:multi_cursor_skip_key='<C-x>'
@@ -376,7 +381,7 @@ let g:jedi#usages_command = '<leader>i'
 "{{{ Testing Functions
 " Make a new jest test base on the current filename
 function! MakeJestTest()
-    execute " vs | e " . expand('%:r') . '.jest.js'
+    execute " vs | e " . expand('%:r') . '.test.js'
 endfunction
 nnoremap <leader>ct :call MakeJestTest()<cr>
 "}}}
