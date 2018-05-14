@@ -22,6 +22,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-repeat'
 Plug 'sheerun/vim-polyglot'
 Plug 'lvht/phpcd.vim'
 Plug 'Shougo/denite.nvim'
@@ -107,7 +108,7 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 set background=dark
-silent! colorscheme molokai
+silent! colorscheme gruvbox
 
 let g:ayucolor = "mirage"
 
@@ -291,7 +292,7 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='molokai'
+let g:airline_theme='understated'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
