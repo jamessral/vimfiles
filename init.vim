@@ -14,9 +14,7 @@ filetype off
 call plug#begin()
 
 Plug 'altercation/vim-colors-solarized'
-Plug 'challenger-deep-theme/vim'
 Plug 'icymind/NeoSolarized'
-Plug 'ayu-theme/ayu-vim'
 Plug 'rakr/vim-one'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -25,10 +23,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
 Plug 'sheerun/vim-polyglot'
 Plug 'lvht/phpcd.vim'
-Plug 'Shougo/denite.nvim'
-Plug 'chemzqm/vim-easygit'
 Plug 'flazz/vim-colorschemes'
-Plug 'daylerees/colour-schemes', { 'rtp': 'vim/' }
 Plug 'ryanoasis/vim-devicons'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'terryma/vim-multiple-cursors'
@@ -37,13 +32,12 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-Plug 'junegunn/goyo.vim'
-Plug 'tpope/vim-speeddating'
 Plug 'leshill/vim-json'
 Plug 'gabesoft/vim-ags'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'reasonml-editor/vim-reason-plus'
 Plug 'scrooloose/nerdcommenter'
 Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
@@ -86,7 +80,6 @@ Plug 'chase/vim-ansible-yaml'
 Plug 'thoughtbot/vim-rspec'
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
-" Plug 'chemzqm/vim-jsx-improve'
 Plug 'othree/html5.vim'
 Plug 'mhartington/nvim-typescript'
 Plug 'leafgarland/typescript-vim'
@@ -107,8 +100,8 @@ filetype plugin indent on    " required
 " Set Color Scheme {{{
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
-set background=dark
-silent! colorscheme gruvbox
+set background=light
+silent! colorscheme NeoSolarized
 
 let g:ayucolor = "mirage"
 
@@ -265,11 +258,6 @@ autocmd FileType css,sass,scss setlocal omnifunc=csscomplete#CompleteCSS
 let g:polyglot_disabled = ['javascript', 'jsx']
 "}}}
 
-"{{{ Goyo
-let g:goyo_width = 100
-nnoremap <leader>z :Goyo<CR>
-"}}}
-
 "{{{ Snippets
 " Note: It must be \"imap" and \"smap".  It uses <Plug> mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -292,7 +280,7 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='understated'
+let g:airline_theme='solarized'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
