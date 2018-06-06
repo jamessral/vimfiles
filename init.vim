@@ -100,8 +100,8 @@ filetype plugin indent on    " required
 " Set Color Scheme {{{
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
-set background=light
-silent! colorscheme NeoSolarized
+set background=dark
+silent! colorscheme PaperColor
 
 let g:ayucolor = "mirage"
 
@@ -218,13 +218,16 @@ noremap <leader>s <C-w>s
 " Edit the vimrc file
 nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
 nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
+
+" Save by pressing Enter in normal mode
+nnoremap <cr> :w<cr>
 "}}}
 
 "{{{ Deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#file#enable_buffer_path = 1 "Use the current file for relative path
-let g:python_host_prog = '/Users/jamessral/.pyenv/shims/python'
-let g:python3_host_prog = '/Users/jamessral/.pyenv/shims/python3.6'
+let g:python_host_prog = '/Users/jsral/.pyenv/shims/python'
+" let g:python3_host_prog = '/Users/jsral/.pyenv/shims/python3.6'
 
 " let g:deoplete#disable_auto_complete = 1
 " inoremap <expr> <C-n>  deoplete#mappings#manual_complete()
@@ -279,8 +282,8 @@ nnoremap <leader>r :Tags<CR>
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
-"{{{ Airline
-let g:airline_theme='solarized'
+"{{{ Airlinej
+let g:airline_theme='dark'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
@@ -384,7 +387,7 @@ nnoremap <silent><leader><leader>G :TestVisit<CR>
 
 let test#strategy = "neovim"
 let g:test#preserve_screen = 1
-let test#javascript#jest#executable = 'yarn jest'
+let test#javascript#jest#executable = 'yarn test'
 let test#javascript#jest#file_pattern = '[**.jest.js | **.test.js]'
 "}}}
 
