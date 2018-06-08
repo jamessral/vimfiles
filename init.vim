@@ -101,7 +101,7 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 set background=dark
-silent! colorscheme gruvbox
+silent! colorscheme landscape
 
 let g:ayucolor = "mirage"
 
