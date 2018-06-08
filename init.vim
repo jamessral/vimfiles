@@ -57,7 +57,6 @@ Plug 'zchee/deoplete-go'
 " Plug 'jpalardy/vim-slime'
 " Plug 'l04m33/vlime', {'rtp': 'vim/'}
 " Plug 'tpope/vim-salve'
-Plug 'tpope/vim-fireplace'
 Plug 'kovisoft/slimv'
 Plug 'jgdavey/tslime.vim'
 Plug 'kien/rainbow_parentheses.vim'
@@ -260,27 +259,6 @@ autocmd FileType css,sass,scss setlocal omnifunc=csscomplete#CompleteCSS
 "{{{ Vim Polyglot
 " Disable javscript in favor of other plugins for js/jsx
 let g:polyglot_disabled = ['javascript', 'jsx']
-"}}}
-
-"{{{ REPL
-let g:repl['javascript'] = {
-    \ 'bin': 'node',
-    \ 'args': [],
-    \ 'syntax': '',
-    \ 'title': 'Node REPL'
-\ }
-let g:repl['javascript.jsx'] = {
-    \ 'bin': 'node',
-    \ 'args': [],
-    \ 'syntax': '',
-    \ 'title': 'Node REPL'
-\ }
-let g:repl['clojure'] = {
-    \ 'bin': 'lein repl',
-    \ 'args': [],
-    \ 'syntax': '',
-    \ 'title': 'Clojure nREPL'
-\ }
 "}}}
 
 "{{{ Snippets
