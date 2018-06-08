@@ -19,6 +19,7 @@ Plug 'rakr/vim-one'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jiangmiao/auto-pairs'
+Plug 'HiPhish/repl.nvim'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
 Plug 'sheerun/vim-polyglot'
@@ -101,7 +102,7 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 set background=dark
-silent! colorscheme PaperColor
+silent! colorscheme gruvbox
 
 let g:ayucolor = "mirage"
 
@@ -261,6 +262,27 @@ autocmd FileType css,sass,scss setlocal omnifunc=csscomplete#CompleteCSS
 let g:polyglot_disabled = ['javascript', 'jsx']
 "}}}
 
+"{{{ REPL
+let g:repl['javascript'] = {
+    \ 'bin': 'node',
+    \ 'args': [],
+    \ 'syntax': '',
+    \ 'title': 'Node REPL'
+\ }
+let g:repl['javascript.jsx'] = {
+    \ 'bin': 'node',
+    \ 'args': [],
+    \ 'syntax': '',
+    \ 'title': 'Node REPL'
+\ }
+let g:repl['clojure'] = {
+    \ 'bin': 'lein repl',
+    \ 'args': [],
+    \ 'syntax': '',
+    \ 'title': 'Clojure nREPL'
+\ }
+"}}}
+
 "{{{ Snippets
 " Note: It must be \"imap" and \"smap".  It uses <Plug> mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -282,8 +304,8 @@ nnoremap <leader>r :Tags<CR>
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
-"{{{ Airlinej
-let g:airline_theme='dark'
+"{{{ Airline
+let g:airline_theme='understated'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
