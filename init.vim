@@ -16,6 +16,8 @@ call plug#begin()
 Plug 'altercation/vim-colors-solarized'
 Plug 'icymind/NeoSolarized'
 Plug 'rakr/vim-one'
+Plug 'rakr/vim-two-firewatch'
+Plug 'jacoborus/tender.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jiangmiao/auto-pairs'
@@ -81,7 +83,7 @@ Plug 'thoughtbot/vim-rspec'
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'othree/html5.vim'
-Plug 'mhartington/nvim-typescript'
+" Plug 'mhartington/nvim-typescript'
 Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/tsuquyomi'
 Plug 'tbastos/vim-lua'
@@ -101,7 +103,7 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 set background=dark
-silent! colorscheme landscape
+silent! colorscheme tender
 
 let g:ayucolor = "mirage"
 
@@ -283,7 +285,7 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='understated'
+let g:airline_theme='distinguished'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
