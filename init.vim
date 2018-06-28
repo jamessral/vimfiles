@@ -15,13 +15,15 @@ call plug#begin()
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'icymind/NeoSolarized'
+Plug 'ayu-theme/ayu-vim'
 Plug 'rakr/vim-one'
 Plug 'rakr/vim-two-firewatch'
 Plug 'jacoborus/tender.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jiangmiao/auto-pairs'
-Plug 'HiPhish/repl.nvim'
+Plug 'tpope/vim-vinegar'
+" Plug 'HiPhish/repl.nvim'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
 Plug 'sheerun/vim-polyglot'
@@ -41,6 +43,9 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'reasonml-editor/vim-reason-plus'
+Plug 'tpope/vim-fireplace'
+Plug 'elixir-editors/vim-elixir'
+Plug 'mhinz/vim-mix-format'
 Plug 'scrooloose/nerdcommenter'
 Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
@@ -82,10 +87,10 @@ Plug 'chase/vim-ansible-yaml'
 Plug 'thoughtbot/vim-rspec'
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
-Plug 'othree/html5.vim'
-" Plug 'mhartington/nvim-typescript'
+" Plug 'othree/html5.vim'
+Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
 Plug 'leafgarland/typescript-vim'
-Plug 'Quramy/tsuquyomi'
+" Plug 'Quramy/tsuquyomi'
 Plug 'tbastos/vim-lua'
 Plug 'janko-m/vim-test'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
@@ -103,7 +108,7 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 set background=dark
-silent! colorscheme tender
+silent! colorscheme dracula
 
 let g:ayucolor = "mirage"
 
@@ -285,7 +290,7 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='distinguished'
+let g:airline_theme='twofirewatch'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
@@ -318,6 +323,7 @@ autocmd! FileType ruby setlocal tabstop=2 shiftwidth=2
 autocmd! FileType javascript setlocal tabstop=2 shiftwidth=2
 autocmd! FileType typescript setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.html.erb setlocal tabstop=2 shiftwidth=2
+autocmd! BufNewFile,BufRead *.html setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.jsx setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.tsx setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.hx setlocal tabstop=4 shiftwidth=4 syntax=haxe
@@ -421,8 +427,8 @@ let g:LanguageClient_serverCommands = {
 "}}}
 
 " Typescript Config {{{
-autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
-autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
+" autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
+" autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
 "}}}
 
 " Line splitting for brackets in insert mode [] () {}"{{{
@@ -516,5 +522,5 @@ let g:gitgutter_eager = 0
 "}}}
 
 " {{{ markdown
-let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','html','sh']
+let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
 "}}}
