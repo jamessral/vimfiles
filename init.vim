@@ -31,7 +31,7 @@ Plug 'lvht/phpcd.vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'terryma/vim-multiple-cursors'
+" Plug 'terryma/vim-multiple-cursors'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'Shougo/neosnippet.vim'
@@ -44,6 +44,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'reasonml-editor/vim-reason-plus'
 Plug 'tpope/vim-fireplace'
+Plug 'racer-rust/vim-racer'
 Plug 'elixir-editors/vim-elixir'
 Plug 'mhinz/vim-mix-format'
 Plug 'scrooloose/nerdcommenter'
@@ -68,7 +69,7 @@ Plug 'kovisoft/slimv'
 Plug 'jgdavey/tslime.vim'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'carlitux/deoplete-ternjs'
-" Plug 'tweekmonster/deoplete-clang2'
+Plug 'tweekmonster/deoplete-clang2'
 Plug 'fishbullet/deoplete-ruby'
 Plug 'w0rp/ale'
 Plug 'mbbill/undotree'
@@ -85,11 +86,11 @@ Plug 'tpope/vim-commentary'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'chase/vim-ansible-yaml'
 Plug 'thoughtbot/vim-rspec'
-Plug 'pangloss/vim-javascript'
-Plug 'maxmellon/vim-jsx-pretty'
+" Plug 'pangloss/vim-javascript'
+" Plug 'maxmellon/vim-jsx-pretty'
 " Plug 'othree/html5.vim'
 Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
-Plug 'leafgarland/typescript-vim'
+" Plug 'leafgarland/typescript-vim'
 " Plug 'Quramy/tsuquyomi'
 Plug 'tbastos/vim-lua'
 Plug 'janko-m/vim-test'
@@ -108,7 +109,7 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 set background=dark
-silent! colorscheme dracula
+silent! colorscheme molokai
 
 let g:ayucolor = "mirage"
 
@@ -265,7 +266,7 @@ autocmd FileType css,sass,scss setlocal omnifunc=csscomplete#CompleteCSS
 
 "{{{ Vim Polyglot
 " Disable javscript in favor of other plugins for js/jsx
-let g:polyglot_disabled = ['javascript', 'jsx']
+" let g:polyglot_disabled = ['javascript', 'jsx']
 "}}}
 
 "{{{ Snippets
@@ -290,7 +291,7 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='twofirewatch'
+let g:airline_theme='wombat'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
@@ -408,6 +409,15 @@ nmap \T <Plug>SetTmuxVars
 "{{{ Clojure & Racket
 autocmd FileType clojure let b:delimitMate_quotes = "\""
 autocmd FileType racket let b:delimitMate_quotes = "\""
+"}}}
+
+"{{{ C/C++
+let g:deoplete#sources#clang#std = {
+    \'c': 'c11',
+    \'cpp': 'c++14',
+    \'objc': 'c11',
+    \'objcpp': 'c++14',
+\}
 "}}}
 
 "{{{ Common Lisp
