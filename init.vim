@@ -109,7 +109,7 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 set background=dark
-silent! colorscheme molokai
+silent! colorscheme gruvbox
 
 let g:ayucolor = "mirage"
 
@@ -291,7 +291,7 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='wombat'
+let g:airline_theme='minimalist'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
@@ -323,6 +323,8 @@ autocmd! FileType lua setlocal tabstop=4 shiftwidth=4
 autocmd! FileType ruby setlocal tabstop=2 shiftwidth=2
 autocmd! FileType javascript setlocal tabstop=2 shiftwidth=2
 autocmd! FileType typescript setlocal tabstop=2 shiftwidth=2
+autocmd! FileType c setlocal tabstop=8 shiftwidth=8 noexpandtab
+autocmd! FileType c++ setlocal tabstop=8 shiftwidth=8 noexpandtab
 autocmd! BufNewFile,BufRead *.html.erb setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.html setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.jsx setlocal tabstop=2 shiftwidth=2
@@ -428,11 +430,16 @@ let g:slimv_repl_split = 4
 let g:slimv_swank_cmd = '!osascript -e "tell application \"Terminal\" to do script \"sbcl --load ~/.config/nvim/plugged/slimv/slime/start-swank.lisp\""'
 "}}}
 
+"{{{ Rust
+let g:ale_linters = {'rust': ['rls']}
+let g:ale_rust_rls_toolchain = 'stable'
+"}}}
+
 "{{{ LanaguageClient
 let g:LanguageClient_serverCommands = {
     \ 'reason': ['ocaml-language-server', '--stdio'],
     \ 'ocaml': ['ocaml-language-server', '--stdio'],
-    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
     \ }
 "}}}
 
