@@ -3,9 +3,11 @@ set noswapfile
 set ttimeout
 set ttimeoutlen=0
 set matchtime=0
-set termguicolors
 set encoding=UTF-8
-" set t_Co=256
+if (has('termguicolors'))
+    set termguicolors
+endif
+set t_Co=256
 
 set path+=**
 
@@ -62,6 +64,7 @@ Plug 'wokalski/autocomplete-flow'
 Plug 'davidhalter/jedi-vim'
 Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go'
+"Plug 'clojure-vim/acid.nvim'
 " Plug 'jpalardy/vim-slime'
 " Plug 'l04m33/vlime', {'rtp': 'vim/'}
 " Plug 'tpope/vim-salve'
@@ -71,6 +74,7 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug 'carlitux/deoplete-ternjs'
 Plug 'tweekmonster/deoplete-clang2'
 Plug 'fishbullet/deoplete-ruby'
+Plug 'rhysd/vim-crystal'
 Plug 'w0rp/ale'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-fugitive'
@@ -108,11 +112,14 @@ filetype plugin indent on    " required
 " Set Color Scheme {{{
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-silent! colorscheme gruvbox
+silent! colorscheme NeoSolarized
+" silent! colorscheme gruvbox
 
 let g:ayucolor = "mirage"
 
+let g:hybrid_reduced_contrast=1
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
 
@@ -285,13 +292,14 @@ let g:neosnippet#snippets_directory='~/.config/nvim/plugged/neosnippet-snippets/
 
 "{{{ Fzf
 nnoremap <C-p> :Files<CR>
-nnoremap <C-b> :Buffers<CR>
+nnoremap <C-M-b> :Buffers<CR>
 nnoremap <leader>r :Tags<CR>
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='minimalist'
+" let g:airline_theme='minimalist'
+let g:airline_theme='solarized'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
@@ -321,6 +329,7 @@ let g:multi_cursor_quit_key='<Esc>'
 " Syntax Highlighting and File Types {{{
 autocmd! FileType lua setlocal tabstop=4 shiftwidth=4
 autocmd! FileType ruby setlocal tabstop=2 shiftwidth=2
+autocmd! FileType crystal setlocal tabstop=2 shiftwidth=2
 autocmd! FileType javascript setlocal tabstop=2 shiftwidth=2
 autocmd! FileType typescript setlocal tabstop=2 shiftwidth=2
 autocmd! FileType c setlocal tabstop=8 shiftwidth=8 noexpandtab
