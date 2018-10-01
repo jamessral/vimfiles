@@ -352,9 +352,11 @@ let g:LanguageClient_serverCommands = {
     \ 'ocaml': ['ocaml-language-server', '--stdio'],
     \ 'rust': ['rustup', 'run', 'stable', 'rls'],
     \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['javascript-typescript-stdio'],
     \ 'typescript': ['javascript-typescript-stdio']
     \ }
 autocmd FileType javascript setlocal omnifunc=LanguageClient#complete
+autocmd FileType javascript.jsx setlocal omnifunc=LanguageClient#complete
 autocmd FileType typescript setlocal omnifunc=LanguageClient#complete
 "}}}
 
