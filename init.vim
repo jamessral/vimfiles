@@ -28,7 +28,9 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+" Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'leshill/vim-json'
 Plug 'gabesoft/vim-ags'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -46,11 +48,11 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'carlitux/deoplete-ternjs'
-Plug 'tweekmonster/deoplete-clang2'
-Plug 'fishbullet/deoplete-ruby'
+" Plug 'carlitux/deoplete-ternjs'
+" Plug 'tweekmonster/deoplete-clang2'
+" Plug 'fishbullet/deoplete-ruby'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -62,7 +64,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'tpope/vim-commentary'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
+" Plug 'mhartington/nvim-typescript', { 'build': ':!install.sh \| UpdateRemotePlugins' }
 Plug 'tbastos/vim-lua'
 Plug 'janko-m/vim-test'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
@@ -194,37 +196,33 @@ nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
 nnoremap <cr> :w<cr>
 "}}}
 
+"{{{ NCM2
+" enable ncm2 for all buffers
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set shortmess+=c
+" IMPORTANTE: :help Ncm2PopupOpen for more information
+set completeopt=noinsert,menuone,noselect
+"}}}
+
 "{{{ Deoplete
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#file#enable_buffer_path = 1 "Use the current file for relative path
-let g:python_host_prog = '/Users/jsral/.pyenv/shims/python'
-let g:python3_host_prog = '/Users/jsral/.pyenv/shims/python3.6'
+"let g:deoplete#enable_at_startup = 1
+"let g:deoplete#file#enable_buffer_path = 1 "Use the current file for relative path
+"let g:python_host_prog = '/Users/jsral/.pyenv/shims/python'
+"let g:python3_host_prog = '/Users/jsral/.pyenv/shims/python3.6'
 
-let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+"let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+"let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
 
-" wait for at least 3 input characters
-let g:deoplete#source#attribute#min_pattern_length = 3
-" wait longer to start getting completions
-let g:deoplete#auto_complete_delay = 100
-" tern
-let g:deoplete#sources#ternjs#tern_bin = '/Users/jamessral/.nvm/versions/v8.5.0/bin'
-let g:deoplete#sources#ternjs#types = 1
-let g:deoplete#sources#ternjs#docs = 1
-let g:deoplete#sources#ternjs#filetypes = [
-                \ 'jsx',
-                \ 'js',
-                \ 'vue']
-let g:tern#command = ["tern"]
-let g:tern#arguments = ["--persistent"]
-autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
-autocmd FileType css,sass,scss setlocal omnifunc=csscomplete#CompleteCSS
-"}}}
+"" wait for at least 3 input characters
+"let g:deoplete#source#attribute#min_pattern_length = 3
+"" wait longer to start getting completions
+"autocmd FileType css,sass,scss setlocal omnifunc=csscomplete#CompleteCSS
+""}}}
 
-"{{{ Vim Polyglot
-" Disable javscript in favor of other plugins for js/jsx
-" let g:polyglot_disabled = ['javascript', 'jsx']
-"}}}
+""{{{ Vim Polyglot
+"" Disable javscript in favor of other plugins for js/jsx
+"" let g:polyglot_disabled = ['javascript', 'jsx']
+""}}}
 
 "{{{ Snippets
 " Note: It must be \"imap" and \"smap".  It uses <Plug> mappings.
@@ -353,7 +351,11 @@ let g:LanguageClient_serverCommands = {
     \ 'reason': ['ocaml-language-server', '--stdio'],
     \ 'ocaml': ['ocaml-language-server', '--stdio'],
     \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+    \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'typescript': ['javascript-typescript-stdio']
     \ }
+autocmd FileType javascript setlocal omnifunc=LanguageClient#complete
+autocmd FileType typescript setlocal omnifunc=LanguageClient#complete
 "}}}
 
 " Typescript Config {{{
