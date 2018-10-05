@@ -17,6 +17,7 @@ call plug#begin()
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'icymind/NeoSolarized'
+Plug 'https://github.com/trevordmiller/nova-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jiangmiao/auto-pairs'
@@ -30,7 +31,6 @@ Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
-" Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'leshill/vim-json'
 Plug 'gabesoft/vim-ags'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -48,11 +48,7 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'kien/rainbow_parentheses.vim'
-" Plug 'carlitux/deoplete-ternjs'
-" Plug 'tweekmonster/deoplete-clang2'
-" Plug 'fishbullet/deoplete-ruby'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -64,7 +60,6 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'tpope/vim-commentary'
 Plug 'vim-airline/vim-airline-themes'
-" Plug 'mhartington/nvim-typescript', { 'build': ':!install.sh \| UpdateRemotePlugins' }
 Plug 'tbastos/vim-lua'
 Plug 'janko-m/vim-test'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
@@ -79,7 +74,7 @@ filetype plugin indent on    " required
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-silent! colorscheme gruvbox
+silent! colorscheme nova
 
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
@@ -202,27 +197,18 @@ autocmd BufEnter * call ncm2#enable_for_buffer()
 set shortmess+=c
 " IMPORTANTE: :help Ncm2PopupOpen for more information
 set completeopt=noinsert,menuone,noselect
+" CSS
+call ncm2#register_source({'name' : 'css',
+            \ 'priority': 9,
+            \ 'subscope_enable': 1,
+            \ 'scope': ['css', 'scss', 'less'],
+            \ 'mark': 'css',
+            \ 'word_pattern': '[\w\-]+',
+            \ 'complete_pattern': ':\s*',
+            \ 'on_complete': ['ncm2#on_complete#omni',
+            \               'csscomplete#CompleteCSS'],
+            \ })
 "}}}
-
-"{{{ Deoplete
-"let g:deoplete#enable_at_startup = 1
-"let g:deoplete#file#enable_buffer_path = 1 "Use the current file for relative path
-"let g:python_host_prog = '/Users/jsral/.pyenv/shims/python'
-"let g:python3_host_prog = '/Users/jsral/.pyenv/shims/python3.6'
-
-"let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-"let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-
-"" wait for at least 3 input characters
-"let g:deoplete#source#attribute#min_pattern_length = 3
-"" wait longer to start getting completions
-"autocmd FileType css,sass,scss setlocal omnifunc=csscomplete#CompleteCSS
-""}}}
-
-""{{{ Vim Polyglot
-"" Disable javscript in favor of other plugins for js/jsx
-"" let g:polyglot_disabled = ['javascript', 'jsx']
-""}}}
 
 "{{{ Snippets
 " Note: It must be \"imap" and \"smap".  It uses <Plug> mappings.
@@ -338,12 +324,7 @@ let test#javascript#jest#file_pattern = '[**.jest.js | **.test.js]'
 "}}}
 
 "{{{ C/C++
-let g:deoplete#sources#clang#std = {
-    \'c': 'c11',
-    \'cpp': 'c++14',
-    \'objc': 'c11',
-    \'objcpp': 'c++14',
-\}
+
 "}}}
 
 "{{{ LanaguageClient
