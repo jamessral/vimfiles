@@ -30,6 +30,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'ncm2/ncm2'
+Plug 'ncm2/ncm2-jedi'
 Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
 Plug 'gabesoft/vim-ags'
@@ -41,6 +42,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
+Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
 Plug 'prettier/vim-prettier', {
    \ 'do': 'yarn install',
    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
@@ -74,7 +76,7 @@ filetype plugin indent on    " required
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-silent! colorscheme nova
+silent! colorscheme NeoSolarized
 
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
@@ -125,7 +127,7 @@ set splitbelow
 " Use the OS clipboard by default
 set clipboard=unnamed
 
-set cursorline
+set nocursorline
 " Indicators
 "set list                          " Show hidden characters (tab and eol)
 "set listchars=trail:⋅,nbsp:⋅,tab:▸\ ,eol:¬       " Use the same chars as textmate.
@@ -226,14 +228,14 @@ let g:neosnippet#snippets_directory='~/.config/nvim/plugged/neosnippet-snippets/
 
 "{{{ Fzf
 nnoremap <C-p> :Files<CR>
-nnoremap <C-M-b> :Buffers<CR>
+nnoremap <C-b> :Buffers<CR>
 nnoremap <leader>r :Tags<CR>
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
 "{{{ Airline
 " let g:airline_theme='minimalist'
-let g:airline_theme='wombat'
+let g:airline_theme='solarized'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
@@ -332,8 +334,6 @@ let g:LanguageClient_serverCommands = {
     \ 'reason': ['ocaml-language-server', '--stdio'],
     \ 'ocaml': ['ocaml-language-server', '--stdio'],
     \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-    \ 'javascript': ['javascript-typescript-stdio'],
-    \ 'javascript.jsx': ['javascript-typescript-stdio'],
     \ 'typescript': ['javascript-typescript-stdio']
     \ }
 autocmd FileType javascript setlocal omnifunc=LanguageClient#complete
