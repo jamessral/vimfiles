@@ -23,6 +23,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'jiangmiao/auto-pairs'
 " Plug 'tpope/vim-vinegar'
 Plug 'sheerun/vim-polyglot'
+Plug 'machakann/vim-highlightedyank'
 Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'christoomey/vim-tmux-navigator'
@@ -77,7 +78,7 @@ filetype plugin indent on    " required
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-silent! colorscheme NeoSolarized
+silent! colorscheme dracula
 
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
@@ -192,6 +193,9 @@ nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
 
 " Save by pressing Enter in normal mode
 nnoremap <cr> :w<cr>
+
+" See live preview of subsitute command
+set inccommand=nosplit
 "}}}
 
 "{{{ NCM2
@@ -236,7 +240,7 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 "{{{ Airline
 " let g:airline_theme='minimalist'
-let g:airline_theme='solarized'
+let g:airline_theme='dracula'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
