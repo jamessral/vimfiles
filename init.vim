@@ -35,6 +35,7 @@ Plug 'ncm2/ncm2-jedi'
 Plug 'ncm2/ncm2-bufword'
 Plug 'ncm2/ncm2-tmux'
 Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-pyclang'
 Plug 'leafo/moonscript-vim'
 Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
@@ -81,7 +82,7 @@ filetype plugin indent on    " required
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-silent! colorscheme base16-atelierdune
+silent! colorscheme pencil
 
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
@@ -243,7 +244,7 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 "{{{ Airline
 " let g:airline_theme='minimalist'
-let g:airline_theme='base16_atelierdune'
+let g:airline_theme='lucius'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
@@ -334,7 +335,7 @@ let test#javascript#jest#file_pattern = '[**.jest.js | **.test.js]'
 "}}}
 
 "{{{ C/C++
-
+let g:ncm2_pyclang#library_path = '/usr/local/Cellar/llvm@5/5.0.2/lib'
 "}}}
 
 "{{{ LanaguageClient
