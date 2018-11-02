@@ -81,7 +81,7 @@ filetype plugin indent on    " required
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-silent! colorscheme wombat
+silent! colorscheme base16-atelierdune
 
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
@@ -243,7 +243,7 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 "{{{ Airline
 " let g:airline_theme='minimalist'
-let g:airline_theme='wombat'
+let g:airline_theme='base16_atelierdune'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
