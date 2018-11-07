@@ -29,8 +29,11 @@ Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
+" Plug 'Shougo/neosnippet.vim'
+" Plug 'Shougo/neosnippet-snippets'
+Plug 'ncm2/ncm2-ultisnips'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'ncm2/ncm2'
 Plug 'ncm2/ncm2-jedi'
 Plug 'ncm2/ncm2-bufword'
@@ -222,18 +225,26 @@ call ncm2#register_source({'name' : 'css',
             \ })
 "}}}
 
-"{{{ Snippets
-" Note: It must be \"imap" and \"smap".  It uses <Plug> mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+"{{{ UltiSnips
+" c-j c-k for moving in snippet
+let g:UltiSnipsExpandTrigger		= "<c-j>"
+let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
+let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
+let g:UltiSnipsRemoveSelectModeMappings = 0
+"}}}
 
-" SuperTab like snippets behavior.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-    \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-let g:neosnippet#snippets_directory='~/.config/nvim/plugged/neosnippet-snippets/neosnippets'
+"{{{ Snippets
+" " Note: It must be \"imap" and \"smap".  It uses <Plug> mappings.
+" imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+" smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+" xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" " SuperTab like snippets behavior.
+" " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+" imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+" smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+"     \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+" let g:neosnippet#snippets_directory='~/.config/nvim/plugged/neosnippet-snippets/neosnippets'
 "}}}
 
 "{{{ Fzf
@@ -245,7 +256,7 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 "{{{ Airline
 " let g:airline_theme='minimalist'
-let g:airline_theme='solarized_flood'
+let g:airline_theme='solarized'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
