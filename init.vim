@@ -86,7 +86,7 @@ filetype plugin indent on    " required
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-silent! colorscheme NeoSolarized
+silent! colorscheme PaperColor
 
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
@@ -155,7 +155,7 @@ xnoremap jk <Esc>
 " easier navigation between split windows
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
+nnoremap <BS> <c-w>h
 nnoremap <c-l> <c-w>l
 
 " Maps Alt-[H,J,K,L] to resizing a window split
@@ -256,7 +256,7 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 "{{{ Airline
 " let g:airline_theme='minimalist'
-let g:airline_theme='solarized'
+let g:airline_theme='papercolor'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
