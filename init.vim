@@ -86,7 +86,9 @@ filetype plugin indent on    " required
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-silent! colorscheme molokai
+silent! colorscheme hybrid
+
+let g:hybrid_reduced_contrast = 1
 
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
@@ -255,7 +257,7 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='molokai'
+let g:airline_theme='hybrid'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
@@ -351,6 +353,7 @@ let g:ncm2_pyclang#library_path = '/usr/local/Cellar/llvm@5/5.0.2/lib'
 
 "{{{ LanaguageClient
 let g:LanguageClient_serverCommands = {
+    \ 'ruby': ['solargraph', 'stdio'],
     \ 'reason': ['ocaml-language-server', '--stdio'],
     \ 'ocaml': ['ocaml-language-server', '--stdio'],
     \ 'rust': ['rustup', 'run', 'stable', 'rls'],
