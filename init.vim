@@ -232,6 +232,10 @@ call ncm2#register_source({'name' : 'css',
             \ })
 "}}}
 
+"{{{ Nerd commenter
+let g:NERDCompactSexyComs = 0
+"}}}
+
 "{{{ UltiSnips
 " c-j c-k for moving in snippet
 let g:UltiSnipsExpandTrigger		= "<c-j>"
