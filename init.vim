@@ -47,6 +47,7 @@ Plug 'gabesoft/vim-ags'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'elixir-editors/vim-elixir'
+Plug 'ElmCast/elm-vim'
 Plug 'mhinz/vim-mix-format'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
@@ -88,7 +89,7 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
 silent! colorscheme hybrid
 
-let g:hybrid_reduced_contrast = 1
+let g:hybrid_reduced_contrast=1
 
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
@@ -215,6 +216,10 @@ set shortmess+=c
 " IMPORTANTE: :help Ncm2PopupOpen for more information
 set completeopt=noinsert,menuone,noselect
 " CSS
+"
+let g:python_host_prog="/home/jsral/neovim/bin/python2"
+let g:python3_host_prog="/home/jsral/neovim3/bin/python3"
+
 call ncm2#register_source({'name' : 'css',
             \ 'priority': 9,
             \ 'subscope_enable': 1,
@@ -326,6 +331,10 @@ set statusline=%{LinterStatus()}
 let g:ale_linters = {
 \  'javascript': ['eslint', 'flow'],
 \}
+"}}}
+
+"{{{
+let g:polyglot_disabled = ['elm']
 "}}}
 
 "{{{ Prettier
