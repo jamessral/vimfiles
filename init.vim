@@ -16,6 +16,7 @@ filetype off
 call plug#begin()
 
 Plug 'altercation/vim-colors-solarized'
+Plug 'ayu-theme/ayu-vim'
 Plug 'icymind/NeoSolarized'
 Plug 'https://github.com/trevordmiller/nova-vim'
 Plug 'vim-airline/vim-airline'
@@ -86,8 +87,9 @@ filetype plugin indent on    " required
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-silent! colorscheme dracula
+silent! colorscheme ayu
 
+let ayucolor="mirage"
 let g:hybrid_reduced_contrast = 1
 
 let g:gruvbox_contrast_dark="hard"
@@ -261,7 +263,7 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='dracula'
+let g:airline_theme='ayu'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
