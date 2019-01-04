@@ -53,7 +53,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
-Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
+" Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
 Plug 'prettier/vim-prettier', {
    \ 'do': 'yarn install',
    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
@@ -87,7 +87,7 @@ filetype plugin indent on    " required
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-silent! colorscheme ayu
+silent! colorscheme nova
 
 let ayucolor="mirage"
 let g:hybrid_reduced_contrast = 1
@@ -216,6 +216,8 @@ autocmd BufEnter * call ncm2#enable_for_buffer()
 set shortmess+=c
 " IMPORTANTE: :help Ncm2PopupOpen for more information
 set completeopt=noinsert,menuone,noselect
+let g:python_host_prog='/Users/jsral/.pyenv/versions/2.7.14/bin/python'
+let g:python3_host_prog='/Users/jsral/.pyenv/versions/3.7.1/bin/python'
 " CSS
 call ncm2#register_source({'name' : 'css',
             \ 'priority': 9,
@@ -263,7 +265,7 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='ayu'
+let g:airline_theme='nova'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
@@ -294,6 +296,8 @@ let g:multi_cursor_quit_key='<Esc>'
 autocmd! FileType lua setlocal tabstop=4 shiftwidth=4
 autocmd! FileType ruby setlocal tabstop=2 shiftwidth=2
 autocmd! FileType javascript setlocal tabstop=2 shiftwidth=2
+autocmd! FileType json setlocal tabstop=2 shiftwidth=2
+autocmd! FileType yaml setlocal tabstop=2 shiftwidth=2
 autocmd! FileType typescript setlocal tabstop=2 shiftwidth=2
 autocmd! FileType c setlocal tabstop=8 shiftwidth=8 noexpandtab
 autocmd! FileType c++ setlocal tabstop=8 shiftwidth=8 noexpandtab
@@ -363,8 +367,11 @@ let g:LanguageClient_serverCommands = {
     \ 'reason': ['ocaml-language-server', '--stdio'],
     \ 'ocaml': ['ocaml-language-server', '--stdio'],
     \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+    \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['javascript-typescript-stdio'],
     \ 'typescript': ['javascript-typescript-stdio']
     \ }
+autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
 autocmd FileType javascript setlocal omnifunc=LanguageClient#complete
 autocmd FileType javascript.jsx setlocal omnifunc=LanguageClient#complete
 autocmd FileType typescript setlocal omnifunc=LanguageClient#complete
