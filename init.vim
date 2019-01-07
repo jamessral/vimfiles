@@ -41,6 +41,7 @@ Plug 'ncm2/ncm2-bufword'
 Plug 'ncm2/ncm2-tmux'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-pyclang'
+Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
 Plug 'mhartington/nvim-typescript', { 'do': 'sh install.sh' }
 Plug 'leafo/moonscript-vim'
 Plug 'roxma/nvim-yarp'
@@ -368,13 +369,9 @@ let g:LanguageClient_serverCommands = {
     \ 'reason': ['ocaml-language-server', '--stdio'],
     \ 'ocaml': ['ocaml-language-server', '--stdio'],
     \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-    \ 'javascript': ['javascript-typescript-stdio'],
-    \ 'javascript.jsx': ['javascript-typescript-stdio'],
     \ 'typescript': ['javascript-typescript-stdio']
     \ }
 autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
-autocmd FileType javascript setlocal omnifunc=LanguageClient#complete
-autocmd FileType javascript.jsx setlocal omnifunc=LanguageClient#complete
 autocmd FileType typescript setlocal omnifunc=LanguageClient#complete
 "}}}
 
