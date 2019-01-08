@@ -46,7 +46,8 @@ Plug 'mhartington/nvim-typescript', { 'do': 'sh install.sh' }
 Plug 'leafo/moonscript-vim'
 Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
-Plug 'gabesoft/vim-ags'
+" Plug 'gabesoft/vim-ags'
+Plug 'dyng/ctrlsf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'elixir-editors/vim-elixir'
@@ -263,7 +264,7 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 nnoremap <C-p> :Files<CR>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <leader>r :Tags<CR>
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore-vcs --hidden'
 "}}}
 
 "{{{ Airline
