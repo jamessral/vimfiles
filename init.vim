@@ -164,6 +164,7 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <BS> <c-w>h
 nnoremap <c-l> <c-w>l
+nnoremap <leader>T :tabe<cr>
 
 " Maps Alt-[H,J,K,L] to resizing a window split
 map <silent> <M-H> <C-w><
@@ -258,6 +259,7 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 " smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 "     \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 " let g:neosnippet#snippets_directory='~/.config/nvim/plugged/neosnippet-snippets/neosnippets'
+let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/plugged/vim-snippets/UltiSnips', 'UltiSnips']
 "}}}
 
 "{{{ Fzf
