@@ -28,6 +28,8 @@ Plug 'tpope/vim-rails'
 Plug 'machakann/vim-highlightedyank'
 Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
+Plug 'davidhalter/jedi-vim'
+Plug 'ambv/black'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 " Plug 'Shougo/neosnippet.vim'
@@ -43,7 +45,8 @@ Plug 'ncm2/ncm2-tmux'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-pyclang'
 Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
-Plug 'mhartington/nvim-typescript', { 'do': 'sh install.sh' }
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'mhartington/nvim-typescript', {'do': ':!install.sh \| UpdateRemotePlugins'}
 Plug 'leafo/moonscript-vim'
 Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
@@ -91,7 +94,7 @@ filetype plugin indent on    " required
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-silent! colorscheme molokai
+silent! colorscheme hybrid
 
 let ayucolor="mirage"
 let g:hybrid_reduced_contrast = 1
@@ -221,8 +224,8 @@ autocmd BufEnter * call ncm2#enable_for_buffer()
 set shortmess+=c
 " IMPORTANTE: :help Ncm2PopupOpen for more information
 set completeopt=noinsert,menuone,noselect
-let g:python_host_prog='/Users/jsral/.pyenv/versions/2.7.14/bin/python'
-let g:python3_host_prog='/Users/jsral/.pyenv/versions/3.7.1/bin/python'
+let g:python_host_prog='/home/jsral/.pyenv/shims/python2'
+let g:python3_host_prog='/home/jsral/.pyenv/shims/python3'
 " CSS
 call ncm2#register_source({'name' : 'css',
             \ 'priority': 9,
@@ -271,7 +274,7 @@ let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore-vcs --hidden'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='distinguished'
+let g:airline_theme='hybrid'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
@@ -350,6 +353,10 @@ let g:ale_linters = {
 nnoremap <leader>F :PrettierAsync<cr>
 "}}}
 
+"{{{ Python
+autocmd BufWritePre *.py execute ':Black'
+"}}}
+
 "{{{ Test Runner
 nnoremap <silent><leader><leader>t :TestNearest<CR>
 nnoremap <silent><leader><leader>T :TestFile<CR>
@@ -373,10 +380,9 @@ let g:LanguageClient_serverCommands = {
     \ 'reason': ['ocaml-language-server', '--stdio'],
     \ 'ocaml': ['ocaml-language-server', '--stdio'],
     \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-    \ 'typescript': ['javascript-typescript-stdio']
     \ }
 autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
-autocmd FileType typescript setlocal omnifunc=LanguageClient#complete
+" autocmd FileType typescript setlocal omnifunc=LanguageClient#complete
 "}}}
 
 " Typescript Config {{{
