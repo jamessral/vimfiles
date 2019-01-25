@@ -218,6 +218,9 @@ nnoremap <cr> :w<cr>
 
 " See live preview of subsitute command
 set inccommand=nosplit
+
+" Always leave gutter open
+set signcolumn=yes
 "}}}
 
 "{{{ NCM2
@@ -396,7 +399,7 @@ autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
 
 " Typescript Config {{{
 let g:polyglot_disabled=['typescript']
-let g:nvim_typescript#diagnosticsEnable = 0
+" let g:nvim_typescript#diagnosticsEnable = 0
 " autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
 " autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
 "}}}
