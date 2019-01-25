@@ -47,7 +47,7 @@ Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-pyclang'
 Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
 " Plug 'HerringtonDarkholme/yats.vim'
-Plug 'leafgarland/typescript-vim'
+" Plug 'leafgarland/typescript-vim'
 Plug 'mhartington/nvim-typescript', {'do': ':!install.sh \| UpdateRemotePlugins'}
 Plug 'leafo/moonscript-vim'
 Plug 'roxma/nvim-yarp'
@@ -398,7 +398,7 @@ autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
 "}}}
 
 " Typescript Config {{{
-let g:polyglot_disabled=['typescript']
+" let g:polyglot_disabled=['typescript']
 " let g:nvim_typescript#diagnosticsEnable = 0
 " autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
 " autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
