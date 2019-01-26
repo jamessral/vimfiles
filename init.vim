@@ -46,8 +46,6 @@ Plug 'ncm2/ncm2-tmux'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-pyclang'
 Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
-" Plug 'HerringtonDarkholme/yats.vim'
-" Plug 'leafgarland/typescript-vim'
 Plug 'mhartington/nvim-typescript', {'do': ':!install.sh \| UpdateRemotePlugins'}
 Plug 'leafo/moonscript-vim'
 Plug 'roxma/nvim-yarp'
@@ -96,7 +94,7 @@ filetype plugin indent on    " required
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-silent! colorscheme night-owl
+silent! colorscheme molokai
 
 let ayucolor="mirage"
 let g:hybrid_reduced_contrast = 1
@@ -218,9 +216,6 @@ nnoremap <cr> :w<cr>
 
 " See live preview of subsitute command
 set inccommand=nosplit
-
-" Always leave gutter open
-set signcolumn=yes
 "}}}
 
 "{{{ NCM2
@@ -229,8 +224,8 @@ autocmd BufEnter * call ncm2#enable_for_buffer()
 set shortmess+=c
 " IMPORTANTE: :help Ncm2PopupOpen for more information
 set completeopt=noinsert,menuone,noselect
-let g:python_host_prog='/Users/jsral/.pyenv/versions/2.7.14/bin/python'
-let g:python3_host_prog='/Users/jsral/.pyenv/versions/3.7.1/bin/python'
+let g:python_host_prog='/home/jsral/.pyenv/shims/python2'
+let g:python3_host_prog='/home/jsral/.pyenv/shims/python3'
 " CSS
 call ncm2#register_source({'name' : 'css',
             \ 'priority': 9,
@@ -275,11 +270,11 @@ let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/plugged/vim-snippets/UltiSn
 nnoremap <C-p> :Files<CR>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <leader>r :Tags<CR>
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
+let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore-vcs --hidden'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='night_owl'
+let g:airline_theme='kolor'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
@@ -349,14 +344,16 @@ endfunction
 set statusline=%{LinterStatus()}
 let g:ale_linters = {
 \  'javascript': ['eslint', 'flow'],
-\  'typescript': ['tslint']
+\  'typescript': ['tsc', 'tslint']
 \}
 
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['prettier', 'eslint'],
-\   'typescript': ['prettier', 'tslint']
+\   'typescript': ['prettier', 'tslint'],
+\   'ruby': ['rubocop']
 \}
+
 "}}}
 
 "{{{ Prettier
@@ -398,8 +395,6 @@ autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
 "}}}
 
 " Typescript Config {{{
-" let g:polyglot_disabled=['typescript']
-" let g:nvim_typescript#diagnosticsEnable = 0
 " autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
 " autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
 "}}}
