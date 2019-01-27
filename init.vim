@@ -5,7 +5,7 @@ set ttimeoutlen=0
 set matchtime=0
 set encoding=UTF-8
 if (has('termguicolors'))
-    set termguicolors
+  set termguicolors
 endif
 set t_Co=256
 
@@ -62,12 +62,12 @@ Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 " Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
 Plug 'prettier/vim-prettier', {
-   \ 'do': 'yarn install',
-   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
+      \ 'do': 'yarn install',
+      \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
 Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+      \ 'branch': 'next',
+      \ 'do': 'bash install.sh',
+      \ }
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
@@ -76,9 +76,9 @@ Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-surround'
-Plug 'nathanaelkane/vim-indent-guides'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'tpope/vim-commentary'
+Plug 'thaerkh/vim-indentguides'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tbastos/vim-lua'
 Plug 'janko-m/vim-test'
@@ -122,8 +122,8 @@ set mouse=a
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 " # http://superuser.com/questions/549930/cant-resize-vim-splits-inside-tmux
 if &term =~ '^screen'
-    " tmux knows the extended mouse mode
-    set ttymouse=xterm2
+  " tmux knows the extended mouse mode
+  set ttymouse=xterm2
 endif
 
 " Map ESC
@@ -135,7 +135,7 @@ set hidden                      " http://nvie.com/posts/how-i-boosted-my-vim/
 
 "" Whitespace
 set nowrap                      " don't wrap lines
-set tabstop=4 shiftwidth=4      " a tab is four spaces (or set this to 4)
+set tabstop=2 shiftwidth=2      " a tab is four spaces (or set this to 4)
 set expandtab                   " use spaces, not tabs (optional)
 set backspace=indent,eol,start  " backspace through everything in insert mode
 
@@ -228,15 +228,15 @@ let g:python_host_prog='/home/jsral/.pyenv/shims/python2'
 let g:python3_host_prog='/home/jsral/.pyenv/shims/python3'
 " CSS
 call ncm2#register_source({'name' : 'css',
-            \ 'priority': 9,
-            \ 'subscope_enable': 1,
-            \ 'scope': ['css', 'scss', 'less'],
-            \ 'mark': 'css',
-            \ 'word_pattern': '[\w\-]+',
-            \ 'complete_pattern': ':\s*',
-            \ 'on_complete': ['ncm2#on_complete#omni',
-            \               'csscomplete#CompleteCSS'],
-            \ })
+      \ 'priority': 9,
+      \ 'subscope_enable': 1,
+      \ 'scope': ['css', 'scss', 'less'],
+      \ 'mark': 'css',
+      \ 'word_pattern': '[\w\-]+',
+      \ 'complete_pattern': ':\s*',
+      \ 'on_complete': ['ncm2#on_complete#omni',
+      \               'csscomplete#CompleteCSS'],
+      \ })
 "}}}
 
 "{{{ Nerd commenter
@@ -329,30 +329,30 @@ let g:ale_lint_delay = 300
 let g:ale_sign_column_always = 1
 let g:ale_set_quickfix = 1
 function! LinterStatus() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
+  let l:counts = ale#statusline#Count(bufnr(''))
 
-    let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_non_errors = l:counts.total - l:all_errors
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
 
-    return l:counts.total == 0 ? 'OK' : printf(
-    \   '%dW %dE',
-    \   all_non_errors,
-    \   all_errors
-    \)
+  return l:counts.total == 0 ? 'OK' : printf(
+        \   '%dW %dE',
+        \   all_non_errors,
+        \   all_errors
+        \)
 endfunction
 
 set statusline=%{LinterStatus()}
 let g:ale_linters = {
-\  'javascript': ['eslint', 'flow'],
-\  'typescript': ['tsc', 'tslint']
-\}
+      \  'javascript': ['eslint', 'flow'],
+      \  'typescript': ['tsc', 'tslint']
+      \}
 
 let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['prettier', 'eslint'],
-\   'typescript': ['prettier', 'tslint'],
-\   'ruby': ['rubocop']
-\}
+      \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+      \   'javascript': ['prettier', 'eslint'],
+      \   'typescript': ['prettier', 'tslint'],
+      \   'ruby': ['rubocop']
+      \}
 
 "}}}
 
@@ -385,11 +385,11 @@ let g:ncm2_pyclang#library_path = '/usr/local/Cellar/llvm@5/5.0.2/lib'
 
 "{{{ LanaguageClient
 let g:LanguageClient_serverCommands = {
-    \ 'ruby': ['solargraph', 'stdio'],
-    \ 'reason': ['ocaml-language-server', '--stdio'],
-    \ 'ocaml': ['ocaml-language-server', '--stdio'],
-    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-    \ }
+      \ 'ruby': ['solargraph', 'stdio'],
+      \ 'reason': ['ocaml-language-server', '--stdio'],
+      \ 'ocaml': ['ocaml-language-server', '--stdio'],
+      \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+      \ }
 autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
 " autocmd FileType typescript setlocal omnifunc=LanguageClient#complete
 "}}}
@@ -460,8 +460,8 @@ let NERDTreeMouseMode=2
 
 " Don't display these kinds of files
 let NERDTreeIgnore=[ '\.swp$','\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
-            \ '\.o$', '\.so$', '\.egg$', '^\.git$', '\.DS_Store$', '^\.bundle$',
-            \ 'node_modules', '\.keep$']
+      \ '\.o$', '\.so$', '\.egg$', '^\.git$', '\.DS_Store$', '^\.bundle$',
+      \ 'node_modules', '\.keep$']
 
 " Quit vim if nerdtree is last buffer
 " https://github.com/scrooloose/nerdtree/issues/21
