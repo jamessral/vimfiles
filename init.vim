@@ -47,6 +47,7 @@ Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-pyclang'
 Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
 Plug 'mhartington/nvim-typescript', {'do': ':!install.sh \| UpdateRemotePlugins'}
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'leafo/moonscript-vim'
 Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
@@ -224,8 +225,8 @@ autocmd BufEnter * call ncm2#enable_for_buffer()
 set shortmess+=c
 " IMPORTANTE: :help Ncm2PopupOpen for more information
 set completeopt=noinsert,menuone,noselect
-let g:python_host_prog='/home/jsral/.pyenv/shims/python2'
-let g:python3_host_prog='/home/jsral/.pyenv/shims/python3'
+let g:python_host_prog=expand('$HOME/.pyenv/versions/2.7.14/bin/python')
+let g:python3_host_prog=expand('$HOME/.pyenv/versions/3.7.1/bin/python')
 " CSS
 call ncm2#register_source({'name' : 'css',
       \ 'priority': 9,
@@ -313,7 +314,7 @@ autocmd! FileType c++ setlocal tabstop=8 shiftwidth=8 noexpandtab
 autocmd! BufNewFile,BufRead *.html.erb setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.html setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.jsx setlocal tabstop=2 shiftwidth=2
-autocmd! BufNewFile,BufRead *.tsx setlocal tabstop=2 shiftwidth=2
+autocmd! BufNewFile,BufRead *.tsx setlocal tabstop=2 shiftwidth=2 syntax=typescript.jsx filetype=typescript.tsx
 autocmd! BufNewFile,BufRead *.hx setlocal tabstop=4 shiftwidth=4 syntax=haxe
 autocmd! BufNewFile,BufRead *.css setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.scss setlocal tabstop=2 shiftwidth=2
@@ -324,6 +325,7 @@ let g:jsx_ext_required = 0
 
 "{{{ Ale Linting
 " Always keep gutter open to avoid flickering
+set signcolumn=yes
 " Add more of a delay so as to not slow down so much
 let g:ale_lint_delay = 300
 let g:ale_sign_column_always = 1
