@@ -139,6 +139,8 @@ set nowrap                      " don't wrap lines
 set tabstop=2 shiftwidth=2      " a tab is four spaces (or set this to 4)
 set expandtab                   " use spaces, not tabs (optional)
 set backspace=indent,eol,start  " backspace through everything in insert mode
+let g:indentguides_spacechar = '┆'
+let g:indentguides_tabchar = '|'
 
 " Vertical split to right
 set splitright
