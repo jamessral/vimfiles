@@ -17,6 +17,7 @@ call plug#begin()
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'ayu-theme/ayu-vim'
+Plug 'kaicataldo/material.vim'
 Plug 'haishanh/night-owl.vim'
 Plug 'icymind/NeoSolarized'
 Plug 'https://github.com/trevordmiller/nova-vim'
@@ -46,8 +47,9 @@ Plug 'ncm2/ncm2-tmux'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-pyclang'
 Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
-Plug 'mhartington/nvim-typescript', {'do': ':!install.sh \| UpdateRemotePlugins'}
 Plug 'peitalin/vim-jsx-typescript'
+" Plug 'leafgarland/typescript-vim'
+Plug 'mhartington/nvim-typescript', {'do': ':!install.sh \| UpdateRemotePlugins'}
 Plug 'leafo/moonscript-vim'
 Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
@@ -95,10 +97,12 @@ filetype plugin indent on    " required
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-silent! colorscheme molokai
+silent! colorscheme material
 
 let ayucolor="mirage"
 let g:hybrid_reduced_contrast = 1
+let g:material_theme_style = 'dark'
+let g:material_terminal_italics = 1
 
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
@@ -221,6 +225,12 @@ nnoremap <cr> :w<cr>
 set inccommand=nosplit
 "}}}
 
+"{{{ Random Number
+function! Rand()
+  let @n = substitute(system('rand'),'\^@',' ','g')
+endfunction
+"}}}
+
 "{{{ NCM2
 " enable ncm2 for all buffers
 autocmd BufEnter * call ncm2#enable_for_buffer()
@@ -273,7 +283,7 @@ let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/plugged/vim-snippets/UltiSn
 nnoremap <C-p> :Files<CR>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <leader>r :Tags<CR>
-let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore-vcs --hidden'
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 "}}}
 
 "{{{ Airline
@@ -307,15 +317,15 @@ let g:multi_cursor_quit_key='<Esc>'
 " Syntax Highlighting and File Types {{{
 autocmd! FileType lua setlocal tabstop=4 shiftwidth=4
 autocmd! FileType ruby setlocal tabstop=2 shiftwidth=2
-autocmd! FileType javascript setlocal tabstop=2 shiftwidth=2
+autocmd! FileType javascript setlocal tabstop=2 shiftwidth=2 syntax=typescript.jsx
 autocmd! FileType json setlocal tabstop=2 shiftwidth=2
 autocmd! FileType yaml setlocal tabstop=2 shiftwidth=2
-autocmd! FileType typescript setlocal tabstop=2 shiftwidth=2
+autocmd! FileType typescript setlocal tabstop=2 shiftwidth=2 shiftwidth=2 syntax=typescript.jsx
 autocmd! FileType c setlocal tabstop=8 shiftwidth=8 noexpandtab
 autocmd! FileType c++ setlocal tabstop=8 shiftwidth=8 noexpandtab
 autocmd! BufNewFile,BufRead *.html.erb setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.html setlocal tabstop=2 shiftwidth=2
-autocmd! BufNewFile,BufRead *.jsx setlocal tabstop=2 shiftwidth=2
+autocmd! BufNewFile,BufRead *.jsx setlocal tabstop=2 shiftwidth=2 syntax=typescript.jsx filetype=javacript.tsx
 autocmd! BufNewFile,BufRead *.tsx setlocal tabstop=2 shiftwidth=2 syntax=typescript.jsx filetype=typescript.tsx
 autocmd! BufNewFile,BufRead *.hx setlocal tabstop=4 shiftwidth=4 syntax=haxe
 autocmd! BufNewFile,BufRead *.css setlocal tabstop=2 shiftwidth=2
@@ -399,6 +409,7 @@ autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
 "}}}
 
 " Typescript Config {{{
+let g:polyglot_disable=['typescript', 'typescript.tsx', 'javascript', 'javacript.jsx']
 " autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
 " autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
 "}}}
