@@ -101,7 +101,7 @@ silent! colorscheme material
 
 let ayucolor="mirage"
 let g:hybrid_reduced_contrast = 1
-let g:material_theme_style = 'dark'
+" let g:material_theme_style = 'dark'
 let g:material_terminal_italics = 1
 
 let g:gruvbox_contrast_dark="hard"
@@ -216,7 +216,7 @@ noremap <leader>s <C-w>s
 
 " Edit the vimrc file
 nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
-nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
+nnoremap <silent> <leader>rv :so $MYVIMRC<CR>
 
 " Save by pressing Enter in normal mode
 nnoremap <cr> :w<cr>
@@ -287,7 +287,7 @@ let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='kolor'
+let g:airline_theme='material'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
@@ -317,7 +317,7 @@ let g:multi_cursor_quit_key='<Esc>'
 " Syntax Highlighting and File Types {{{
 autocmd! FileType lua setlocal tabstop=4 shiftwidth=4
 autocmd! FileType ruby setlocal tabstop=2 shiftwidth=2
-autocmd! FileType javascript setlocal tabstop=2 shiftwidth=2 syntax=typescript.jsx
+autocmd! FileType javascript setlocal tabstop=2 shiftwidth=2
 autocmd! FileType json setlocal tabstop=2 shiftwidth=2
 autocmd! FileType yaml setlocal tabstop=2 shiftwidth=2
 autocmd! FileType typescript setlocal tabstop=2 shiftwidth=2 shiftwidth=2 syntax=typescript.jsx
@@ -325,7 +325,7 @@ autocmd! FileType c setlocal tabstop=8 shiftwidth=8 noexpandtab
 autocmd! FileType c++ setlocal tabstop=8 shiftwidth=8 noexpandtab
 autocmd! BufNewFile,BufRead *.html.erb setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.html setlocal tabstop=2 shiftwidth=2
-autocmd! BufNewFile,BufRead *.jsx setlocal tabstop=2 shiftwidth=2 syntax=typescript.jsx filetype=javacript.tsx
+autocmd! BufNewFile,BufRead *.jsx setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.tsx setlocal tabstop=2 shiftwidth=2 syntax=typescript.jsx filetype=typescript.tsx
 autocmd! BufNewFile,BufRead *.hx setlocal tabstop=4 shiftwidth=4 syntax=haxe
 autocmd! BufNewFile,BufRead *.css setlocal tabstop=2 shiftwidth=2
@@ -342,6 +342,7 @@ set signcolumn=yes
 let g:ale_lint_delay = 300
 let g:ale_sign_column_always = 1
 let g:ale_set_quickfix = 1
+let g:ale_fix_on_save = 1
 function! LinterStatus() abort
   let l:counts = ale#statusline#Count(bufnr(''))
 
@@ -357,14 +358,14 @@ endfunction
 
 set statusline=%{LinterStatus()}
 let g:ale_linters = {
-      \  'javascript': ['eslint', 'flow'],
+      \  'javascript': ['eslint'],
       \  'typescript': ['tsc', 'tslint']
       \}
 
 let g:ale_fixers = {
       \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-      \   'javascript': ['prettier', 'eslint'],
-      \   'typescript': ['prettier', 'tslint'],
+      \   'javascript': ['eslint'],
+      \   'typescript': ['tslint'],
       \   'ruby': ['rubocop']
       \}
 
@@ -391,6 +392,7 @@ let test#strategy = "neovim"
 let g:test#preserve_screen = 1
 let test#javascript#jest#executable = 'yarn test'
 let test#javascript#jest#file_pattern = '[**.jest.js | **.test.js]'
+let test#typescript#jest#file_pattern = '[**.jest.ts | **.test.ts]'
 "}}}
 
 "{{{ C/C++
@@ -409,7 +411,7 @@ autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
 "}}}
 
 " Typescript Config {{{
-let g:polyglot_disable=['typescript', 'typescript.tsx', 'javascript', 'javacript.jsx']
+let g:polyglot_disable=['typescript', 'typescript.tsx']
 " autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
 " autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
 "}}}
