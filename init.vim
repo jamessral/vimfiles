@@ -96,8 +96,8 @@ filetype plugin indent on    " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set background=dark
-silent! colorscheme material
+set background=light
+silent! colorscheme NeoSolarized
 
 let ayucolor="mirage"
 let g:hybrid_reduced_contrast = 1
@@ -107,6 +107,7 @@ let g:material_terminal_italics = 1
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
 call togglebg#map("<F5>")
+nnoremap <leader>Ft :ToggleBG<cr>
 " }}}
 
 " Vim Settings {{{
