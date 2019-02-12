@@ -1,4 +1,5 @@
 set nocompatible
+
 set noswapfile
 set ttimeout
 set ttimeoutlen=0
@@ -81,7 +82,7 @@ Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'tpope/vim-commentary'
-Plug 'thaerkh/vim-indentguides'
+" Plug 'thaerkh/vim-indentguides'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tbastos/vim-lua'
 Plug 'janko-m/vim-test'
@@ -89,7 +90,7 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'tpope/vim-dispatch'
 Plug 'danro/rename.vim'
 call plug#end()            " required
-filetype plugin indent on    " required
+" filetype plugin indent on    " required
 " }}}
 
 " Set Color Scheme {{{
@@ -144,8 +145,8 @@ set nowrap                      " don't wrap lines
 set tabstop=2 shiftwidth=2      " a tab is four spaces (or set this to 4)
 set expandtab                   " use spaces, not tabs (optional)
 set backspace=indent,eol,start  " backspace through everything in insert mode
-let g:indentguides_spacechar = '┆'
-let g:indentguides_tabchar = '|'
+" let g:indentguides_spacechar = '┆'
+" let g:indentguides_tabchar = '|'
 
 " Vertical split to right
 set splitright
@@ -288,7 +289,7 @@ let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='material'
+let g:airline_theme='solarized'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
