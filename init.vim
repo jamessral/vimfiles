@@ -18,6 +18,8 @@ call plug#begin()
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'ayu-theme/ayu-vim'
+Plug 'rakr/vim-one'
+Plug 'chriskempson/base16-vim'
 Plug 'kaicataldo/material.vim'
 Plug 'haishanh/night-owl.vim'
 Plug 'icymind/NeoSolarized'
@@ -97,8 +99,8 @@ call plug#end()            " required
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set background=light
-silent! colorscheme NeoSolarized
+set background=dark
+silent! colorscheme base16-tomorrow-night
 
 let ayucolor="mirage"
 let g:hybrid_reduced_contrast = 1
@@ -289,7 +291,7 @@ let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='solarized'
+let g:airline_theme='base16'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
