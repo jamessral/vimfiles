@@ -100,7 +100,7 @@ call plug#end()            " required
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-silent! colorscheme base16-tomorrow-night
+silent! colorscheme one
 
 let ayucolor="mirage"
 let g:hybrid_reduced_contrast = 1
@@ -231,7 +231,9 @@ set inccommand=nosplit
 
 "{{{ Random Number
 function! Rand()
-  let @n = substitute(system('rand'),'\^@',' ','g')
+  let @n = substitute(system('rand'),'\n', '', 'g')
+  call append(line('.'), @n)
+  normal! Jx
 endfunction
 "}}}
 
@@ -291,7 +293,7 @@ let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='base16'
+let g:airline_theme='one'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
@@ -421,7 +423,7 @@ let g:polyglot_disable=['typescript', 'typescript.tsx']
 "}}}
 
 " Line splitting for brackets in insert mode [] () {}"{{{
-imap <C-l> <CR><Esc>O
+" imap <C-l> <CR><Esc>O
 "}}}
 
 "{{{ Remove trailing whitespace on save
