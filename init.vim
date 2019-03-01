@@ -100,7 +100,7 @@ call plug#end()            " required
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-silent! colorscheme one
+silent! colorscheme hybrid
 
 let ayucolor="mirage"
 let g:hybrid_reduced_contrast = 1
@@ -138,7 +138,6 @@ endif
 " Map ESC
 let mapleader = " "              " The default leader key isn't very intuitive.
 
-set number
 set showmatch                   " matching brace/parenthesis/etc.
 set hidden                      " http://nvie.com/posts/how-i-boosted-my-vim/
 
@@ -293,7 +292,7 @@ let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='one'
+let g:airline_theme='hybrid'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
@@ -431,8 +430,13 @@ autocmd BufWritePre * %s/\s\+$//e
 "}}}
 
 " Hybrid Line Numbers {{{
-set relativenumber
-set number
+" set relativenumber
+" set number
+function! ToggleLines()
+  set norelativenumber!
+  set nonumber!
+endfunction
+nnoremap <F2> :call ToggleLines()<cr>
 " }}}
 
 " Spell Checking {{{
