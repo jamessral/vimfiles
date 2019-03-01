@@ -96,11 +96,26 @@ call plug#end()            " required
 " }}}
 
 " Set Color Scheme {{{
+let t:is_transparent = 1
+function! Transparent()
+  hi Normal guibg=NONE ctermbg=NONE
+endfunction
+function! ToggleTransparent()
+  if t:is_transparent == 0
+    call Transparent()
+    let t:is_transparent = 1
+  else
+    set background=dark
+    let t:is_transparent = 0
+  endif
+endfunction
+
+nnoremap <F6> :call ToggleTransparent()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-silent! colorscheme hybrid
+colorscheme hybrid
 
 let ayucolor="mirage"
 let g:hybrid_reduced_contrast = 1
@@ -138,6 +153,7 @@ endif
 " Map ESC
 let mapleader = " "              " The default leader key isn't very intuitive.
 
+" set number
 set showmatch                   " matching brace/parenthesis/etc.
 set hidden                      " http://nvie.com/posts/how-i-boosted-my-vim/
 
@@ -517,3 +533,5 @@ let g:gitgutter_eager = 0
 " {{{ markdown
 let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
 "}}}
+
+call Transparent()
