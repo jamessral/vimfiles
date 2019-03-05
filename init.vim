@@ -26,7 +26,7 @@ Plug 'icymind/NeoSolarized'
 Plug 'https://github.com/trevordmiller/nova-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 " Plug 'tpope/vim-vinegar'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-rails'
@@ -115,7 +115,7 @@ nnoremap <F6> :call ToggleTransparent()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-colorscheme hybrid
+colorscheme gruvbox
 
 let ayucolor="mirage"
 let g:hybrid_reduced_contrast = 1
@@ -308,7 +308,7 @@ let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='hybrid'
+let g:airline_theme='raven'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
