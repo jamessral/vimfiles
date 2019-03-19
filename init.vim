@@ -1,5 +1,4 @@
 set nocompatible
-
 set noswapfile
 set ttimeout
 set ttimeoutlen=0
@@ -21,13 +20,11 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'rakr/vim-one'
 Plug 'chriskempson/base16-vim'
 Plug 'kaicataldo/material.vim'
-Plug 'haishanh/night-owl.vim'
 Plug 'icymind/NeoSolarized'
-Plug 'https://github.com/trevordmiller/nova-vim'
+Plug 'trevordmiller/nova-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Plug 'jiangmiao/auto-pairs'
-" Plug 'tpope/vim-vinegar'
+Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-classpath'
@@ -39,9 +36,8 @@ Plug 'davidhalter/jedi-vim'
 Plug 'ambv/black'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
-" Plug 'Shougo/neosnippet.vim'
-" Plug 'Shougo/neosnippet-snippets'
 Plug 'ncm2/ncm2-ultisnips'
+Plug 'ncm2/ncm2-go'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'mattn/emmet-vim'
@@ -53,12 +49,11 @@ Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-pyclang'
 Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
 Plug 'peitalin/vim-jsx-typescript'
-" Plug 'leafgarland/typescript-vim'
 Plug 'mhartington/nvim-typescript', {'do': ':!install.sh \| UpdateRemotePlugins'}
 Plug 'leafo/moonscript-vim'
 Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
-" Plug 'gabesoft/vim-ags'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'dyng/ctrlsf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -68,7 +63,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
-" Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
+Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
 Plug 'prettier/vim-prettier', {
       \ 'do': 'yarn install',
       \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
@@ -76,7 +71,6 @@ Plug 'autozimu/LanguageClient-neovim', {
       \ 'branch': 'next',
       \ 'do': 'bash install.sh',
       \ }
-Plug 'kien/rainbow_parentheses.vim'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -117,7 +111,7 @@ nnoremap <F6> :call ToggleTransparent()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-colorscheme gruvbox
+colorscheme jellybeans
 
 let ayucolor="mirage"
 let g:hybrid_reduced_contrast = 1
@@ -288,17 +282,6 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 "}}}
 
 "{{{ Snippets
-" " Note: It must be \"imap" and \"smap".  It uses <Plug> mappings.
-" imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-" smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-" xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" " SuperTab like snippets behavior.
-" " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-" imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-" smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-"     \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-" let g:neosnippet#snippets_directory='~/.config/nvim/plugged/neosnippet-snippets/neosnippets'
 let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/plugged/vim-snippets/UltiSnips', 'UltiSnips']
 "}}}
 
@@ -310,7 +293,7 @@ let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='raven'
+let g:airline_theme='jellybeans'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
@@ -328,15 +311,6 @@ let g:airline_powerline_fonts = 1
 
 "}}}
 
-"{{{ Multiple Cursors
-let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_start_key='gb'
-let g:multi_cursor_next_key='<C-f>'
-let g:multi_cursor_prev_key='<C-b>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<Esc>'
-"}}}
-
 " Syntax Highlighting and File Types {{{
 autocmd! FileType lua setlocal tabstop=4 shiftwidth=4
 autocmd! FileType ruby setlocal tabstop=2 shiftwidth=2
@@ -346,6 +320,7 @@ autocmd! FileType yaml setlocal tabstop=2 shiftwidth=2
 autocmd! FileType typescript setlocal tabstop=2 shiftwidth=2 shiftwidth=2 syntax=typescript.jsx
 autocmd! FileType c setlocal tabstop=8 shiftwidth=8 noexpandtab
 autocmd! FileType c++ setlocal tabstop=8 shiftwidth=8 noexpandtab
+autocmd! FileType go setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd! BufNewFile,BufRead *.html.erb setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.html setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.jsx setlocal tabstop=2 shiftwidth=2
@@ -464,10 +439,6 @@ autocmd Filetype markdown setlocal spell
 
 " Folding {{{
 set foldmethod=marker
-
-"Fold Tag
-"http://stevelosh.com/blog/2010/09/coming-home-to-vim/
-nnoremap <leader>ft Vatzf
 "}}}
 
 "{{{ File Browsing
@@ -483,18 +454,12 @@ let g:netrw_liststyle=3     " tree view
 nmap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
 nmap <leader>n :NERDTreeToggle<CR>
 
-" Store the bookmarks file
-"let NERDTreeBookmarksFile=expand("$HOME/.vim/tmp/NERDTreeBookmarks")
-
 " Show the bookmarks table on startup
 let NERDTreeShowBookmarks=1
 
 " Show hidden files, too
 let NERDTreeShowFiles=1
 let NERDTreeShowHidden=1
-
-" Quit on opening files from the tree
-" let NERDTreeQuitOnOpen=1
 
 " Highlight the selected entry in the tree
 let NERDTreeHighlightCursorline=1
@@ -512,10 +477,6 @@ let NERDTreeIgnore=[ '\.swp$','\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
 " https://github.com/scrooloose/nerdtree/issues/21
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 "}}}
-
-" Undotree {{{
-nnoremap <leader>u :UndotreeToggle<cr>
-" }}}
 
 " Fugitive {{{
 noremap <leader>gs :Gstatus<cr>
