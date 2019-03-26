@@ -29,6 +29,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-classpath'
 Plug 'tpope/vim-fireplace'
+Plug 'RRethy/vim-hexokinase'
 Plug 'machakann/vim-highlightedyank'
 Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
@@ -111,7 +112,7 @@ nnoremap <F6> :call ToggleTransparent()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-colorscheme jellybeans
+colorscheme dracula
 
 let ayucolor="mirage"
 let g:hybrid_reduced_contrast = 1
@@ -293,7 +294,7 @@ let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 "}}}
 
 "{{{ Airline
-let g:airline_theme='jellybeans'
+let g:airline_theme='dracula'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
@@ -367,6 +368,10 @@ let g:ale_fixers = {
       \   'ruby': ['rubocop']
       \}
 
+"}}}
+
+"{{{
+let g:Hexokinase_ftAutoload = ['css', 'scss', 'xml', 'js', 'jsx', 'ts', 'tsx', 'vue']
 "}}}
 
 "{{{ Prettier
