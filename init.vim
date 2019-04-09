@@ -4,6 +4,7 @@ set ttimeout
 set ttimeoutlen=0
 set matchtime=0
 set encoding=UTF-8
+set ttyfast
 if (has('termguicolors'))
   set termguicolors
 endif
@@ -11,7 +12,7 @@ set t_Co=256
 
 set path+=**
 
-" For Vim-Plug {{{
+" For Vim-Plug
 filetype off
 call plug#begin()
 
@@ -22,10 +23,12 @@ Plug 'chriskempson/base16-vim'
 Plug 'kaicataldo/material.vim'
 Plug 'icymind/NeoSolarized'
 Plug 'trevordmiller/nova-vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 Plug 'jiangmiao/auto-pairs'
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'sheerun/vim-polyglot'
+Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-classpath'
 Plug 'tpope/vim-fireplace'
@@ -81,8 +84,6 @@ Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'tpope/vim-commentary'
-" Plug 'thaerkh/vim-indentguides'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'tbastos/vim-lua'
 Plug 'janko-m/vim-test'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
@@ -90,10 +91,9 @@ Plug 'tpope/vim-dispatch'
 Plug 'danro/rename.vim'
 call plug#end()            " required
 " filetype plugin indent on    " required
-" }}}
 
-" Set Color Scheme {{{
-let t:is_transparent = 1
+" Set Color Scheme
+let t:is_transparent = 0
 function! Transparent()
   hi Normal guibg=NONE ctermbg=NONE
 endfunction
@@ -111,8 +111,8 @@ nnoremap <F6> :call ToggleTransparent()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set background=dark
-colorscheme dracula
+set background=light
+colorscheme NeoSolarized
 
 let ayucolor="mirage"
 let g:hybrid_reduced_contrast = 1
@@ -123,9 +123,8 @@ let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
 call togglebg#map("<F5>")
 nnoremap <leader>Ft :ToggleBG<cr>
-" }}}
 
-" Vim Settings {{{
+" Vim Settings
 set colorcolumn=80
 syntax enable
 set encoding=utf-8
@@ -211,7 +210,47 @@ set undodir=~/.vim/undo//
 
 set history=50    " keep 50 lines of command line history
 set ruler         " show the cursor position all the time
+
+function! GitInfo()
+  let git = fugitive#head()
+  if git != ''
+    return '[] '.fugitive#head()
+  else
+    return ''
+endfunction
+
+let g:current_mode = {
+    \ 'n'      : 'NORMAL ',
+    \ 'no'     : 'N·Operator Pending ',
+    \ 'v'      : 'VISAUL ',
+    \ 'V'      : 'V-Line ',
+    \ '\<C-V>' : 'V-Block ',
+    \ 's'      : 'SELECT ',
+    \ 'S'      : 'S-Line ',
+    \ '\<C-S>' : 'S-BLOCK ',
+    \ 'i'      : 'INSERT ',
+    \ 'R'      : 'REPLACE ',
+    \ 'Rv'     : 'V-REPLACE ',
+    \ 'c'      : 'COMMAND ',
+    \ 'cv'     : 'VIM EX ',
+    \ 'ce'     : 'EX ',
+    \ 'r'      : 'PROMPT ',
+    \ 'rm'     : 'MORE ',
+    \ 'r?'     : 'CONFIRM ',
+    \ '!'      : 'SHELL ',
+    \ 't'      : 'TERMINAL '
+\}
+
 set laststatus=2
+set statusline=
+set statusline+=\ " Some space
+set statusline+=%{g:current_mode[mode()]}        " Path to the file
+set statusline+=\ " Some space
+set statusline+=%f         " Path to the file
+set statusline+=\ " Some space
+set statusline+=%{GitInfo()}
+set statusline+=\ -\      " Separator
+set statusline+=%y        " Filetype of the file
 
 set title " terminal title
 set autoread " load change files
@@ -239,17 +278,15 @@ nnoremap <cr> :w<cr>
 
 " See live preview of subsitute command
 set inccommand=nosplit
-"}}}
 
-"{{{ Random Number
+" Random Number
 function! Rand()
   let @n = substitute(system('rand'),'\n', '', 'g')
   call append(line('.'), @n)
   normal! Jx
 endfunction
-"}}}
 
-"{{{ NCM2
+" NCM2
 " enable ncm2 for all buffers
 autocmd BufEnter * call ncm2#enable_for_buffer()
 set shortmess+=c
@@ -268,51 +305,45 @@ call ncm2#register_source({'name' : 'css',
       \ 'on_complete': ['ncm2#on_complete#omni',
       \               'csscomplete#CompleteCSS'],
       \ })
-"}}}
 
-"{{{ Nerd commenter
+" Nerd commenter
 let g:NERDCompactSexyComs = 0
-"}}}
 
-"{{{ UltiSnips
+" UltiSnips
 " c-j c-k for moving in snippet
 let g:UltiSnipsExpandTrigger		= "<c-j>"
 let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
 let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
 let g:UltiSnipsRemoveSelectModeMappings = 0
-"}}}
 
-"{{{ Snippets
+" Snippets
 let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/plugged/vim-snippets/UltiSnips', 'UltiSnips']
-"}}}
 
-"{{{ Fzf
+" Fzf
 nnoremap <C-p> :Files<CR>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <leader>r :Tags<CR>
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
-"}}}
 
-"{{{ Airline
-let g:airline_theme='dracula'
-let g:airline_left_sep=''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep=''
-let g:airline_right_alt_sep = ''
-" keep branch name lenghts under control
-let g:airline#extensions#branch#displayed_head_limit = 10
-" let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ''
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline_powerline_fonts = 1
-"}}}
+" Airline
+"let g:airline_theme='solarized'
+"let g:airline_left_sep=''
+"let g:airline_left_alt_sep = ''
+"let g:airline_right_sep=''
+"let g:airline_right_alt_sep = ''
+"" keep branch name lenghts under control
+"let g:airline#extensions#branch#displayed_head_limit = 10
+"" let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#left_sep = ''
+"let g:airline#extensions#tabline#left_alt_sep = '|'
+"let g:airline#extensions#tabline#buffer_nr_show = 1
+"let g:airline_powerline_fonts = 1
+""
 
-"{{{ Easymotion
+" Easymotion
 
-"}}}
 
-" Syntax Highlighting and File Types {{{
+" Syntax Highlighting and File Types
 autocmd! FileType lua setlocal tabstop=4 shiftwidth=4
 autocmd! FileType ruby setlocal tabstop=2 shiftwidth=2
 autocmd! FileType javascript setlocal tabstop=2 shiftwidth=2
@@ -332,9 +363,8 @@ autocmd! BufNewFile,BufRead *.scss setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.ex setlocal tabstop=2 shiftwidth=2
 " Use JSX for .js
 let g:jsx_ext_required = 0
-"}}}
 
-"{{{ Ale Linting
+" Ale Linting
 " Always keep gutter open to avoid flickering
 set signcolumn=yes
 " Add more of a delay so as to not slow down so much
@@ -355,7 +385,9 @@ function! LinterStatus() abort
         \)
 endfunction
 
-set statusline=%{LinterStatus()}
+set statusline+=%=%{LinterStatus()}
+set statusline+=\ " Some space
+set statusline+=\ " Some space
 let g:ale_linters = {
       \  'javascript': ['eslint'],
       \  'typescript': ['tsc', 'tslint']
@@ -368,23 +400,19 @@ let g:ale_fixers = {
       \   'ruby': ['rubocop']
       \}
 
-"}}}
 
-"{{{
+" HExokinase
 let g:Hexokinase_ftAutoload = ['css', 'scss', 'xml', 'js', 'jsx', 'ts', 'tsx', 'vue']
-"}}}
 
-"{{{ Prettier
+" Prettier
 " let g:prettier#autoformat = 0
 " autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.vue PrettierAsync
 nnoremap <leader>F :PrettierAsync<cr>
-"}}}
 
-"{{{ Python
+" Python
 autocmd BufWritePre *.py execute ':Black'
-"}}}
 
-"{{{ Test Runner
+" Test Runner
 nnoremap <silent><leader><leader>t :TestNearest<CR>
 nnoremap <silent><leader><leader>T :TestFile<CR>
 nnoremap <silent><leader><leader>A :TestSuite<CR>
@@ -396,13 +424,11 @@ let g:test#preserve_screen = 1
 let test#javascript#jest#executable = 'yarn test'
 let test#javascript#jest#file_pattern = '[**.jest.js | **.test.js]'
 let test#typescript#jest#file_pattern = '[**.jest.ts | **.test.ts]'
-"}}}
 
-"{{{ C/C++
+" C/C++
 let g:ncm2_pyclang#library_path = '/usr/local/Cellar/llvm@5/5.0.2/lib'
-"}}}
 
-"{{{ LanaguageClient
+" LanaguageClient
 let g:LanguageClient_serverCommands = {
       \ 'ruby': ['solargraph', 'stdio'],
       \ 'reason': ['ocaml-language-server', '--stdio'],
@@ -411,49 +437,41 @@ let g:LanguageClient_serverCommands = {
       \ }
 autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
 " autocmd FileType typescript setlocal omnifunc=LanguageClient#complete
-"}}}
 
-" Typescript Config {{{
-let g:polyglot_disable=['typescript', 'typescript.tsx']
+" Typescript Config
+let g:polyglot_disable=['typescript', 'typescript.tsx', 'javscript', 'javascript.jsx']
 " autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
 " autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
-"}}}
 
-" Line splitting for brackets in insert mode [] () {}"{{{
+" Line splitting for brackets in insert mode [] () {}"
 " imap <C-l> <CR><Esc>O
-"}}}
 
-"{{{ Remove trailing whitespace on save
+" Remove trailing whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
-"}}}
 
-" Hybrid Line Numbers {{{
-" set relativenumber
-" set number
+" Hybrid Line Numbers
+set relativenumber
+set number
 function! ToggleLines()
   set norelativenumber!
   set nonumber!
 endfunction
 nnoremap <F2> :call ToggleLines()<cr>
-" }}}
 
-" Spell Checking {{{
+" Spell Checking
 autocmd Filetype gitcommit setlocal spell
 autocmd Filetype markdown setlocal spell
-"}}}
 
-" Folding {{{
+" Folding
 set foldmethod=marker
-"}}}
 
-"{{{ File Browsing
+" File Browsing
 let g:netrw_banner=0        " no more annoying banner!
 let g:netrw_browse_split=4  " open in previous window
 let g:netrw_altv=1          " open splits to the right
 let g:netrw_liststyle=3     " tree view
-"}}}
 
-" NERD Tree {{{
+" NERD Tree
 " Put focus to the NERD Tree with F3 (tricked by quickly closing it and
 " immediately showing it again, since there is no :NERDTreeFocus command)
 nmap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
@@ -481,25 +499,19 @@ let NERDTreeIgnore=[ '\.swp$','\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
 " Quit vim if nerdtree is last buffer
 " https://github.com/scrooloose/nerdtree/issues/21
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-"}}}
 
-" Fugitive {{{
+" Fugitive
 noremap <leader>gs :Gstatus<cr>
 noremap <leader>gc :Gcommit<cr>
 noremap <leader>ga :Gwrite<cr>
 noremap <leader>gd :Gdiff<cr>
-"}}}
 
-" Git Gutter {{{
+" Git Gutter
 " Make git gutter background clear
 highlight clear SignColumn
 autocmd ColorScheme * highlight clear SignColumn
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
-"}}}
 
-" {{{ markdown
+"  markdown
 let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
-"}}}
-
-call Transparent()
