@@ -214,7 +214,7 @@ set ruler         " show the cursor position all the time
 function! GitInfo()
   let git = fugitive#head()
   if git != ''
-    return '[] '.fugitive#head()
+    return ''.fugitive#head()
   else
     return ''
 endfunction
