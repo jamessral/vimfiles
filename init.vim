@@ -349,7 +349,8 @@ autocmd! BufNewFile,BufRead *.html.erb setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.html setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.jsx setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.tsx setlocal tabstop=2 shiftwidth=2 syntax=typescript.jsx filetype=typescript.tsx
-autocmd! BufNewFile,BufRead *.vue setlocal tabstop=2 shiftwidth=2 syntax=vue
+autocmd! BufNewFile,BufRead *.vue setf vue
+autocmd! BufNewFile,BufRead *.vue setlocal tabstop=2 shiftwidth=2 syntax=vue.html.javascript.css
 autocmd! BufNewFile,BufRead *.hx setlocal tabstop=4 shiftwidth=4 syntax=haxe
 autocmd! BufNewFile,BufRead *.css setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.scss setlocal tabstop=2 shiftwidth=2
