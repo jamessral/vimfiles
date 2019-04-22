@@ -23,8 +23,8 @@ Plug 'chriskempson/base16-vim'
 Plug 'kaicataldo/material.vim'
 Plug 'icymind/NeoSolarized'
 Plug 'trevordmiller/nova-vim'
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'jiangmiao/auto-pairs'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'sheerun/vim-polyglot'
@@ -82,7 +82,7 @@ Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-surround'
-Plug 'vim-scripts/bufexplorer.zip'
+" Plug 'vim-scripts/bufexplorer.zip'
 Plug 'tpope/vim-commentary'
 Plug 'tbastos/vim-lua'
 Plug 'janko-m/vim-test'
@@ -241,17 +241,6 @@ let g:current_mode = {
     \ 't'      : 'TERMINAL '
 \}
 
-set laststatus=2
-set statusline=
-set statusline+=\ " Some space
-set statusline+=%{g:current_mode[mode()]}        " Path to the file
-set statusline+=\ " Some space
-set statusline+=%f         " Path to the file
-set statusline+=\ " Some space
-set statusline+=%{GitInfo()}
-set statusline+=\ -\      " Separator
-set statusline+=%y        " Filetype of the file
-
 set title " terminal title
 set autoread " load change files
 
@@ -326,18 +315,18 @@ nnoremap <leader>r :Tags<CR>
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 
 " Airline
-"let g:airline_theme='solarized'
-"let g:airline_left_sep=''
-"let g:airline_left_alt_sep = ''
-"let g:airline_right_sep=''
-"let g:airline_right_alt_sep = ''
-"" keep branch name lenghts under control
-"let g:airline#extensions#branch#displayed_head_limit = 10
-"" let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#left_sep = ''
-"let g:airline#extensions#tabline#left_alt_sep = '|'
-"let g:airline#extensions#tabline#buffer_nr_show = 1
-"let g:airline_powerline_fonts = 1
+let g:airline_theme='solarized'
+let g:airline_left_sep=''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep=''
+let g:airline_right_alt_sep = ''
+" keep branch name lenghts under control
+let g:airline#extensions#branch#displayed_head_limit = 10
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline_powerline_fonts = 1
 ""
 
 " Easymotion
@@ -347,16 +336,20 @@ let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 autocmd! FileType lua setlocal tabstop=4 shiftwidth=4
 autocmd! FileType ruby setlocal tabstop=2 shiftwidth=2
 autocmd! FileType javascript setlocal tabstop=2 shiftwidth=2
+autocmd! FileType javascript.jsx setlocal tabstop=2 shiftwidth=2
 autocmd! FileType json setlocal tabstop=2 shiftwidth=2
 autocmd! FileType yaml setlocal tabstop=2 shiftwidth=2
 autocmd! FileType typescript setlocal tabstop=2 shiftwidth=2 shiftwidth=2 syntax=typescript.jsx
+autocmd! FileType typescript.tsx setlocal tabstop=2 shiftwidth=2 shiftwidth=2 syntax=typescript.jsx
 autocmd! FileType c setlocal tabstop=8 shiftwidth=8 noexpandtab
 autocmd! FileType c++ setlocal tabstop=8 shiftwidth=8 noexpandtab
 autocmd! FileType go setlocal tabstop=4 shiftwidth=4 noexpandtab
+autocmd! BufRead,BufNewFile,BufEnter vue syntax sync fromstart
 autocmd! BufNewFile,BufRead *.html.erb setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.html setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.jsx setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.tsx setlocal tabstop=2 shiftwidth=2 syntax=typescript.jsx filetype=typescript.tsx
+autocmd! BufNewFile,BufRead *.vue setlocal tabstop=2 shiftwidth=2 syntax=vue
 autocmd! BufNewFile,BufRead *.hx setlocal tabstop=4 shiftwidth=4 syntax=haxe
 autocmd! BufNewFile,BufRead *.css setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.scss setlocal tabstop=2 shiftwidth=2
@@ -385,9 +378,6 @@ function! LinterStatus() abort
         \)
 endfunction
 
-set statusline+=%=%{LinterStatus()}
-set statusline+=\ " Some space
-set statusline+=\ " Some space
 let g:ale_linters = {
       \  'javascript': ['eslint'],
       \  'typescript': ['tsc', 'tslint']
@@ -400,6 +390,20 @@ let g:ale_fixers = {
       \   'ruby': ['rubocop']
       \}
 
+set laststatus=2
+set statusline=
+set statusline+=\ " Some space
+set statusline+=%{g:current_mode[mode()]}        " Path to the file
+set statusline+=\ " Some space
+set statusline+=%f         " Path to the file
+set statusline+=\ " Some space
+set statusline+=%{GitInfo()}
+set statusline+=\ " Separator
+set statusline+=%=%y        " Filetype of the file
+set statusline+=\ " Separator
+set statusline+=%{LinterStatus()}
+set statusline+=\ " Some space
+set statusline+=\ " Some space
 
 " HExokinase
 let g:Hexokinase_ftAutoload = ['css', 'scss', 'xml', 'js', 'jsx', 'ts', 'tsx', 'vue']
