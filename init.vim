@@ -112,8 +112,8 @@ nnoremap <F6> :call ToggleTransparent()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set background=light
-colorscheme NeoSolarized
+set background=dark
+colorscheme base16-tomorrow-night
 
 let ayucolor="mirage"
 let g:hybrid_reduced_contrast = 1
@@ -187,10 +187,10 @@ set smartcase                   " ... unless they contain at least one capital l
 inoremap jk <Esc>
 xnoremap jk <Esc>
 " easier navigation between split windows
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
+nnoremap <C-j> <c-w>j
+nnoremap <C-k> <c-w>k
 nnoremap <BS> <c-w>h
-nnoremap <c-l> <c-w>l
+nnoremap <C-l> <c-w>l
 nnoremap <leader>T :tabe<cr>
 
 " Maps Alt-[H,J,K,L] to resizing a window split
@@ -316,7 +316,7 @@ nnoremap <leader>r :Tags<CR>
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 
 " Airline
-let g:airline_theme='solarized'
+let g:airline_theme='base16'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
