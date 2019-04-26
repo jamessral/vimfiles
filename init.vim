@@ -343,12 +343,14 @@ autocmd! FileType yaml setlocal tabstop=2 shiftwidth=2
 autocmd! FileType typescript setlocal tabstop=2 shiftwidth=2 shiftwidth=2 syntax=typescript.jsx
 autocmd! FileType typescript.tsx setlocal tabstop=2 shiftwidth=2 shiftwidth=2 syntax=typescript.jsx
 autocmd! FileType c setlocal tabstop=8 shiftwidth=8 noexpandtab
-autocmd! FileType c++ setlocal tabstop=8 shiftwidth=8 noexpandtab
+autocmd! FileType cpp setlocal tabstop=8 shiftwidth=8 noexpandtab
 autocmd! FileType go setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd! BufRead,BufNewFile,BufEnter vue syntax sync fromstart
 autocmd! BufNewFile,BufRead *.html.erb setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.html setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.jsx setlocal tabstop=2 shiftwidth=2
+autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=8 shiftwidth=8
+autocmd! BufNewFile,BufRead *.c setlocal tabstop=8 shiftwidth=8
 autocmd! BufNewFile,BufRead *.tsx setlocal tabstop=2 shiftwidth=2 syntax=typescript.jsx filetype=typescript.tsx
 autocmd! BufNewFile,BufRead *.vue setf vue
 autocmd! BufNewFile,BufRead *.vue setlocal tabstop=2 shiftwidth=2 syntax=vue.html.javascript.css
@@ -382,13 +384,13 @@ endfunction
 
 let g:ale_linters = {
       \  'javascript': ['eslint'],
-      \  'typescript': ['tsc', 'tslint']
+      \  'typescript': ['tsc', 'eslint', 'tslint']
       \}
 
 let g:ale_fixers = {
       \   '*': ['remove_trailing_lines', 'trim_whitespace'],
       \   'javascript': ['eslint'],
-      \   'typescript': ['tslint'],
+      \   'typescript': ['eslint', 'tslint'],
       \   'ruby': ['rubocop']
       \}
 
@@ -432,7 +434,7 @@ let test#javascript#jest#file_pattern = '[**.jest.js | **.test.js]'
 let test#typescript#jest#file_pattern = '[**.jest.ts | **.test.ts]'
 
 " C/C++
-let g:ncm2_pyclang#library_path = '/usr/local/Cellar/llvm@5/5.0.2/lib'
+let g:ncm2_pyclang#library_path = '/usr/local/Cellar/llvm/8.0.0/lib'
 
 " LanaguageClient
 let g:LanguageClient_serverCommands = {
@@ -456,8 +458,8 @@ let g:polyglot_disable=['typescript', 'typescript.tsx', 'javscript', 'javascript
 autocmd BufWritePre * %s/\s\+$//e
 
 " Hybrid Line Numbers
-set relativenumber
-set number
+" set relativenumber
+" set number
 function! ToggleLines()
   set norelativenumber!
   set nonumber!
@@ -521,3 +523,5 @@ let g:gitgutter_eager = 0
 
 "  markdown
 let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
+
+:call ToggleTransparent()
