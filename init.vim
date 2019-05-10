@@ -17,12 +17,12 @@ filetype off
 call plug#begin()
 
 Plug 'altercation/vim-colors-solarized'
-Plug 'ayu-theme/ayu-vim'
-Plug 'rakr/vim-one'
+" Plug 'ayu-theme/ayu-vim'
+" Plug 'rakr/vim-one'
 Plug 'chriskempson/base16-vim'
-Plug 'kaicataldo/material.vim'
-Plug 'icymind/NeoSolarized'
-Plug 'trevordmiller/nova-vim'
+" Plug 'kaicataldo/material.vim'
+" Plug 'icymind/NeoSolarized'
+" Plug 'trevordmiller/nova-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jiangmiao/auto-pairs'
@@ -30,14 +30,14 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'tpope/vim-rails'
-Plug 'tpope/vim-classpath'
-Plug 'tpope/vim-fireplace'
-Plug 'RRethy/vim-hexokinase'
+" Plug 'tpope/vim-classpath'
+" Plug 'tpope/vim-fireplace'
+" Plug 'RRethy/vim-hexokinase'
 Plug 'machakann/vim-highlightedyank'
 Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'davidhalter/jedi-vim'
-Plug 'ambv/black'
+" Plug 'ambv/black'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ncm2/ncm2-ultisnips'
@@ -54,7 +54,7 @@ Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-pyclang'
 Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
 Plug 'peitalin/vim-jsx-typescript'
-Plug 'mhartington/nvim-typescript', {'do': ':!install.sh \| UpdateRemotePlugins'}
+Plug 'mhartington/nvim-typescript', {'do': ':!install.sh --production \| UpdateRemotePlugins'}
 Plug 'leafo/moonscript-vim'
 Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
@@ -283,7 +283,7 @@ set shortmess+=c
 " IMPORTANTE: :help Ncm2PopupOpen for more information
 set completeopt=noinsert,menuone,noselect
 let g:python_host_prog=expand('$HOME/.pyenv/versions/2.7.14/bin/python')
-let g:python3_host_prog=expand('$HOME/.pyenv/versions/3.7.1/bin/python')
+let g:python3_host_prog=expand('$HOME/.pyenv/versions/3.7.3/bin/python')
 " CSS
 call ncm2#register_source({'name' : 'css',
       \ 'priority': 9,
@@ -365,7 +365,7 @@ let g:jsx_ext_required = 0
 " Always keep gutter open to avoid flickering
 set signcolumn=yes
 " Add more of a delay so as to not slow down so much
-let g:ale_lint_delay = 300
+let g:ale_lint_delay = 500
 let g:ale_sign_column_always = 1
 let g:ale_set_quickfix = 1
 let g:ale_fix_on_save = 1
