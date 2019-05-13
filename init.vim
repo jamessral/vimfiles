@@ -52,7 +52,7 @@ Plug 'ncm2/ncm2-bufword'
 Plug 'ncm2/ncm2-tmux'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-pyclang'
-Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
+" Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'mhartington/nvim-typescript', {'do': ':!install.sh --production \| UpdateRemotePlugins'}
 Plug 'leafo/moonscript-vim'
@@ -68,7 +68,6 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
-Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
 Plug 'prettier/vim-prettier', {
       \ 'do': 'yarn install',
       \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
@@ -109,21 +108,35 @@ function! ToggleTransparent()
 endfunction
 
 nnoremap <F6> :call ToggleTransparent()<cr>
+
+let t:current_theme = 'dark'
+function! SwitchTheme()
+  if t:current_theme == 'dark'
+    set background=light
+    let t:current_theme = 'light'
+    :colorscheme flattened_light
+  else
+    set background=dark
+    let t:current_theme = 'dark'
+    :colorscheme base16-tomorrow-night
+    :call Transparent()
+    let t:is_transparent=1
+  end
+endfunction
+
+nnoremap <F5> :call SwitchTheme()<cr>
+
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
 colorscheme base16-tomorrow-night
-
 let ayucolor="mirage"
 let g:hybrid_reduced_contrast = 1
-" let g:material_theme_style = 'dark'
 let g:material_terminal_italics = 1
 
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
-call togglebg#map("<F5>")
-nnoremap <leader>Ft :ToggleBG<cr>
 
 " Vim Settings
 set colorcolumn=80
@@ -169,7 +182,7 @@ set splitright
 set splitbelow
 
 " Use the OS clipboard by default
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 set nocursorline
 " Indicators
@@ -434,7 +447,7 @@ let test#javascript#jest#file_pattern = '[**.jest.js | **.test.js]'
 let test#typescript#jest#file_pattern = '[**.jest.ts | **.test.ts]'
 
 " C/C++
-let g:ncm2_pyclang#library_path = '/usr/local/Cellar/llvm/8.0.0/lib'
+let g:ncm2_pyclang#library_path = '/usr/lib/llvm-6.0/lib'
 
 " LanaguageClient
 let g:LanguageClient_serverCommands = {
