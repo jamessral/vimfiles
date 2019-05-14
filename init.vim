@@ -21,7 +21,7 @@ Plug 'altercation/vim-colors-solarized'
 " Plug 'rakr/vim-one'
 Plug 'chriskempson/base16-vim'
 " Plug 'kaicataldo/material.vim'
-" Plug 'icymind/NeoSolarized'
+Plug 'icymind/NeoSolarized'
 " Plug 'trevordmiller/nova-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -93,7 +93,7 @@ call plug#end()            " required
 " filetype plugin indent on    " required
 
 " Set Color Scheme
-let t:is_transparent = 0
+let t:is_transparent = 1
 function! Transparent()
   hi Normal guibg=NONE ctermbg=NONE
 endfunction
@@ -109,20 +109,20 @@ endfunction
 
 nnoremap <F6> :call ToggleTransparent()<cr>
 
-let t:current_theme = 'dark'
-function! SwitchTheme()
-  if t:current_theme == 'dark'
-    set background=light
-    let t:current_theme = 'light'
-    :colorscheme flattened_light
-  else
-    set background=dark
-    let t:current_theme = 'dark'
-    :colorscheme base16-tomorrow-night
-    :call Transparent()
-    let t:is_transparent=1
-  end
-endfunction
+" let t:current_theme = 'dark'
+" function! SwitchTheme()
+"   if t:current_theme == 'dark'
+"     set background=light
+"     let t:current_theme = 'light'
+"     :colorscheme flattened_light
+"   else
+"     set background=dark
+"     let t:current_theme = 'dark'
+"     :colorscheme base16-tomorrow-night
+"     :call Transparent()
+"     let t:is_transparent=1
+"   end
+" endfunction
 
 nnoremap <F5> :call SwitchTheme()<cr>
 
@@ -130,7 +130,7 @@ nnoremap <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-colorscheme base16-tomorrow-night
+colorscheme NeoSolarized
 let ayucolor="mirage"
 let g:hybrid_reduced_contrast = 1
 let g:material_terminal_italics = 1
