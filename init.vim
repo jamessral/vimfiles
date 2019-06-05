@@ -19,6 +19,7 @@ call plug#begin()
 Plug 'altercation/vim-colors-solarized'
 " Plug 'ayu-theme/ayu-vim'
 " Plug 'rakr/vim-one'
+Plug 'rainglow/vim'
 Plug 'chriskempson/base16-vim'
 " Plug 'kaicataldo/material.vim'
 Plug 'icymind/NeoSolarized'
@@ -27,6 +28,8 @@ Plug 'trevordmiller/nova-vim'
 " Plug 'itchyny/lightline.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+" Plug 'itchyny/lightline.vim'
+Plug 'terryma/vim-multiple-cursors'
 Plug 'jiangmiao/auto-pairs'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'sheerun/vim-polyglot'
@@ -95,14 +98,14 @@ call plug#end()            " required
 " filetype plugin indent on    " required
 
 " Set Color Scheme
-let t:is_transparent = 1
+let t:is_transparent = 0
 function! Transparent()
   hi Normal guibg=NONE ctermbg=NONE
 endfunction
 function! ToggleTransparent()
   if t:is_transparent == 0
     call Transparent()
-    let t:is_transparent = 1
+    let t:is_transparent = 0
   else
     set background=dark
     let t:is_transparent = 0
@@ -116,13 +119,13 @@ function! SwitchTheme()
   if t:current_theme == 'dark'
     set background=light
     let t:current_theme = 'light'
-    :colorscheme NeoSolarized
-    :AirlineTheme solarized
+    :colorscheme base16-solarized-light
+    :AirlineTheme tomorrow
   else
     set background=dark
     let t:current_theme = 'dark'
     :colorscheme darcula
-    :AirlineTheme zenburn
+    :AirlineTheme tomorrow
     " :call Transparent()
     " let t:is_transparent=1
   end
@@ -333,7 +336,7 @@ nnoremap <leader>r :Tags<CR>
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 
 " Airline
-let g:airline_theme='zenburn'
+let g:airline_theme='tomorrow'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
@@ -347,10 +350,17 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_powerline_fonts = 1
 ""
 
+<<<<<<< HEAD
 " Lightline
 " let g:lightline = {
 "       \ 'colorscheme': 'PaperColor light',
       " \ }
+=======
+"" Lightline
+" let g:lightline = {
+"   \'colorscheme': 'one'
+"   \}
+>>>>>>> df30012... Molokai all the things
 
 " Easymotion
 
@@ -546,4 +556,4 @@ let g:gitgutter_eager = 0
 "  markdown
 let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
 
-:call ToggleTransparent()
+" :call ToggleTransparent()
