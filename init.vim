@@ -22,7 +22,9 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/base16-vim'
 " Plug 'kaicataldo/material.vim'
 Plug 'icymind/NeoSolarized'
-" Plug 'trevordmiller/nova-vim'
+Plug 'blueshirts/darcula'
+Plug 'trevordmiller/nova-vim'
+" Plug 'itchyny/lightline.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jiangmiao/auto-pairs'
@@ -109,20 +111,22 @@ endfunction
 
 nnoremap <F6> :call ToggleTransparent()<cr>
 
-" let t:current_theme = 'dark'
-" function! SwitchTheme()
-"   if t:current_theme == 'dark'
-"     set background=light
-"     let t:current_theme = 'light'
-"     :colorscheme flattened_light
-"   else
-"     set background=dark
-"     let t:current_theme = 'dark'
-"     :colorscheme base16-tomorrow-night
-"     :call Transparent()
-"     let t:is_transparent=1
-"   end
-" endfunction
+let t:current_theme = 'dark'
+function! SwitchTheme()
+  if t:current_theme == 'dark'
+    set background=light
+    let t:current_theme = 'light'
+    :colorscheme NeoSolarized
+    :AirlineTheme solarized
+  else
+    set background=dark
+    let t:current_theme = 'dark'
+    :colorscheme darcula
+    :AirlineTheme zenburn
+    " :call Transparent()
+    " let t:is_transparent=1
+  end
+endfunction
 
 nnoremap <F5> :call SwitchTheme()<cr>
 
@@ -130,7 +134,7 @@ nnoremap <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-colorscheme gruvbox
+colorscheme darcula
 let ayucolor="mirage"
 let g:hybrid_reduced_contrast = 1
 let g:material_terminal_italics = 1
@@ -329,7 +333,7 @@ nnoremap <leader>r :Tags<CR>
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 
 " Airline
-let g:airline_theme='base16'
+let g:airline_theme='zenburn'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
@@ -342,6 +346,11 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_powerline_fonts = 1
 ""
+
+" Lightline
+" let g:lightline = {
+"       \ 'colorscheme': 'PaperColor light',
+      " \ }
 
 " Easymotion
 
@@ -471,8 +480,8 @@ let g:polyglot_disable=['typescript', 'typescript.tsx', 'javscript', 'javascript
 autocmd BufWritePre * %s/\s\+$//e
 
 " Hybrid Line Numbers
-" set relativenumber
-" set number
+set relativenumber
+set number
 function! ToggleLines()
   set norelativenumber!
   set nonumber!
