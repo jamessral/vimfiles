@@ -26,6 +26,10 @@ Plug 'icymind/NeoSolarized'
 Plug 'blueshirts/darcula'
 Plug 'trevordmiller/nova-vim'
 " Plug 'itchyny/lightline.vim'
+=======
+" Plug 'trevordmiller/nova-vim'
+Plug 'blueshirts/darcula'
+>>>>>>> 2c7bccb... So much darcula
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " Plug 'itchyny/lightline.vim'
@@ -119,13 +123,13 @@ function! SwitchTheme()
   if t:current_theme == 'dark'
     set background=light
     let t:current_theme = 'light'
-    :colorscheme base16-solarized-light
+    :colorscheme base16-tomorrow
     :AirlineTheme tomorrow
   else
     set background=dark
     let t:current_theme = 'dark'
     :colorscheme darcula
-    :AirlineTheme tomorrow
+    :AirlineTheme molokai
     " :call Transparent()
     " let t:is_transparent=1
   end
@@ -349,18 +353,10 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_powerline_fonts = 1
 ""
-
-<<<<<<< HEAD
-" Lightline
-" let g:lightline = {
-"       \ 'colorscheme': 'PaperColor light',
-      " \ }
-=======
 "" Lightline
 " let g:lightline = {
 "   \'colorscheme': 'one'
 "   \}
->>>>>>> df30012... Molokai all the things
 
 " Easymotion
 
