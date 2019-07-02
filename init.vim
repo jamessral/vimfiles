@@ -18,18 +18,13 @@ call plug#begin()
 
 Plug 'altercation/vim-colors-solarized'
 " Plug 'ayu-theme/ayu-vim'
-" Plug 'rakr/vim-one'
+Plug 'rakr/vim-one'
 Plug 'rainglow/vim'
 Plug 'chriskempson/base16-vim'
 " Plug 'kaicataldo/material.vim'
 Plug 'icymind/NeoSolarized'
-Plug 'blueshirts/darcula'
-Plug 'trevordmiller/nova-vim'
-" Plug 'itchyny/lightline.vim'
-=======
 " Plug 'trevordmiller/nova-vim'
 Plug 'blueshirts/darcula'
->>>>>>> 2c7bccb... So much darcula
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " Plug 'itchyny/lightline.vim'
@@ -123,13 +118,13 @@ function! SwitchTheme()
   if t:current_theme == 'dark'
     set background=light
     let t:current_theme = 'light'
-    :colorscheme base16-tomorrow
-    :AirlineTheme tomorrow
+    :colorscheme base16-gruvbox-light-hard
+    :AirlineTheme base16
   else
     set background=dark
     let t:current_theme = 'dark'
-    :colorscheme darcula
-    :AirlineTheme molokai
+    :colorscheme base16-gruvbox-dark-medium
+    :AirlineTheme base16
     " :call Transparent()
     " let t:is_transparent=1
   end
@@ -141,7 +136,7 @@ nnoremap <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-colorscheme darcula
+colorscheme base16-gruvbox-dark-medium
 let ayucolor="mirage"
 let g:hybrid_reduced_contrast = 1
 let g:material_terminal_italics = 1
@@ -340,7 +335,7 @@ nnoremap <leader>r :Tags<CR>
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 
 " Airline
-let g:airline_theme='tomorrow'
+let g:airline_theme='base16'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
@@ -353,6 +348,7 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_powerline_fonts = 1
 ""
+
 "" Lightline
 " let g:lightline = {
 "   \'colorscheme': 'one'
@@ -441,7 +437,7 @@ set statusline+=\ " Some space
 let g:Hexokinase_ftAutoload = ['css', 'scss', 'xml', 'js', 'jsx', 'ts', 'tsx', 'vue']
 
 " Prettier
-" let g:prettier#autoformat = 0
+let g:prettier#autoformat = 0
 " autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.vue PrettierAsync
 nnoremap <leader>F :PrettierAsync<cr>
 
