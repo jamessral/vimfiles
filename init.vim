@@ -23,7 +23,7 @@ Plug 'rainglow/vim'
 Plug 'chriskempson/base16-vim'
 " Plug 'kaicataldo/material.vim'
 Plug 'icymind/NeoSolarized'
-" Plug 'trevordmiller/nova-vim'
+Plug 'trevordmiller/nova-vim'
 Plug 'blueshirts/darcula'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -34,6 +34,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'tpope/vim-rails'
+Plug 'ludovicchabant/vim-gutentags'
 " Plug 'tpope/vim-classpath'
 " Plug 'tpope/vim-fireplace'
 " Plug 'RRethy/vim-hexokinase'
@@ -43,18 +44,26 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'davidhalter/jedi-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'ncm2/ncm2-ultisnips'
-Plug 'ncm2/ncm2-go'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete-clangx'
+Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
+Plug 'takkii/Bignyanco'
+Plug 'takkii/ruby-dictionary3'
+" Plug 'takkii/totolot'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+" Plug 'ncm2/ncm2-ultisnips'
+" Plug 'ncm2/ncm2-go'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'mattn/emmet-vim'
 Plug 'calviken/vim-gdscript3'
-Plug 'ncm2/ncm2'
-Plug 'ncm2/ncm2-jedi'
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-tmux'
-Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-pyclang'
+" Plug 'ncm2/ncm2'
+" Plug 'ncm2/ncm2-jedi'
+" Plug 'ncm2/ncm2-bufword'
+" Plug 'ncm2/ncm2-tmux'
+" Plug 'ncm2/ncm2-path'
+" Plug 'ncm2/ncm2-pyclang'
 " Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'mhartington/nvim-typescript', {'do': ':!install.sh --production \| UpdateRemotePlugins'}
@@ -69,6 +78,8 @@ Plug 'elixir-editors/vim-elixir'
 Plug 'mhinz/vim-mix-format'
 Plug 'scrooloose/nerdcommenter'
 " Plug 'scrooloose/nerdtree'
+Plug 'francoiscabrol/ranger.vim'
+Plug 'rbgrouleff/bclose.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'prettier/vim-prettier', {
@@ -116,12 +127,12 @@ function! SwitchTheme()
   if t:current_theme == 'dark'
     set background=light
     let t:current_theme = 'light'
-    :colorscheme base16-gruvbox-light-hard
+    :colorscheme ThemerVim
     :AirlineTheme base16
   else
     set background=dark
     let t:current_theme = 'dark'
-    :colorscheme base16-gruvbox-dark-medium
+    :colorscheme ThemerVim
     :AirlineTheme base16
     " :call Transparent()
     " let t:is_transparent=1
@@ -134,7 +145,7 @@ nnoremap <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-colorscheme base16-gruvbox-dark-medium
+colorscheme ThemerVim
 let ayucolor="mirage"
 let g:hybrid_reduced_contrast = 1
 let g:material_terminal_italics = 1
@@ -293,27 +304,29 @@ function! Rand()
   normal! Jx
 endfunction
 
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+
 " NCM2
 " enable ncm2 for all buffers
-autocmd BufEnter * call ncm2#enable_for_buffer()
+" autocmd BufEnter * call ncm2#enable_for_buffer()
 set shortmess+=c
-" IMPORTANTE: :help Ncm2PopupOpen for more information
 set completeopt=noinsert,menuone,noselect
 let g:python_host_prog=expand('$HOME/.pyenv/versions/2.7.14/bin/python')
 let g:python3_host_prog=expand('$HOME/.pyenv/versions/3.7.3/bin/python')
 " CSS
-call ncm2#register_source({'name' : 'css',
-      \ 'priority': 9,
-      \ 'subscope_enable': 1,
-      \ 'scope': ['css', 'scss', 'less'],
-      \ 'mark': 'css',
-      \ 'word_pattern': '[\w\-]+',
-      \ 'complete_pattern': ':\s*',
-      \ 'on_complete': ['ncm2#on_complete#omni',
-      \               'csscomplete#CompleteCSS'],
-      \ })
+" call ncm2#register_source({'name' : 'css',
+"       \ 'priority': 9,
+"       \ 'subscope_enable': 1,
+"       \ 'scope': ['css', 'scss', 'less'],
+"       \ 'mark': 'css',
+"       \ 'word_pattern': '[\w\-]+',
+"       \ 'complete_pattern': ':\s*',
+"       \ 'on_complete': ['ncm2#on_complete#omni',
+"       \               'csscomplete#CompleteCSS'],
+"       \ })
 
-" Nerd commenter
+" " Nerd commenter
 let g:NERDCompactSexyComs = 0
 
 " UltiSnips
@@ -364,15 +377,15 @@ autocmd! FileType json setlocal tabstop=2 shiftwidth=2
 autocmd! FileType yaml setlocal tabstop=2 shiftwidth=2
 autocmd! FileType typescript setlocal tabstop=2 shiftwidth=2 shiftwidth=2 syntax=typescript.jsx
 autocmd! FileType typescript.tsx setlocal tabstop=2 shiftwidth=2 shiftwidth=2 syntax=typescript.jsx
-autocmd! FileType c setlocal tabstop=8 shiftwidth=8 noexpandtab
-autocmd! FileType cpp setlocal tabstop=8 shiftwidth=8 noexpandtab
+autocmd! FileType c setlocal tabstop=4 shiftwidth=4 noexpandtab
+autocmd! FileType cpp setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd! FileType go setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd! BufRead,BufNewFile,BufEnter vue syntax sync fromstart
 autocmd! BufNewFile,BufRead *.html.erb setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.html setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.jsx setlocal tabstop=2 shiftwidth=2
-autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=8 shiftwidth=8
-autocmd! BufNewFile,BufRead *.c setlocal tabstop=8 shiftwidth=8
+autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.c setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.tsx setlocal tabstop=2 shiftwidth=2 syntax=typescript.jsx filetype=typescript.tsx
 autocmd! BufNewFile,BufRead *.vue setf vue
 autocmd! BufNewFile,BufRead *.vue setlocal tabstop=2 shiftwidth=2 syntax=vue.html.javascript.css
@@ -406,7 +419,7 @@ endfunction
 
 let g:ale_linters = {
       \  'javascript': ['eslint'],
-      \  'typescript': ['tsc', 'eslint', 'tslint']
+      \  'typescript': ['tsc', 'tslint']
       \}
 
 let g:ale_fixers = {
@@ -456,7 +469,9 @@ let test#javascript#jest#file_pattern = '[**.jest.js | **.test.js]'
 let test#typescript#jest#file_pattern = '[**.jest.ts | **.test.ts]'
 
 " C/C++
-let g:ncm2_pyclang#library_path = '/usr/lib/llvm-6.0/lib'
+" let g:ncm2_pyclang#library_path = '/usr/lib/llvm-6.0/lib/libclang.so'
+" let g:ncm2_pyclang#args_file_path = ['.clang_complete']
+" autocmd FileType c,cpp nnoremap <buffer> gd :<c-u>call ncm2_pyclang#goto_declaration()<cr>
 
 " LanaguageClient
 let g:LanguageClient_serverCommands = {
@@ -504,8 +519,8 @@ let g:netrw_liststyle=3     " tree view
 " NERD Tree
 " Put focus to the NERD Tree with F3 (tricked by quickly closing it and
 " immediately showing it again, since there is no :NERDTreeFocus command)
-nmap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
-nmap <leader>n :NERDTreeToggle<CR>
+" nmap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
+" nmap <leader>n :NERDTreeToggle<CR>
 
 " Show the bookmarks table on startup
 let NERDTreeShowBookmarks=1
