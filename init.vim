@@ -45,7 +45,7 @@ Plug 'davidhalter/jedi-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/deoplete-clangx'
+Plug 'tweekmonster/deoplete-clang2'
 Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
 Plug 'takkii/Bignyanco'
 Plug 'takkii/ruby-dictionary3'
@@ -416,16 +416,18 @@ function! LinterStatus() abort
         \   all_errors
         \)
 endfunction
+let g:ale_typescript_tslint_executable = 'tslint --project tsconfig.json'
+let g:ale_typescript_tslint_config_path = 'tslint.json'
 
 let g:ale_linters = {
       \  'javascript': ['eslint'],
-      \  'typescript': ['tsc', 'tslint']
+      \  'typescript': ['tsc', 'tslint', 'eslint']
       \}
 
 let g:ale_fixers = {
       \   '*': ['remove_trailing_lines', 'trim_whitespace'],
       \   'javascript': ['eslint'],
-      \   'typescript': ['eslint', 'tslint'],
+      \   'typescript': ['tslint', 'eslint'],
       \   'ruby': ['rubocop']
       \}
 
