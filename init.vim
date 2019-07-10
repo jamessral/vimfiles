@@ -18,6 +18,7 @@ call plug#begin()
 
 Plug 'altercation/vim-colors-solarized'
 " Plug 'ayu-theme/ayu-vim'
+Plug 'cocopon/iceberg.vim'
 Plug 'rakr/vim-one'
 Plug 'rainglow/vim'
 Plug 'chriskempson/base16-vim'
@@ -128,13 +129,13 @@ function! SwitchTheme()
   if t:current_theme == 'dark'
     set background=light
     let t:current_theme = 'light'
-    :colorscheme ThemerVim
-    :AirlineTheme base16
+    :colorscheme NeoSolarized
+    :AirlineTheme solarized
   else
     set background=dark
     let t:current_theme = 'dark'
-    :colorscheme ThemerVim
-    :AirlineTheme base16
+    :colorscheme NeoSolarized
+    :AirlineTheme solarized
     " :call Transparent()
     " let t:is_transparent=1
   end
@@ -146,7 +147,7 @@ nnoremap <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-colorscheme ThemerVim
+colorscheme NeoSolarized
 let ayucolor="mirage"
 let g:hybrid_reduced_contrast = 1
 let g:material_terminal_italics = 1
