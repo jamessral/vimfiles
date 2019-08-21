@@ -35,14 +35,14 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'tpope/vim-rails'
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 " Plug 'tpope/vim-classpath'
 " Plug 'tpope/vim-fireplace'
 " Plug 'RRethy/vim-hexokinase'
 Plug 'machakann/vim-highlightedyank'
 Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
-Plug 'davidhalter/jedi-vim'
+" Plug 'davidhalter/jedi-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -53,7 +53,6 @@ Plug 'takkii/Bignyanco'
 Plug 'takkii/ruby-dictionary3'
 " Plug 'takkii/totolot'
 Plug 'HerringtonDarkholme/yats.vim'
-Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 " Plug 'ncm2/ncm2-ultisnips'
 " Plug 'ncm2/ncm2-go'
 Plug 'SirVer/ultisnips'
@@ -68,7 +67,7 @@ Plug 'calviken/vim-gdscript3'
 " Plug 'ncm2/ncm2-pyclang'
 " Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
 Plug 'peitalin/vim-jsx-typescript'
-Plug 'mhartington/nvim-typescript', {'do': ':!install.sh --production \| UpdateRemotePlugins'}
+" Plug 'mhartington/nvim-typescript', {'do': ':!install.sh --production \| UpdateRemotePlugins'}
 Plug 'leafo/moonscript-vim'
 Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
@@ -108,6 +107,7 @@ call plug#end()            " required
 " filetype plugin indent on    " required
 
 " Set Color Scheme
+let t:current_theme = 'light'
 let t:is_transparent = 0
 function! Transparent()
   hi Normal guibg=NONE ctermbg=NONE
@@ -115,27 +115,31 @@ endfunction
 function! ToggleTransparent()
   if t:is_transparent == 0
     call Transparent()
-    let t:is_transparent = 0
+    let t:is_transparent = 1
   else
-    set background=dark
+    if t:current_theme == 'light'
+      set background=light
+    else
+      set background=dark
+    end
+
     let t:is_transparent = 0
   endif
 endfunction
 
 nnoremap <F6> :call ToggleTransparent()<cr>
 
-let t:current_theme = 'dark'
 function! SwitchTheme()
   if t:current_theme == 'dark'
     set background=light
     let t:current_theme = 'light'
-    :colorscheme NeoSolarized
-    :AirlineTheme solarized
+    :colorscheme base16-tomorrow
+    :AirlineTheme base16
   else
     set background=dark
     let t:current_theme = 'dark'
-    :colorscheme NeoSolarized
-    :AirlineTheme solarized
+    :colorscheme Monokai
+    :AirlineTheme base16
     " :call Transparent()
     " let t:is_transparent=1
   end
@@ -146,8 +150,8 @@ nnoremap <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set background=dark
-colorscheme NeoSolarized
+set background=light
+colorscheme base16-tomorrow
 let ayucolor="mirage"
 let g:hybrid_reduced_contrast = 1
 let g:material_terminal_italics = 1
@@ -333,11 +337,10 @@ set signcolumn=yes
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -349,7 +352,7 @@ inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Use `[c` and `]c` to navigate diagnostics
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
@@ -400,9 +403,9 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Use <tab> for select selections ranges, needs server support, like: coc-tsserver, coc-python
-nmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <S-TAB> <Plug>(coc-range-select-backword)
+" nmap <silent> <TAB> <Plug>(coc-range-select)
+" xmap <silent> <TAB> <Plug>(coc-range-select)
+" xmap <silent> <S-TAB> <Plug>(coc-range-select-backword)
 
 " Use `:Format` to format current buffer
 command! -nargs=0 Format :call CocAction('format')
@@ -440,7 +443,7 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 set shortmess+=c
 set completeopt=noinsert,menuone,noselect
 let g:python_host_prog=expand('$HOME/.pyenv/versions/2.7.14/bin/python')
-let g:python3_host_prog=expand('$HOME/.pyenv/versions/3.7.3/bin/python')
+let g:python3_host_prog=expand('$HOME/.pyenv/versions/3.7.4/bin/python')
 " CSS
 " call ncm2#register_source({'name' : 'css',
 "       \ 'priority': 9,
@@ -469,7 +472,7 @@ let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/plugged/vim-snippets/UltiSn
 " Fzf
 nnoremap <C-p> :Files<CR>
 nnoremap <C-b> :Buffers<CR>
-nnoremap <leader>r :Tags<CR>
+" nnoremap <leader>r :Tags<CR>
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 
 " Airline
@@ -582,7 +585,7 @@ let g:prettier#autoformat = 0
 nnoremap <leader>F :PrettierAsync<cr>
 
 " Python
-autocmd BufWritePre *.py execute ':Black'
+" autocmd BufWritePre *.py execute ':Black'
 
 " Test Runner
 nnoremap <silent><leader><leader>t :TestNearest<CR>
