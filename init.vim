@@ -42,6 +42,7 @@ Plug 'tpope/vim-rails'
 Plug 'machakann/vim-highlightedyank'
 Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
+Plug 'chrisbra/Colorizer'
 " Plug 'davidhalter/jedi-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
@@ -107,7 +108,7 @@ call plug#end()            " required
 " filetype plugin indent on    " required
 
 " Set Color Scheme
-let t:current_theme = 'light'
+let t:current_theme = 'dark'
 let t:is_transparent = 0
 function! Transparent()
   hi Normal guibg=NONE ctermbg=NONE
@@ -133,12 +134,12 @@ function! SwitchTheme()
   if t:current_theme == 'dark'
     set background=light
     let t:current_theme = 'light'
-    :colorscheme base16-tomorrow
-    :AirlineTheme base16
+    :colorscheme PaperColor
+    :AirlineTheme papercolor
   else
     set background=dark
     let t:current_theme = 'dark'
-    :colorscheme Monokai
+    :colorscheme PaperColor
     :AirlineTheme base16
     " :call Transparent()
     " let t:is_transparent=1
@@ -150,8 +151,8 @@ nnoremap <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set background=light
-colorscheme base16-tomorrow
+set background=dark
+colorscheme PaperColor
 let ayucolor="mirage"
 let g:hybrid_reduced_contrast = 1
 let g:material_terminal_italics = 1
