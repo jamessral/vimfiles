@@ -28,8 +28,8 @@ Plug 'trevordmiller/nova-vim'
 Plug 'blueshirts/darcula'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Plug 'itchyny/lightline.vim'
 " Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-vinegar'
 Plug 'jiangmiao/auto-pairs'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'sheerun/vim-polyglot'
@@ -43,30 +43,17 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'chrisbra/Colorizer'
-" Plug 'davidhalter/jedi-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'tweekmonster/deoplete-clang2'
-" Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
 Plug 'takkii/Bignyanco'
 Plug 'takkii/ruby-dictionary3'
 " Plug 'takkii/totolot'
 Plug 'HerringtonDarkholme/yats.vim'
-" Plug 'ncm2/ncm2-ultisnips'
-" Plug 'ncm2/ncm2-go'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'mattn/emmet-vim'
 Plug 'calviken/vim-gdscript3'
-" Plug 'ncm2/ncm2'
-" Plug 'ncm2/ncm2-jedi'
-" Plug 'ncm2/ncm2-bufword'
-" Plug 'ncm2/ncm2-tmux'
-" Plug 'ncm2/ncm2-path'
-" Plug 'ncm2/ncm2-pyclang'
-" Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
 Plug 'peitalin/vim-jsx-typescript'
 " Plug 'mhartington/nvim-typescript', {'do': ':!install.sh --production \| UpdateRemotePlugins'}
 Plug 'leafo/moonscript-vim'
@@ -79,8 +66,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'elixir-editors/vim-elixir'
 Plug 'mhinz/vim-mix-format'
 Plug 'scrooloose/nerdcommenter'
-" Plug 'scrooloose/nerdtree'
-Plug 'francoiscabrol/ranger.vim'
+" Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
@@ -96,7 +82,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-endwise'
-" Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tbastos/vim-lua'
@@ -438,25 +423,11 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
-" NCM2
-" enable ncm2 for all buffers
-" autocmd BufEnter * call ncm2#enable_for_buffer()
 set shortmess+=c
 set completeopt=noinsert,menuone,noselect
 let g:python_host_prog=expand('$HOME/.pyenv/versions/2.7.14/bin/python')
 let g:python3_host_prog=expand('$HOME/.pyenv/versions/3.7.4/bin/python')
 " CSS
-" call ncm2#register_source({'name' : 'css',
-"       \ 'priority': 9,
-"       \ 'subscope_enable': 1,
-"       \ 'scope': ['css', 'scss', 'less'],
-"       \ 'mark': 'css',
-"       \ 'word_pattern': '[\w\-]+',
-"       \ 'complete_pattern': ':\s*',
-"       \ 'on_complete': ['ncm2#on_complete#omni',
-"       \               'csscomplete#CompleteCSS'],
-"       \ })
-
 " " Nerd commenter
 let g:NERDCompactSexyComs = 0
 
@@ -490,14 +461,6 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_powerline_fonts = 1
 ""
-
-"" Lightline
-" let g:lightline = {
-"   \'colorscheme': 'one'
-"   \}
-
-" Easymotion
-
 
 " Syntax Highlighting and File Types
 autocmd! FileType lua setlocal tabstop=4 shiftwidth=4
@@ -618,11 +581,6 @@ autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
 
 " Typescript Config
 let g:polyglot_disable=['typescript', 'typescript.tsx', 'javscript', 'javascript.jsx']
-" autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
-" autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
-
-" Line splitting for brackets in insert mode [] () {}"
-" imap <C-l> <CR><Esc>O
 
 " Remove trailing whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
