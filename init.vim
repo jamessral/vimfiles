@@ -291,7 +291,7 @@ set inccommand=nosplit
 
 " Random Number
 function! Rand()
-  let @n = substitute(system('rand'),'\n', '', 'g')
+  let @n = substitute(system('random'),'\n', '', 'g')
   call append(line('.'), @n)
   normal! Jx
 endfunction
