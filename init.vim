@@ -29,7 +29,8 @@ Plug 'blueshirts/darcula'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " Plug 'terryma/vim-multiple-cursors'
-Plug 'tpope/vim-vinegar'
+" Plug 'tpope/vim-vinegar'
+Plug 'scrooloose/nerdtree'
 Plug 'jiangmiao/auto-pairs'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'sheerun/vim-polyglot'
@@ -93,7 +94,7 @@ call plug#end()            " required
 " filetype plugin indent on    " required
 
 " Set Color Scheme
-let t:current_theme = 'dark'
+let t:current_theme = 'light'
 let t:is_transparent = 0
 function! Transparent()
   hi Normal guibg=NONE ctermbg=NONE
@@ -136,7 +137,7 @@ nnoremap <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set background=dark
+set background=light
 colorscheme PaperColor
 let ayucolor="mirage"
 let g:hybrid_reduced_contrast = 1
@@ -606,12 +607,15 @@ let g:netrw_banner=0        " no more annoying banner!
 let g:netrw_browse_split=4  " open in previous window
 let g:netrw_altv=1          " open splits to the right
 let g:netrw_liststyle=3     " tree view
+let g:netrw_fastbrowse=0
+autocmd FileType netrw setl bufhidden=delete
+autocmd FileType netrw setl bufhidden=wipe
 
 " NERD Tree
 " Put focus to the NERD Tree with F3 (tricked by quickly closing it and
 " immediately showing it again, since there is no :NERDTreeFocus command)
-" nmap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
-" nmap <leader>n :NERDTreeToggle<CR>
+nmap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
+nmap <leader>n :NERDTreeToggle<CR>
 
 " Show the bookmarks table on startup
 let NERDTreeShowBookmarks=1
