@@ -3,115 +3,151 @@ set noswapfile
 set ttimeout
 set ttimeoutlen=0
 set matchtime=0
-"set termguicolors
+set encoding=UTF-8
+set ttyfast
+if (has('termguicolors'))
+  set termguicolors
+endif
+set t_Co=256
 
 set path+=**
 
-" For Vim-Plug {{{
+" For Vim-Plug
 filetype off
 call plug#begin()
 
 Plug 'altercation/vim-colors-solarized'
+" Plug 'ayu-theme/ayu-vim'
+Plug 'cocopon/iceberg.vim'
+Plug 'rakr/vim-one'
+" Plug 'rainglow/vim'
+Plug 'chriskempson/base16-vim'
+" Plug 'kaicataldo/material.vim'
 Plug 'icymind/NeoSolarized'
-Plug 'ayu-theme/ayu-vim'
-Plug 'j-tom/vim-old-hope'
+Plug 'trevordmiller/nova-vim'
+Plug 'blueshirts/darcula'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+" Plug 'terryma/vim-multiple-cursors'
+" Plug 'tpope/vim-vinegar'
+Plug 'scrooloose/nerdtree'
 Plug 'jiangmiao/auto-pairs'
-Plug 'tpope/vim-unimpaired'
-Plug 'maralla/completor.vim'
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'sheerun/vim-polyglot'
+Plug 'MaxMEllon/vim-jsx-pretty'
+Plug 'tpope/vim-rails'
+Plug 'Tetralux/odin.vim'
+" Plug 'ludovicchabant/vim-gutentags'
+" Plug 'tpope/vim-classpath'
+" Plug 'tpope/vim-fireplace'
+" Plug 'RRethy/vim-hexokinase'
+Plug 'machakann/vim-highlightedyank'
 Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
+Plug 'chrisbra/Colorizer'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'slashmili/alchemist.vim'
-Plug 'elixir-lang/vim-elixir'
-Plug 'davidhalter/jedi-vim'
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
-Plug 'AndrewRadev/splitjoin.vim'
-Plug 'junegunn/goyo.vim'
-Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
-Plug 'reasonml-editor/vim-reason'
-Plug 'tpope/vim-speeddating'
-Plug 'ElmCast/elm-vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'takkii/Bignyanco'
+Plug 'takkii/ruby-dictionary3'
+" Plug 'takkii/totolot'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'mattn/emmet-vim'
+Plug 'calviken/vim-gdscript3'
+Plug 'peitalin/vim-jsx-typescript'
+" Plug 'mhartington/nvim-typescript', {'do': ':!install.sh --production \| UpdateRemotePlugins'}
+Plug 'leafo/moonscript-vim'
+Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
-Plug 'gabesoft/vim-ags'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'dyng/ctrlsf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'scrooloose/nerdtree'
+Plug 'elixir-editors/vim-elixir'
+Plug 'mhinz/vim-mix-format'
 Plug 'scrooloose/nerdcommenter'
-Plug 'ervandew/supertab'
+" Plug 'francoiscabrol/ranger.vim'
+Plug 'rbgrouleff/bclose.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
-Plug 'mattn/emmet-vim'
-Plug 'wokalski/autocomplete-flow'
-Plug 'fatih/vim-go'
-Plug 'rust-lang/rust.vim'
-Plug 'python-mode/python-mode'  " this takes over
-Plug 'kien/rainbow_parentheses.vim'
+Plug 'prettier/vim-prettier', {
+      \ 'do': 'yarn install',
+      \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
+" Plug 'autozimu/LanguageClient-neovim', {
+"       \ 'branch': 'next',
+"       \ 'do': 'bash install.sh',
+"       \ }
 Plug 'w0rp/ale'
-Plug 'mbbill/undotree'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-rails'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'tpope/vim-rbenv'
-Plug 'vim-scripts/bufexplorer.zip'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-eunuch'
-Plug 'itchyny/lightline.vim'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'chase/vim-ansible-yaml'
-Plug 'thoughtbot/vim-rspec'
-Plug 'othree/yajs.vim'
-Plug 'jelera/vim-javascript-syntax'
-Plug 'othree/html5.vim'
-Plug 'mxw/vim-jsx'
-Plug 'leafgarland/typescript-vim'
-Plug 'Quramy/tsuquyomi'
 Plug 'tbastos/vim-lua'
-Plug 'justinj/vim-pico8-syntax'
 Plug 'janko-m/vim-test'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'danro/rename.vim'
-Plug 'flowtype/vim-flow', {
-            \ 'autoload': {
-            \     'filetypes': 'javascript'
-            \ }}
 Plug 'tpope/vim-dispatch'
 Plug 'danro/rename.vim'
 call plug#end()            " required
-filetype plugin indent on    " required
-" }}}
+" filetype plugin indent on    " required
 
-" Set Color Scheme {{{
+" Set Color Scheme
+let t:current_theme = 'dark'
+let t:is_transparent = 0
+function! Transparent()
+  hi Normal guibg=NONE ctermbg=NONE
+endfunction
+function! ToggleTransparent()
+  if t:is_transparent == 0
+    call Transparent()
+    let t:is_transparent = 1
+  else
+    if t:current_theme == 'light'
+      set background=light
+    else
+      set background=dark
+    end
+
+    let t:is_transparent = 0
+  endif
+endfunction
+
+nnoremap <F6> :call ToggleTransparent()<cr>
+
+function! SwitchTheme()
+  if t:current_theme == 'dark'
+    set background=light
+    let t:current_theme = 'light'
+    :colorscheme PaperColor
+    " :AirlineTheme papercolor
+  else
+    set background=dark
+    let t:current_theme = 'dark'
+    :colorscheme lucius
+    " :AirlineTheme base16
+    " :call Transparent()
+    " let t:is_transparent=1
+  end
+endfunction
+
+nnoremap <F5> :call SwitchTheme()<cr>
+
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
-set background=light
-silent! colorscheme NeoSolarized
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+set background=dark
+colorscheme lucius
+let ayucolor="mirage"
+let g:hybrid_reduced_contrast = 0
+let g:material_terminal_italics = 1
 
-"let ayucolor="light"  " for light version of theme
-"let ayucolor="mirage" " for mirage version of theme
-"let ayucolor="dark"   " for dark version of theme
-
-let g:solarized_termcolors=256
-
-let g:gruvbox_contrast_dark="medium"
+let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
-let g:hybrid_custom_term_colors = 1
-let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 
-call togglebg#map("<F5>")
-" }}}
-
-" Vim Settings {{{
+" Vim Settings
 set colorcolumn=80
 syntax enable
 set encoding=utf-8
@@ -119,31 +155,48 @@ set showcmd                     " display incomplete commands
 set ttyfast
 set wildmenu
 " set wildmode=list:longest,full
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/.tmp/*,*/.sass-cache/*,*/node_modules/*,*.keep,*.DS_Store,*/.git/*
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/.tmp/*,*/.sass-cache/*,*/node_modules/*,*.keep,*.DS_Store,*/.git/*,*/__pychache__/*
 
 set mouse=a
 
 " Don't use a line cursor in insert mode
-set guicursor=
+" set guicursor=
 
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 " # http://superuser.com/questions/549930/cant-resize-vim-splits-inside-tmux
 if &term =~ '^screen'
-    " tmux knows the extended mouse mode
-    set ttymouse=xterm2
+  " tmux knows the extended mouse mode
+  set ttymouse=xterm2
 endif
 
 " Map ESC
-let mapleader = ","              " The default leader key isn't very intuitive.
+let mapleader = " "              " The default leader key isn't very intuitive.
 
-set number
+" set number
 set showmatch                   " matching brace/parenthesis/etc.
 set hidden                      " http://nvie.com/posts/how-i-boosted-my-vim/
 
+" GUI Settings
+set guifont=FuraCode\ Nerd\ Font\ 11
+set guioptions-=l
+set guioptions-=r
+set guioptions-=T
+set guioptions-=R
+set guioptions-=m
+set guioptions-=L
+set linespace=3
+" fullscreen
+map <silent> <F11>
+\    :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
+"
+
 "" Whitespace
 set nowrap                      " don't wrap lines
-set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
+set tabstop=2 shiftwidth=2      " a tab is four spaces (or set this to 4)
 set expandtab                   " use spaces, not tabs (optional)
 set backspace=indent,eol,start  " backspace through everything in insert mode
+" let g:indentguides_spacechar = '┆'
+" let g:indentguides_tabchar = '|'
 
 " Vertical split to right
 set splitright
@@ -152,9 +205,9 @@ set splitright
 set splitbelow
 
 " Use the OS clipboard by default
-set clipboard=unnamed
+set clipboard=unnamedplus
 
-"set cursorline
+set nocursorline
 " Indicators
 "set list                          " Show hidden characters (tab and eol)
 "set listchars=trail:⋅,nbsp:⋅,tab:▸\ ,eol:¬       " Use the same chars as textmate.
@@ -170,28 +223,60 @@ set smartcase                   " ... unless they contain at least one capital l
 inoremap jk <Esc>
 xnoremap jk <Esc>
 " easier navigation between split windows
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
+nnoremap <C-j> <c-w>j
+nnoremap <C-k> <c-w>k
+nnoremap <BS> <c-w>h
+nnoremap <C-l> <c-w>l
+nnoremap <leader>T :tabe<cr>
 
 " Maps Alt-[H,J,K,L] to resizing a window split
 map <silent> <M-H> <C-w><
 map <silent> <M-J> <C-W>-
 map <silent> <M-K> <C-W>+
 map <silent> <M-L> <C-w>>
+" For navigating even in Nvim terminal
+tnoremap <M-h> <C-\><C-N><C-w>h
+tnoremap <M-j> <C-\><C-N><C-w>j
+tnoremap <M-k> <C-\><C-N><C-w>k
+tnoremap <M-l> <C-\><C-N><C-w>l
 
 set backup       " keep a backup file
 set backupdir=~/.vim/backup//
-set directory=~/.vim/swap//
-if version >= 703
-  set undofile
-  set undodir=~/.vim/undo//
-endif
+set undofile
+set undodir=~/.vim/undo//
 
 set history=50    " keep 50 lines of command line history
 set ruler         " show the cursor position all the time
-set laststatus=2
+
+function! GitInfo()
+  let git = fugitive#head()
+  if git != ''
+    return ''.fugitive#head()
+  else
+    return ''
+endfunction
+
+let g:current_mode = {
+    \ 'n'      : 'NORMAL ',
+    \ 'no'     : 'N·Operator Pending ',
+    \ 'v'      : 'VISAUL ',
+    \ 'V'      : 'V-Line ',
+    \ '\<C-V>' : 'V-Block ',
+    \ 's'      : 'SELECT ',
+    \ 'S'      : 'S-Line ',
+    \ '\<C-S>' : 'S-BLOCK ',
+    \ 'i'      : 'INSERT ',
+    \ 'R'      : 'REPLACE ',
+    \ 'Rv'     : 'V-REPLACE ',
+    \ 'c'      : 'COMMAND ',
+    \ 'cv'     : 'VIM EX ',
+    \ 'ce'     : 'EX ',
+    \ 'r'      : 'PROMPT ',
+    \ 'rm'     : 'MORE ',
+    \ 'r?'     : 'CONFIRM ',
+    \ '!'      : 'SHELL ',
+    \ 't'      : 'TERMINAL '
+\}
 
 set title " terminal title
 set autoread " load change files
@@ -212,257 +297,343 @@ noremap <leader>s <C-w>s
 
 " Edit the vimrc file
 nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
-nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
-"}}}
+nnoremap <silent> <leader>rv :so $MYVIMRC<CR>
 
-"{{{ Deoplete
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#file#enable_buffer_path = 1 "Use the current file for relative path
-let g:python_host_prog = '/usr/local/bin/python2'
-let g:python3_host_prog = '/usr/local/bin/python3'
-let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+" Save by pressing Enter in normal mode
+nnoremap <cr> :w<cr>
 
-" wait for at least 3 input characters
-let g:deoplete#source#attribute#min_pattern_length = 3
-" wait longer to start getting completions
-let g:deoplete#auto_complete_delay = 100
-" deoplete tab-complete
-inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-" tern
-let g:deoplete#sources#ternjs#tern_bin = '/Users/jamessral/.nvm/versions/v8.1.3/bin'
-let g:deoplete#sources#ternjs#types = 1
-let g:deoplete#sources#ternjs#docs = 1
-let g:deoplete#sources#ternjs#filetypes = [
-                \ 'jsx',
-                \ 'js',
-                \ 'vue']
-let g:tern#command = ["tern"]
-let g:tern#arguments = ["--persistent"]
-autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
-"}}}
+" See live preview of subsitute command
+" set incsubstitue=nosplit
 
-"{{{ Snippets
-" Note: It must be \"imap" and \"smap".  It uses <Plug> mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"imap <expr><TAB>
-" \ pumvisible() ? "\<C-n>" :
-" \ neosnippet#expandable_or_jumpable() ?
-" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-let g:neosnippet#snippets_directory='~/.vim/plugged/neosnippet-snippets/neosnippets'
-"}}}
-
-"{{{ Ags
-if executable('ag')
-    let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-      \ --ignore .git
-      \ --ignore .svn
-      \ --ignore .hg
-      \ --ignore .DS_Store
-      \ --ignore node_modules
-      \ --ignore "**/*.pyc"
-      \ -g ""'
-endif
-"}}}
-
-"{{{ Fzf
-nnoremap <C-o> :Files<CR>
-nnoremap <C-b> :Buffers<CR>
-nnoremap <leader>r :Tags<CR>
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
-"}}}
-
-"{{{ Lightline
-let g:lightline = {
-      \ 'colorscheme': 'solarized',
-      \ }
-"}}}
-
-"{{{ Goyo (Distraction Free)
-let g:goyo_width=120
-
-nnoremap <leader>z :Goyo<CR>
-"}}}
-
-"{{{ Easymotion
-
-"}}}
-
-"{{{ Multiple Cursors
-let g:multi_cursor_next_key='<C-f>'
-let g:multi_cursor_prev_key='<C-b>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<Esc>'
-"}}}
-
-" GUI Settings {{{
-set guifont=Sauce\ Code\ Pro\ Nerd\ Font\ Complete\ Mono:h13
-set guioptions-=l guioptions-=L guioptions-=r guioptions-=T guioptions-=R guioptions-=m
-" }}}
-
-" Syntax Highlighting and File Types {{{
-autocmd! FileType java setlocal tabstop=4 shiftwidth=4
-autocmd! BufNewFile,BufRead *.hx setlocal tabstop=4 shiftwidth=4 syntax=haxe
-autocmd! BufNewFile,BufRead *.hxml setlocal tabstop=4 shiftwidth=4
-autocmd! BufNewFile,BufRead *.h setlocal tabstop=4 shiftwidth=4
-autocmd! BufNewFile,BufRead *.c setlocal tabstop=4 shiftwidth=4
-autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4
-autocmd! BufNewFile,BufRead *.hpp setlocal tabstop=4 shiftwidth=4
-autocmd! BufNewFile,BufRead *.scss setlocal tabstop=2 shiftwidth=2
-autocmd! BufNewFile,BufRead *.purs setlocal syntax=purescript
-autocmd! BufNewFile,BufRead *.ex setlocal tabstop=2 shiftwidth=2
-autocmd! BufNewFile,BufRead *.exs setlocal tabstop=2 shiftwidth=2 syntax=elixir
-autocmd! FileType php *.php setlocal tabstop=4 shiftwidth=4
-autocmd! FileType haskell *.hs setlocal tabstop=4 shiftwidth=4
-autocmd! FileType dlang *.d setlocal tabstop=4 shiftwidth=4
-autocmd! FileType go setlocal tabstop=4 shiftwidth=4
-" Use JSX for .js
-let g:jsx_ext_required = 0
-"}}}
-
-"{{{ Ale Linting
-" Always keep gutter open to avoid flickering
-" Add more of a delay so as to not slow down so much
-let g:ale_lint_delay = 300
-let g:ale_sign_column_always = 1
-let g:ale_set_quickfix = 1
-function! LinterStatus() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
-
-    let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_non_errors = l:counts.total - l:all_errors
-
-    return l:counts.total == 0 ? 'OK' : printf(
-    \   '%dW %dE',
-    \   all_non_errors,
-    \   all_errors
-    \)
+" Random Number
+function! Rand()
+  let @n = substitute(system('random'),'\n', '', 'g')
+  call append(line('.'), @n)
+  normal! Jx
 endfunction
 
-set statusline=%{LinterStatus()}
+" Deoplete
+" let g:deoplete#enable_at_startup = 1
+"
+" CoC
+" Starting config lifted from [here](https://github.com/neoclide/coc.nvim)
+set updatetime=300
+" if hidden is not set, TextEdit might fail.
+set hidden
+
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+" Better display for messages
+set cmdheight=2
+
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+" pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Use <tab> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+" nmap <silent> <TAB> <Plug>(coc-range-select)
+" xmap <silent> <TAB> <Plug>(coc-range-select)
+" xmap <silent> <S-TAB> <Plug>(coc-range-select-backword)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+set shortmess+=c
+set completeopt=noinsert,menuone,noselect
+let g:python_host_prog=expand('$HOME/.pyenv/versions/2.7.14/bin/python')
+let g:python3_host_prog=expand('$HOME/.pyenv/versions/3.7.4/bin/python')
+" CSS
+" " Nerd commenter
+let g:NERDCompactSexyComs = 0
+
+" UltiSnips
+" c-j c-k for moving in snippet
+let g:UltiSnipsExpandTrigger		= "<c-j>"
+let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
+let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
+let g:UltiSnipsRemoveSelectModeMappings = 0
+
+" Snippets
+let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/plugged/vim-snippets/UltiSnips', 'UltiSnips']
+
+" Fzf
+nnoremap <C-p> :Files<CR>
+nnoremap <C-b> :Buffers<CR>
+" nnoremap <leader>r :Tags<CR>
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
+
+" Airline
+" let g:airline_theme='base16'
+" let g:airline_left_sep=''
+" let g:airline_left_alt_sep = ''
+" let g:airline_right_sep=''
+" let g:airline_right_alt_sep = ''
+" " keep branch name lenghts under control
+" let g:airline#extensions#branch#displayed_head_limit = 10
+" " let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#left_sep = ''
+" let g:airline#extensions#tabline#left_alt_sep = '|'
+" let g:airline#extensions#tabline#buffer_nr_show = 1
+" let g:airline_powerline_fonts = 1
+""
+
+" Syntax Highlighting and File Types
+autocmd! FileType lua setlocal tabstop=4 shiftwidth=4
+autocmd! FileType ruby setlocal tabstop=2 shiftwidth=2
+autocmd! FileType javascript setlocal tabstop=2 shiftwidth=2
+autocmd! FileType javascript.jsx setlocal tabstop=2 shiftwidth=2
+autocmd! FileType json setlocal tabstop=2 shiftwidth=2
+autocmd! FileType yaml setlocal tabstop=2 shiftwidth=2
+autocmd! FileType typescript setlocal tabstop=2 shiftwidth=2 shiftwidth=2 syntax=typescript.jsx
+autocmd! FileType typescript.tsx setlocal tabstop=2 shiftwidth=2 shiftwidth=2 syntax=typescript.jsx
+autocmd! FileType c setlocal tabstop=4 shiftwidth=4 noexpandtab
+autocmd! FileType cpp setlocal tabstop=4 shiftwidth=4 noexpandtab
+autocmd! FileType go setlocal tabstop=4 shiftwidth=4 noexpandtab
+autocmd! BufRead,BufNewFile,BufEnter vue syntax sync fromstart
+let g:vue_disable_pre_processors=1
+autocmd! BufNewFile,BufRead,CursorHold *.html.erb setlocal tabstop=2 shiftwidth=2
+autocmd! BufNewFile,BufRead *.html setlocal tabstop=2 shiftwidth=2
+autocmd! BufNewFile,BufRead *.jsx setlocal tabstop=2 shiftwidth=2
+autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.c setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.tsx setlocal tabstop=2 shiftwidth=2 syntax=typescript.jsx filetype=typescript.tsx
+autocmd! BufNewFile,BufRead *.vue setf vue
+autocmd! BufNewFile,BufRead *.vue setlocal tabstop=2 shiftwidth=2 syntax=vue.html.javascript.css
+autocmd! BufNewFile,BufRead *.hx setlocal tabstop=4 shiftwidth=4 syntax=haxe
+autocmd! BufNewFile,BufRead *.css setlocal tabstop=2 shiftwidth=2
+autocmd! BufNewFile,BufRead *.scss setlocal tabstop=2 shiftwidth=2
+autocmd! BufNewFile,BufRead *.ex setlocal tabstop=2 shiftwidth=2
+" Use JSX for .js
+let g:jsx_ext_required = 0
+
+" Ale Linting
+" Always keep gutter open to avoid flickering
+set signcolumn=yes
+" Add more of a delay so as to not slow down so much
+let g:ale_lint_delay = 500
+let g:ale_sign_column_always = 1
+let g:ale_set_quickfix = 1
+let g:ale_fix_on_save = 1
+function! LinterStatus() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+
+  return l:counts.total == 0 ? 'OK' : printf(
+        \   '%dW %dE',
+        \   all_non_errors,
+        \   all_errors
+        \)
+endfunction
+let g:ale_typescript_tslint_executable = 'tslint --project tsconfig.json'
+let g:ale_typescript_tslint_config_path = 'tslint.json'
+
 let g:ale_linters = {
-\  'javscript': ['eslint', 'flow'],
-\}
-"}}}
+      \  'javascript': ['eslint'],
+      \  'typescript': ['tsc', 'tslint', 'eslint']
+      \}
 
-"{{{ Flow
-"nnoremap <silent> <leader>d :FlowJumpToDef
-let g:flow#showquickfix = 0
-let g:flow#enable = 0
-"}}}
+let g:ale_fixers = {
+      \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+      \   'javascript': ['eslint'],
+      \   'typescript': ['tslint', 'eslint'],
+      \   'ruby': ['rubocop']
+      \}
 
-"{{{ Test Runner
-nnoremap <silent> <leader> <leader>t :TestNearest<CR>
-nnoremap <silent> <leader> <leader>T :TestFile<CR>
-nnoremap <silent> <leader> <leader>A :TestSuite<CR>
-nnoremap <silent> <leader> <leader>L :TestLast<CR>
-nnoremap <silent> <leader> <leader>G :TestVisit<CR>
+set laststatus=2
+set statusline=
+set statusline+=\ " Some space
+set statusline+=%{g:current_mode[mode()]}        " Path to the file
+set statusline+=\ " Some space
+set statusline+=%f         " Path to the file
+set statusline+=\ " Some space
+set statusline+=%{GitInfo()}
+set statusline+=\ " Separator
+set statusline+=%=%y        " Filetype of the file
+set statusline+=\ " Separator
+set statusline+=%{LinterStatus()}
+set statusline+=\ " Some space
+set statusline+=\ " Some space
 
-let test#strategy = "vimproc"
-let test#javascript#jest#file_pattern = '**.jest.js'
-"}}}
+" HExokinase
+let g:Hexokinase_ftAutoload = ['css', 'scss', 'xml', 'js', 'jsx', 'ts', 'tsx', 'vue']
 
-"{{{ Python
-let g:pymode_python = 'python3'
-let g:jedi#goto_command = "<leader>d"
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = ""
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>N"
-let g:jedi#completions_command = "<C-Space>"
-let g:jedi#rename_command = "<leader>r"
-let g:jedi#completions_enabled = 0
-let g:jedi#popup_select_first = 0
-"}}}
+" Prettier
+let g:prettier#autoformat = 0
+" autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.vue PrettierAsync
+nnoremap <leader>F :PrettierAsync<cr>
 
-"{{{ Rust
-let g:deoplete#sources#rust#racer_binary='/Users/jamessral/.cargo/bin/racer'
-let g:deoplete#sources#rust#rust_source_path='/Users/jamessral/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src'
+" Python
+" autocmd BufWritePre *.py execute ':Black'
 
-" User rustfmt on save
-let g:rustfmt_autosave = 1
-"}}}
+" Test Runner
+nnoremap <silent><leader><leader>t :TestNearest<CR>
+nnoremap <silent><leader><leader>T :TestFile<CR>
+nnoremap <silent><leader><leader>A :TestSuite<CR>
+nnoremap <silent><leader><leader>L :TestLast<CR>
+nnoremap <silent><leader><leader>G :TestVisit<CR>
 
-"{{{ Elm
-autocmd FileType purescript nmap <buffer> <leader>d <Plug>(ElmShowDocs)
-let g:polyglot_disabled = ["elm"]
-"}}}
+let test#strategy = "tmux"
+let g:test#preserve_screen = 1
+let test#javascript#jest#executable = 'yarn test'
+let test#javascript#jest#file_pattern = '[**.jest.js | **.test.js]'
+let test#typescript#jest#file_pattern = '[**.jest.ts | **.test.ts]'
 
-" Typescript Config {{{
-autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
-autocmd FileType typescript nmap <buffer> <Leader>R <Plug>(TsuquyomiRenameSymbol)
-"}}}
+" C/C++
+" let g:ncm2_pyclang#library_path = '/usr/lib/llvm-6.0/lib/libclang.so'
+" let g:ncm2_pyclang#args_file_path = ['.clang_complete']
+" autocmd FileType c,cpp nnoremap <buffer> gd :<c-u>call ncm2_pyclang#goto_declaration()<cr>
 
-" Emmet-vim {{{
-let g:user_emmet_leader_key='<C-Z>'
-"}}}
+" LanaguageClient
+let g:LanguageClient_serverCommands = {
+      \ 'ruby': ['solargraph', 'stdio'],
+      \ 'reason': ['ocaml-language-server', '--stdio'],
+      \ 'ocaml': ['ocaml-language-server', '--stdio'],
+      \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+      \ }
+autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
+" autocmd FileType typescript setlocal omnifunc=LanguageClient#complete
 
-" Line splitting for brackets in insert mode [] () {}"{{{
-imap <C-l> <CR><Esc>O
-"}}}
+" Typescript Config
+let g:polyglot_disable=['typescript', 'typescript.tsx', 'javscript', 'javascript.jsx']
 
-"{{{ Remove trailing whitespace on save
+" Remove trailing whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
-"}}}
 
-" Hybrid Line Numbers {{{
-set relativenumber
-set number
-" }}}
+" Hybrid Line Numbers
+" set relativenumber
+" set number
+function! ToggleLines()
+  set norelativenumber!
+  set nonumber!
+endfunction
+nnoremap <F2> :call ToggleLines()<cr>
 
-" Spell Checking {{{
+" Spell Checking
 autocmd Filetype gitcommit setlocal spell
 autocmd Filetype markdown setlocal spell
-"}}}
 
-" Folding {{{
+" Folding
 set foldmethod=marker
 
-" http://vim.wikia.com/wiki/Use_folds_in_your_program
-" augroup vimrc
-"   au BufReadPre * setlocal foldmethod=indent
-"   au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
-" augroup END
-
-"Fold Tag
-"http://stevelosh.com/blog/2010/09/coming-home-to-vim/
-nnoremap <leader>ft Vatzf
-"}}}
-
-" Ctrl-P plugin {{{
-nnoremap <C-p> :CtrlP<CR>
-let g:ctrlp_custom_ignore = 'vendor/bundle/node_modules'
-let g:ctrlp_working_path_mode = 'ra'
-" }}}
-
-"{{{ File Browsing
+" File Browsing
 let g:netrw_banner=0        " no more annoying banner!
 let g:netrw_browse_split=4  " open in previous window
 let g:netrw_altv=1          " open splits to the right
 let g:netrw_liststyle=3     " tree view
-"}}}
+let g:netrw_fastbrowse=0
+autocmd FileType netrw setl bufhidden=delete
+autocmd FileType netrw setl bufhidden=wipe
 
-"{{{ CTags
-" generate Ctags
-nnoremap <leader>. :Tags<CR>
-"}}}
-
-" NERD Tree {{{
+" NERD Tree
 " Put focus to the NERD Tree with F3 (tricked by quickly closing it and
 " immediately showing it again, since there is no :NERDTreeFocus command)
 nmap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
 nmap <leader>n :NERDTreeToggle<CR>
 
-" Store the bookmarks file
-"let NERDTreeBookmarksFile=expand("$HOME/.vim/tmp/NERDTreeBookmarks")
+let g:NERDTreeWinSize=40
 
 " Show the bookmarks table on startup
 let NERDTreeShowBookmarks=1
@@ -470,9 +641,6 @@ let NERDTreeShowBookmarks=1
 " Show hidden files, too
 let NERDTreeShowFiles=1
 let NERDTreeShowHidden=1
-
-" Quit on opening files from the tree
-" let NERDTreeQuitOnOpen=1
 
 " Highlight the selected entry in the tree
 let NERDTreeHighlightCursorline=1
@@ -483,36 +651,27 @@ let NERDTreeMouseMode=2
 
 " Don't display these kinds of files
 let NERDTreeIgnore=[ '\.swp$','\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
-            \ '\.o$', '\.so$', '\.egg$', '^\.git$', '\.DS_Store$', '^\.bundle$',
-            \ 'node_modules', '\.keep$']
+      \ '\.o$', '\.so$', '\.egg$', '^\.git$', '\.DS_Store$', '^\.bundle$',
+      \ 'node_modules', '\.keep$']
 
 " Quit vim if nerdtree is last buffer
 " https://github.com/scrooloose/nerdtree/issues/21
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-"let g:NERDTreeWinPos = "right"
-"}}}
-
-" Undotree {{{
-nnoremap <leader>u :UndotreeToggle<cr>
-" }}}
-
-" Fugitive {{{
+" Fugitive
 noremap <leader>gs :Gstatus<cr>
 noremap <leader>gc :Gcommit<cr>
 noremap <leader>ga :Gwrite<cr>
-noremap <leader>gl :Glog<cr>
 noremap <leader>gd :Gdiff<cr>
-"}}}
 
-" Git Gutter {{{
+" Git Gutter
 " Make git gutter background clear
 highlight clear SignColumn
 autocmd ColorScheme * highlight clear SignColumn
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
-"}}}
 
-" {{{ markdown
-let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','html','sh']
-"}}}
+"  markdown
+let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
+
+" :call ToggleTransparent()
