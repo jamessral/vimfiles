@@ -17,30 +17,17 @@ filetype off
 call plug#begin()
 
 Plug 'altercation/vim-colors-solarized'
-" Plug 'ayu-theme/ayu-vim'
-Plug 'cocopon/iceberg.vim'
 Plug 'rakr/vim-one'
 " Plug 'rainglow/vim'
 Plug 'chriskempson/base16-vim'
-" Plug 'kaicataldo/material.vim'
 Plug 'icymind/NeoSolarized'
 Plug 'trevordmiller/nova-vim'
-Plug 'blueshirts/darcula'
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
-" Plug 'terryma/vim-multiple-cursors'
-" Plug 'tpope/vim-vinegar'
 Plug 'scrooloose/nerdtree'
 Plug 'jiangmiao/auto-pairs'
-Plug 'AndrewRadev/splitjoin.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'tpope/vim-rails'
 Plug 'Tetralux/odin.vim'
-" Plug 'ludovicchabant/vim-gutentags'
-" Plug 'tpope/vim-classpath'
-" Plug 'tpope/vim-fireplace'
-" Plug 'RRethy/vim-hexokinase'
 Plug 'machakann/vim-highlightedyank'
 Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
@@ -50,35 +37,25 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'takkii/Bignyanco'
 Plug 'takkii/ruby-dictionary3'
-" Plug 'takkii/totolot'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'mattn/emmet-vim'
 Plug 'calviken/vim-gdscript3'
 Plug 'peitalin/vim-jsx-typescript'
-" Plug 'mhartington/nvim-typescript', {'do': ':!install.sh --production \| UpdateRemotePlugins'}
-Plug 'leafo/moonscript-vim'
 Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'dyng/ctrlsf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'elixir-editors/vim-elixir'
-Plug 'mhinz/vim-mix-format'
 Plug 'scrooloose/nerdcommenter'
-" Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'prettier/vim-prettier', {
       \ 'do': 'yarn install',
       \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
-" Plug 'autozimu/LanguageClient-neovim', {
-"       \ 'branch': 'next',
-"       \ 'do': 'bash install.sh',
-"       \ }
 Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -121,12 +98,12 @@ function! SwitchTheme()
   if t:current_theme == 'dark'
     set background=light
     let t:current_theme = 'light'
-    :colorscheme PaperColor
+    :colorscheme NeoSolarized
     " :AirlineTheme papercolor
   else
     set background=dark
     let t:current_theme = 'dark'
-    :colorscheme lucius
+    :colorscheme space-vim-dark
     " :AirlineTheme base16
     " :call Transparent()
     " let t:is_transparent=1
@@ -139,8 +116,8 @@ nnoremap <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-colorscheme lucius
-let ayucolor="mirage"
+colorscheme space-vim-dark
+
 let g:hybrid_reduced_contrast = 0
 let g:material_terminal_italics = 1
 
@@ -172,19 +149,19 @@ endif
 " Map ESC
 let mapleader = " "              " The default leader key isn't very intuitive.
 
-" set number
+set number
 set showmatch                   " matching brace/parenthesis/etc.
 set hidden                      " http://nvie.com/posts/how-i-boosted-my-vim/
 
 " GUI Settings
-set guifont=FuraCode\ Nerd\ Font\ 11
+set guifont=Literation\ Nerd\ Font\ 11
 set guioptions-=l
 set guioptions-=r
 set guioptions-=T
 set guioptions-=R
 set guioptions-=m
 set guioptions-=L
-set linespace=3
+set linespace=5
 " fullscreen
 map <silent> <F11>
 \    :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
@@ -463,21 +440,6 @@ nnoremap <C-b> :Buffers<CR>
 " nnoremap <leader>r :Tags<CR>
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 
-" Airline
-" let g:airline_theme='base16'
-" let g:airline_left_sep=''
-" let g:airline_left_alt_sep = ''
-" let g:airline_right_sep=''
-" let g:airline_right_alt_sep = ''
-" " keep branch name lenghts under control
-" let g:airline#extensions#branch#displayed_head_limit = 10
-" " let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#left_sep = ''
-" let g:airline#extensions#tabline#left_alt_sep = '|'
-" let g:airline#extensions#tabline#buffer_nr_show = 1
-" let g:airline_powerline_fonts = 1
-""
-
 " Syntax Highlighting and File Types
 autocmd! FileType lua setlocal tabstop=4 shiftwidth=4
 autocmd! FileType ruby setlocal tabstop=2 shiftwidth=2
@@ -487,20 +449,21 @@ autocmd! FileType json setlocal tabstop=2 shiftwidth=2
 autocmd! FileType yaml setlocal tabstop=2 shiftwidth=2
 autocmd! FileType typescript setlocal tabstop=2 shiftwidth=2 shiftwidth=2 syntax=typescript.jsx
 autocmd! FileType typescript.tsx setlocal tabstop=2 shiftwidth=2 shiftwidth=2 syntax=typescript.jsx
-autocmd! FileType c setlocal tabstop=4 shiftwidth=4 noexpandtab
-autocmd! FileType cpp setlocal tabstop=4 shiftwidth=4 noexpandtab
+autocmd! FileType c setlocal tabstop=8 shiftwidth=8 noexpandtab
+autocmd! FileType cpp setlocal tabstop=8 shiftwidth=8 noexpandtab
 autocmd! FileType go setlocal tabstop=4 shiftwidth=4 noexpandtab
+autocmd! FileType rust setlocal tabstop=4 shiftwidth=4
 autocmd! BufRead,BufNewFile,BufEnter vue syntax sync fromstart
 let g:vue_disable_pre_processors=1
 autocmd! BufNewFile,BufRead,CursorHold *.html.erb setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.html setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.jsx setlocal tabstop=2 shiftwidth=2
-autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4
-autocmd! BufNewFile,BufRead *.c setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=8 shiftwidth=8
+autocmd! BufNewFile,BufRead *.c setlocal tabstop=8 shiftwidth=8
+autocmd! BufNewFile,BufRead *.rs setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.tsx setlocal tabstop=2 shiftwidth=2 syntax=typescript.jsx filetype=typescript.tsx
 autocmd! BufNewFile,BufRead *.vue setf vue
 autocmd! BufNewFile,BufRead *.vue setlocal tabstop=2 shiftwidth=2 syntax=vue.html.javascript.css
-autocmd! BufNewFile,BufRead *.hx setlocal tabstop=4 shiftwidth=4 syntax=haxe
 autocmd! BufNewFile,BufRead *.css setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.scss setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.ex setlocal tabstop=2 shiftwidth=2
@@ -557,9 +520,6 @@ set statusline+=%{LinterStatus()}
 set statusline+=\ " Some space
 set statusline+=\ " Some space
 
-" HExokinase
-let g:Hexokinase_ftAutoload = ['css', 'scss', 'xml', 'js', 'jsx', 'ts', 'tsx', 'vue']
-
 " Prettier
 let g:prettier#autoformat = 0
 " autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.vue PrettierAsync
@@ -575,26 +535,11 @@ nnoremap <silent><leader><leader>A :TestSuite<CR>
 nnoremap <silent><leader><leader>L :TestLast<CR>
 nnoremap <silent><leader><leader>G :TestVisit<CR>
 
-let test#strategy = "tmux"
+let test#strategy = "vimproc"
 let g:test#preserve_screen = 1
 let test#javascript#jest#executable = 'yarn test'
 let test#javascript#jest#file_pattern = '[**.jest.js | **.test.js]'
 let test#typescript#jest#file_pattern = '[**.jest.ts | **.test.ts]'
-
-" C/C++
-" let g:ncm2_pyclang#library_path = '/usr/lib/llvm-6.0/lib/libclang.so'
-" let g:ncm2_pyclang#args_file_path = ['.clang_complete']
-" autocmd FileType c,cpp nnoremap <buffer> gd :<c-u>call ncm2_pyclang#goto_declaration()<cr>
-
-" LanaguageClient
-let g:LanguageClient_serverCommands = {
-      \ 'ruby': ['solargraph', 'stdio'],
-      \ 'reason': ['ocaml-language-server', '--stdio'],
-      \ 'ocaml': ['ocaml-language-server', '--stdio'],
-      \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-      \ }
-autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
-" autocmd FileType typescript setlocal omnifunc=LanguageClient#complete
 
 " Typescript Config
 let g:polyglot_disable=['typescript', 'typescript.tsx', 'javscript', 'javascript.jsx']
@@ -603,8 +548,8 @@ let g:polyglot_disable=['typescript', 'typescript.tsx', 'javscript', 'javascript
 autocmd BufWritePre * %s/\s\+$//e
 
 " Hybrid Line Numbers
-" set relativenumber
-" set number
+set relativenumber
+set number
 function! ToggleLines()
   set norelativenumber!
   set nonumber!
