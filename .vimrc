@@ -22,6 +22,7 @@ Plug 'rakr/vim-one'
 Plug 'chriskempson/base16-vim'
 Plug 'icymind/NeoSolarized'
 Plug 'trevordmiller/nova-vim'
+Plug 'liuchengxu/space-vim-theme'
 Plug 'scrooloose/nerdtree'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
@@ -98,12 +99,12 @@ function! SwitchTheme()
   if t:current_theme == 'dark'
     set background=light
     let t:current_theme = 'light'
-    :colorscheme NeoSolarized
+    :colorscheme base16-one-light
     " :AirlineTheme papercolor
   else
     set background=dark
     let t:current_theme = 'dark'
-    :colorscheme space-vim-dark
+    :colorscheme base16-onedark
     " :AirlineTheme base16
     " :call Transparent()
     " let t:is_transparent=1
@@ -116,7 +117,7 @@ nnoremap <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-colorscheme space-vim-dark
+:colorscheme base16-onedark
 
 let g:hybrid_reduced_contrast = 0
 let g:material_terminal_italics = 1
