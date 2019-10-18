@@ -73,7 +73,7 @@ call plug#end()            " required
 " filetype plugin indent on    " required
 
 " Set Color Scheme
-let t:current_theme = 'dark'
+let t:current_theme = 'light'
 let t:is_transparent = 0
 function! Transparent()
   hi Normal guibg=NONE ctermbg=NONE
@@ -99,12 +99,12 @@ function! SwitchTheme()
   if t:current_theme == 'dark'
     set background=light
     let t:current_theme = 'light'
-    :colorscheme base16-one-light
+    :colorscheme space_vim_theme
     " :AirlineTheme papercolor
   else
     set background=dark
     let t:current_theme = 'dark'
-    :colorscheme base16-onedark
+    :colorscheme space_vim_theme
     " :AirlineTheme base16
     " :call Transparent()
     " let t:is_transparent=1
@@ -117,7 +117,7 @@ nnoremap <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-:colorscheme base16-onedark
+:colorscheme space_vim_theme
 
 let g:hybrid_reduced_contrast = 0
 let g:material_terminal_italics = 1
@@ -454,6 +454,7 @@ autocmd! FileType c setlocal tabstop=8 shiftwidth=8 noexpandtab
 autocmd! FileType cpp setlocal tabstop=8 shiftwidth=8 noexpandtab
 autocmd! FileType go setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd! FileType rust setlocal tabstop=4 shiftwidth=4
+autocmd! FileType elm setlocal tabstop=4 shiftwidth=4
 autocmd! BufRead,BufNewFile,BufEnter vue syntax sync fromstart
 let g:vue_disable_pre_processors=1
 autocmd! BufNewFile,BufRead,CursorHold *.html.erb setlocal tabstop=2 shiftwidth=2
@@ -462,6 +463,7 @@ autocmd! BufNewFile,BufRead *.jsx setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=8 shiftwidth=8
 autocmd! BufNewFile,BufRead *.c setlocal tabstop=8 shiftwidth=8
 autocmd! BufNewFile,BufRead *.rs setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.elm setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.tsx setlocal tabstop=2 shiftwidth=2 syntax=typescript.jsx filetype=typescript.tsx
 autocmd! BufNewFile,BufRead *.vue setf vue
 autocmd! BufNewFile,BufRead *.vue setlocal tabstop=2 shiftwidth=2 syntax=vue.html.javascript.css
@@ -528,6 +530,14 @@ nnoremap <leader>F :PrettierAsync<cr>
 
 " Python
 " autocmd BufWritePre *.py execute ':Black'
+
+" Courtesy of Jeremy!
+:set wildcharm=<C-z>
+" open current test file's source in split
+:nnoremap <leader>os :vs %<C-z><c-f>bbdb.<cr>
+
+" open current file's test in split
+:nnoremap <leader>ot :vs %<C-z><c-f>bitest.<cr>
 
 " Test Runner
 nnoremap <silent><leader><leader>t :TestNearest<CR>
