@@ -30,6 +30,8 @@ Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'tpope/vim-rails'
 Plug 'Tetralux/odin.vim'
 Plug 'machakann/vim-highlightedyank'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'chrisbra/Colorizer'
@@ -99,13 +101,13 @@ function! SwitchTheme()
   if t:current_theme == 'dark'
     set background=light
     let t:current_theme = 'light'
-    :colorscheme space_vim_theme
-    " :AirlineTheme papercolor
+    :colorscheme NeoSolarized
+    :AirlineTheme solarized
   else
     set background=dark
     let t:current_theme = 'dark'
-    :colorscheme space_vim_theme
-    " :AirlineTheme base16
+    :colorscheme NeoSolarized
+    :AirlineTheme solarized
     " :call Transparent()
     " let t:is_transparent=1
   end
@@ -117,7 +119,7 @@ nnoremap <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-:colorscheme space_vim_theme
+:colorscheme NeoSolarized
 
 let g:hybrid_reduced_contrast = 0
 let g:material_terminal_italics = 1
@@ -508,20 +510,33 @@ let g:ale_fixers = {
       \   'ruby': ['rubocop']
       \}
 
-set laststatus=2
-set statusline=
-set statusline+=\ " Some space
-set statusline+=%{g:current_mode[mode()]}        " Path to the file
-set statusline+=\ " Some space
-set statusline+=%f         " Path to the file
-set statusline+=\ " Some space
-set statusline+=%{GitInfo()}
-set statusline+=\ " Separator
-set statusline+=%=%y        " Filetype of the file
-set statusline+=\ " Separator
-set statusline+=%{LinterStatus()}
-set statusline+=\ " Some space
-set statusline+=\ " Some space
+" set laststatus=2
+" set statusline=
+" set statusline+=\ " Some space
+" set statusline+=%{g:current_mode[mode()]}        " Path to the file
+" set statusline+=\ " Some space
+" set statusline+=%f         " Path to the file
+" set statusline+=\ " Some space
+" set statusline+=%{GitInfo()}
+" set statusline+=\ " Separator
+" set statusline+=%=%y        " Filetype of the file
+" set statusline+=\ " Separator
+" set statusline+=%{LinterStatus()}
+" set statusline+=\ " Some space
+" set statusline+=\ " Some space
+" Airline
+let g:airline_theme='solarized'
+let g:airline_left_sep=''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep=''
+let g:airline_right_alt_sep = ''
+" keep branch name lenghts under control
+let g:airline#extensions#branch#displayed_head_limit = 10
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline_powerline_fonts = 1
 
 " Prettier
 let g:prettier#autoformat = 0
