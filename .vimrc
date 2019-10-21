@@ -26,8 +26,10 @@ Plug 'liuchengxu/space-vim-theme'
 Plug 'scrooloose/nerdtree'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-fireplace'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'tpope/vim-rails'
+Plug 'jpalardy/vim-slime'
 Plug 'Tetralux/odin.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'vim-airline/vim-airline'
@@ -118,7 +120,7 @@ nnoremap <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set background=dark
+set background=light
 :colorscheme NeoSolarized
 
 let g:hybrid_reduced_contrast = 0
@@ -291,6 +293,9 @@ function! Rand()
   call append(line('.'), @n)
   normal! Jx
 endfunction
+
+" Repl
+let g:slime_target="vimterminal"
 
 " Deoplete
 " let g:deoplete#enable_at_startup = 1
