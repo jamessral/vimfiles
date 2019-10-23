@@ -78,7 +78,7 @@ call plug#end()            " required
 " filetype plugin indent on    " required
 
 " Set Color Scheme
-let t:current_theme = 'light'
+let t:current_theme = 'dark'
 let t:is_transparent = 0
 function! Transparent()
   hi Normal guibg=NONE ctermbg=NONE
@@ -104,13 +104,13 @@ function! SwitchTheme()
   if t:current_theme == 'dark'
     set background=light
     let t:current_theme = 'light'
-    :colorscheme NeoSolarized
-    :AirlineTheme solarized
+    :colorscheme Tomorrow
+    :AirlineTheme tomorrow
   else
     set background=dark
     let t:current_theme = 'dark'
-    :colorscheme NeoSolarized
-    :AirlineTheme solarized
+    :colorscheme Tomorrow-Night-Bright
+    :AirlineTheme tomorrow
     " :call Transparent()
     " let t:is_transparent=1
   end
@@ -121,8 +121,8 @@ nnoremap <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set background=light
-:colorscheme NeoSolarized
+set background=dark
+:colorscheme Tomorrow-Night-Bright
 
 let g:hybrid_reduced_contrast = 0
 let g:material_terminal_italics = 1
@@ -531,7 +531,7 @@ let g:ale_fixers = {
 " set statusline+=\ " Some space
 " set statusline+=\ " Some space
 " Airline
-let g:airline_theme='solarized'
+let g:airline_theme='tomorrow'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
