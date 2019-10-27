@@ -104,13 +104,13 @@ function! SwitchTheme()
   if t:current_theme == 'dark'
     set background=light
     let t:current_theme = 'light'
-    :colorscheme Tomorrow
+    :colorscheme base16-atelier-dune-light
     :AirlineTheme tomorrow
   else
     set background=dark
     let t:current_theme = 'dark'
-    :colorscheme Tomorrow-Night-Bright
-    :AirlineTheme tomorrow
+    :colorscheme jellybeans
+    :AirlineTheme jellybeans
     " :call Transparent()
     " let t:is_transparent=1
   end
@@ -122,11 +122,12 @@ nnoremap <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-:colorscheme Tomorrow-Night-Bright
+:colorscheme jellybeans
 
 let g:hybrid_reduced_contrast = 0
 let g:material_terminal_italics = 1
 
+let g:ayucolor="dark"
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
 
