@@ -23,7 +23,8 @@ Plug 'chriskempson/base16-vim'
 Plug 'icymind/NeoSolarized'
 Plug 'trevordmiller/nova-vim'
 Plug 'liuchengxu/space-vim-theme'
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-vinegar'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fireplace'
@@ -104,13 +105,13 @@ function! SwitchTheme()
   if t:current_theme == 'dark'
     set background=light
     let t:current_theme = 'light'
-    :colorscheme NeoSolarized
-    :AirlineTheme solarized
+    :colorscheme hybrid
+    :AirlineTheme hybrid
   else
     set background=dark
     let t:current_theme = 'dark'
-    :colorscheme NeoSolarized
-    :AirlineTheme solarized
+    :colorscheme hybrid
+    :AirlineTheme hybrid
     " :call Transparent()
     " let t:is_transparent=1
   end
@@ -122,9 +123,9 @@ nnoremap <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-:colorscheme NeoSolarized
+:colorscheme hybrid
 
-let g:hybrid_reduced_contrast = 0
+let g:hybrid_reduced_contrast = 1
 let g:material_terminal_italics = 1
 
 let g:ayucolor="dark"
@@ -532,7 +533,7 @@ let g:ale_fixers = {
 " set statusline+=\ " Some space
 " set statusline+=\ " Some space
 " Airline
-let g:airline_theme='tomorrow'
+let g:airline_theme='hybrid'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
@@ -598,18 +599,19 @@ set foldmethod=marker
 
 " File Browsing
 let g:netrw_banner=0        " no more annoying banner!
-let g:netrw_browse_split=4  " open in previous window
+let g:netrw_browse_split=0
 let g:netrw_altv=1          " open splits to the right
 let g:netrw_liststyle=3     " tree view
 let g:netrw_fastbrowse=0
-autocmd FileType netrw setl bufhidden=delete
-autocmd FileType netrw setl bufhidden=wipe
+let g:netrw_winsize=15
+" autocmd FileType netrw setl bufhidden=delete
+" autocmd FileType netrw setl bufhidden=wipe
 
 " NERD Tree
 " Put focus to the NERD Tree with F3 (tricked by quickly closing it and
 " immediately showing it again, since there is no :NERDTreeFocus command)
-nmap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
-nmap <leader>n :NERDTreeToggle<CR>
+" nmap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
+" nmap <leader>n :NERDTreeToggle<CR>
 
 let g:NERDTreeWinSize=40
 
