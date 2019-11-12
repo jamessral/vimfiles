@@ -19,12 +19,13 @@ call plug#begin()
 Plug 'altercation/vim-colors-solarized'
 Plug 'rakr/vim-one'
 " Plug 'rainglow/vim'
+Plug 'luochen1990/rainbow'
 Plug 'chriskempson/base16-vim'
 Plug 'icymind/NeoSolarized'
-Plug 'trevordmiller/nova-vim'
+" Plug 'trevordmiller/nova-vim'
 Plug 'liuchengxu/space-vim-theme'
-" Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-vinegar'
+Plug 'scrooloose/nerdtree'
+" Plug 'tpope/vim-vinegar'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fireplace'
@@ -32,7 +33,7 @@ Plug 'tpope/vim-salve'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'tpope/vim-rails'
 Plug 'jpalardy/vim-slime'
-Plug 'Tetralux/odin.vim'
+" Plug 'Tetralux/odin.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -52,7 +53,7 @@ Plug 'calviken/vim-gdscript3'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'dyng/ctrlsf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -105,13 +106,13 @@ function! SwitchTheme()
   if t:current_theme == 'dark'
     set background=light
     let t:current_theme = 'light'
-    :colorscheme hybrid
-    :AirlineTheme hybrid
+    :colorscheme space_vim_theme
+    :AirlineTheme tomorrow
   else
     set background=dark
     let t:current_theme = 'dark'
-    :colorscheme hybrid
-    :AirlineTheme hybrid
+    :colorscheme base16-monokai
+    :AirlineTheme base16_monokai
     " :call Transparent()
     " let t:is_transparent=1
   end
@@ -123,7 +124,7 @@ nnoremap <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-:colorscheme hybrid
+:colorscheme base16-monokai
 
 let g:hybrid_reduced_contrast = 1
 let g:material_terminal_italics = 1
@@ -448,6 +449,10 @@ let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/plugged/vim-snippets/UltiSn
 " Fzf
 nnoremap <C-p> :Files<CR>
 nnoremap <C-b> :Buffers<CR>
+
+" Delete all but the current buffer
+command! BufOnly silent! execute "%bd|e#|bd#"
+
 " nnoremap <leader>r :Tags<CR>
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 
@@ -533,7 +538,7 @@ let g:ale_fixers = {
 " set statusline+=\ " Some space
 " set statusline+=\ " Some space
 " Airline
-let g:airline_theme='hybrid'
+let g:airline_theme='base16_monokai'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
@@ -610,8 +615,8 @@ let g:netrw_winsize=15
 " NERD Tree
 " Put focus to the NERD Tree with F3 (tricked by quickly closing it and
 " immediately showing it again, since there is no :NERDTreeFocus command)
-" nmap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
-" nmap <leader>n :NERDTreeToggle<CR>
+nmap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
+nmap <leader>n :NERDTreeToggle<CR>
 
 let g:NERDTreeWinSize=40
 
