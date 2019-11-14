@@ -28,6 +28,7 @@ Plug 'scrooloose/nerdtree'
 " Plug 'tpope/vim-vinegar'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
+Plug 'kovisoft/slimv'
 Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-salve'
 Plug 'MaxMEllon/vim-jsx-pretty'
@@ -301,9 +302,9 @@ endfunction
 " Repl
 let g:slime_target="tmux"
 
-" Deoplete
-" let g:deoplete#enable_at_startup = 1
-"
+" Common Lisp
+" let g:slimv_swank_cmd = ':terminal xterm -e sbcl --load $HOME/quicklisp/dists/quicklisp/software/slime-v2.24/start-swank.lisp &'
+
 " CoC
 " Starting config lifted from [here](https://github.com/neoclide/coc.nvim)
 set updatetime=300
