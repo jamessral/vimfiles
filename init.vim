@@ -54,7 +54,7 @@ Plug 'calviken/vim-gdscript3'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
-" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'dyng/ctrlsf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -107,13 +107,13 @@ function! SwitchTheme()
   if t:current_theme == 'dark'
     set background=light
     let t:current_theme = 'light'
-    :colorscheme space_vim_theme
-    :AirlineTheme tomorrow
+    :colorscheme gruvbox
+    :AirlineTheme minimalist
   else
     set background=dark
     let t:current_theme = 'dark'
-    :colorscheme base16-monokai
-    :AirlineTheme base16_monokai
+    :colorscheme badwolf
+    :AirlineTheme minimalist
     " :call Transparent()
     " let t:is_transparent=1
   end
@@ -125,7 +125,7 @@ nnoremap <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-:colorscheme base16-monokai
+colorscheme badwolf
 
 let g:hybrid_reduced_contrast = 1
 let g:material_terminal_italics = 1
@@ -539,7 +539,7 @@ let g:ale_fixers = {
 " set statusline+=\ " Some space
 " set statusline+=\ " Some space
 " Airline
-let g:airline_theme='base16_monokai'
+let g:airline_theme='minimalist'
 let g:airline_left_sep=''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
@@ -575,7 +575,7 @@ nnoremap <silent><leader><leader>A :TestSuite<CR>
 nnoremap <silent><leader><leader>L :TestLast<CR>
 nnoremap <silent><leader><leader>G :TestVisit<CR>
 
-let test#strategy = "vimproc"
+let test#strategy = "neovim"
 let g:test#preserve_screen = 1
 let test#javascript#jest#executable = 'yarn test'
 let test#javascript#jest#file_pattern = '[**.jest.js | **.test.js]'
