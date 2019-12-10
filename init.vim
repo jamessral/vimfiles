@@ -371,13 +371,14 @@ let g:ale_linters = {
       \  'javascript': ['eslint'],
       \  'javascript.jsx': ['eslint'],
       \  'typescript': ['tsserver', 'tslint', 'eslint'],
-      \  'typescript.tsx': ['tsserver', 'tslint', 'eslint']
+      \  'typescriptreact': ['tsserver', 'tslint', 'eslint']
       \}
 
 let g:ale_fixers = {
       \   '*': ['remove_trailing_lines', 'trim_whitespace'],
       \   'javascript': ['eslint'],
       \   'typescript': ['tslint', 'eslint'],
+      \   'typescriptreact': ['tslint', 'eslint'],
       \   'ruby': ['rubocop']
       \}
 
