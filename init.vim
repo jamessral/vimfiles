@@ -31,6 +31,13 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 Plug 'takkii/Bignyanco'
 Plug 'takkii/ruby-dictionary3'
 Plug 'HerringtonDarkholme/yats.vim'
@@ -65,6 +72,7 @@ Plug 'danro/rename.vim'
 call plug#end()            " required
 " filetype plugin indent on    " required
 
+let g:deoplete#enable_at_startup = 1
 " Set Color Scheme
 let t:current_theme = 'dark'
 let t:is_transparent = 0
@@ -97,7 +105,8 @@ function! SwitchTheme()
   else
     set background=dark
     let t:current_theme = 'light'
-    :colorscheme kolor
+    :colorscheme OceanicNext
+    " :colorscheme kolor
     " :AirlineTheme minimalist
     " :call Transparent()
     " let t:is_transparent=1
@@ -110,7 +119,7 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-colorscheme kolor
+colorscheme OceanicNext
 
 let g:hybrid_reduced_contrast = 1
 let g:material_terminal_italics = 1
