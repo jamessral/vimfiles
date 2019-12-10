@@ -318,8 +318,8 @@ autocmd! FileType javascript setlocal tabstop=2 shiftwidth=2
 autocmd! FileType javascript.jsx setlocal tabstop=2 shiftwidth=2
 autocmd! FileType json setlocal tabstop=2 shiftwidth=2
 autocmd! FileType yaml setlocal tabstop=2 shiftwidth=2
-autocmd! FileType typescript setlocal tabstop=2 shiftwidth=2 shiftwidth=2 syntax=typescript.jsx
-autocmd! FileType typescript.tsx setlocal tabstop=2 shiftwidth=2 shiftwidth=2 syntax=typescript.jsx
+autocmd! FileType typescript setlocal tabstop=2 shiftwidth=2 shiftwidth=2
+" autocmd! FileType typescript.tsx setlocal tabstop=2 shiftwidth=2 shiftwidth=2
 autocmd! FileType c setlocal tabstop=8 shiftwidth=8 noexpandtab
 autocmd! FileType cpp setlocal tabstop=8 shiftwidth=8 noexpandtab
 autocmd! FileType go setlocal tabstop=4 shiftwidth=4 noexpandtab
@@ -334,7 +334,8 @@ autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=8 shiftwidth=8
 autocmd! BufNewFile,BufRead *.c setlocal tabstop=8 shiftwidth=8
 autocmd! BufNewFile,BufRead *.rs setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.elm setlocal tabstop=4 shiftwidth=4
-autocmd! BufNewFile,BufRead *.tsx setlocal tabstop=2 shiftwidth=2 syntax=typescript.jsx filetype=typescript.tsx
+autocmd! BufNewFile,BufRead *.ts setlocal tabstop=2 shiftwidth=2
+autocmd! BufNewFile,BufRead *.tsx setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.vue setf vue
 autocmd! BufNewFile,BufRead *.vue setlocal tabstop=2 shiftwidth=2 syntax=vue.html.javascript.css
 autocmd! BufNewFile,BufRead *.css setlocal tabstop=2 shiftwidth=2
