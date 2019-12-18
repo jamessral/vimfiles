@@ -72,6 +72,8 @@ call plug#end()            " required
 " filetype plugin indent on    " required
 
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#disable_auto_complete = 1
+inoremap <expr> <C-n>  deoplete#manual_complete()
 " Set Color Scheme
 let t:current_theme = 'light'
 
@@ -101,10 +103,11 @@ function! SwitchTheme()
   if t:current_theme == 'light'
     set background=light
     let t:current_theme = 'dark'
-    :colorscheme earendel
+    :colorscheme PaperColor
   else
+    set background=dark
     let t:current_theme = 'light'
-    :colorscheme OceanicNext
+    :colorscheme dracula
   end
 endfunction
 
@@ -114,7 +117,7 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-colorscheme OceanicNext
+colorscheme dracula
 
 let g:hybrid_reduced_contrast = 1
 let g:material_terminal_italics = 1
