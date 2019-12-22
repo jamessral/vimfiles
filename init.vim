@@ -37,8 +37,8 @@ else
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
-Plug 'takkii/Bignyanco'
-Plug 'takkii/ruby-dictionary3'
+" Plug 'takkii/Bignyanco'
+" Plug 'takkii/ruby-dictionary3'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -103,11 +103,11 @@ function! SwitchTheme()
   if t:current_theme == 'light'
     set background=light
     let t:current_theme = 'dark'
-    :colorscheme PaperColor
+    :colorscheme gruvbox
   else
     set background=dark
     let t:current_theme = 'light'
-    :colorscheme dracula
+    :colorscheme gruvbox
   end
 endfunction
 
@@ -116,8 +116,8 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set background=dark
-colorscheme dracula
+set background=light
+colorscheme gruvbox
 
 let g:hybrid_reduced_contrast = 1
 let g:material_terminal_italics = 1
@@ -318,8 +318,9 @@ autocmd! FileType json setlocal tabstop=2 shiftwidth=2
 autocmd! FileType yaml setlocal tabstop=2 shiftwidth=2
 autocmd! FileType typescript setlocal tabstop=2 shiftwidth=2 shiftwidth=2
 " autocmd! FileType typescript.tsx setlocal tabstop=2 shiftwidth=2 shiftwidth=2
-autocmd! FileType c setlocal tabstop=8 shiftwidth=8 noexpandtab
-autocmd! FileType cpp setlocal tabstop=8 shiftwidth=8 noexpandtab
+autocmd! FileType c setlocal tabstop=4 shiftwidth=4 noexpandtab
+autocmd! FileType cpp setlocal tabstop=4 shiftwidth=4 noexpandtab
+autocmd! FileType d setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd! FileType go setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd! FileType rust setlocal tabstop=4 shiftwidth=4
 autocmd! FileType elm setlocal tabstop=4 shiftwidth=4
@@ -328,8 +329,9 @@ let g:vue_disable_pre_processors=1
 autocmd! BufNewFile,BufRead,CursorHold *.html.erb setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.html setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.jsx setlocal tabstop=2 shiftwidth=2
-autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=8 shiftwidth=8
-autocmd! BufNewFile,BufRead *.c setlocal tabstop=8 shiftwidth=8
+autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.c setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.d setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.rs setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.elm setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.ts setlocal tabstop=2 shiftwidth=2
