@@ -23,6 +23,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'tpope/vim-rails'
+Plug 'rhysd/vim-crystal'
 Plug 'Tetralux/odin.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'flazz/vim-colorschemes'
@@ -59,7 +60,6 @@ Plug 'prettier/vim-prettier', {
 Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
@@ -122,7 +122,7 @@ colorscheme gruvbox
 let g:hybrid_reduced_contrast = 1
 let g:material_terminal_italics = 1
 
-let g:ayucolor="dark"
+let g:ayucolor="mirage"
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
 
@@ -443,6 +443,7 @@ autocmd Filetype gitcommit setlocal spell
 autocmd Filetype markdown setlocal spell
 
 " Folding
+set nofoldenable " disable folding by default
 set foldmethod=marker
 
 " File Browsing
