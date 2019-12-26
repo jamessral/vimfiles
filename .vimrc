@@ -51,7 +51,7 @@ Plug 'HerringtonDarkholme/yats.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'mattn/emmet-vim'
-Plug 'peitalin/vim-jsx-typescript'
+" Plug 'peitalin/vim-jsx-typescript'
 Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -324,7 +324,6 @@ autocmd! FileType javascript.jsx setlocal tabstop=2 shiftwidth=2
 autocmd! FileType json setlocal tabstop=2 shiftwidth=2
 autocmd! FileType yaml setlocal tabstop=2 shiftwidth=2
 autocmd! FileType typescript setlocal tabstop=2 shiftwidth=2 shiftwidth=2
-" autocmd! FileType typescript.tsx setlocal tabstop=2 shiftwidth=2 shiftwidth=2
 autocmd! FileType c setlocal tabstop=8 shiftwidth=8 noexpandtab
 autocmd! FileType cpp setlocal tabstop=8 shiftwidth=8 noexpandtab
 autocmd! FileType go setlocal tabstop=4 shiftwidth=4 noexpandtab
@@ -429,7 +428,7 @@ let test#javascript#jest#file_pattern = '[**.jest.js | **.test.js]'
 let test#typescript#jest#file_pattern = '[**.jest.ts | **.test.ts]'
 
 " Typescript Config
-let g:polyglot_disable=['typescript', 'typescript.tsx', 'javscript', 'javascript.jsx']
+let g:polyglot_disable=['typescript', 'javscript', 'javascript.jsx']
 
 " Remove trailing whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
