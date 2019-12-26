@@ -108,11 +108,11 @@ nnoremap <silent> <F6> :call ToggleTransparent()<cr>
 
 function! SwitchTheme()
   if t:current_theme == 'light'
-    set background=light
     let t:current_theme = 'dark'
+    set background=dark
     :colorscheme gruvbox
   else
-    set background=dark
+    set background=light
     let t:current_theme = 'light'
     :colorscheme gruvbox
   end
@@ -130,8 +130,8 @@ let g:hybrid_reduced_contrast = 1
 let g:material_terminal_italics = 1
 
 let g:ayucolor="mirage"
-let g:gruvbox_contrast_dark="hard"
-let g:gruvbox_contrast_light="hard"
+let g:gruvbox_contrast_dark="medium"
+let g:gruvbox_contrast_light="medium"
 
 " Vim Settings
 set colorcolumn=80
