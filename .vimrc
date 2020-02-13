@@ -27,6 +27,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'tpope/vim-rails'
+Plug 'rakr/vim-one'
 Plug 'jdonaldson/vaxe'
 Plug 'calviken/vim-gdscript3'
 Plug 'plasticboy/vim-markdown'
@@ -111,11 +112,11 @@ function! SwitchTheme()
   if t:current_theme == 'light'
     let t:current_theme = 'dark'
     set background=dark
-    :colorscheme gruvbox
+    :colorscheme PaperColor
   else
     set background=light
     let t:current_theme = 'light'
-    :colorscheme gruvbox
+    :colorscheme PaperColor
   end
 endfunction
 
@@ -125,7 +126,7 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=light
-colorscheme gruvbox
+colorscheme basic-light
 
 let g:hybrid_reduced_contrast = 1
 let g:material_terminal_italics = 1
@@ -229,6 +230,7 @@ tnoremap <M-l> <C-\><C-N><C-w>l
 
 set backup       " keep a backup file
 set backupdir=~/.vim/backup//
+set backupcopy=yes
 set undofile
 set undodir=~/.vim/undo//
 

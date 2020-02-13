@@ -23,8 +23,9 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'tpope/vim-rails'
-Plug 'rhysd/vim-crystal'
 Plug 'Tetralux/odin.vim'
+Plug 'jdonaldson/vaxe'
+Plug 'dart-lang/dart-vim-plugin'
 Plug 'machakann/vim-highlightedyank'
 Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
@@ -60,6 +61,7 @@ Plug 'prettier/vim-prettier', {
 Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
@@ -102,7 +104,7 @@ function! SwitchTheme()
   if t:current_theme == 'light'
     set background=light
     let t:current_theme = 'dark'
-    :colorscheme pencil
+    :colorscheme basic-light
   else
     set background=dark
     let t:current_theme = 'light'
@@ -115,13 +117,13 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set background=dark
-colorscheme dracula
+set background=light
+colorscheme basic-light
 
 let g:hybrid_reduced_contrast = 1
 let g:material_terminal_italics = 1
 
-let g:ayucolor="mirage"
+let g:ayucolor="dark"
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
 
@@ -136,6 +138,8 @@ set wildmenu
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/.tmp/*,*/.sass-cache/*,*/node_modules/*,*.keep,*.DS_Store,*/.git/*,*/__pychache__/*
 
 set mouse=a
+
+set autowrite
 
 " Don't use a line cursor in insert mode
 " set guicursor=
@@ -523,6 +527,9 @@ let g:prettier#autoformat = 0
 " autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.vue PrettierAsync
 nnoremap <leader>F :PrettierAsync<cr>
 
+let g:dat_style_guide = 2
+let g:dart_format_on_save = 1
+
 " Courtesy of Jeremy!
 :set wildcharm=<C-z>
 " open current test file's source in split
@@ -564,7 +571,6 @@ autocmd Filetype gitcommit setlocal spell
 autocmd Filetype markdown setlocal spell
 
 " Folding
-set nofoldenable " disable folding by default
 set foldmethod=marker
 
 " File Browsing
