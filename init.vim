@@ -63,7 +63,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-c NOTE(jsral):ommentary'
+Plug 'tpope/vim-commentary'
 Plug 'tbastos/vim-lua'
 Plug 'janko-m/vim-test'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
