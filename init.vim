@@ -28,6 +28,8 @@ Plug 'Tetralux/odin.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
+Plug 'calviken/vim-gdscript3'
+Plug 'Shougo/deoplete.nvim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -98,11 +100,11 @@ nnoremap <silent> <F6> :call ToggleTransparent()<cr>
 
 function! SwitchTheme()
   if t:current_theme == 'light'
-    set background=light
+    set background=dark
     let t:current_theme = 'dark'
     :colorscheme flattened_dark
   else
-    set background=dark
+    set background=light
     let t:current_theme = 'light'
     :colorscheme flattened_light
   end
