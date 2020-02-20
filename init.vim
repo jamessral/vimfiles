@@ -29,7 +29,6 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'calviken/vim-gdscript3'
-Plug 'Shougo/deoplete.nvim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
