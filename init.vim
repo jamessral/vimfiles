@@ -446,6 +446,11 @@ nnoremap <C-b> :Buffers<CR>
 
 " Delete all but the current buffer
 command! BufOnly silent! execute "%bd|e#|bd#"
+function CleanupBuffers()
+  :BufOnly
+  :bd
+endfunction
+nnoremap <leader>bd :call CleanupBuffers()<cr>
 
 " nnoremap <leader>r :Tags<CR>
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
@@ -453,6 +458,7 @@ let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 " Syntax Highlighting and File Types
 autocmd! FileType lua setlocal tabstop=4 shiftwidth=4
 autocmd! FileType ruby setlocal tabstop=2 shiftwidth=2
+autocmd! FileType eruby setlocal tabstop=2 shiftwidth=2
 autocmd! FileType javascript setlocal tabstop=2 shiftwidth=2 syntax=javascript.jsx
 autocmd! FileType javascript.jsx setlocal tabstop=2 shiftwidth=2
 autocmd! FileType json setlocal tabstop=2 shiftwidth=2
