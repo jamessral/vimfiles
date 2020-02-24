@@ -18,7 +18,8 @@ filetype off
 call plug#begin()
 
 Plug 'chriskempson/base16-vim'
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-vinegar'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
 Plug 'MaxMEllon/vim-jsx-pretty'
@@ -101,11 +102,11 @@ function! SwitchTheme()
   if t:current_theme == 'light'
     set background=dark
     let t:current_theme = 'dark'
-    :colorscheme Tomorrow-Night
+    :colorscheme PaperColor
   else
     set background=light
     let t:current_theme = 'light'
-    :colorscheme flattened_light
+    :colorscheme PaperColor
   end
 endfunction
 
@@ -115,7 +116,7 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-colorscheme Tomorrow-Night
+colorscheme PaperColor
 let g:hybrid_reduced_contrast = 1
 let g:material_terminal_italics = 1
 
@@ -597,33 +598,33 @@ let g:netrw_winsize=15
 " NERD Tree
 " Put focus to the NERD Tree with F3 (tricked by quickly closing it and
 " immediately showing it again, since there is no :NERDTreeFocus command)
-nmap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
-nmap <leader>n :NERDTreeToggle<CR>
+" nmap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
+" nmap <leader>n :NERDTreeToggle<CR>
 
-let g:NERDTreeWinSize=40
+" let g:NERDTreeWinSize=40
 
 " Show the bookmarks table on startup
-let NERDTreeShowBookmarks=1
+" let NERDTreeShowBookmarks=1
 
 " Show hidden files, too
-let NERDTreeShowFiles=1
-let NERDTreeShowHidden=1
+" let NERDTreeShowFiles=1
+" let NERDTreeShowHidden=1
 
 " Highlight the selected entry in the tree
-let NERDTreeHighlightCursorline=1
+" let NERDTreeHighlightCursorline=1
 
 " Use a single click to fold/unfold directories and a double click to open
 " files
-let NERDTreeMouseMode=2
+" let NERDTreeMouseMode=2
 
 " Don't display these kinds of files
-let NERDTreeIgnore=[ '\.swp$','\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
-      \ '\.o$', '\.so$', '\.egg$', '^\.git$', '\.DS_Store$', '^\.bundle$',
-      \ 'node_modules', '\.keep$', '\.obj$', '\.pdb$', '\.sln$']
+" let NERDTreeIgnore=[ '\.swp$','\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
+      " \ '\.o$', '\.so$', '\.egg$', '^\.git$', '\.DS_Store$', '^\.bundle$',
+      " \ 'node_modules', '\.keep$', '\.obj$', '\.pdb$', '\.sln$']
 
 " Quit vim if nerdtree is last buffer
 " https://github.com/scrooloose/nerdtree/issues/21
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " Fugitive
 noremap <leader>gs :Gstatus<cr>
