@@ -32,16 +32,17 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'calviken/vim-gdscript3'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" if has('nvim')
-"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" else
-"   Plug 'Shougo/deoplete.nvim'
-"   Plug 'roxma/nvim-yarp'
-"   Plug 'roxma/vim-hug-neovim-rpc'
-" endif
-Plug 'takkii/Bignyanco'
-Plug 'takkii/ruby-dictionary3'
+Plug 'sebastianmarkow/deoplete-rust'
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+" Plug 'takkii/Bignyanco'
+" Plug 'takkii/ruby-dictionary3'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -102,11 +103,11 @@ function! SwitchTheme()
   if t:current_theme == 'light'
     set background=dark
     let t:current_theme = 'dark'
-    :colorscheme PaperColor
+    :colorscheme base16-default-dark
   else
     set background=light
     let t:current_theme = 'light'
-    :colorscheme PaperColor
+    :colorscheme base16-gruvbox-light-hard
   end
 endfunction
 
@@ -116,7 +117,7 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-colorscheme PaperColor
+colorscheme base16-default-dark
 let g:hybrid_reduced_contrast = 1
 let g:material_terminal_italics = 1
 
