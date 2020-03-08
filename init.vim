@@ -18,9 +18,9 @@ filetype off
 call plug#begin()
 
 Plug 'chriskempson/base16-vim'
-Plug 'scrooloose/nerdtree'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-vinegar'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'tpope/vim-rails'
 Plug 'jpalardy/vim-slime'
