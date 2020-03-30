@@ -31,6 +31,10 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'sebastianmarkow/deoplete-rust'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -101,11 +105,11 @@ function! SwitchTheme()
   if t:current_theme == 'light'
     set background=dark
     let t:current_theme = 'dark'
-    :colorscheme flattened_dark
+    colorscheme base16-tomorrow
   else
     set background=light
     let t:current_theme = 'light'
-    :colorscheme flattened_light
+    colorscheme base16-tomorrow-night
   end
 endfunction
 
@@ -115,7 +119,7 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-colorscheme flattened_dark
+colorscheme base16-tomorrow-night
 let g:hybrid_reduced_contrast = 1
 let g:material_terminal_italics = 1
 
@@ -181,9 +185,9 @@ set splitright
 set splitbelow
 
 " Use the OS clipboard by default
-set clipboard=unnamedplus
+set clipboard=unnamed
 
-set nocursorline
+set cursorline
 " Indicators
 "set list                          " Show hidden characters (tab and eol)
 "set listchars=trail:⋅,nbsp:⋅,tab:▸\ ,eol:¬       " Use the same chars as textmate.
@@ -302,9 +306,9 @@ endfunction
 set shortmess+=c
 set completeopt=noinsert,menuone,noselect
 let g:python_host_prog=expand('$HOME/.pyenv/versions/2.7.14/bin/python')
-let g:python3_host_prog=expand('$HOME/.pyenv/versions/3.7.4/bin/python')
+let g:python3_host_prog=expand('$HOME/.pyenv/versions/3.7.6/bin/python')
 
-" " Nerd c NOTE(jsral):ommenter
+" " Nerd commenter
 let g:NERDCompactSexyComs = 0
 
 " UltiSnips
@@ -316,6 +320,23 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 
 " Snippets
 let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/plugged/vim-snippets/UltiSnips', 'UltiSnips']
+
+let g:LanguageClient_useVirtualText = "No"
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ 'javascript': ['typescript-language-server', '--stdio'],
+    \ 'javascript.jsx': ['typescript-language-server', '--stdio'],
+    \ 'typescript': ['typescript-language-server', '--stdio'],
+    \ 'typescript.tsx': ['typescript-language-server', '--stdio'],
+    \ 'typescriptreact': ['typescript-language-server', '--stdio'],
+    \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
+    \ }
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+" Or map each action separately
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 " Fzf
 nnoremap <C-p> :Files<CR>
