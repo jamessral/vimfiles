@@ -185,7 +185,7 @@ set splitright
 set splitbelow
 
 " Use the OS clipboard by default
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 set cursorline
 " Indicators
@@ -234,6 +234,11 @@ function! PrintTodo()
   :Commentary
   :normal! F:
   :startinsert!
+endfunction
+
+function! CleanBuffers()
+  :BufOnly
+  :bd
 endfunction
 
 inoremap <C-i><C-n> <ESC>:call PrintNote()<cr>
@@ -332,7 +337,7 @@ let g:LanguageClient_serverCommands = {
     \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
     \ }
 
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+nnoremap <F7> :call LanguageClient_contextMenu()<CR>
 " Or map each action separately
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
