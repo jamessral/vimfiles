@@ -52,7 +52,7 @@ Plug 'HerringtonDarkholme/yats.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'mattn/emmet-vim'
-Plug 'peitalin/vim-jsx-typescript'
+Plug 'leafgarland/typescript-vim'
 Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -82,7 +82,7 @@ call plug#end()            " required
 
 let g:deoplete#enable_at_startup = 1
 " Set Color Scheme
-let t:current_theme = 'dark'
+let t:current_theme = 'light'
 let t:is_transparent = 0
 function! Transparent()
   hi Normal guibg=NONE ctermbg=NONE
@@ -108,11 +108,11 @@ function! SwitchTheme()
   if t:current_theme == 'light'
     set background=dark
     let t:current_theme = 'dark'
-    colorscheme base16-tomorrow
+    colorscheme PaperColor
   else
     set background=light
     let t:current_theme = 'light'
-    colorscheme base16-tomorrow-night
+    colorscheme PaperColor
   end
 endfunction
 
@@ -121,8 +121,8 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set background=dark
-colorscheme base16-tomorrow-night
+set background=light
+colorscheme PaperColor
 let g:hybrid_reduced_contrast = 1
 let g:material_terminal_italics = 1
 
@@ -306,7 +306,7 @@ nnoremap <cr> :w<cr>
 
 " Random Number
 function! Rand()
-  let @n = substitute(system('random'),'\n', '', 'g')
+  let @n = substitute(system('shuf -i 1000-100000 -n 1'),'\n', '', 'g')
   call append(line('.'), @n)
   normal! Jx
 endfunction
@@ -364,7 +364,6 @@ autocmd! FileType javascript.jsx setlocal tabstop=2 shiftwidth=2
 autocmd! FileType json setlocal tabstop=2 shiftwidth=2
 autocmd! FileType yaml setlocal tabstop=2 shiftwidth=2
 autocmd! FileType typescript setlocal tabstop=2 shiftwidth=2 shiftwidth=2
-" autocmd! FileType typescript.tsx setlocal tabstop=2 shiftwidth=2 shiftwidth=2
 autocmd! FileType c setlocal tabstop=4 shiftwidth=4 noexpandtab commentstring=//\ %s
 autocmd! FileType cpp setlocal tabstop=4 shiftwidth=4 noexpandtab commentstring=//\ %s
 autocmd! FileType go setlocal tabstop=4 shiftwidth=4 noexpandtab
@@ -379,8 +378,8 @@ autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.c setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.rs setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.elm setlocal tabstop=4 shiftwidth=4
-autocmd! BufNewFile,BufRead *.ts setlocal tabstop=2 shiftwidth=2
-autocmd! BufNewFile,BufRead *.tsx setlocal tabstop=2 shiftwidth=2
+autocmd! BufNewFile,BufRead *.ts setlocal tabstop=2 shiftwidth=2 filetype=typescript
+autocmd! BufNewFile,BufRead *.tsx setlocal tabstop=2 shiftwidth=2 filetype=typescript.tsx
 autocmd! BufNewFile,BufRead *.vue setf vue
 autocmd! BufNewFile,BufRead *.vue setlocal tabstop=2 shiftwidth=2 syntax=vue.html.javascript.css
 autocmd! BufNewFile,BufRead *.css setlocal tabstop=2 shiftwidth=2
