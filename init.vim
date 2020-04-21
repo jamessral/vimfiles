@@ -41,8 +41,6 @@ else
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
-Plug 'takkii/Bignyanco'
-Plug 'takkii/ruby-dictionary3'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -76,8 +74,12 @@ call plug#end()            " required
 " filetype plugin indent on    " required
 
 let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option({
+\ 'auto_complete_delay': 200,
+\ })
+
 " Set Color Scheme
-let t:current_theme = 'light'
+let t:current_theme = 'dark'
 let t:is_transparent = 0
 function! Transparent()
   hi Normal guibg=NONE ctermbg=NONE
@@ -103,11 +105,11 @@ function! SwitchTheme()
   if t:current_theme == 'light'
     set background=dark
     let t:current_theme = 'dark'
-    colorscheme PaperColor
+    colorscheme monokai-phoenix
   else
     set background=light
     let t:current_theme = 'light'
-    colorscheme PaperColor
+    colorscheme flattened_light
   end
 endfunction
 
@@ -116,8 +118,8 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set background=light
-colorscheme PaperColor
+set background=dark
+colorscheme monokai-phoenix
 let g:hybrid_reduced_contrast = 1
 let g:material_terminal_italics = 1
 
@@ -130,6 +132,7 @@ set colorcolumn=80
 syntax enable
 set encoding=utf-8
 set showcmd                     " display incomplete commands
+set cmdheight=1
 set ttyfast
 set wildmenu
 " set wildmode=list:longest,full
