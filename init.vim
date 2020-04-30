@@ -30,7 +30,6 @@ Plug 'jpalardy/vim-slime'
 Plug 'Tetralux/odin.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'flazz/vim-colorschemes'
-Plug 'ryanoasis/vim-devicons'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'sebastianmarkow/deoplete-rust'
@@ -44,7 +43,6 @@ endif
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'mattn/emmet-vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
@@ -105,7 +103,7 @@ function! SwitchTheme()
   if t:current_theme == 'light'
     set background=dark
     let t:current_theme = 'dark'
-    colorscheme monokai-phoenix
+    colorscheme flattened_dark
   else
     set background=light
     let t:current_theme = 'light'
@@ -119,7 +117,7 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-colorscheme monokai-phoenix
+colorscheme flattened_dark
 let g:hybrid_reduced_contrast = 1
 let g:material_terminal_italics = 1
 
