@@ -20,17 +20,20 @@ call plug#begin()
 Plug 'chriskempson/base16-vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-vinegar'
+Plug 'preservim/nerdtree'
+" Plug 'tpope/vim-vinegar'
 Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'ap/vim-css-color'
 Plug 'tpope/vim-rails'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'jpalardy/vim-slime'
 Plug 'Tetralux/odin.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'flazz/vim-colorschemes'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'bounceme/dim-jump'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'sebastianmarkow/deoplete-rust'
 if has('nvim')
@@ -77,7 +80,7 @@ call deoplete#custom#option({
 \ })
 
 " Set Color Scheme
-let t:current_theme = 'dark'
+let t:current_theme = 'light'
 let t:is_transparent = 0
 function! Transparent()
   hi Normal guibg=NONE ctermbg=NONE
@@ -103,11 +106,11 @@ function! SwitchTheme()
   if t:current_theme == 'light'
     set background=dark
     let t:current_theme = 'dark'
-    colorscheme flattened_dark
+    colorscheme PaperColor
   else
     set background=light
     let t:current_theme = 'light'
-    colorscheme flattened_light
+    colorscheme PaperColor
   end
 endfunction
 
@@ -116,8 +119,8 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set background=dark
-colorscheme flattened_dark
+set background=light
+colorscheme PaperColor
 let g:hybrid_reduced_contrast = 1
 let g:material_terminal_italics = 1
 
@@ -309,8 +312,8 @@ endfunction
 
 set shortmess+=c
 set completeopt=noinsert,menuone,noselect
-let g:python_host_prog=expand('$HOME/.pyenv/versions/2.7.14/bin/python')
-let g:python3_host_prog=expand('$HOME/.pyenv/versions/3.7.6/bin/python')
+let g:python_host_prog=expand('$HOME/.asdf/installs/python/2.7.14/bin/python')
+let g:python3_host_prog=expand('$HOME/.asdf/installs/python/3.7.4/bin/python3')
 
 " " Nerd commenter
 let g:NERDCompactSexyComs = 0
@@ -419,6 +422,8 @@ set statusline+=\ " Some space
 set statusline+=%{GitInfo()}
 set statusline+=\ " Separator
 set statusline+=%=%y        " Filetype of the file
+set statusline+=\ " Separator
+set statusline+=%{gutentags#statusline()}
 set statusline+=\ " Separator
 set statusline+=%{LinterStatus()}
 set statusline+=\ " Some space
