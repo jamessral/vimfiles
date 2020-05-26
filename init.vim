@@ -21,8 +21,10 @@ Plug 'chriskempson/base16-vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
 Plug 'preservim/nerdtree'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 " Plug 'tpope/vim-vinegar'
-Plug 'francoiscabrol/ranger.vim'
+" Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'ap/vim-css-color'
@@ -30,6 +32,7 @@ Plug 'tpope/vim-rails'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'jpalardy/vim-slime'
 Plug 'Tetralux/odin.vim'
+Plug 'calviken/vim-gdscript3'
 Plug 'machakann/vim-highlightedyank'
 Plug 'flazz/vim-colorschemes'
 Plug 'christoomey/vim-tmux-navigator'
@@ -81,27 +84,6 @@ call deoplete#custom#option({
 
 " Set Color Scheme
 let t:current_theme = 'light'
-let t:is_transparent = 0
-function! Transparent()
-  hi Normal guibg=NONE ctermbg=NONE
-endfunction
-function! ToggleTransparent()
-  if t:is_transparent == 0
-    call Transparent()
-    let t:is_transparent = 1
-  else
-    if t:current_theme == 'light'
-      set background=light
-    else
-      set background=dark
-    end
-
-    let t:is_transparent = 0
-  endif
-endfunction
-
-nnoremap <silent> <F6> :call ToggleTransparent()<cr>
-
 function! SwitchTheme()
   if t:current_theme == 'light'
     set background=dark
@@ -121,6 +103,7 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=light
 colorscheme PaperColor
+let g:airline_theme="papercolor"
 let g:hybrid_reduced_contrast = 1
 let g:material_terminal_italics = 1
 
@@ -129,7 +112,8 @@ let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
 
 " Vim Settings
-set colorcolumn=80
+" set colorcolumn=80
+" set colorcolumn=
 syntax enable
 set encoding=utf-8
 set showcmd                     " display incomplete commands
@@ -412,22 +396,22 @@ let g:ale_fixers = {
       \   'ruby': ['rubocop']
       \}
 
-set laststatus=2
-set statusline=
-set statusline+=\ " Some space
-set statusline+=%{g:current_mode[mode()]}        " Path to the file
-set statusline+=\ " Some space
-set statusline+=%f         " Path to the file
-set statusline+=\ " Some space
-set statusline+=%{GitInfo()}
-set statusline+=\ " Separator
-set statusline+=%=%y        " Filetype of the file
-set statusline+=\ " Separator
-set statusline+=%{gutentags#statusline()}
-set statusline+=\ " Separator
-set statusline+=%{LinterStatus()}
-set statusline+=\ " Some space
-set statusline+=\ " Some space
+" set laststatus=2
+" set statusline=
+" set statusline+=\ " Some space
+" set statusline+=%{g:current_mode[mode()]}        " Path to the file
+" set statusline+=\ " Some space
+" set statusline+=%f         " Path to the file
+" set statusline+=\ " Some space
+" set statusline+=%{GitInfo()}
+" set statusline+=\ " Separator
+" set statusline+=%=%y        " Filetype of the file
+" set statusline+=\ " Separator
+" set statusline+=%{gutentags#statusline()}
+" set statusline+=\ " Separator
+" set statusline+=%{LinterStatus()}
+" set statusline+=\ " Some space
+" set statusline+=\ " Some space
 
 " Prettier
 let g:prettier#autoformat = 0
@@ -531,5 +515,3 @@ let g:gitgutter_eager = 0
 
 "  markdown
 let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
-
-" :call ToggleTransparent()
