@@ -518,3 +518,9 @@ let g:gitgutter_eager = 0
 
 "  markdown
 let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
+
+" Markdown Preview
+let g:mkdp_browser = 'firefox'
+
+" VimWiki
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
