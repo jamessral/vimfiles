@@ -67,6 +67,8 @@ Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-markdown'
+Plug 'vimwiki/vimwiki'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
@@ -89,11 +91,11 @@ function! SwitchTheme()
   if t:current_theme == 'light'
     set background=dark
     let t:current_theme = 'dark'
-    colorscheme PaperColor
+    colorscheme basic-dark
   else
     set background=light
     let t:current_theme = 'light'
-    colorscheme PaperColor
+    colorscheme basic-light
   end
 endfunction
 
@@ -103,8 +105,8 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=light
-colorscheme PaperColor
-let g:airline_theme="papercolor"
+colorscheme basic-light
+let g:airline_theme="minimalist"
 let g:hybrid_reduced_contrast = 1
 let g:material_terminal_italics = 1
 
