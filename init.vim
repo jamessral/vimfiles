@@ -23,14 +23,11 @@ Plug 'sheerun/vim-polyglot'
 Plug 'preservim/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Plug 'tpope/vim-vinegar'
-" Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'ap/vim-css-color'
 Plug 'tpope/vim-rails'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'jpalardy/vim-slime'
 Plug 'kburdett/vim-nuuid'
 Plug 'Tetralux/odin.vim'
 Plug 'calviken/vim-gdscript3'
@@ -38,17 +35,17 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'flazz/vim-colorschemes'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'bounceme/dim-jump'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
-" Plug 'sebastianmarkow/deoplete-rust'
-" if has('nvim')
-  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" else
-  " Plug 'Shougo/deoplete.nvim'
-  " Plug 'roxma/nvim-yarp'
-  " Plug 'roxma/vim-hug-neovim-rpc'
-" endif
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+Plug 'sebastianmarkow/deoplete-rust'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -69,7 +66,6 @@ Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-markdown'
-Plug 'vimwiki/vimwiki'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-surround'
@@ -80,15 +76,17 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'tpope/vim-dispatch'
 Plug 'danro/rename.vim'
 call plug#end()            " required
-" filetype plugin indent on    " required
+filetype plugin indent on    " required
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
 
-" let g:deoplete#enable_at_startup = 1
-" call deoplete#custom#option({
-" \ 'auto_complete_delay': 200,
-" \ })
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option({
+    \ 'auto_complete': v:false,
+    \ })
 
 " Set Color Scheme
-let t:current_theme = 'dark'
+let t:current_theme = 'light'
 function! SwitchTheme()
   if t:current_theme == 'light'
     set background=dark
@@ -106,8 +104,8 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set background=dark
-colorscheme ir_black
+set background=light
+colorscheme basic-light
 let g:airline_theme="minimalist"
 let g:hybrid_reduced_contrast = 1
 let g:material_terminal_italics = 1
@@ -117,8 +115,6 @@ let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
 
 " Vim Settings
-" set colorcolumn=80
-" set colorcolumn=
 syntax enable
 set encoding=utf-8
 set showcmd                     " display incomplete commands
@@ -129,9 +125,6 @@ set wildmenu
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/.tmp/*,*/.sass-cache/*,*/node_modules/*,*.keep,*.DS_Store,*/.git/*,*/__pychache__/*
 
 set mouse=a
-
-" Don't use a line cursor in insert mode
-" set guicursor=
 
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 " # http://superuser.com/questions/549930/cant-resize-vim-splits-inside-tmux
@@ -156,18 +149,16 @@ set guioptions-=R
 set guioptions-=m
 set guioptions-=L
 set linespace=5
+
 " fullscreen
 map <silent> <F11>
 \    :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
-"
 
 "" Whitespace
 set nowrap                      " don't wrap lines
 set tabstop=2 shiftwidth=2      " a tab is four spaces (or set this to 4)
 set expandtab                   " use spaces, not tabs (optional)
 set backspace=indent,eol,start  " backspace through everything in insert mode
-" let g:indentguides_spacechar = '┆'
-" let g:indentguides_tabchar = '|'
 
 " Vertical split to right
 set splitright
@@ -179,10 +170,6 @@ set splitbelow
 set clipboard=unnamedplus
 
 set cursorline
-" Indicators
-"set list                          " Show hidden characters (tab and eol)
-"set listchars=trail:⋅,nbsp:⋅,tab:▸\ ,eol:¬       " Use the same chars as textmate.
-"set listchars=trail:⋅,nbsp:⋅,tab:❯
 set showbreak=↪\
 
 " Searching
@@ -253,28 +240,6 @@ function! GitInfo()
     return ''
 endfunction
 
-let g:current_mode = {
-    \ 'n'      : 'NORMAL ',
-    \ 'no'     : 'N·Operator Pending ',
-    \ 'v'      : 'VISAUL ',
-    \ 'V'      : 'V-Line ',
-    \ '\<C-V>' : 'V-Block ',
-    \ 's'      : 'SELECT ',
-    \ 'S'      : 'S-Line ',
-    \ '\<C-S>' : 'S-BLOCK ',
-    \ 'i'      : 'INSERT ',
-    \ 'R'      : 'REPLACE ',
-    \ 'Rv'     : 'V-REPLACE ',
-    \ 'c'      : 'COMMAND ',
-    \ 'cv'     : 'VIM EX ',
-    \ 'ce'     : 'EX ',
-    \ 'r'      : 'PROMPT ',
-    \ 'rm'     : 'MORE ',
-    \ 'r?'     : 'CONFIRM ',
-    \ '!'      : 'SHELL ',
-    \ 't'      : 'TERMINAL '
-\}
-
 set title " terminal title
 set autoread " load change files
 
@@ -314,111 +279,12 @@ let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
 let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
 let g:UltiSnipsRemoveSelectModeMappings = 0
 
+" Dim Jump
+nnoremap <leader>dj :DimJumpPos<cr>
+
 " Snippets
 let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/plugged/vim-snippets/UltiSnips', 'UltiSnips']
 
-" Coc
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
-
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
-
-" Always show the sig
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Remap keys for applying codeAction to the current line.
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
-
-" Introduce function text object
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap if <Plug>(coc-funcobj-i)
-omap af <Plug>(coc-funcobj-a)
-
-" Use <TAB> for selections ranges.
-" NOTE: Requires 'textDocument/selectionRange' support from the language server.
-" coc-tsserver, coc-python are the examples of servers that support it.
-nmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <TAB> <Plug>(coc-range-select)
-
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
-
-" Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-" Mappings using CoCList:
-" Show all diagnostics.
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" Show commands.
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " Fzf
 nnoremap <C-p> :Files<CR>
 nnoremap <C-b> :Buffers<CR>
@@ -439,9 +305,6 @@ autocmd! FileType yaml setlocal tabstop=2 shiftwidth=2
 autocmd! FileType typescript setlocal tabstop=2 shiftwidth=2 shiftwidth=2
 autocmd! FileType c setlocal tabstop=4 shiftwidth=4 noexpandtab commentstring=//\ %s
 autocmd! FileType cpp setlocal tabstop=4 shiftwidth=4 noexpandtab commentstring=//\ %s
-autocmd! FileType go setlocal tabstop=4 shiftwidth=4 noexpandtab
-autocmd! FileType rust setlocal tabstop=4 shiftwidth=4
-autocmd! FileType elm setlocal tabstop=4 shiftwidth=4
 autocmd! BufRead,BufNewFile,BufEnter vue syntax sync fromstart
 let g:vue_disable_pre_processors=1
 autocmd! BufNewFile,BufRead,CursorHold *.html.erb setlocal tabstop=2 shiftwidth=2
@@ -449,15 +312,10 @@ autocmd! BufNewFile,BufRead *.html setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.jsx setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.c setlocal tabstop=4 shiftwidth=4
-autocmd! BufNewFile,BufRead *.rs setlocal tabstop=4 shiftwidth=4
-autocmd! BufNewFile,BufRead *.elm setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.ts setlocal tabstop=2 shiftwidth=2 filetype=typescript
 autocmd! BufNewFile,BufRead *.tsx setlocal tabstop=2 shiftwidth=2 filetype=typescript.tsx
-autocmd! BufNewFile,BufRead *.vue setf vue
-autocmd! BufNewFile,BufRead *.vue setlocal tabstop=2 shiftwidth=2 syntax=vue.html.javascript.css
 autocmd! BufNewFile,BufRead *.css setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.scss setlocal tabstop=2 shiftwidth=2
-autocmd! BufNewFile,BufRead *.ex setlocal tabstop=2 shiftwidth=2
 " Use JSX for .js
 let g:jsx_ext_required = 0
 
@@ -501,23 +359,6 @@ let g:ale_fixers = {
       \   'typescriptreact': ['tslint', 'eslint'],
       \   'ruby': ['rubocop']
       \}
-
-" set laststatus=2
-" set statusline=
-" set statusline+=\ " Some space
-" set statusline+=%{g:current_mode[mode()]}        " Path to the file
-" set statusline+=\ " Some space
-" set statusline+=%f         " Path to the file
-" set statusline+=\ " Some space
-" set statusline+=%{GitInfo()}
-" set statusline+=\ " Separator
-" set statusline+=%=%y        " Filetype of the file
-" set statusline+=\ " Separator
-" set statusline+=%{gutentags#statusline()}
-" set statusline+=\ " Separator
-" set statusline+=%{LinterStatus()}
-" set statusline+=\ " Some space
-" set statusline+=\ " Some space
 
 " Prettier
 let g:prettier#autoformat = 0
@@ -575,38 +416,6 @@ let g:netrw_liststyle=3     " tree view
 let g:netrw_fastbrowse=0
 let g:netrw_winsize=15
 
-" NERD Tree
-" Put focus to the NERD Tree with F3 (tricked by quickly closing it and
-" immediately showing it again, since there is no :NERDTreeFocus command)
-nmap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
-nmap <leader>n :NERDTreeToggle<CR>
-
-let g:NERDTreeWinSize=40
-
-" Show the bookmarks table on startup
-let NERDTreeShowBookmarks=1
-
-" Show hidden files, too
-let NERDTreeShowFiles=1
-let NERDTreeShowHidden=1
-
-" Highlight the selected entry in the tree
-let NERDTreeHighlightCursorline=1
-
-" Use a single click to fold/unfold directories and a double click to open
-" files
-let NERDTreeMouseMode=2
-
-" Don't display these kinds of files
-let NERDTreeIgnore=[ '\.swp$','\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
-      \ '\.o$', '\.so$', '\.egg$', '^\.git$', '\.DS_Store$', '^\.bundle$',
-      \ 'node_modules', '\.keep$', '\.obj$', '\.pdb$', '\.sln$']
-
-" Quit vim if nerdtree is last buffer
-" https://github.com/scrooloose/nerdtree/issues/21
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-" Fugitive
 noremap <leader>gs :Gstatus<cr>
 noremap <leader>gc :Gcommit<cr>
 noremap <leader>ga :Gwrite<cr>
@@ -624,6 +433,3 @@ let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
 
 " Markdown Preview
 let g:mkdp_browser = 'firefox'
-
-" VimWiki
-let g:vimwiki_list = [{'path': '~/vimwiki/'}]
