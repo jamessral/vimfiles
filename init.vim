@@ -269,6 +269,9 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 " Dim Jump
 nnoremap <leader>dj :DimJumpPos<cr>
 
+" Slime
+let g:slime_target = "tmux"
+
 " Snippets
 let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/plugged/vim-snippets/UltiSnips', 'UltiSnips']
 
