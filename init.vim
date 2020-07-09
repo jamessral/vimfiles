@@ -20,7 +20,7 @@ call plug#begin()
 Plug 'chriskempson/base16-vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
-Plug 'preservim/nerdtree'
+Plug 'jpalardy/vim-slime'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'rbgrouleff/bclose.vim'
@@ -42,7 +42,6 @@ if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
   Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
@@ -66,7 +65,6 @@ Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-markdown'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
@@ -91,11 +89,11 @@ function! SwitchTheme()
   if t:current_theme == 'light'
     set background=dark
     let t:current_theme = 'dark'
-    colorscheme basic-dark
+    colorscheme gruvbox
   else
     set background=light
     let t:current_theme = 'light'
-    colorscheme basic-light
+    colorscheme gruvbox
   end
 endfunction
 
@@ -105,12 +103,8 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=light
-colorscheme basic-light
+colorscheme gruvbox
 let g:airline_theme="minimalist"
-let g:hybrid_reduced_contrast = 1
-let g:material_terminal_italics = 1
-
-let g:ayucolor="dark"
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
 
@@ -257,13 +251,6 @@ nnoremap <silent> <leader>rv :so $MYVIMRC<CR>
 " Save by pressing Enter in normal mode
 nnoremap <cr> :w<cr>
 
-" Random Number
-function! Rand()
-  let @n = substitute(system('shuf -i 1000-100000 -n 1'),'\n', '', 'g')
-  call append(line('.'), @n)
-  normal! Jx
-endfunction
-
 set shortmess+=c
 set completeopt=noinsert,menuone,noselect
 let g:python_host_prog=expand('$HOME/.asdf/installs/python/2.7.14/bin/python')
@@ -297,25 +284,14 @@ let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 
 " Syntax Highlighting and File Types
 autocmd! FileType lua setlocal tabstop=4 shiftwidth=4
-autocmd! FileType ruby setlocal tabstop=2 shiftwidth=2
-autocmd! FileType javascript setlocal tabstop=2 shiftwidth=2
-autocmd! FileType javascript.jsx setlocal tabstop=2 shiftwidth=2
-autocmd! FileType json setlocal tabstop=2 shiftwidth=2
-autocmd! FileType yaml setlocal tabstop=2 shiftwidth=2
-autocmd! FileType typescript setlocal tabstop=2 shiftwidth=2 shiftwidth=2
 autocmd! FileType c setlocal tabstop=4 shiftwidth=4 noexpandtab commentstring=//\ %s
 autocmd! FileType cpp setlocal tabstop=4 shiftwidth=4 noexpandtab commentstring=//\ %s
 autocmd! BufRead,BufNewFile,BufEnter vue syntax sync fromstart
 let g:vue_disable_pre_processors=1
-autocmd! BufNewFile,BufRead,CursorHold *.html.erb setlocal tabstop=2 shiftwidth=2
-autocmd! BufNewFile,BufRead *.html setlocal tabstop=2 shiftwidth=2
-autocmd! BufNewFile,BufRead *.jsx setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.c setlocal tabstop=4 shiftwidth=4
-autocmd! BufNewFile,BufRead *.ts setlocal tabstop=2 shiftwidth=2 filetype=typescript
-autocmd! BufNewFile,BufRead *.tsx setlocal tabstop=2 shiftwidth=2 filetype=typescript.tsx
-autocmd! BufNewFile,BufRead *.css setlocal tabstop=2 shiftwidth=2
-autocmd! BufNewFile,BufRead *.scss setlocal tabstop=2 shiftwidth=2
+autocmd! BufNewFile,BufRead *.ts setlocal filetype=typescript
+autocmd! BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
 " Use JSX for .js
 let g:jsx_ext_required = 0
 
@@ -430,6 +406,3 @@ let g:gitgutter_eager = 0
 
 "  markdown
 let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
-
-" Markdown Preview
-let g:mkdp_browser = 'firefox'
