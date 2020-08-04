@@ -93,11 +93,13 @@ function! SwitchTheme()
   if t:current_theme == 'light'
     set background=dark
     let t:current_theme = 'dark'
-    colorscheme gruvbox
+    colorscheme default
+    highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+    " colorscheme base16-gruvbox-dark-hard
   else
     set background=light
     let t:current_theme = 'light'
-    colorscheme gruvbox
+    colorscheme base16-gruvbox-light-hard
   end
 endfunction
 
@@ -107,7 +109,7 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-colorscheme gruvbox
+colorscheme default
 
 let g:airline_theme="minimalist"
 let g:gruvbox_contrast_dark="hard"
@@ -420,3 +422,5 @@ let g:gitgutter_eager = 0
 
 "  markdown
 let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
+
+highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
