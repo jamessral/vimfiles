@@ -18,8 +18,11 @@ filetype off
 call plug#begin()
 
 Plug 'chriskempson/base16-vim'
+Plug 'flazz/vim-colorschemes'
+Plug 'icymind/NeoSolarized'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
+Plug 'vifm/vifm.vim'
 Plug 'jpalardy/vim-slime'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -32,7 +35,6 @@ Plug 'kburdett/vim-nuuid'
 Plug 'Tetralux/odin.vim'
 Plug 'calviken/vim-gdscript3'
 Plug 'machakann/vim-highlightedyank'
-Plug 'flazz/vim-colorschemes'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'bounceme/dim-jump'
 Plug 'christoomey/vim-tmux-navigator'
@@ -76,15 +78,17 @@ Plug 'danro/rename.vim'
 call plug#end()            " required
 filetype plugin indent on    " required
 filetype plugin on
-set omnifunc=syntaxcomplete#Complete
+" set omnifunc=syntaxcomplete#Complete
 
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option({
-    \ 'auto_complete': v:false,
-    \ })
+\ 'auto_complete': v:true,
+\ 'auto_complete_delay': 300,
+\ 'smart_case': v:true,
+\ })
 
 " Set Color Scheme
-let t:current_theme = 'light'
+let t:current_theme = 'dark'
 function! SwitchTheme()
   if t:current_theme == 'light'
     set background=dark
@@ -102,8 +106,9 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set background=light
+set background=dark
 colorscheme gruvbox
+
 let g:airline_theme="minimalist"
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
@@ -218,8 +223,9 @@ nnoremap <leader>in <ESC>:call PrintNote()<cr>
 inoremap <C-i><C-t> <ESC>:call PrintTodo()<cr>
 nnoremap <leader>it <ESC>:call PrintTodo()<cr>
 
-set backup       " keep a backup file
-set backupdir=~/.vim/backup//
+" set backup       " keep a backup file
+" set backupdir=~/.vim/backup//
+set backupcopy=yes
 set undofile
 set undodir=~/.vim/undo//
 
@@ -323,6 +329,9 @@ let g:ale_typescript_tslint_executable = 'tslint --project tsconfig.json'
 let g:ale_typescript_tslint_config_path = 'tslint.json'
 
 let g:ale_linters = {
+      \  'ruby': ['rubocop'],
+      \  'rspec': ['rubocop'],
+      \  'eruby': ['erblint'],
       \  'javascript': ['eslint'],
       \  'javascript.jsx': ['eslint'],
       \  'typescript': ['tsserver', 'tslint', 'eslint'],
@@ -336,7 +345,8 @@ let g:ale_fixers = {
       \   'javascript': ['eslint'],
       \   'typescript': ['tslint', 'eslint'],
       \   'typescriptreact': ['tslint', 'eslint'],
-      \   'ruby': ['rubocop']
+      \   'ruby': ['rubocop'],
+      \   'rspec': ['rubocop']
       \}
 
 " Prettier
@@ -394,6 +404,7 @@ let g:netrw_altv=1          " open splits to the right
 let g:netrw_liststyle=3     " tree view
 let g:netrw_fastbrowse=0
 let g:netrw_winsize=15
+nnoremap - :Vifm<cr>
 
 noremap <leader>gs :Gstatus<cr>
 noremap <leader>gc :Gcommit<cr>
