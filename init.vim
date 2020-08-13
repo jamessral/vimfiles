@@ -19,6 +19,7 @@ call plug#begin()
 
 Plug 'chriskempson/base16-vim'
 Plug 'flazz/vim-colorschemes'
+Plug 'dracula/vim'
 Plug 'icymind/NeoSolarized'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
@@ -93,13 +94,14 @@ function! SwitchTheme()
   if t:current_theme == 'light'
     set background=dark
     let t:current_theme = 'dark'
-    colorscheme default
-    highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
-    " colorscheme base16-gruvbox-dark-hard
+    colorscheme dracula
+    " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+    highlight Comment cterm=italic gui=italic
   else
     set background=light
     let t:current_theme = 'light'
     colorscheme base16-gruvbox-light-hard
+    highlight Comment cterm=italic gui=italic
   end
 endfunction
 
@@ -109,7 +111,7 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-colorscheme default
+colorscheme dracula
 
 let g:airline_theme="minimalist"
 let g:gruvbox_contrast_dark="hard"
@@ -142,14 +144,14 @@ set showmatch                   " matching brace/parenthesis/etc.
 set hidden                      " http://nvie.com/posts/how-i-boosted-my-vim/
 
 " GUI Settings
-set guifont=Noto\ Mono:h10.5
+set guifont=Victor\ Mono:h12
 set guioptions-=l
 set guioptions-=r
 set guioptions-=T
 set guioptions-=R
 set guioptions-=m
 set guioptions-=L
-set linespace=5
+set linespace=12
 
 " fullscreen
 map <silent> <F11>
@@ -423,4 +425,5 @@ let g:gitgutter_eager = 0
 "  markdown
 let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
 
-highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+" highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+highlight Comment cterm=italic gui=italic
