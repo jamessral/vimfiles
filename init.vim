@@ -89,7 +89,7 @@ call deoplete#custom#option({
 \ })
 
 " Set Color Scheme
-let t:current_theme = 'dark'
+let t:current_theme = 'light'
 function! SwitchTheme()
   if t:current_theme == 'light'
     set background=dark
@@ -112,10 +112,10 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set background=dark
-colorscheme dracula
+set background=light
+colorscheme base16-gruvbox-light-hard
 
-let g:airline_theme="dracula"
+let g:airline_theme="minimalist"
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
 
