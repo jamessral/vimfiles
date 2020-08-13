@@ -94,12 +94,14 @@ function! SwitchTheme()
   if t:current_theme == 'light'
     set background=dark
     let t:current_theme = 'dark'
+    let g:airline_theme="dracula"
     colorscheme dracula
     " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
     highlight Comment cterm=italic gui=italic
   else
     set background=light
     let t:current_theme = 'light'
+    let g:airline_theme="minimalist"
     colorscheme base16-gruvbox-light-hard
     highlight Comment cterm=italic gui=italic
   end
@@ -113,7 +115,7 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
 colorscheme dracula
 
-let g:airline_theme="minimalist"
+let g:airline_theme="dracula"
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
 
