@@ -88,32 +88,50 @@ call deoplete#custom#option({
 \ 'smart_case': v:true,
 \ })
 
+function! LoadLight()
+  set background=light
+  let t:current_theme = 'light'
+  let g:airline_theme="solarized"
+  colorscheme NeoSolarized
+  highlight Comment cterm=italic gui=italic
+endfunction
+
+function! LoadDark()
+  set background=dark
+  let t:current_theme = 'dark'
+  let g:airline_theme="minimalist"
+  colorscheme base16-horizon-dark
+  " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+  highlight Comment cterm=italic gui=italic
+endfunction
+
+function! LoadNeutral()
+  set background=dark
+  let t:current_theme = 'neutral'
+  let g:airline_theme="minimalist"
+  colorscheme zenburn
+  highlight Comment cterm=italic gui=italic
+endfunction
+
 " Set Color Scheme
-let t:current_theme = 'light'
+let t:current_theme = 'dark'
 function! SwitchTheme()
   if t:current_theme == 'light'
-    set background=dark
-    let t:current_theme = 'dark'
-    let g:airline_theme="dracula"
-    colorscheme dracula
-    " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
-    highlight Comment cterm=italic gui=italic
+    :call LoadNeutral()
+  elseif t:current_theme == 'dark'
+    :call LoadLight()
   else
-    set background=light
-    let t:current_theme = 'light'
-    let g:airline_theme="minimalist"
-    colorscheme base16-gruvbox-light-hard
-    highlight Comment cterm=italic gui=italic
+    :call LoadDark()
   end
 endfunction
 
-nnoremap <silent> <F5> :call SwitchTheme()<cr>
+nnoremap <silent> <F6> :call SwitchTheme()<cr>
 
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set background=light
-colorscheme base16-gruvbox-light-hard
+let $NVIM_TUI_ENABLE_TRUE_COLOR=2
+set background=dark
+colorscheme base16-horizon-dark
 
 let g:airline_theme="minimalist"
 let g:gruvbox_contrast_dark="hard"
@@ -146,7 +164,7 @@ set showmatch                   " matching brace/parenthesis/etc.
 set hidden                      " http://nvie.com/posts/how-i-boosted-my-vim/
 
 " GUI Settings
-set guifont=Victor\ Mono:h12
+set guifont=JetBrains\ Mono:h12
 set guioptions-=l
 set guioptions-=r
 set guioptions-=T
