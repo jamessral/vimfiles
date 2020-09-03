@@ -41,12 +41,13 @@ Plug 'bounceme/dim-jump'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'sebastianmarkow/deoplete-rust'
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" if has('nvim')
+"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" else
+"   Plug 'Shougo/deoplete.nvim'
+"   Plug 'roxma/vim-hug-neovim-rpc'
+" endif
 Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'SirVer/ultisnips'
@@ -81,18 +82,46 @@ filetype plugin indent on    " required
 filetype plugin on
 " set omnifunc=syntaxcomplete#Complete
 
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option({
-\ 'auto_complete': v:true,
-\ 'auto_complete_delay': 300,
-\ 'smart_case': v:true,
-\ })
+" Deoplete
+" let g:deoplete#enable_at_startup = 1
+" call deoplete#custom#option({
+" \ 'auto_complete': v:true,
+" \ 'auto_complete_delay': 300,
+" \ 'smart_case': v:true,
+" \ })
+
+" CoC
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Themes
 
 function! LoadLight()
   set background=light
   let t:current_theme = 'light'
   let g:airline_theme="solarized"
-  colorscheme NeoSolarized
+  colorscheme base16-solarized-light
   highlight Comment cterm=italic gui=italic
 endfunction
 
@@ -105,11 +134,20 @@ function! LoadDark()
   highlight Comment cterm=italic gui=italic
 endfunction
 
+function! LoadVeryDark()
+  set background=dark
+  let t:current_theme = 'very_dark'
+  let g:airline_theme="minimalist"
+  colorscheme base16-bright
+  " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+  highlight Comment cterm=italic gui=italic
+endfunction
+
 function! LoadNeutral()
   set background=dark
   let t:current_theme = 'neutral'
   let g:airline_theme="minimalist"
-  colorscheme zenburn
+  colorscheme base16-eighties
   highlight Comment cterm=italic gui=italic
 endfunction
 
@@ -119,21 +157,21 @@ function! SwitchTheme()
   if t:current_theme == 'light'
     :call LoadNeutral()
   elseif t:current_theme == 'dark'
+    :call LoadVeryDark()
+  elseif t:current_theme == 'very_dark'
     :call LoadLight()
   else
     :call LoadDark()
   end
 endfunction
 
-nnoremap <silent> <F6> :call SwitchTheme()<cr>
+nnoremap <silent> <F5> :call SwitchTheme()<cr>
 
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=2
-set background=dark
-colorscheme base16-horizon-dark
+:call LoadVeryDark()
 
-let g:airline_theme="minimalist"
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
 
