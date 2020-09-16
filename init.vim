@@ -181,7 +181,7 @@ set showmatch                   " matching brace/parenthesis/etc.
 set hidden                      " http://nvie.com/posts/how-i-boosted-my-vim/
 
 " GUI Settings
-set guifont=JetBrains\ Mono:h10.5
+set guifont=IBM\ Plex\ Mono:h10.5
 set guioptions-=l
 set guioptions-=r
 set guioptions-=T
