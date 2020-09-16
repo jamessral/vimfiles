@@ -38,10 +38,13 @@ Plug 'calviken/vim-gdscript3'
 Plug 'machakann/vim-highlightedyank'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'bounceme/dim-jump'
+Plug 'jceb/vim-orgmode'
+Plug 'vim-scripts/utl.vim'
+Plug 'tpope/vim-repeat'
+Plug 'chrisbra/NrrwRgn'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'sebastianmarkow/deoplete-rust'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " if has('nvim')
 "   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " else
@@ -77,6 +80,7 @@ Plug 'janko-m/vim-test'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'tpope/vim-dispatch'
 Plug 'danro/rename.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()            " required
 filetype plugin indent on    " required
 filetype plugin on
@@ -90,32 +94,7 @@ filetype plugin on
 " \ 'smart_case': v:true,
 " \ })
 
-" CoC
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Themes
+j" Themes
 
 function! LoadLight()
   set background=light
@@ -479,6 +458,51 @@ highlight clear SignColumn
 autocmd ColorScheme * highlight clear SignColumn
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
+" CoC
+" GoTo code navigation.
+nnoremap <silent> gd <Plug>(coc-definition)
+nnoremap <silent> gy <Plug>(coc-type-definition)
+nnoremap <silent> gi <Plug>(coc-implementation)
+nnoremap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+" Symbol renaming.
+nnoremap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xnoremap <leader>f  <Plug>(coc-format-selected)
+nnoremap <leader>f  <Plug>(coc-format-selected)
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Remap keys for applying codeAction to the current buffer.
+nnoremap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nnoremap <leader>qf  <Plug>(coc-fix-current)
+
+
 
 "  markdown
 let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
