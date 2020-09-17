@@ -96,6 +96,14 @@ filetype plugin on
 
 " Themes
 
+function! LoadVeryLight()
+  set background=light
+  let t:current_theme = 'very_light'
+  let g:airline_theme="minimalist"
+  colorscheme base16-one-light
+  highlight Comment cterm=italic gui=italic
+endfunction
+
 function! LoadLight()
   set background=light
   let t:current_theme = 'light'
@@ -131,16 +139,18 @@ function! LoadNeutral()
 endfunction
 
 " Set Color Scheme
-let t:current_theme = 'dark'
+let t:current_theme = 'very_dark'
 function! SwitchTheme()
   if t:current_theme == 'light'
     :call LoadNeutral()
+  elseif t:current_theme == 'neutral'
+    :call LoadDark()
   elseif t:current_theme == 'dark'
     :call LoadVeryDark()
   elseif t:current_theme == 'very_dark'
+    :call LoadVeryLight()
+  elseif t:current_theme == 'very_light'
     :call LoadLight()
-  else
-    :call LoadDark()
   end
 endfunction
 
@@ -485,6 +495,13 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
 " Remap keys for applying codeAction to the current buffer.
 nmap <leader>ac <Plug>(coc-codeaction-line)
