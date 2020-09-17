@@ -94,7 +94,7 @@ filetype plugin on
 " \ 'smart_case': v:true,
 " \ })
 
-j" Themes
+" Themes
 
 function! LoadLight()
   set background=light
@@ -293,7 +293,6 @@ vnoremap > >gv
 " Edit the vimrc file
 nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
 nnoremap <silent> <leader>rv :so $MYVIMRC<CR>
-
 " Save by pressing Enter in normal mode
 nnoremap <cr> :w<cr>
 
@@ -316,7 +315,7 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 nnoremap <leader>dj :DimJumpPos<cr>
 
 " Slime
-let g:slime_target = "tmux"
+let g:slime_target = "neovim"
 
 " Snippets
 let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/plugged/vim-snippets/UltiSnips', 'UltiSnips']
@@ -395,12 +394,12 @@ let g:prettier#autoformat = 0
 nnoremap <leader>F :PrettierAsync<cr>
 
 " Courtesy of Jeremy!
-:set wildcharm=<C-z>
+set wildcharm=<C-z>
 " open current test file's source in split
-:nnoremap <leader>os :vs %<C-z><c-f>bbdb.<cr>
+nnoremap <leader>os :vs %<C-z><c-f>bbdb.<cr>
 
 " open current file's test in split
-:nnoremap <leader>ot :vs %<C-z><c-f>bitest.<cr>
+nnoremap <leader>ot :vs %<C-z><c-f>bitest.<cr>
 
 " Test Runner
 nnoremap <silent><leader><leader>t :TestNearest<CR>
@@ -457,6 +456,7 @@ highlight clear SignColumn
 autocmd ColorScheme * highlight clear SignColumn
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
+
 " CoC
 " GoTo code navigation.
 nnoremap <silent> gd <Plug>(coc-definition)
@@ -473,16 +473,6 @@ nnoremap <leader>rn <Plug>(coc-rename)
 " Formatting selected code.
 xnoremap <leader>f  <Plug>(coc-format-selected)
 nnoremap <leader>f  <Plug>(coc-format-selected)
-
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
@@ -497,11 +487,9 @@ function! s:show_documentation()
 endfunction
 
 " Remap keys for applying codeAction to the current buffer.
-nnoremap <leader>ac  <Plug>(coc-codeaction)
+nnoremap <leader>ac <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
-nnoremap <leader>qf  <Plug>(coc-fix-current)
-
-
+nnoremap <leader>qf <Plug>(coc-fix-current)
 
 "  markdown
 let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
