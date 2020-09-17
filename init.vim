@@ -459,20 +459,20 @@ let g:gitgutter_eager = 0
 
 " CoC
 " GoTo code navigation.
-nnoremap <silent> gd <Plug>(coc-definition)
-nnoremap <silent> gy <Plug>(coc-type-definition)
-nnoremap <silent> gi <Plug>(coc-implementation)
-nnoremap <silent> gr <Plug>(coc-references)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nmap <silent> K :call <SID>show_documentation()<CR>
 
 " Symbol renaming.
-nnoremap <leader>rn <Plug>(coc-rename)
+nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xnoremap <leader>f  <Plug>(coc-format-selected)
-nnoremap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
@@ -487,9 +487,10 @@ function! s:show_documentation()
 endfunction
 
 " Remap keys for applying codeAction to the current buffer.
-nnoremap <leader>ac <Plug>(coc-codeaction)
+nmap <leader>ac <Plug>(coc-codeaction-line)
+nmap <leader>av <Plug>(coc-codeaction-selected)
 " Apply AutoFix to problem on the current line.
-nnoremap <leader>qf <Plug>(coc-fix-current)
+nmap <leader>qf <Plug>(coc-fix-current)
 
 "  markdown
 let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
