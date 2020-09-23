@@ -116,7 +116,7 @@ function! LoadDark()
   set background=dark
   let t:current_theme = 'dark'
   let g:airline_theme="minimalist"
-  colorscheme base16-horizon-dark
+  colorscheme srcery
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   highlight Comment cterm=italic gui=italic
 endfunction
@@ -159,7 +159,7 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=2
-:call LoadVeryDark()
+:call LoadDark()
 
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
