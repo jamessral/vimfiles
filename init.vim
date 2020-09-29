@@ -115,8 +115,8 @@ endfunction
 function! LoadDark()
   set background=dark
   let t:current_theme = 'dark'
-  let g:airline_theme="minimalist"
-  colorscheme srcery
+  let g:airline_theme="base16_oceanicnext"
+  colorscheme base16-oceanicnext
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   highlight Comment cterm=italic gui=italic
 endfunction
@@ -125,7 +125,7 @@ function! LoadVeryDark()
   set background=dark
   let t:current_theme = 'very_dark'
   let g:airline_theme="minimalist"
-  colorscheme base16-bright
+  colorscheme srcery
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   highlight Comment cterm=italic gui=italic
 endfunction
