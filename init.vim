@@ -45,6 +45,7 @@ Plug 'chrisbra/NrrwRgn'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'sebastianmarkow/deoplete-rust'
+Plug 'vimwiki/vimwiki'
 " if has('nvim')
 "   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " else
@@ -444,7 +445,7 @@ autocmd Filetype gitcommit setlocal spell
 autocmd Filetype markdown setlocal spell
 
 " Folding
-set foldmethod=marker
+set foldmethod=expr
 
 " File Browsing
 let g:netrw_banner=0        " no more annoying banner!
@@ -511,6 +512,9 @@ nmap <leader>qf <Plug>(coc-fix-current)
 
 "  markdown
 let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
+
+" Vimwiki
+let g:vimwiki_folding='expr'
 
 " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
 highlight Comment cterm=italic gui=italic
