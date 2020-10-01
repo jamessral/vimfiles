@@ -21,9 +21,11 @@ Plug 'chriskempson/base16-vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'dracula/vim'
 Plug 'icymind/NeoSolarized'
+Plug 'cocopon/iceberg.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
-Plug 'vifm/vifm.vim'
+Plug 'cocopon/vaffle.vim'
+" Plug 'vifm/vifm.vim'
 Plug 'jpalardy/vim-slime'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -116,8 +118,8 @@ endfunction
 function! LoadDark()
   set background=dark
   let t:current_theme = 'dark'
-  let g:airline_theme="base16_oceanicnext"
-  colorscheme base16-oceanicnext
+  let g:airline_theme="iceberg"
+  colorscheme iceberg
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   highlight Comment cterm=italic gui=italic
 endfunction
@@ -454,7 +456,7 @@ let g:netrw_altv=1          " open splits to the right
 let g:netrw_liststyle=3     " tree view
 let g:netrw_fastbrowse=0
 let g:netrw_winsize=15
-nnoremap - :Vifm<cr>
+nnoremap - :Vaffle<cr>
 
 noremap <leader>gs :Gstatus<cr>
 noremap <leader>gc :Gcommit<cr>
