@@ -24,6 +24,7 @@ Plug 'icymind/NeoSolarized'
 Plug 'cocopon/iceberg.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
+Plug 'lepture/vim-jinja'
 Plug 'cocopon/vaffle.vim'
 " Plug 'vifm/vifm.vim'
 Plug 'jpalardy/vim-slime'
@@ -456,7 +457,7 @@ let g:netrw_altv=1          " open splits to the right
 let g:netrw_liststyle=3     " tree view
 let g:netrw_fastbrowse=0
 let g:netrw_winsize=15
-nnoremap - :Vaffle<cr>
+nnoremap - :Vaffle %<cr>
 
 noremap <leader>gs :Gstatus<cr>
 noremap <leader>gc :Gcommit<cr>
