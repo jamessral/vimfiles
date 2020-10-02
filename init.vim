@@ -36,6 +36,7 @@ Plug 'ap/vim-css-color'
 Plug 'tpope/vim-rails'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'kburdett/vim-nuuid'
+Plug 'Olical/conjure', { 'tag': 'v4.3.1' }
 Plug 'Tetralux/odin.vim'
 Plug 'calviken/vim-gdscript3'
 Plug 'machakann/vim-highlightedyank'
@@ -44,7 +45,6 @@ Plug 'bounceme/dim-jump'
 Plug 'jceb/vim-orgmode'
 Plug 'vim-scripts/utl.vim'
 Plug 'tpope/vim-repeat'
-Plug 'chrisbra/NrrwRgn'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'sebastianmarkow/deoplete-rust'
@@ -119,8 +119,8 @@ endfunction
 function! LoadDark()
   set background=dark
   let t:current_theme = 'dark'
-  let g:airline_theme="base16_gruvbox_dark_hard"
-  colorscheme gruvbox
+  let g:airline_theme="minimalist"
+  colorscheme srcery
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   highlight Comment cterm=italic gui=italic
 endfunction
@@ -129,8 +129,8 @@ function! LoadVeryDark()
   set background=dark
   let t:current_theme = 'very_dark'
   let g:airline_theme="minimalist"
-  colorscheme srcery
-  " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+  colorscheme xterm16
+  highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   highlight Comment cterm=italic gui=italic
 endfunction
 
@@ -163,7 +163,7 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=2
-:call LoadDark()
+:call LoadVeryDark()
 
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
@@ -519,5 +519,5 @@ let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
 " Vimwiki
 let g:vimwiki_folding='expr'
 
-" highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
 highlight Comment cterm=italic gui=italic
