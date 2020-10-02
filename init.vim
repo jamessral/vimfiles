@@ -119,8 +119,8 @@ endfunction
 function! LoadDark()
   set background=dark
   let t:current_theme = 'dark'
-  let g:airline_theme="iceberg"
-  colorscheme iceberg
+  let g:airline_theme="base16_gruvbox_dark_hard"
+  colorscheme gruvbox
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   highlight Comment cterm=italic gui=italic
 endfunction
