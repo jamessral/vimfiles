@@ -63,7 +63,8 @@ Plug 'leafgarland/typescript-vim'
 Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'dyng/ctrlsf.vim'
+" Plug 'dyng/ctrlsf.vim'
+Plug 'vileszs/ack.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
@@ -337,6 +338,11 @@ let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/plugged/vim-snippets/UltiSn
 " Fzf
 nnoremap <C-p> :Files<CR>
 nnoremap <C-b> :Buffers<CR>
+
+" Ack/Ag
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 
 " Delete all but the current buffer
 command! BufOnly silent! execute "%bd|e#|bd#"
