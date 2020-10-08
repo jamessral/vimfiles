@@ -19,6 +19,7 @@ call plug#begin()
 
 Plug 'chriskempson/base16-vim'
 Plug 'flazz/vim-colorschemes'
+Plug 'jamessral/naysayer-vim'
 Plug 'dracula/vim'
 Plug 'icymind/NeoSolarized'
 Plug 'cocopon/iceberg.vim'
