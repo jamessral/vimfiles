@@ -65,7 +65,7 @@ Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Plug 'dyng/ctrlsf.vim'
-Plug 'vileszs/ack.vim'
+Plug 'mileszs/ack.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
@@ -122,8 +122,8 @@ function! LoadDark()
   set background=dark
   let t:current_theme = 'dark'
   let g:airline_theme="minimalist"
-  colorscheme srcery
-  " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+  colorscheme naysayer
+  highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   highlight Comment cterm=italic gui=italic
 endfunction
 
@@ -165,7 +165,7 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=2
-:call LoadVeryDark()
+:call LoadDark()
 
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
