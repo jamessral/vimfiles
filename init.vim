@@ -34,7 +34,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'ap/vim-css-color'
-Plug 'tpope/vim-rails'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'kburdett/vim-nuuid'
 Plug 'Olical/conjure', { 'tag': 'v4.3.1' }
@@ -114,7 +113,7 @@ function! LoadLight()
   set background=light
   let t:current_theme = 'light'
   let g:airline_theme="solarized"
-  colorscheme base16-solarized-light
+  colorscheme base16-gruvbox-light-medium
   highlight Comment cterm=italic gui=italic
 endfunction
 
@@ -122,16 +121,16 @@ function! LoadDark()
   set background=dark
   let t:current_theme = 'dark'
   let g:airline_theme="minimalist"
-  colorscheme naysayer
-  highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
-  highlight Comment cterm=italic gui=italic
+  colorscheme OceanicNext
+  " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+  " highlight Comment cterm=italic gui=italic
 endfunction
 
 function! LoadVeryDark()
   set background=dark
   let t:current_theme = 'very_dark'
   let g:airline_theme="minimalist"
-  colorscheme xterm16
+  colorscheme Tomorrow-Night-Bright
   highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   highlight Comment cterm=italic gui=italic
 endfunction
@@ -197,7 +196,7 @@ set showmatch                   " matching brace/parenthesis/etc.
 set hidden                      " http://nvie.com/posts/how-i-boosted-my-vim/
 
 " GUI Settings
-set guifont=IBM\ Plex\ Mono:h10.5
+set guifont=Ubuntu\ Mono:h12
 set guioptions-=l
 set guioptions-=r
 set guioptions-=T
@@ -503,7 +502,7 @@ function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
   else
-    call CocAction('doHover')
+    call CocActionAsync('doHover')
   endif
 endfunction
 
