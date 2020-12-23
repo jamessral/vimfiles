@@ -63,7 +63,6 @@ Plug 'leafgarland/typescript-vim'
 Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-" Plug 'dyng/ctrlsf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -121,7 +120,7 @@ function! LoadDark()
   set background=dark
   let t:current_theme = 'dark'
   let g:airline_theme="minimalist"
-  colorscheme OceanicNext
+  colorscheme molokai
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   " highlight Comment cterm=italic gui=italic
 endfunction
@@ -525,5 +524,5 @@ let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
 " Vimwiki
 let g:vimwiki_folding='expr'
 
-highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
-highlight Comment cterm=italic gui=italic
+" highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+" highlight Comment cterm=italic gui=italic
