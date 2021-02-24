@@ -63,7 +63,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'mileszs/ack.vim'
+" Plug 'mileszs/ack.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
@@ -112,7 +112,7 @@ function! LoadLight()
   set background=light
   let t:current_theme = 'light'
   let g:airline_theme="solarized"
-  colorscheme base16-gruvbox-light-medium
+  colorscheme NeoSolarized
   highlight Comment cterm=italic gui=italic
 endfunction
 
@@ -120,7 +120,7 @@ function! LoadDark()
   set background=dark
   let t:current_theme = 'dark'
   let g:airline_theme="minimalist"
-  colorscheme molokai
+  colorscheme ayu
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   " highlight Comment cterm=italic gui=italic
 endfunction
@@ -129,7 +129,7 @@ function! LoadVeryDark()
   set background=dark
   let t:current_theme = 'very_dark'
   let g:airline_theme="minimalist"
-  colorscheme Tomorrow-Night-Bright
+  colorscheme default
   highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   highlight Comment cterm=italic gui=italic
 endfunction
@@ -163,7 +163,7 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=2
-:call LoadDark()
+:call LoadVeryDark()
 
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
@@ -524,5 +524,5 @@ let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
 " Vimwiki
 let g:vimwiki_folding='expr'
 
-" highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
-" highlight Comment cterm=italic gui=italic
+highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+highlight Comment cterm=italic gui=italic
