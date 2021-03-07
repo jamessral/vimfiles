@@ -48,7 +48,6 @@ Plug 'tpope/vim-repeat'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'sebastianmarkow/deoplete-rust'
-Plug 'vimwiki/vimwiki'
 " if has('nvim')
 "   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " else
@@ -119,8 +118,8 @@ endfunction
 function! LoadDark()
   set background=dark
   let t:current_theme = 'dark'
-  let g:airline_theme="minimalist"
-  colorscheme ayu
+  let g:airline_theme="solarized"
+  colorscheme NeoSolarized
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   " highlight Comment cterm=italic gui=italic
 endfunction
@@ -163,7 +162,7 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=2
-:call LoadVeryDark()
+:call LoadDark()
 
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
@@ -347,7 +346,7 @@ endif
 command! BufOnly silent! execute "%bd|e#|bd#"
 
 " nnoremap <leader>r :Tags<CR>
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
+let $FZF_DEFAULT_COMMAND = 'ag -l'
 
 " Syntax Highlighting and File Types
 autocmd! FileType lua setlocal tabstop=4 shiftwidth=4
@@ -395,7 +394,8 @@ let g:ale_linters = {
       \  'typescript': ['tsserver', 'tslint', 'eslint'],
       \  'typescriptreact': ['tsserver', 'tslint', 'eslint'],
       \  'cpp': ['null'],
-      \  'c': ['null']
+      \  'c': ['null'],
+      \  'markdown': ['null'],
       \}
 
 let g:ale_fixers = {
@@ -520,9 +520,6 @@ nmap <leader>qf <Plug>(coc-fix-current)
 
 "  markdown
 let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
-
-" Vimwiki
-let g:vimwiki_folding='expr'
 
 highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
 highlight Comment cterm=italic gui=italic
