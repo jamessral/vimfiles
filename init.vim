@@ -525,5 +525,5 @@ nmap <leader>qf <Plug>(coc-fix-current)
 "  markdown
 let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
 
-highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
-highlight Comment cterm=italic gui=italic
+" highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+" highlight Comment cterm=italic gui=italic
