@@ -35,6 +35,7 @@ Plug 'rbgrouleff/bclose.vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'ap/vim-css-color'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'junegunn/goyo.vim'
 Plug 'kburdett/vim-nuuid'
 Plug 'Olical/conjure', { 'tag': 'v4.3.1' }
 Plug 'Tetralux/odin.vim'
@@ -275,6 +276,9 @@ inoremap <C-i><C-n> <ESC>:call PrintNote()<cr>
 nnoremap <leader>in <ESC>:call PrintNote()<cr>
 inoremap <C-i><C-t> <ESC>:call PrintTodo()<cr>
 nnoremap <leader>it <ESC>:call PrintTodo()<cr>
+
+" Goyo centered layout (Like Zen-mode)
+nnoremap <leader>z :Goyo<cr>
 
 " set backup       " keep a backup file
 " set backupdir=~/.vim/backup//
