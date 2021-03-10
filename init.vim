@@ -119,8 +119,8 @@ endfunction
 function! LoadDark()
   set background=dark
   let t:current_theme = 'dark'
-  let g:airline_theme="solarized"
-  colorscheme NeoSolarized
+  let g:airline_theme="dracula"
+  colorscheme dracula
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   " highlight Comment cterm=italic gui=italic
 endfunction
@@ -404,9 +404,9 @@ let g:ale_linters = {
 
 let g:ale_fixers = {
       \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-      \   'javascript': ['eslint'],
-      \   'typescript': ['tslint', 'eslint'],
-      \   'typescriptreact': ['tslint', 'eslint'],
+      \   'javascript': ['eslint', 'prettier'],
+      \   'typescript': ['tslint', 'eslint', 'prettier'],
+      \   'typescriptreact': ['tslint', 'eslint', 'prettier'],
       \   'ruby': ['rubocop'],
       \   'rspec': ['rubocop']
       \}
