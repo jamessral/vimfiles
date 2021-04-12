@@ -27,7 +27,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
 Plug 'lepture/vim-jinja'
 Plug 'cocopon/vaffle.vim'
-" Plug 'vifm/vifm.vim'
 Plug 'jpalardy/vim-slime'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -42,7 +41,6 @@ Plug 'calviken/vim-gdscript3'
 Plug 'machakann/vim-highlightedyank'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'bounceme/dim-jump'
-Plug 'jceb/vim-orgmode'
 Plug 'vim-scripts/utl.vim'
 Plug 'tpope/vim-repeat'
 Plug 'christoomey/vim-tmux-navigator'
@@ -63,7 +61,6 @@ Plug 'leafgarland/typescript-vim'
 Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-" Plug 'mileszs/ack.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
@@ -163,7 +160,7 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=2
-:call LoadVeryDark()
+:call LoadLight()
 
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
@@ -524,5 +521,5 @@ let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
 " Vimwiki
 let g:vimwiki_folding='expr'
 
-highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
-highlight Comment cterm=italic gui=italic
+" highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+" highlight Comment cterm=italic gui=italic
