@@ -24,6 +24,7 @@ Plug 'dracula/vim'
 Plug 'icymind/NeoSolarized'
 Plug 'cocopon/iceberg.vim'
 Plug 'jiangmiao/auto-pairs'
+Plug 'mattn/emmet-vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'lepture/vim-jinja'
 Plug 'cocopon/vaffle.vim'
@@ -33,7 +34,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'ap/vim-css-color'
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'kburdett/vim-nuuid'
 Plug 'Olical/conjure', { 'tag': 'v4.3.1' }
 Plug 'Tetralux/odin.vim'
@@ -43,16 +43,12 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'bounceme/dim-jump'
 Plug 'vim-scripts/utl.vim'
 Plug 'tpope/vim-repeat'
+Plug 'junegunn/goyo.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'sebastianmarkow/deoplete-rust'
+Plug 'hsanson/vim-android'
 Plug 'vimwiki/vimwiki'
-" if has('nvim')
-"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" else
-"   Plug 'Shougo/deoplete.nvim'
-"   Plug 'roxma/vim-hug-neovim-rpc'
-" endif
 Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'SirVer/ultisnips'
@@ -96,12 +92,17 @@ filetype plugin on
 " \ })
 
 " Themes
+function! LoadDefaultLight()
+  set background=light
+  let t:current_theme = 'very_light'
+  colorscheme default
+endfunction
 
 function! LoadVeryLight()
   set background=light
   let t:current_theme = 'very_light'
   let g:airline_theme="minimalist"
-  colorscheme base16-one-light
+  colorscheme pencil
   highlight Comment cterm=italic gui=italic
 endfunction
 
@@ -160,7 +161,8 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=2
-:call LoadLight()
+set background=light
+let g:airline_theme='minimalist'
 
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
@@ -514,6 +516,13 @@ nmap <leader>ac <Plug>(coc-codeaction-line)
 nmap <leader>av <Plug>(coc-codeaction-selected)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf <Plug>(coc-fix-current)
+
+" Android
+let g:android_sdk_path = expand('$ANDROID_SDK_ROOT')
+
+" Goyo
+let g:goyo_width = 120
+nnoremap <leader>z :Goyo<cr>
 
 "  markdown
 let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
