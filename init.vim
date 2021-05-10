@@ -24,17 +24,16 @@ Plug 'dracula/vim'
 Plug 'icymind/NeoSolarized'
 Plug 'cocopon/iceberg.vim'
 Plug 'jiangmiao/auto-pairs'
+Plug 'mattn/emmet-vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'lepture/vim-jinja'
 Plug 'cocopon/vaffle.vim'
-" Plug 'vifm/vifm.vim'
 Plug 'jpalardy/vim-slime'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'ap/vim-css-color'
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'junegunn/goyo.vim'
 Plug 'kburdett/vim-nuuid'
 Plug 'Olical/conjure', { 'tag': 'v4.3.1' }
@@ -43,18 +42,14 @@ Plug 'calviken/vim-gdscript3'
 Plug 'machakann/vim-highlightedyank'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'bounceme/dim-jump'
-Plug 'jceb/vim-orgmode'
 Plug 'vim-scripts/utl.vim'
 Plug 'tpope/vim-repeat'
+Plug 'junegunn/goyo.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'sebastianmarkow/deoplete-rust'
-" if has('nvim')
-"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" else
-"   Plug 'Shougo/deoplete.nvim'
-"   Plug 'roxma/vim-hug-neovim-rpc'
-" endif
+Plug 'hsanson/vim-android'
+Plug 'vimwiki/vimwiki'
 Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'SirVer/ultisnips'
@@ -63,7 +58,6 @@ Plug 'leafgarland/typescript-vim'
 Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-" Plug 'mileszs/ack.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
@@ -99,12 +93,17 @@ filetype plugin on
 " \ })
 
 " Themes
+function! LoadDefaultLight()
+  set background=light
+  let t:current_theme = 'very_light'
+  colorscheme default
+endfunction
 
 function! LoadVeryLight()
   set background=light
   let t:current_theme = 'very_light'
   let g:airline_theme="minimalist"
-  colorscheme base16-one-light
+  colorscheme pencil
   highlight Comment cterm=italic gui=italic
 endfunction
 
@@ -163,8 +162,8 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=2
-:call LoadDark()
 
+:call LoadVeryLight()
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
 
@@ -522,8 +521,18 @@ nmap <leader>av <Plug>(coc-codeaction-selected)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf <Plug>(coc-fix-current)
 
+" Android
+let g:android_sdk_path = expand('$ANDROID_SDK_ROOT')
+
+" Goyo
+let g:goyo_width = 120
+nnoremap <leader>z :Goyo<cr>
+
 "  markdown
 let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
+
+" Vimwiki
+let g:vimwiki_folding='expr'
 
 " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
 " highlight Comment cterm=italic gui=italic
