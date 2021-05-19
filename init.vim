@@ -29,6 +29,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'lepture/vim-jinja'
 Plug 'cocopon/vaffle.vim'
 Plug 'jpalardy/vim-slime'
+Plug 'vlime/vlime', {'rtp': 'vim/'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'rbgrouleff/bclose.vim'
@@ -47,7 +48,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'sebastianmarkow/deoplete-rust'
-Plug 'hsanson/vim-android'
+Plug 'artyommironov/vim-android-sensible'
 Plug 'vimwiki/vimwiki'
 Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 Plug 'HerringtonDarkholme/yats.vim'
@@ -102,7 +103,7 @@ function! LoadVeryLight()
   set background=light
   let t:current_theme = 'very_light'
   let g:airline_theme="minimalist"
-  colorscheme pencil
+  colorscheme Tomorrow
   highlight Comment cterm=italic gui=italic
 endfunction
 
@@ -161,8 +162,7 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=2
-set background=light
-let g:airline_theme='minimalist'
+:call LoadVeryLight()
 
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
@@ -194,7 +194,7 @@ set showmatch                   " matching brace/parenthesis/etc.
 set hidden                      " http://nvie.com/posts/how-i-boosted-my-vim/
 
 " GUI Settings
-set guifont=Ubuntu\ Mono:h12
+set guifont=Fira\ Code:h13
 set guioptions-=l
 set guioptions-=r
 set guioptions-=T
@@ -463,7 +463,7 @@ let g:netrw_fastbrowse=0
 let g:netrw_winsize=15
 nnoremap - :Vaffle %<cr>
 
-noremap <leader>gs :Gstatus<cr>
+noremap <leader>gs :Git<cr>
 noremap <leader>gc :Gcommit<cr>
 noremap <leader>ga :Gwrite<cr>
 noremap <leader>gd :Gdiff<cr>
