@@ -137,7 +137,7 @@ function! LoadNeutral()
   set background=dark
   let t:current_theme = 'neutral'
   let g:airline_theme="minimalist"
-  colorscheme base16-eighties
+  colorscheme naysayer
   highlight Comment cterm=italic gui=italic
 endfunction
 
@@ -162,7 +162,7 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=2
-:call LoadVeryDark()
+:call LoadNeutral()
 
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
@@ -530,5 +530,5 @@ let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
 " Vimwiki
 let g:vimwiki_folding='expr'
 
-highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
-highlight Comment cterm=italic gui=italic
+" highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+" highlight Comment cterm=italic gui=italic
