@@ -162,7 +162,7 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=2
-:call LoadNeutral()
+:call LoadVeryDark()
 
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
@@ -382,6 +382,7 @@ function! LinterStatus() abort
         \   all_errors
         \)
 endfunction
+let g:ale_ruby_rubocop_executable = 'bundle'
 let g:ale_typescript_tslint_executable = 'tslint --project tsconfig.json'
 let g:ale_typescript_tslint_config_path = 'tslint.json'
 
@@ -530,5 +531,5 @@ let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
 " Vimwiki
 let g:vimwiki_folding='expr'
 
-" highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
-" highlight Comment cterm=italic gui=italic
+highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+highlight Comment cterm=italic gui=italic
