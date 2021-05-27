@@ -29,6 +29,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'lepture/vim-jinja'
 Plug 'cocopon/vaffle.vim'
 Plug 'jpalardy/vim-slime'
+Plug 'vlime/vlime', {'rtp': 'vim/'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'rbgrouleff/bclose.vim'
@@ -48,7 +49,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'sebastianmarkow/deoplete-rust'
-Plug 'hsanson/vim-android'
+Plug 'artyommironov/vim-android-sensible'
 Plug 'vimwiki/vimwiki'
 Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 Plug 'HerringtonDarkholme/yats.vim'
@@ -103,7 +104,7 @@ function! LoadVeryLight()
   set background=light
   let t:current_theme = 'very_light'
   let g:airline_theme="minimalist"
-  colorscheme pencil
+  colorscheme Tomorrow
   highlight Comment cterm=italic gui=italic
 endfunction
 
@@ -137,7 +138,7 @@ function! LoadNeutral()
   set background=dark
   let t:current_theme = 'neutral'
   let g:airline_theme="minimalist"
-  colorscheme base16-eighties
+  colorscheme naysayer
   highlight Comment cterm=italic gui=italic
 endfunction
 
@@ -162,8 +163,7 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=2
-
-:call LoadVeryLight()
+:call LoadVeryDark()
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
 
@@ -194,7 +194,7 @@ set showmatch                   " matching brace/parenthesis/etc.
 set hidden                      " http://nvie.com/posts/how-i-boosted-my-vim/
 
 " GUI Settings
-set guifont=Ubuntu\ Mono:h12
+set guifont=Fira\ Code:h13
 set guioptions-=l
 set guioptions-=r
 set guioptions-=T
@@ -385,6 +385,7 @@ function! LinterStatus() abort
         \   all_errors
         \)
 endfunction
+let g:ale_ruby_rubocop_executable = 'bundle'
 let g:ale_typescript_tslint_executable = 'tslint --project tsconfig.json'
 let g:ale_typescript_tslint_config_path = 'tslint.json'
 
@@ -467,7 +468,7 @@ let g:netrw_fastbrowse=0
 let g:netrw_winsize=15
 nnoremap - :Vaffle %<cr>
 
-noremap <leader>gs :Gstatus<cr>
+noremap <leader>gs :Git<cr>
 noremap <leader>gc :Gcommit<cr>
 noremap <leader>ga :Gwrite<cr>
 noremap <leader>gd :Gdiff<cr>
@@ -534,5 +535,5 @@ let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
 " Vimwiki
 let g:vimwiki_folding='expr'
 
-" highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
-" highlight Comment cterm=italic gui=italic
+highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+highlight Comment cterm=italic gui=italic
