@@ -10,10 +10,6 @@ if (has('termguicolors'))
 else
   set t_Co=256
 endif
-set t_ut=""
-if (&term =~ '^xterm' && &t_Co == 256)
-  set t_ut= | set ttyscroll=1
-endif
 
 set path+=**
 
@@ -22,42 +18,47 @@ filetype off
 call plug#begin()
 
 Plug 'chriskempson/base16-vim'
-Plug 'scrooloose/nerdtree'
-Plug 'jiangmiao/auto-pairs'
-Plug 'sheerun/vim-polyglot'
-Plug 'MaxMEllon/vim-jsx-pretty'
-Plug 'tpope/vim-rails'
-Plug 'rakr/vim-one'
-Plug 'jdonaldson/vaxe'
-Plug 'calviken/vim-gdscript3'
-Plug 'plasticboy/vim-markdown'
-Plug 'Quramy/tsuquyomi'
-Plug 'rhysd/vim-crystal'
-Plug 'Tetralux/odin.vim'
-Plug 'machakann/vim-highlightedyank'
 Plug 'flazz/vim-colorschemes'
-Plug 'ryanoasis/vim-devicons'
+Plug 'jamessral/naysayer-vim'
+Plug 'dracula/vim'
+Plug 'icymind/NeoSolarized'
+Plug 'cocopon/iceberg.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'mattn/emmet-vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'lepture/vim-jinja'
+Plug 'cocopon/vaffle.vim'
+Plug 'jpalardy/vim-slime'
+Plug 'vlime/vlime', {'rtp': 'vim/'}
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'rbgrouleff/bclose.vim'
+Plug 'MaxMEllon/vim-jsx-pretty'
+Plug 'ap/vim-css-color'
+Plug 'junegunn/goyo.vim'
+Plug 'kburdett/vim-nuuid'
+Plug 'Olical/conjure', { 'tag': 'v4.3.1' }
+Plug 'Tetralux/odin.vim'
+Plug 'calviken/vim-gdscript3'
+Plug 'machakann/vim-highlightedyank'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'bounceme/dim-jump'
+Plug 'vim-scripts/utl.vim'
+Plug 'tpope/vim-repeat'
+Plug 'junegunn/goyo.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-" Plug 'takkii/Bignyanco'
-" Plug 'takkii/ruby-dictionary3'
+Plug 'sebastianmarkow/deoplete-rust'
+Plug 'artyommironov/vim-android-sensible'
+Plug 'vimwiki/vimwiki'
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'mattn/emmet-vim'
-" Plug 'peitalin/vim-jsx-typescript'
+Plug 'leafgarland/typescript-vim'
 Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'dyng/ctrlsf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
@@ -69,6 +70,7 @@ Plug 'prettier/vim-prettier', {
 Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
@@ -77,46 +79,80 @@ Plug 'janko-m/vim-test'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'tpope/vim-dispatch'
 Plug 'danro/rename.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()            " required
-" filetype plugin indent on    " required
+filetype plugin indent on    " required
+filetype plugin on
+" set omnifunc=syntaxcomplete#Complete
 
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#disable_auto_complete = 1
-inoremap <expr> <C-n>  deoplete#manual_complete()
+" Deoplete
+" let g:deoplete#enable_at_startup = 1
+" call deoplete#custom#option({
+" \ 'auto_complete': v:true,
+" \ 'auto_complete_delay': 300,
+" \ 'smart_case': v:true,
+" \ })
+
+" Themes
+function! LoadDefaultLight()
+  set background=light
+  let t:current_theme = 'very_light'
+  colorscheme default
+endfunction
+
+function! LoadVeryLight()
+  set background=light
+  let t:current_theme = 'very_light'
+  let g:airline_theme="minimalist"
+  colorscheme mac_classic
+  highlight Comment cterm=italic gui=italic
+endfunction
+
+function! LoadLight()
+  set background=light
+  let t:current_theme = 'light'
+  let g:airline_theme="solarized"
+  colorscheme NeoSolarized
+  highlight Comment cterm=italic gui=italic
+endfunction
+
+function! LoadDark()
+  set background=dark
+  let t:current_theme = 'dark'
+  let g:airline_theme="ayu_mirage"
+  colorscheme ayu
+  " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+  " highlight Comment cterm=italic gui=italic
+endfunction
+
+function! LoadVeryDark()
+  set background=dark
+  let t:current_theme = 'very_dark'
+  let g:airline_theme="minimalist"
+  colorscheme ir_black
+endfunction
+
+function! LoadNeutral()
+  set background=dark
+  let t:current_theme = 'neutral'
+  let g:airline_theme="minimalist"
+  colorscheme naysayer
+  highlight Comment cterm=italic gui=italic
+endfunction
+
 " Set Color Scheme
-let t:current_theme = 'light'
-
-" function! Transparent()
-"   hi Normal guibg=NONE ctermbg=NONE
-" endfunction
-
-" let t:is_transparent = 0
-" function! ToggleTransparent()
-"   if t:is_transparent == 0
-"     call Transparent()
-"     let t:is_transparent = 1
-"   else
-"     if t:current_theme == 'light'
-"       set background=light
-"     else
-"       set background=dark
-"     end
-
-"     let t:is_transparent = 0
-"   endif
-" endfunction
-
-nnoremap <silent> <F6> :call ToggleTransparent()<cr>
-
+let t:current_theme = 'very_dark'
 function! SwitchTheme()
   if t:current_theme == 'light'
-    let t:current_theme = 'dark'
-    set background=dark
-    :colorscheme PaperColor
-  else
-    set background=light
-    let t:current_theme = 'light'
-    :colorscheme PaperColor
+    :call LoadNeutral()
+  elseif t:current_theme == 'neutral'
+    :call LoadDark()
+  elseif t:current_theme == 'dark'
+    :call LoadVeryDark()
+  elseif t:current_theme == 'very_dark'
+    :call LoadVeryLight()
+  elseif t:current_theme == 'very_light'
+    :call LoadLight()
   end
 endfunction
 
@@ -124,31 +160,22 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set background=light
-colorscheme basic-light
-
-let g:hybrid_reduced_contrast = 1
-let g:material_terminal_italics = 1
-
-let g:ayucolor="mirage"
-let g:gruvbox_contrast_dark="medium"
-let g:gruvbox_contrast_light="medium"
+let $NVIM_TUI_ENABLE_TRUE_COLOR=2
+:call LoadDark()
+let g:gruvbox_contrast_dark="hard"
+let g:gruvbox_contrast_light="hard"
 
 " Vim Settings
-set colorcolumn=80
 syntax enable
 set encoding=utf-8
 set showcmd                     " display incomplete commands
+set cmdheight=1
 set ttyfast
 set wildmenu
 " set wildmode=list:longest,full
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/.tmp/*,*/.sass-cache/*,*/node_modules/*,*.keep,*.DS_Store,*/.git/*,*/__pychache__/*
 
 set mouse=a
-
-" Don't use a line cursor in insert mode
-" set guicursor=
 
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 " # http://superuser.com/questions/549930/cant-resize-vim-splits-inside-tmux
@@ -165,26 +192,23 @@ set showmatch                   " matching brace/parenthesis/etc.
 set hidden                      " http://nvie.com/posts/how-i-boosted-my-vim/
 
 " GUI Settings
-set guifont=Liberation\ Mono\ 11
+set guifont=Fira\ Code:h13
 set guioptions-=l
 set guioptions-=r
 set guioptions-=T
 set guioptions-=R
 set guioptions-=m
 set guioptions-=L
-set linespace=5
+set linespace=9
 " fullscreen
 map <silent> <F11>
 \    :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
-"
 
 "" Whitespace
 set nowrap                      " don't wrap lines
 set tabstop=2 shiftwidth=2      " a tab is four spaces (or set this to 4)
 set expandtab                   " use spaces, not tabs (optional)
 set backspace=indent,eol,start  " backspace through everything in insert mode
-" let g:indentguides_spacechar = '┆'
-" let g:indentguides_tabchar = '|'
 
 " Vertical split to right
 set splitright
@@ -195,11 +219,7 @@ set splitbelow
 " Use the OS clipboard by default
 set clipboard=unnamedplus
 
-set nocursorline
-" Indicators
-"set list                          " Show hidden characters (tab and eol)
-"set listchars=trail:⋅,nbsp:⋅,tab:▸\ ,eol:¬       " Use the same chars as textmate.
-"set listchars=trail:⋅,nbsp:⋅,tab:❯
+set cursorline
 set showbreak=↪\
 
 " Searching
@@ -222,14 +242,43 @@ map <silent> <M-H> <C-w><
 map <silent> <M-J> <C-W>-
 map <silent> <M-K> <C-W>+
 map <silent> <M-L> <C-w>>
+
 " For navigating even in Nvim terminal
 tnoremap <M-h> <C-\><C-N><C-w>h
 tnoremap <M-j> <C-\><C-N><C-w>j
 tnoremap <M-k> <C-\><C-N><C-w>k
 tnoremap <M-l> <C-\><C-N><C-w>l
 
-set backup       " keep a backup file
-set backupdir=~/.vim/backup//
+" Notes a la Casey Muratori
+function! PrintNote()
+  :normal! iNOTE(jsral):
+  :Commentary
+  :normal! F:
+  :startinsert!
+endfunction
+
+function! PrintTodo()
+  :normal! iTODO(jsral):
+  :Commentary
+  :normal! F:
+  :startinsert!
+endfunction
+
+function! CleanBuffers()
+  :BufOnly
+  :bd
+endfunction
+
+inoremap <C-i><C-n> <ESC>:call PrintNote()<cr>
+nnoremap <leader>in <ESC>:call PrintNote()<cr>
+inoremap <C-i><C-t> <ESC>:call PrintTodo()<cr>
+nnoremap <leader>it <ESC>:call PrintTodo()<cr>
+
+" Goyo centered layout (Like Zen-mode)
+nnoremap <leader>z :Goyo<cr>
+
+" set backup       " keep a backup file
+" set backupdir=~/.vim/backup//
 set backupcopy=yes
 set undofile
 set undodir=~/.vim/undo//
@@ -245,28 +294,6 @@ function! GitInfo()
     return ''
 endfunction
 
-let g:current_mode = {
-    \ 'n'      : 'NORMAL ',
-    \ 'no'     : 'N·Operator Pending ',
-    \ 'v'      : 'VISAUL ',
-    \ 'V'      : 'V-Line ',
-    \ '\<C-V>' : 'V-Block ',
-    \ 's'      : 'SELECT ',
-    \ 'S'      : 'S-Line ',
-    \ '\<C-S>' : 'S-BLOCK ',
-    \ 'i'      : 'INSERT ',
-    \ 'R'      : 'REPLACE ',
-    \ 'Rv'     : 'V-REPLACE ',
-    \ 'c'      : 'COMMAND ',
-    \ 'cv'     : 'VIM EX ',
-    \ 'ce'     : 'EX ',
-    \ 'r'      : 'PROMPT ',
-    \ 'rm'     : 'MORE ',
-    \ 'r?'     : 'CONFIRM ',
-    \ '!'      : 'SHELL ',
-    \ 't'      : 'TERMINAL '
-\}
-
 set title " terminal title
 set autoread " load change files
 
@@ -280,21 +307,13 @@ vnoremap > >gv
 " Edit the vimrc file
 nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
 nnoremap <silent> <leader>rv :so $MYVIMRC<CR>
-
 " Save by pressing Enter in normal mode
 nnoremap <cr> :w<cr>
 
-" Random Number
-function! Rand()
-  let @n = substitute(system('random'),'\n', '', 'g')
-  call append(line('.'), @n)
-  normal! Jx
-endfunction
-
 set shortmess+=c
 set completeopt=noinsert,menuone,noselect
-let g:python_host_prog=expand('$HOME/.pyenv/versions/2.7.14/bin/python')
-let g:python3_host_prog=expand('$HOME/.pyenv/versions/3.7.4/bin/python')
+let g:python_host_prog=expand('$HOME/.asdf/installs/python/2.7.14/bin/python')
+let g:python3_host_prog=expand('$HOME/.asdf/installs/python/3.9.2/bin/python3')
 
 " " Nerd commenter
 let g:NERDCompactSexyComs = 0
@@ -306,6 +325,12 @@ let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
 let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
 let g:UltiSnipsRemoveSelectModeMappings = 0
 
+" Dim Jump
+nnoremap <leader>dj :DimJumpPos<cr>
+
+" Slime
+let g:slime_target = "tmux"
+
 " Snippets
 let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/plugged/vim-snippets/UltiSnips', 'UltiSnips']
 
@@ -313,41 +338,27 @@ let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/plugged/vim-snippets/UltiSn
 nnoremap <C-p> :Files<CR>
 nnoremap <C-b> :Buffers<CR>
 
+" Ack/Ag
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
 " Delete all but the current buffer
 command! BufOnly silent! execute "%bd|e#|bd#"
 
 " nnoremap <leader>r :Tags<CR>
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
+let $FZF_DEFAULT_COMMAND = 'ag -l'
 
 " Syntax Highlighting and File Types
 autocmd! FileType lua setlocal tabstop=4 shiftwidth=4
-autocmd! FileType ruby setlocal tabstop=2 shiftwidth=2
-autocmd! FileType javascript setlocal tabstop=2 shiftwidth=2
-autocmd! FileType javascript.jsx setlocal tabstop=2 shiftwidth=2
-autocmd! FileType json setlocal tabstop=2 shiftwidth=2
-autocmd! FileType yaml setlocal tabstop=2 shiftwidth=2
-autocmd! FileType typescript setlocal tabstop=2 shiftwidth=2 shiftwidth=2
-autocmd! FileType c setlocal tabstop=8 shiftwidth=8 noexpandtab
-autocmd! FileType cpp setlocal tabstop=8 shiftwidth=8 noexpandtab
-autocmd! FileType go setlocal tabstop=4 shiftwidth=4 noexpandtab
-autocmd! FileType rust setlocal tabstop=4 shiftwidth=4
-autocmd! FileType elm setlocal tabstop=4 shiftwidth=4
+autocmd! FileType c setlocal tabstop=4 shiftwidth=4 noexpandtab commentstring=//\ %s
+autocmd! FileType cpp setlocal tabstop=4 shiftwidth=4 noexpandtab commentstring=//\ %s
 autocmd! BufRead,BufNewFile,BufEnter vue syntax sync fromstart
 let g:vue_disable_pre_processors=1
-autocmd! BufNewFile,BufRead,CursorHold *.html.erb setlocal tabstop=2 shiftwidth=2
-autocmd! BufNewFile,BufRead *.html setlocal tabstop=2 shiftwidth=2
-autocmd! BufNewFile,BufRead *.jsx setlocal tabstop=2 shiftwidth=2
-autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=8 shiftwidth=8
-autocmd! BufNewFile,BufRead *.c setlocal tabstop=8 shiftwidth=8
-autocmd! BufNewFile,BufRead *.rs setlocal tabstop=4 shiftwidth=4
-autocmd! BufNewFile,BufRead *.elm setlocal tabstop=4 shiftwidth=4
-autocmd! BufNewFile,BufRead *.ts setlocal tabstop=2 shiftwidth=2
-autocmd! BufNewFile,BufRead *.tsx setlocal tabstop=2 shiftwidth=2
-autocmd! BufNewFile,BufRead *.vue setf vue
-autocmd! BufNewFile,BufRead *.vue setlocal tabstop=2 shiftwidth=2 syntax=vue.html.javascript.css
-autocmd! BufNewFile,BufRead *.css setlocal tabstop=2 shiftwidth=2
-autocmd! BufNewFile,BufRead *.scss setlocal tabstop=2 shiftwidth=2
-autocmd! BufNewFile,BufRead *.ex setlocal tabstop=2 shiftwidth=2
+autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.c setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.ts setlocal filetype=typescript
+autocmd! BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
 " Use JSX for .js
 let g:jsx_ext_required = 0
 
@@ -359,6 +370,7 @@ let g:ale_lint_delay = 500
 let g:ale_sign_column_always = 1
 let g:ale_set_quickfix = 1
 let g:ale_fix_on_save = 1
+let g:ale_completion_enabled = 0
 function! LinterStatus() abort
   let l:counts = ale#statusline#Count(bufnr(''))
 
@@ -371,38 +383,31 @@ function! LinterStatus() abort
         \   all_errors
         \)
 endfunction
+let g:ale_ruby_rubocop_executable = 'bundle'
 let g:ale_typescript_tslint_executable = 'tslint --project tsconfig.json'
 let g:ale_typescript_tslint_config_path = 'tslint.json'
 
 let g:ale_linters = {
+      \  'ruby': ['rubocop'],
+      \  'rspec': ['rubocop'],
+      \  'eruby': ['erblint'],
       \  'javascript': ['eslint'],
       \  'javascript.jsx': ['eslint'],
       \  'typescript': ['tsserver', 'tslint', 'eslint'],
-      \  'typescriptreact': ['tsserver', 'tslint', 'eslint']
+      \  'typescriptreact': ['tsserver', 'tslint', 'eslint'],
+      \  'cpp': ['null'],
+      \  'c': ['null'],
+      \  'markdown': ['null'],
       \}
 
 let g:ale_fixers = {
       \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-      \   'javascript': ['eslint'],
-      \   'typescript': ['tslint', 'eslint'],
-      \   'typescriptreact': ['tslint', 'eslint'],
-      \   'ruby': ['rubocop']
+      \   'javascript': ['eslint', 'prettier'],
+      \   'typescript': ['tslint', 'eslint', 'prettier'],
+      \   'typescriptreact': ['tslint', 'eslint', 'prettier'],
+      \   'ruby': ['rubocop'],
+      \   'rspec': ['rubocop']
       \}
-
-set laststatus=2
-set statusline=
-set statusline+=\ " Some space
-set statusline+=%{g:current_mode[mode()]}        " Path to the file
-set statusline+=\ " Some space
-set statusline+=%f         " Path to the file
-set statusline+=\ " Some space
-set statusline+=%{GitInfo()}
-set statusline+=\ " Separator
-set statusline+=%=%y        " Filetype of the file
-set statusline+=\ " Separator
-set statusline+=%{LinterStatus()}
-set statusline+=\ " Some space
-set statusline+=\ " Some space
 
 " Prettier
 let g:prettier#autoformat = 0
@@ -410,12 +415,12 @@ let g:prettier#autoformat = 0
 nnoremap <leader>F :PrettierAsync<cr>
 
 " Courtesy of Jeremy!
-:set wildcharm=<C-z>
+set wildcharm=<C-z>
 " open current test file's source in split
-:nnoremap <leader>os :vs %<C-z><c-f>bbdb.<cr>
+nnoremap <leader>os :vs %<C-z><c-f>bbdb.<cr>
 
 " open current file's test in split
-:nnoremap <leader>ot :vs %<C-z><c-f>bitest.<cr>
+nnoremap <leader>ot :vs %<C-z><c-f>bitest.<cr>
 
 " Test Runner
 nnoremap <silent><leader><leader>t :TestNearest<CR>
@@ -424,14 +429,14 @@ nnoremap <silent><leader><leader>A :TestSuite<CR>
 nnoremap <silent><leader><leader>L :TestLast<CR>
 nnoremap <silent><leader><leader>G :TestVisit<CR>
 
-let test#strategy = "asyncrun"
+let test#strategy = "neovim"
 let g:test#preserve_screen = 1
 let test#javascript#jest#executable = 'yarn test'
 let test#javascript#jest#file_pattern = '[**.jest.js | **.test.js]'
 let test#typescript#jest#file_pattern = '[**.jest.ts | **.test.ts]'
 
 " Typescript Config
-let g:polyglot_disable=['typescript', 'javscript', 'javascript.jsx']
+let g:polyglot_disable=['typescript', 'typescript.tsx', 'javscript', 'javascript.jsx']
 
 " Remove trailing whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
@@ -450,8 +455,7 @@ autocmd Filetype gitcommit setlocal spell
 autocmd Filetype markdown setlocal spell
 
 " Folding
-set nofoldenable " disable folding by default
-set foldmethod=marker
+set foldmethod=expr
 
 " File Browsing
 let g:netrw_banner=0        " no more annoying banner!
@@ -460,40 +464,9 @@ let g:netrw_altv=1          " open splits to the right
 let g:netrw_liststyle=3     " tree view
 let g:netrw_fastbrowse=0
 let g:netrw_winsize=15
+nnoremap - :Vaffle %<cr>
 
-" NERD Tree
-" Put focus to the NERD Tree with F3 (tricked by quickly closing it and
-" immediately showing it again, since there is no :NERDTreeFocus command)
-nmap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
-nmap <leader>n :NERDTreeToggle<CR>
-
-let g:NERDTreeWinSize=40
-
-" Show the bookmarks table on startup
-let NERDTreeShowBookmarks=1
-
-" Show hidden files, too
-let NERDTreeShowFiles=1
-let NERDTreeShowHidden=1
-
-" Highlight the selected entry in the tree
-let NERDTreeHighlightCursorline=1
-
-" Use a single click to fold/unfold directories and a double click to open
-" files
-let NERDTreeMouseMode=2
-
-" Don't display these kinds of files
-let NERDTreeIgnore=[ '\.swp$','\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
-      \ '\.o$', '\.so$', '\.egg$', '^\.git$', '\.DS_Store$', '^\.bundle$',
-      \ 'node_modules', '\.keep$', '\.obj$', '\.pdb$', '\.sln$']
-
-" Quit vim if nerdtree is last buffer
-" https://github.com/scrooloose/nerdtree/issues/21
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-" Fugitive
-noremap <leader>gs :Gstatus<cr>
+noremap <leader>gs :Git<cr>
 noremap <leader>gc :Gcommit<cr>
 noremap <leader>ga :Gwrite<cr>
 noremap <leader>gd :Gdiff<cr>
@@ -505,5 +478,57 @@ autocmd ColorScheme * highlight clear SignColumn
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 
+" CoC
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nmap <silent> K :call <SID>show_documentation()<CR>
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocActionAsync('doHover')
+  endif
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac <Plug>(coc-codeaction-line)
+nmap <leader>av <Plug>(coc-codeaction-selected)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf <Plug>(coc-fix-current)
+
+" Android
+let g:android_sdk_path = expand('$ANDROID_SDK_ROOT')
+
+" Goyo
+let g:goyo_width = 120
+nnoremap <leader>z :Goyo<cr>
+
 "  markdown
 let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
+
+" Vimwiki
+let g:vimwiki_folding='expr'
