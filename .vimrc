@@ -51,11 +51,13 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'sebastianmarkow/deoplete-rust'
 Plug 'artyommironov/vim-android-sensible'
 Plug 'vimwiki/vimwiki'
-Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'jparise/vim-graphql'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'leafgarland/typescript-vim'
 Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -161,7 +163,10 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=2
-:call LoadDark()
+set background=dark
+highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+highlight Comment cterm=italic gui=italic
+" :call LoadDark()
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
 
@@ -217,7 +222,7 @@ set splitright
 set splitbelow
 
 " Use the OS clipboard by default
-set clipboard=unnamedplus
+set clipboard=unnamed
 
 set cursorline
 set showbreak=↪\
@@ -429,7 +434,7 @@ nnoremap <silent><leader><leader>A :TestSuite<CR>
 nnoremap <silent><leader><leader>L :TestLast<CR>
 nnoremap <silent><leader><leader>G :TestVisit<CR>
 
-let test#strategy = "neovim"
+let test#strategy = "vimterminal"
 let g:test#preserve_screen = 1
 let test#javascript#jest#executable = 'yarn test'
 let test#javascript#jest#file_pattern = '[**.jest.js | **.test.js]'
