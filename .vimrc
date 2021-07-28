@@ -17,18 +17,14 @@ set path+=**
 filetype off
 call plug#begin()
 
-Plug 'chriskempson/base16-vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'jamessral/naysayer-vim'
-Plug 'dracula/vim'
-Plug 'icymind/NeoSolarized'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mattn/emmet-vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'lepture/vim-jinja'
 Plug 'cocopon/vaffle.vim'
 Plug 'jpalardy/vim-slime'
-Plug 'vlime/vlime', {'rtp': 'vim/'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'rbgrouleff/bclose.vim'
@@ -36,7 +32,6 @@ Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'ap/vim-css-color'
 Plug 'junegunn/goyo.vim'
 Plug 'kburdett/vim-nuuid'
-Plug 'Olical/conjure', { 'tag': 'v4.3.1' }
 Plug 'Tetralux/odin.vim'
 Plug 'calviken/vim-gdscript3'
 Plug 'machakann/vim-highlightedyank'
@@ -47,7 +42,6 @@ Plug 'tpope/vim-repeat'
 Plug 'junegunn/goyo.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'sebastianmarkow/deoplete-rust'
 Plug 'artyommironov/vim-android-sensible'
 Plug 'vimwiki/vimwiki'
 Plug 'pangloss/vim-javascript'
@@ -84,15 +78,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()            " required
 filetype plugin indent on    " required
 filetype plugin on
-" set omnifunc=syntaxcomplete#Complete
-
-" Deoplete
-" let g:deoplete#enable_at_startup = 1
-" call deoplete#custom#option({
-" \ 'auto_complete': v:true,
-" \ 'auto_complete_delay': 300,
-" \ 'smart_case': v:true,
-" \ })
 
 " Themes
 function! LoadDark()
@@ -128,8 +113,6 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 let $NVIM_TUI_ENABLE_TRUE_COLOR=2
 
 :call LoadDark()
-let g:gruvbox_contrast_dark="hard"
-let g:gruvbox_contrast_light="hard"
 
 " Vim Settings
 syntax enable
@@ -202,12 +185,6 @@ nnoremap <C-k> <c-w>k
 nnoremap <BS> <c-w>h
 nnoremap <C-l> <c-w>l
 nnoremap <leader>T :tabe<cr>
-
-" Maps Alt-[H,J,K,L] to resizing a window split
-map <silent> <M-H> <C-w><
-map <silent> <M-J> <C-W>-
-map <silent> <M-K> <C-W>+
-map <silent> <M-L> <C-w>>
 
 " For navigating even in Nvim terminal
 tnoremap <M-h> <C-\><C-N><C-w>h
