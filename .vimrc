@@ -22,7 +22,6 @@ Plug 'flazz/vim-colorschemes'
 Plug 'jamessral/naysayer-vim'
 Plug 'dracula/vim'
 Plug 'icymind/NeoSolarized'
-Plug 'cocopon/iceberg.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mattn/emmet-vim'
 Plug 'sheerun/vim-polyglot'
@@ -96,64 +95,28 @@ filetype plugin on
 " \ })
 
 " Themes
-function! LoadDefaultLight()
-  set background=light
-  let t:current_theme = 'very_light'
+function! LoadDark()
+  let t:current_theme = 'dark'
   colorscheme default
-endfunction
-
-function! LoadVeryLight()
-  set background=light
-  let t:current_theme = 'very_light'
-  let g:airline_theme="minimalist"
-  colorscheme mac_classic
+  set background=dark
+  highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   highlight Comment cterm=italic gui=italic
 endfunction
 
 function! LoadLight()
-  set background=light
   let t:current_theme = 'light'
-  let g:airline_theme="solarized"
-  colorscheme NeoSolarized
-  highlight Comment cterm=italic gui=italic
-endfunction
-
-function! LoadDark()
-  set background=dark
-  let t:current_theme = 'dark'
-  let g:airline_theme="ayu_mirage"
-  colorscheme ayu
-  " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
-  " highlight Comment cterm=italic gui=italic
-endfunction
-
-function! LoadVeryDark()
-  set background=dark
-  let t:current_theme = 'very_dark'
   let g:airline_theme="minimalist"
-  colorscheme ir_black
-endfunction
-
-function! LoadNeutral()
-  set background=dark
-  let t:current_theme = 'neutral'
-  let g:airline_theme="minimalist"
-  colorscheme naysayer
+  colorscheme mac_classic
+  set background=light
   highlight Comment cterm=italic gui=italic
 endfunction
 
 " Set Color Scheme
-let t:current_theme = 'very_dark'
+let t:current_theme = 'dark'
 function! SwitchTheme()
   if t:current_theme == 'light'
-    :call LoadNeutral()
-  elseif t:current_theme == 'neutral'
     :call LoadDark()
-  elseif t:current_theme == 'dark'
-    :call LoadVeryDark()
-  elseif t:current_theme == 'very_dark'
-    :call LoadVeryLight()
-  elseif t:current_theme == 'very_light'
+  if t:current_theme == 'dark'
     :call LoadLight()
   end
 endfunction
@@ -163,10 +126,8 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=2
-set background=dark
-highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
-highlight Comment cterm=italic gui=italic
-" :call LoadDark()
+
+:call LoadDark()
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
 
