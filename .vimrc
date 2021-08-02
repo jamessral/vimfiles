@@ -80,7 +80,7 @@ filetype plugin on
 " Themes
 function! LoadDark()
   let t:current_theme = 'dark'
-  colorscheme default
+  colorscheme molokai
   set background=dark
   highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   highlight Comment cterm=italic gui=italic
@@ -89,6 +89,7 @@ endfunction
 function! LoadLight()
   let t:current_theme = 'light'
   let g:airline_theme="minimalist"
+  colorscheme mac_classic
   set background=light
   highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   highlight Comment cterm=italic gui=italic
@@ -475,3 +476,6 @@ let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
 
 " Vimwiki
 let g:vimwiki_folding='expr'
+
+highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+highlight Comment cterm=italic gui=italic
