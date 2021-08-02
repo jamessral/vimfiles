@@ -28,9 +28,7 @@ Plug 'jpalardy/vim-slime'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'rbgrouleff/bclose.vim'
-Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'ap/vim-css-color'
-Plug 'junegunn/goyo.vim'
 Plug 'kburdett/vim-nuuid'
 Plug 'Tetralux/odin.vim'
 Plug 'calviken/vim-gdscript3'
@@ -91,8 +89,8 @@ endfunction
 function! LoadLight()
   let t:current_theme = 'light'
   let g:airline_theme="minimalist"
-  colorscheme mac_classic
   set background=light
+  highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   highlight Comment cterm=italic gui=italic
 endfunction
 
@@ -101,9 +99,9 @@ let t:current_theme = 'dark'
 function! SwitchTheme()
   if t:current_theme == 'light'
     :call LoadDark()
-  if t:current_theme == 'dark'
+  elseif t:current_theme == 'dark'
     :call LoadLight()
-  end
+  endif
 endfunction
 
 nnoremap <silent> <F5> :call SwitchTheme()<cr>
@@ -300,6 +298,8 @@ autocmd! BufRead,BufNewFile,BufEnter vue syntax sync fromstart
 let g:vue_disable_pre_processors=1
 autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.c setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.js setlocal tabstop=2 shiftwidth=2
+autocmd! BufNewFile,BufRead *.jsx setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.ts setlocal filetype=typescript
 autocmd! BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
 " Use JSX for .js
