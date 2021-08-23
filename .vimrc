@@ -1,5 +1,6 @@
 set nocompatible
 set noswapfile
+set nomodeline
 set ttimeout
 set ttimeoutlen=0
 set matchtime=0
