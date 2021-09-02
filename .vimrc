@@ -43,6 +43,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'artyommironov/vim-android-sensible'
 Plug 'vimwiki/vimwiki'
+Plug 'lervag/vimtex'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'maxmellon/vim-jsx-pretty'
@@ -52,7 +53,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
@@ -81,19 +82,20 @@ filetype plugin on
 " Themes
 function! LoadDark()
   let t:current_theme = 'dark'
+  let g:airline_theme="minimalist"
   colorscheme molokai
   set background=dark
-  highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
-  highlight Comment cterm=italic gui=italic
+  " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+  " highlight Comment cterm=italic gui=italic
 endfunction
 
 function! LoadLight()
   let t:current_theme = 'light'
-  let g:airline_theme="minimalist"
-  colorscheme mac_classic
+  let g:airline_theme="solarized"
+  colorscheme flattened_light
   set background=light
-  highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
-  highlight Comment cterm=italic gui=italic
+  " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+  " highlight Comment cterm=italic gui=italic
 endfunction
 
 " Set Color Scheme
@@ -141,7 +143,7 @@ set showmatch                   " matching brace/parenthesis/etc.
 set hidden                      " http://nvie.com/posts/how-i-boosted-my-vim/
 
 " GUI Settings
-set guifont=Fira\ Code:h13
+set guifont=Source\ Code\ Pro\ 11
 set guioptions-=l
 set guioptions-=r
 set guioptions-=T
@@ -478,5 +480,5 @@ let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
 " Vimwiki
 let g:vimwiki_folding='expr'
 
-highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
-highlight Comment cterm=italic gui=italic
+" highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+" highlight Comment cterm=italic gui=italic
