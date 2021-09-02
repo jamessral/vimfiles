@@ -82,8 +82,8 @@ filetype plugin on
 " Themes
 function! LoadDark()
   let t:current_theme = 'dark'
-  let g:airline_theme="minimalist"
-  colorscheme molokai
+  colorscheme flattened_dark
+  let g:airline_theme="solarized"
   set background=dark
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   " highlight Comment cterm=italic gui=italic
