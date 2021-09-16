@@ -79,11 +79,14 @@ call plug#end()            " required
 filetype plugin indent on    " required
 filetype plugin on
 
+let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_contrast_light='hard'
+
 " Themes
 function! LoadDark()
   let t:current_theme = 'dark'
-  colorscheme flattened_dark
-  let g:airline_theme="solarized"
+  colorscheme gruvbox
+  let g:airline_theme="minimalist"
   set background=dark
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   " highlight Comment cterm=italic gui=italic
@@ -91,8 +94,8 @@ endfunction
 
 function! LoadLight()
   let t:current_theme = 'light'
-  let g:airline_theme="solarized"
-  colorscheme flattened_light
+  let g:airline_theme="minimalist"
+  colorscheme gruvbox
   set background=light
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   " highlight Comment cterm=italic gui=italic
@@ -168,7 +171,7 @@ set splitright
 set splitbelow
 
 " Use the OS clipboard by default
-set clipboard=unnamed
+set clipboard^=unnamedplus
 
 set cursorline
 set showbreak=↪\
