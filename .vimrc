@@ -85,8 +85,8 @@ let g:gruvbox_contrast_light='hard'
 " Themes
 function! LoadDark()
   let t:current_theme = 'dark'
-  colorscheme flattened_dark
-  let g:airline_theme="solarized"
+  colorscheme PaperColor
+  let g:airline_theme="minimalist"
   set background=dark
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   " highlight Comment cterm=italic gui=italic
@@ -94,8 +94,8 @@ endfunction
 
 function! LoadLight()
   let t:current_theme = 'light'
-  let g:airline_theme="solarized"
-  colorscheme flattened_light
+  let g:airline_theme="minimalist"
+  colorscheme PaperColor
   set background=light
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   " highlight Comment cterm=italic gui=italic
