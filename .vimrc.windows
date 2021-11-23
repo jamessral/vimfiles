@@ -86,7 +86,7 @@ let g:gruvbox_contrast_light='hard'
 function! LoadDark()
   let t:current_theme = 'dark'
   colorscheme Atelier_ForestDark
-  let g:airline_theme="solarized"
+  let g:airline_theme="minimalist"
   set background=dark
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   " highlight Comment cterm=italic gui=italic
@@ -176,7 +176,7 @@ set clipboard^=unnamed
 
 if has('gui')
   set cursorline
-elseif
+else
   set nocursorline
 endif
 
