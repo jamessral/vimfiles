@@ -38,6 +38,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'bounceme/dim-jump'
 Plug 'vim-scripts/utl.vim'
 Plug 'tpope/vim-repeat'
+Plug 'dart-lang/dart-vim-plugin'
 Plug 'junegunn/goyo.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
@@ -85,7 +86,7 @@ let g:gruvbox_contrast_light='hard'
 " Themes
 function! LoadDark()
   let t:current_theme = 'dark'
-  colorscheme Atelier_ForestDark
+  colorscheme elrond
   let g:airline_theme="minimalist"
   set background=dark
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
@@ -146,14 +147,14 @@ set showmatch                   " matching brace/parenthesis/etc.
 set hidden                      " http://nvie.com/posts/how-i-boosted-my-vim/
 
 " GUI Settings
-set guifont=Source\ Code\ Pro\ 11
+set guifont=JetBrains\ Mono:h12
 set guioptions-=l
 set guioptions-=r
 set guioptions-=T
 set guioptions-=R
 set guioptions-=m
 set guioptions-=L
-set linespace=9
+set linespace=3
 " fullscreen
 map <silent> <F11>
 \    :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
@@ -173,7 +174,13 @@ set splitbelow
 " Use the OS clipboard by default
 set clipboard^=unnamed
 
-set cursorline
+
+if has('gui')
+  set cursorline
+else
+  set nocursorline
+endif
+
 set showbreak=↪\
 
 " Searching
@@ -260,8 +267,9 @@ nnoremap <cr> :w<cr>
 
 set shortmess+=c
 set completeopt=noinsert,menuone,noselect
-let g:python_host_prog=expand('$HOME/.asdf/installs/python/2.7.14/bin/python')
-let g:python3_host_prog=expand('$HOME/.asdf/installs/python/3.10.10/bin/python3')
+set pythonthreedll=C:\\Users\\james\\AppData\\Local\\Programs\\Python\\Python310\\python310.dll
+set pythonthreehome=C:\\Users\\james\\AppData\\Local\\Programs\\Python\\Python310
+
 
 " " Nerd commenter
 let g:NERDCompactSexyComs = 0
@@ -278,9 +286,6 @@ nnoremap <leader>dj :DimJumpPos<cr>
 
 " Slime
 let g:slime_target = "tmux"
-
-" Snippets
-let g:UltiSnipsSnippetDirectories = ['~/.vim/plugged/vim-snippets/UltiSnips', 'UltiSnips']
 
 " Fzf
 nnoremap <C-p> :Files<CR>
