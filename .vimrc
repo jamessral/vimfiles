@@ -85,8 +85,8 @@ let g:gruvbox_contrast_light='hard'
 " Themes
 function! LoadDark()
   let t:current_theme = 'dark'
-  colorscheme flattened_dark
-  let g:airline_theme="solarized"
+  colorscheme Atelier_ForestDark
+  let g:airline_theme="minimalist"
   set background=dark
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   " highlight Comment cterm=italic gui=italic
@@ -171,7 +171,7 @@ set splitright
 set splitbelow
 
 " Use the OS clipboard by default
-set clipboard^=unnamedplus
+set clipboard^=unnamed
 
 set cursorline
 set showbreak=↪\
@@ -261,7 +261,7 @@ nnoremap <cr> :w<cr>
 set shortmess+=c
 set completeopt=noinsert,menuone,noselect
 let g:python_host_prog=expand('$HOME/.asdf/installs/python/2.7.14/bin/python')
-let g:python3_host_prog=expand('$HOME/.asdf/installs/python/3.9.2/bin/python3')
+let g:python3_host_prog=expand('$HOME/.asdf/installs/python/3.10.10/bin/python3')
 
 " " Nerd commenter
 let g:NERDCompactSexyComs = 0
@@ -280,7 +280,7 @@ nnoremap <leader>dj :DimJumpPos<cr>
 let g:slime_target = "tmux"
 
 " Snippets
-let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/plugged/vim-snippets/UltiSnips', 'UltiSnips']
+let g:UltiSnipsSnippetDirectories = ['~/.vim/plugged/vim-snippets/UltiSnips', 'UltiSnips']
 
 " Fzf
 nnoremap <C-p> :Files<CR>
