@@ -86,7 +86,7 @@ let g:gruvbox_contrast_light='hard'
 " Themes
 function! LoadDark()
   let t:current_theme = 'dark'
-  colorscheme elrond
+  colorscheme Tomorrow-Night-Bright
   let g:airline_theme="minimalist"
   set background=dark
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
@@ -96,7 +96,7 @@ endfunction
 function! LoadLight()
   let t:current_theme = 'light'
   let g:airline_theme="solarized"
-  colorscheme flattened_light
+  colorscheme ancient
   set background=light
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   " highlight Comment cterm=italic gui=italic
@@ -147,7 +147,7 @@ set showmatch                   " matching brace/parenthesis/etc.
 set hidden                      " http://nvie.com/posts/how-i-boosted-my-vim/
 
 " GUI Settings
-set guifont=JetBrains\ Mono:h12
+set guifont=JetBrains\ Mono:h11
 set guioptions-=l
 set guioptions-=r
 set guioptions-=T
