@@ -34,10 +34,10 @@ Plug 'kburdett/vim-nuuid'
 Plug 'Tetralux/odin.vim'
 Plug 'calviken/vim-gdscript3'
 Plug 'machakann/vim-highlightedyank'
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'bounceme/dim-jump'
 Plug 'vim-scripts/utl.vim'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rails'
 Plug 'junegunn/goyo.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
@@ -85,8 +85,8 @@ let g:gruvbox_contrast_light='hard'
 " Themes
 function! LoadDark()
   let t:current_theme = 'dark'
-  colorscheme Atelier_ForestDark
-  let g:airline_theme="minimalist"
+  colorscheme badwolf
+  let g:airline_theme="transparent"
   set background=dark
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   " highlight Comment cterm=italic gui=italic
@@ -94,8 +94,8 @@ endfunction
 
 function! LoadLight()
   let t:current_theme = 'light'
-  let g:airline_theme="solarized"
-  colorscheme flattened_light
+  let g:airline_theme="transparent"
+  colorscheme summerfruit256
   set background=light
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   " highlight Comment cterm=italic gui=italic
@@ -117,7 +117,7 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=2
 
-:call LoadDark()
+:call LoadLight()
 
 " Vim Settings
 syntax enable
