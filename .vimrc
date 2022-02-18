@@ -42,7 +42,6 @@ Plug 'junegunn/goyo.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'artyommironov/vim-android-sensible'
-Plug 'vimwiki/vimwiki'
 Plug 'lervag/vimtex'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
@@ -117,7 +116,7 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=2
 
-:call LoadLight()
+:call LoadDark()
 
 " Vim Settings
 syntax enable
