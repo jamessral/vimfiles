@@ -19,6 +19,7 @@ filetype off
 call plug#begin()
 
 Plug 'flazz/vim-colorschemes'
+Plug 'haishanh/night-owl.vim'
 Plug 'jamessral/naysayer-vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mattn/emmet-vim'
@@ -84,7 +85,7 @@ let g:gruvbox_contrast_light='hard'
 " Themes
 function! LoadDark()
   let t:current_theme = 'dark'
-  colorscheme badwolf
+  colorscheme night-owl
   let g:airline_theme="transparent"
   set background=dark
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
@@ -94,7 +95,7 @@ endfunction
 function! LoadLight()
   let t:current_theme = 'light'
   let g:airline_theme="transparent"
-  colorscheme summerfruit256
+  colorscheme PaperColor
   set background=light
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   " highlight Comment cterm=italic gui=italic
