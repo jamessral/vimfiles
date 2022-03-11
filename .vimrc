@@ -85,7 +85,7 @@ let g:gruvbox_contrast_light='hard'
 " Themes
 function! LoadDark()
   let t:current_theme = 'dark'
-  colorscheme night-owl
+  colorscheme naysayer
   let g:airline_theme="transparent"
   set background=dark
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
