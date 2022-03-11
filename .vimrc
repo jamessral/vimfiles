@@ -94,12 +94,8 @@ endfunction
 
 function! LoadLight()
   let t:current_theme = 'light'
-  let g:airline_theme="solarized"
-  colorscheme ancient
-=======
   let g:airline_theme="transparent"
   colorscheme PaperColor
->>>>>>> 622997642e6f46c4ec8790c7f116c8baa6ab84d4
   set background=light
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   " highlight Comment cterm=italic gui=italic
@@ -183,8 +179,6 @@ if has('gui')
 else
   set nocursorline
 endif
-=======
->>>>>>> 622997642e6f46c4ec8790c7f116c8baa6ab84d4
 
 set showbreak=↪\
 
