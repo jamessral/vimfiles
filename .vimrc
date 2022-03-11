@@ -19,6 +19,7 @@ filetype off
 call plug#begin()
 
 Plug 'flazz/vim-colorschemes'
+Plug 'haishanh/night-owl.vim'
 Plug 'jamessral/naysayer-vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mattn/emmet-vim'
@@ -34,16 +35,14 @@ Plug 'kburdett/vim-nuuid'
 Plug 'Tetralux/odin.vim'
 Plug 'calviken/vim-gdscript3'
 Plug 'machakann/vim-highlightedyank'
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'bounceme/dim-jump'
 Plug 'vim-scripts/utl.vim'
 Plug 'tpope/vim-repeat'
-Plug 'dart-lang/dart-vim-plugin'
+Plug 'tpope/vim-rails'
 Plug 'junegunn/goyo.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'artyommironov/vim-android-sensible'
-Plug 'vimwiki/vimwiki'
 Plug 'lervag/vimtex'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
@@ -86,8 +85,8 @@ let g:gruvbox_contrast_light='hard'
 " Themes
 function! LoadDark()
   let t:current_theme = 'dark'
-  colorscheme Tomorrow-Night-Bright
-  let g:airline_theme="minimalist"
+  colorscheme night-owl
+  let g:airline_theme="transparent"
   set background=dark
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   " highlight Comment cterm=italic gui=italic
@@ -97,6 +96,10 @@ function! LoadLight()
   let t:current_theme = 'light'
   let g:airline_theme="solarized"
   colorscheme ancient
+=======
+  let g:airline_theme="transparent"
+  colorscheme PaperColor
+>>>>>>> 622997642e6f46c4ec8790c7f116c8baa6ab84d4
   set background=light
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   " highlight Comment cterm=italic gui=italic
@@ -180,6 +183,8 @@ if has('gui')
 else
   set nocursorline
 endif
+=======
+>>>>>>> 622997642e6f46c4ec8790c7f116c8baa6ab84d4
 
 set showbreak=↪\
 
@@ -270,7 +275,6 @@ set completeopt=noinsert,menuone,noselect
 set pythonthreedll=C:\\Users\\james\\AppData\\Local\\Programs\\Python\\Python310\\python310.dll
 set pythonthreehome=C:\\Users\\james\\AppData\\Local\\Programs\\Python\\Python310
 
-
 " " Nerd commenter
 let g:NERDCompactSexyComs = 0
 
@@ -287,6 +291,8 @@ nnoremap <leader>dj :DimJumpPos<cr>
 " Slime
 let g:slime_target = "tmux"
 
+" Snippets
+let g:UltiSnipsSnippetDirectories = ['~/.vim/plugged/vim-snippets/UltiSnips', 'UltiSnips']
 " Fzf
 nnoremap <C-p> :Files<CR>
 nnoremap <C-b> :Buffers<CR>
