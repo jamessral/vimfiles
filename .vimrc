@@ -53,7 +53,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
-" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
@@ -85,7 +85,7 @@ let g:gruvbox_contrast_light='hard'
 " Themes
 function! LoadDark()
   let t:current_theme = 'dark'
-  colorscheme naysayer
+  colorscheme PaperColor
   let g:airline_theme="transparent"
   set background=dark
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
@@ -95,7 +95,7 @@ endfunction
 function! LoadLight()
   let t:current_theme = 'light'
   let g:airline_theme="transparent"
-  colorscheme PaperColor
+  colorscheme basic-light
   set background=light
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   " highlight Comment cterm=italic gui=italic
@@ -117,7 +117,7 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=2
 
-:call LoadDark()
+:call LoadLight()
 
 " Vim Settings
 syntax enable
@@ -266,8 +266,6 @@ nnoremap <cr> :w<cr>
 
 set shortmess+=c
 set completeopt=noinsert,menuone,noselect
-set pythonthreedll=C:\\Users\\james\\AppData\\Local\\Programs\\Python\\Python310\\python310.dll
-set pythonthreehome=C:\\Users\\james\\AppData\\Local\\Programs\\Python\\Python310
 
 " " Nerd commenter
 let g:NERDCompactSexyComs = 0
