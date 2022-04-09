@@ -22,27 +22,25 @@ Plug 'flazz/vim-colorschemes'
 Plug 'haishanh/night-owl.vim'
 Plug 'jamessral/naysayer-vim'
 Plug 'jiangmiao/auto-pairs'
+Plug 'dracula/vim'
 Plug 'mattn/emmet-vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'lepture/vim-jinja'
 Plug 'cocopon/vaffle.vim'
 Plug 'jpalardy/vim-slime'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'ap/vim-css-color'
 Plug 'kburdett/vim-nuuid'
 Plug 'Tetralux/odin.vim'
-Plug 'calviken/vim-gdscript3'
 Plug 'machakann/vim-highlightedyank'
-Plug 'bounceme/dim-jump'
 Plug 'vim-scripts/utl.vim'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rails'
 Plug 'junegunn/goyo.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'artyommironov/vim-android-sensible'
 Plug 'lervag/vimtex'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
@@ -57,7 +55,6 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
-Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'prettier/vim-prettier', {
       \ 'do': 'yarn install',
@@ -85,8 +82,8 @@ let g:gruvbox_contrast_light='hard'
 " Themes
 function! LoadDark()
   let t:current_theme = 'dark'
-  colorscheme PaperColor
-  let g:airline_theme="transparent"
+  colorscheme dracula
+  " let g:airline_theme="transparent"
   set background=dark
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   " highlight Comment cterm=italic gui=italic
@@ -94,7 +91,7 @@ endfunction
 
 function! LoadLight()
   let t:current_theme = 'light'
-  let g:airline_theme="transparent"
+  " let g:airline_theme="transparent"
   colorscheme basic-light
   set background=light
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
@@ -117,7 +114,7 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=2
 
-:call LoadLight()
+:call LoadDark()
 
 " Vim Settings
 syntax enable
@@ -146,7 +143,7 @@ set showmatch                   " matching brace/parenthesis/etc.
 set hidden                      " http://nvie.com/posts/how-i-boosted-my-vim/
 
 " GUI Settings
-set guifont=JetBrains\ Mono:h11
+set guifont=Liberation\ Mono:h10
 set guioptions-=l
 set guioptions-=r
 set guioptions-=T
