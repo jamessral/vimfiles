@@ -62,6 +62,7 @@ Plug 'prettier/vim-prettier', {
 Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'preservim/vim-pencil'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-surround'
@@ -176,6 +177,10 @@ if has('gui')
 else
   set nocursorline
 endif
+
+" Statusline
+set laststatus=2
+set statusline=%f\ %#CursorColumn#\ %=\ %y\ %l/%L\ %p%%\ %l:%c
 
 set showbreak=↪\
 
