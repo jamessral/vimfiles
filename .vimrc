@@ -28,8 +28,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'lepture/vim-jinja'
 Plug 'cocopon/vaffle.vim'
 Plug 'jpalardy/vim-slime'
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
+Plug 'vimwiki/vimwiki'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'ap/vim-css-color'
 Plug 'kburdett/vim-nuuid'
@@ -83,7 +82,7 @@ let g:gruvbox_contrast_light='hard'
 " Themes
 function! LoadDark()
   let t:current_theme = 'dark'
-  colorscheme dracula
+  colorscheme basic-dark
   " let g:airline_theme="transparent"
   set background=dark
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
