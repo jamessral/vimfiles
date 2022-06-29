@@ -84,8 +84,8 @@ function! LoadDark()
   let t:current_theme = 'dark'
   colorscheme simple_dark
   set background=dark
-  " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
-  " highlight Comment cterm=italic gui=italic
+  highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+  highlight Comment cterm=italic gui=italic
 endfunction
 
 function! LoadLight()
@@ -485,5 +485,5 @@ let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
 " Vimwiki
 let g:vimwiki_folding='expr'
 
-" highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
-" highlight Comment cterm=italic gui=italic
+highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+highlight Comment cterm=italic gui=italic
