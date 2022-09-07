@@ -1,10 +1,12 @@
 set nocompatible
 set noswapfile
+set nomodeline
 set ttimeout
 set ttimeoutlen=0
 set matchtime=0
 set encoding=UTF-8
 set ttyfast
+set number
 if (has('termguicolors'))
   set termguicolors
 else
@@ -17,52 +19,42 @@ set path+=**
 filetype off
 call plug#begin()
 
-Plug 'chriskempson/base16-vim'
 Plug 'flazz/vim-colorschemes'
+Plug 'haishanh/night-owl.vim'
 Plug 'jamessral/naysayer-vim'
-Plug 'dracula/vim'
-Plug 'icymind/NeoSolarized'
-Plug 'cocopon/iceberg.vim'
 Plug 'jiangmiao/auto-pairs'
+Plug 'dracula/vim'
 Plug 'mattn/emmet-vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'lepture/vim-jinja'
 Plug 'cocopon/vaffle.vim'
 Plug 'jpalardy/vim-slime'
-Plug 'vlime/vlime', {'rtp': 'vim/'}
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'vimwiki/vimwiki'
 Plug 'rbgrouleff/bclose.vim'
-Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'ap/vim-css-color'
-Plug 'junegunn/goyo.vim'
 Plug 'kburdett/vim-nuuid'
-Plug 'Olical/conjure', { 'tag': 'v4.3.1' }
 Plug 'Tetralux/odin.vim'
-Plug 'calviken/vim-gdscript3'
 Plug 'machakann/vim-highlightedyank'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'bounceme/dim-jump'
 Plug 'vim-scripts/utl.vim'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rails'
 Plug 'junegunn/goyo.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'sebastianmarkow/deoplete-rust'
-Plug 'artyommironov/vim-android-sensible'
-Plug 'vimwiki/vimwiki'
-Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+Plug 'lervag/vimtex'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'jparise/vim-graphql'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'leafgarland/typescript-vim'
 Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
-Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'prettier/vim-prettier', {
       \ 'do': 'yarn install',
@@ -70,6 +62,7 @@ Plug 'prettier/vim-prettier', {
 Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'preservim/vim-pencil'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-surround'
@@ -83,79 +76,35 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()            " required
 filetype plugin indent on    " required
 filetype plugin on
-" set omnifunc=syntaxcomplete#Complete
 
-" Deoplete
-" let g:deoplete#enable_at_startup = 1
-" call deoplete#custom#option({
-" \ 'auto_complete': v:true,
-" \ 'auto_complete_delay': 300,
-" \ 'smart_case': v:true,
-" \ })
+let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_contrast_light='hard'
 
 " Themes
-function! LoadDefaultLight()
-  set background=light
-  let t:current_theme = 'very_light'
-  colorscheme default
-endfunction
-
-function! LoadVeryLight()
-  set background=light
-  let t:current_theme = 'very_light'
-  let g:airline_theme="minimalist"
-  colorscheme Tomorrow
-  highlight Comment cterm=italic gui=italic
-endfunction
-
-function! LoadLight()
-  set background=light
-  let t:current_theme = 'light'
-  let g:airline_theme="solarized"
-  colorscheme NeoSolarized
-  highlight Comment cterm=italic gui=italic
-endfunction
-
 function! LoadDark()
-  set background=dark
   let t:current_theme = 'dark'
-  let g:airline_theme="dracula"
-  colorscheme dracula
-  " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
-  " highlight Comment cterm=italic gui=italic
-endfunction
-
-function! LoadVeryDark()
+  colorscheme simple_dark
   set background=dark
-  let t:current_theme = 'very_dark'
-  let g:airline_theme="minimalist"
-  colorscheme default
   highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   highlight Comment cterm=italic gui=italic
 endfunction
 
-function! LoadNeutral()
-  set background=dark
-  let t:current_theme = 'neutral'
-  let g:airline_theme="minimalist"
-  colorscheme naysayer
-  highlight Comment cterm=italic gui=italic
+function! LoadLight()
+  let t:current_theme = 'light'
+  colorscheme basic-light
+  set background=light
+  " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+  " highlight Comment cterm=italic gui=italic
 endfunction
 
 " Set Color Scheme
-let t:current_theme = 'very_dark'
+let t:current_theme = 'light'
 function! SwitchTheme()
   if t:current_theme == 'light'
-    :call LoadNeutral()
-  elseif t:current_theme == 'neutral'
     :call LoadDark()
   elseif t:current_theme == 'dark'
-    :call LoadVeryDark()
-  elseif t:current_theme == 'very_dark'
-    :call LoadVeryLight()
-  elseif t:current_theme == 'very_light'
     :call LoadLight()
-  end
+  endif
 endfunction
 
 nnoremap <silent> <F5> :call SwitchTheme()<cr>
@@ -163,9 +112,8 @@ nnoremap <silent> <F5> :call SwitchTheme()<cr>
 " Silent prevents vim from complaining during initial setup when scheme is not
 " available.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=2
-:call LoadVeryDark()
-let g:gruvbox_contrast_dark="hard"
-let g:gruvbox_contrast_light="hard"
+
+:call LoadDark()
 
 " Vim Settings
 syntax enable
@@ -194,14 +142,14 @@ set showmatch                   " matching brace/parenthesis/etc.
 set hidden                      " http://nvie.com/posts/how-i-boosted-my-vim/
 
 " GUI Settings
-set guifont=Fira\ Code:h13
+set guifont=Liberation\ Mono:h10
 set guioptions-=l
 set guioptions-=r
 set guioptions-=T
 set guioptions-=R
 set guioptions-=m
 set guioptions-=L
-set linespace=9
+set linespace=3
 " fullscreen
 map <silent> <F11>
 \    :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
@@ -219,9 +167,19 @@ set splitright
 set splitbelow
 
 " Use the OS clipboard by default
-set clipboard=unnamedplus
+set clipboard^=unnamed
 
-set cursorline
+
+if has('gui')
+  set cursorline
+else
+  set nocursorline
+endif
+
+" Statusline
+set laststatus=2
+set statusline=%f\ %#CursorColumn#\ %=\ %y\ %l/%L\ %p%%\ %l:%c
+
 set showbreak=↪\
 
 " Searching
@@ -238,12 +196,6 @@ nnoremap <C-k> <c-w>k
 nnoremap <BS> <c-w>h
 nnoremap <C-l> <c-w>l
 nnoremap <leader>T :tabe<cr>
-
-" Maps Alt-[H,J,K,L] to resizing a window split
-map <silent> <M-H> <C-w><
-map <silent> <M-J> <C-W>-
-map <silent> <M-K> <C-W>+
-map <silent> <M-L> <C-w>>
 
 " For navigating even in Nvim terminal
 tnoremap <M-h> <C-\><C-N><C-w>h
@@ -314,8 +266,8 @@ nnoremap <cr> :w<cr>
 
 set shortmess+=c
 set completeopt=noinsert,menuone,noselect
-let g:python_host_prog=expand('$HOME/.asdf/installs/python/2.7.14/bin/python')
-let g:python3_host_prog=expand('$HOME/.asdf/installs/python/3.7.4/bin/python3')
+let g:python_host_prog=expand('$HOME/.asdf/installs/python/2.7.18/bin/python')
+let g:python3_host_prog=expand('$HOME/.asdf/installs/python/3.10.6/bin/python3')
 
 " " Nerd commenter
 let g:NERDCompactSexyComs = 0
@@ -331,11 +283,10 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 nnoremap <leader>dj :DimJumpPos<cr>
 
 " Slime
-let g:slime_target = "neovim"
+let g:slime_target = "tmux"
 
 " Snippets
-let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/plugged/vim-snippets/UltiSnips', 'UltiSnips']
-
+let g:UltiSnipsSnippetDirectories = ['~/.vim/plugged/vim-snippets/UltiSnips', 'UltiSnips']
 " Fzf
 nnoremap <C-p> :Files<CR>
 nnoremap <C-b> :Buffers<CR>
@@ -359,6 +310,8 @@ autocmd! BufRead,BufNewFile,BufEnter vue syntax sync fromstart
 let g:vue_disable_pre_processors=1
 autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4
 autocmd! BufNewFile,BufRead *.c setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.js setlocal tabstop=2 shiftwidth=2
+autocmd! BufNewFile,BufRead *.jsx setlocal tabstop=2 shiftwidth=2
 autocmd! BufNewFile,BufRead *.ts setlocal filetype=typescript
 autocmd! BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
 " Use JSX for .js
