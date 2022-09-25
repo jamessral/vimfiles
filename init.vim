@@ -83,7 +83,7 @@ let g:gruvbox_contrast_light='hard'
 " Themes
 function! LoadDark()
   let t:current_theme = 'dark'
-  colorscheme molokai
+  colorscheme flattened_dark
   set background=dark
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   " highlight Comment cterm=italic gui=italic
@@ -91,7 +91,7 @@ endfunction
 
 function! LoadLight()
   let t:current_theme = 'light'
-  colorscheme basic-light
+  colorscheme flattened_light
   set background=light
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   " highlight Comment cterm=italic gui=italic
@@ -397,8 +397,8 @@ let g:polyglot_disable=['typescript', 'typescript.tsx', 'javscript', 'javascript
 autocmd BufWritePre * %s/\s\+$//e
 
 " Hybrid Line Numbers
-" set relativenumber
-" set number
+set relativenumber
+set number
 function! ToggleLines()
   set norelativenumber!
   set nonumber!
