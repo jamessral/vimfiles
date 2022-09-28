@@ -47,8 +47,6 @@ Plug 'leafgarland/typescript-vim'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'jparise/vim-graphql'
 Plug 'HerringtonDarkholme/yats.vim'
-" Plug 'SirVer/ultisnips'
-" Plug 'honza/vim-snippets'
 Plug 'roxma/nvim-yarp'
 Plug 'leshill/vim-json'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -277,21 +275,12 @@ let g:python3_host_prog=expand('$HOME/.asdf/installs/python/3.10.6/bin/python3')
 " " Nerd commenter
 let g:NERDCompactSexyComs = 0
 
-" UltiSnips
-" c-j c-k for moving in snippet
-let g:UltiSnipsExpandTrigger		= "<c-j>"
-let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
-let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
-let g:UltiSnipsRemoveSelectModeMappings = 0
-
 " Dim Jump
 nnoremap <leader>dj :DimJumpPos<cr>
 
 " Slime
 let g:slime_target = "tmux"
 
-" Snippets
-let g:UltiSnipsSnippetDirectories = ['~/.vim/plugged/vim-snippets/UltiSnips', 'UltiSnips']
 " Fzf
 nnoremap <C-p> :Files<CR>
 nnoremap <C-b> :Buffers<CR>
@@ -374,14 +363,6 @@ let g:prettier#autoformat = 0
 " autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.vue PrettierAsync
 nnoremap <leader>F :PrettierAsync<cr>
 
-" Courtesy of Jeremy!
-set wildcharm=<C-z>
-" open current test file's source in split
-nnoremap <leader>os :vs %<C-z><c-f>bbdb.<cr>
-
-" open current file's test in split
-nnoremap <leader>ot :vs %<C-z><c-f>bitest.<cr>
-
 " Test Runner
 nnoremap <silent><leader><leader>t :TestNearest<CR>
 nnoremap <silent><leader><leader>T :TestFile<CR>
@@ -459,7 +440,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+  vim.keymap.set('n', '<space>K', vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
   vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
   vim.keymap.set('n', '<space>wl', function()
@@ -483,7 +464,7 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local lspconfig = require('lspconfig')
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver' }
+local servers = { 'clangd', 'rust_analyzer', 'tsserver' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
@@ -538,48 +519,6 @@ cmp.setup {
 
 EOF
 
-" CoC
-" GoTo code navigation.
-" nmap <silent> gd <Plug>(coc-definition)
-" nmap <silent> gy <Plug>(coc-type-definition)
-" nmap <silent> gi <Plug>(coc-implementation)
-" nmap <silent> gr <Plug>(coc-references)
-
-" " Use K to show documentation in preview window.
-" nmap <silent> K :call <SID>show_documentation()<CR>
-
-" " Symbol renaming.
-" nmap <leader>rn <Plug>(coc-rename)
-
-" " Formatting selected code.
-" xmap <leader>f  <Plug>(coc-format-selected)
-" nmap <leader>f  <Plug>(coc-format-selected)
-" function! s:check_back_space() abort
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~# '\s'
-" endfunction
-
-" function! s:show_documentation()
-"   if (index(['vim','help'], &filetype) >= 0)
-"     execute 'h '.expand('<cword>')
-"   else
-"     call CocActionAsync('doHover')
-"   endif
-" endfunction
-
-" " Use <c-space> to trigger completion.
-" if has('nvim')
-"   inoremap <silent><expr> <c-space> coc#refresh()
-" else
-"   inoremap <silent><expr> <c-@> coc#refresh()
-" endif
-
-" " Remap keys for applying codeAction to the current buffer.
-" nmap <leader>ac <Plug>(coc-codeaction-line)
-" nmap <leader>av <Plug>(coc-codeaction-selected)
-" " Apply AutoFix to problem on the current line.
-" nmap <leader>qf <Plug>(coc-fix-current)
-
 " Android
 let g:android_sdk_path = expand('$ANDROID_SDK_ROOT')
 
@@ -592,6 +531,3 @@ let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
 
 " Vimwiki
 let g:vimwiki_folding='expr'
-
-" highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
-" highlight Comment cterm=italic gui=italic
