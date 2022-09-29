@@ -87,15 +87,15 @@ let g:gruvbox_contrast_light='hard'
 " Themes
 function! LoadDark()
   let t:current_theme = 'dark'
-  colorscheme flattened_dark
+  colorscheme default
   set background=dark
-  " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
-  " highlight Comment cterm=italic gui=italic
+  highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+  highlight Comment cterm=italic gui=italic
 endfunction
 
 function! LoadLight()
   let t:current_theme = 'light'
-  colorscheme flattened_light
+  colorscheme PaperColor
   set background=light
   " highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
   " highlight Comment cterm=italic gui=italic
@@ -540,3 +540,6 @@ let g:markdown_fenced_languages=['ruby','erb=eruby','javascript','sh']
 
 " Vimwiki
 let g:vimwiki_folding='expr'
+
+highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan
+highlight Comment cterm=italic gui=italic
