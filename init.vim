@@ -54,9 +54,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Raimondi/delimitMate'
-Plug 'prettier/vim-prettier', {
-      \ 'do': 'yarn install',
-      \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'html'] }
 " Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -70,7 +67,8 @@ Plug 'janko-m/vim-test'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'tpope/vim-dispatch'
 Plug 'danro/rename.vim'
-Plug 'mfussenegger/nvim-lint'
+Plug 'nvim-lua/plenary.nvim'
+" Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -313,9 +311,10 @@ autocmd! BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
 " Use JSX for .js
 let g:jsx_ext_required = 0
 
+set signcolumn=yes
+
 " Ale Linting
 " Always keep gutter open to avoid flickering
-set signcolumn=yes
 " " Add more of a delay so as to not slow down so much
 " let g:ale_lint_delay = 500
 " let g:ale_sign_column_always = 1
@@ -359,11 +358,6 @@ set signcolumn=yes
 "       \   'ruby': ['rubocop'],
 "       \   'rspec': ['rubocop']
 "       \}
-
-" Prettier
-let g:prettier#autoformat = 0
-" autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.vue PrettierAsync
-nnoremap <leader>F :PrettierAsync<cr>
 
 " Test Runner
 nnoremap <silent><leader><leader>t :TestNearest<CR>
@@ -465,6 +459,7 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local lspconfig = require('lspconfig')
 
+require'lspconfig'.eslint.setup{}
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 local servers = { 'clangd', 'rust_analyzer', 'tsserver' }
 for _, lsp in ipairs(servers) do
@@ -525,18 +520,6 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
   },
-}
-
--- linting
-local lint = require('lint')
-lint.linters.eslint.cmd = './node_modules/.bin/eslint'
-lint.linters_by_ft = {
-  javascript = {'eslint'},
-  javascriptreact = {'eslint'},
-  typescript = {'eslint'},
-  typescriptreact = {'eslint'},
-  ruby = {'rubocop'},
-  vue = {'eslint'},
 }
 
 EOF
