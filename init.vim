@@ -54,7 +54,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Raimondi/delimitMate'
-" Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'preservim/vim-pencil'
@@ -68,14 +67,12 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'tpope/vim-dispatch'
 Plug 'danro/rename.vim'
 Plug 'nvim-lua/plenary.nvim'
-" Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'rafamadriz/friendly-snippets'
 Plug 'L3MON4D3/LuaSnip'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()            " required
 filetype plugin indent on    " required
 filetype plugin on
@@ -313,52 +310,6 @@ let g:jsx_ext_required = 0
 
 set signcolumn=yes
 
-" Ale Linting
-" Always keep gutter open to avoid flickering
-" " Add more of a delay so as to not slow down so much
-" let g:ale_lint_delay = 500
-" let g:ale_sign_column_always = 1
-" let g:ale_set_quickfix = 1
-" let g:ale_fix_on_save = 1
-" let g:ale_completion_enabled = 0
-" function! LinterStatus() abort
-"   let l:counts = ale#statusline#Count(bufnr(''))
-
-"   let l:all_errors = l:counts.error + l:counts.style_error
-"   let l:all_non_errors = l:counts.total - l:all_errors
-
-"   return l:counts.total == 0 ? 'OK' : printf(
-"         \   '%dW %dE',
-"         \   all_non_errors,
-"         \   all_errors
-"         \)
-" endfunction
-" let g:ale_ruby_rubocop_executable = 'bundle'
-" let g:ale_typescript_tslint_executable = 'tslint --project tsconfig.json'
-" let g:ale_typescript_tslint_config_path = 'tslint.json'
-
-" let g:ale_linters = {
-"       \  'ruby': ['rubocop'],
-"       \  'rspec': ['rubocop'],
-"       \  'eruby': ['erblint'],
-"       \  'javascript': ['eslint'],
-"       \  'javascript.jsx': ['eslint'],
-"       \  'typescript': ['tsserver', 'tslint', 'eslint'],
-"       \  'typescriptreact': ['tsserver', 'tslint', 'eslint'],
-"       \  'cpp': ['null'],
-"       \  'c': ['null'],
-"       \  'markdown': ['null'],
-"       \}
-
-" let g:ale_fixers = {
-"       \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-"       \   'javascript': ['eslint', 'prettier'],
-"       \   'typescript': ['tslint', 'eslint', 'prettier'],
-"       \   'typescriptreact': ['tslint', 'eslint', 'prettier'],
-"       \   'ruby': ['rubocop'],
-"       \   'rspec': ['rubocop']
-"       \}
-
 " Test Runner
 nnoremap <silent><leader><leader>t :TestNearest<CR>
 nnoremap <silent><leader><leader>T :TestFile<CR>
@@ -460,6 +411,7 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local lspconfig = require('lspconfig')
 
 require'lspconfig'.eslint.setup{}
+
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 local servers = { 'clangd', 'rust_analyzer', 'tsserver' }
 for _, lsp in ipairs(servers) do
@@ -523,10 +475,7 @@ cmp.setup {
 }
 
 EOF
-
-au BufEnter lua require('lint').try_lint()
-au BufWritePost lua require('lint').try_lint()
-au InsertLeave lua require('lint').try_lint()
+autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll
 
 " Android
 let g:android_sdk_path = expand('$ANDROID_SDK_ROOT')
