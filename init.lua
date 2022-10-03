@@ -110,21 +110,21 @@ vim.g.vimwiki_folding = 'expr'
 
 -- UI
 
-vim.cmd [[ highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan ]]
-vim.cmd [[ highlight Comment cterm=italic gui=italic ]]
+-- vim.cmd [[ highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan ]]
+-- vim.cmd [[ highlight Comment cterm=italic gui=italic ]]
 
 current_theme = 'dark'
 function LoadDark()
     current_theme = 'dark'
-    vim.g.background = 'dark'
-    vim.cmd [[ colorscheme default ]]
-    vim.cmd [[ highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan]]
-    vim.cmd [[ highlight Comment cterm=italic gui=italic ]]
+    vim.cmd [[ set background=dark ]]
+    vim.cmd [[ colorscheme poimandres ]]
+    -- vim.cmd [[ highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan]]
+    -- vim.cmd [[ highlight Comment cterm=italic gui=italic ]]
 end
 function LoadLight()
     current_theme = 'light'
-    vim.g.background = 'light'
     vim.cmd [[ colorscheme PaperColor ]]
+    vim.cmd [[ set background=light ]]
     -- vim.cmd [[ highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan]]
     -- vim.cmd [[ highlight Comment cterm=italic gui=italic ]]
 end
@@ -294,6 +294,30 @@ local packer_bootstrap = ensure_packer()
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'flazz/vim-colorschemes'
+  use { 
+      'olivercederborg/poimandres.nvim',
+      config = function()
+          require('poimandres').setup {
+              -- leave this setup function empty for default config
+              -- or refer to the configuration section
+              -- for configuration options
+          }
+      end
+  }
+  use { 'nvim-treesitter/nvim-treesitter',
+    config = function()
+        require'nvim-treesitter.configs'.setup {
+          -- A list of parser names, or "all"
+          ensure_installed = { "c", "lua", "rust", "typescript", "javascript" },
+          sync_install = false,
+          auto_install = true,
+          ignore_install = {},
+          highlight = {
+              enable = true,
+          },
+      }
+    end
+  }
   use 'haishanh/night-owl.vim'
   use 'jamessral/naysayer-vim'
   use 'jiangmiao/auto-pairs'
