@@ -8,14 +8,14 @@
 -- vim.opt.encoding = UTF-8
 -- vim.opt.ttyfast = true
 -- vim.opt.number = true
--- vim.opt.path = vim.opt.path .. '**'
+vim.opt.path:append('**')
 -- display incomplete commands
 -- vim.opt.showcmd = true
 -- vim.opt.cmdheight = 1
 -- vim.opt.ttyfast = true
 vim.opt.termguicolors = true
 vim.opt.wildmenu = true
--- vim.opt.wildignore = vim.opt.wildignore .. '*/tmp/*,*.so,*.swp,*.zip,*/.tmp/*,*/.sass-cache/*,*/node_modules/*,*.keep,*.DS_Store,*/.git/*,*/__pychache__/*'
+vim.opt.wildignore:append('*/tmp/*,*.so,*.swp,*.zip,*/.tmp/*,*/.sass-cache/*,*/node_modules/*,*.keep,*.DS_Store,*/.git/*,*/__pychache__/*')
 vim.opt.mouse = 'a'
 vim.opt.guicursor = 'n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50'
 --vim.opt.completeopt = 'noinsert,menunone,noselect'
@@ -65,13 +65,13 @@ vim.opt.ignorecase = true                  -- searches are case insensitive...
 vim.opt.smartcase = true                   -- ... unless they contain at least one capital letter
 vim.opt.backupcopy = 'yes'
 vim.opt.undofile = true
-vim.opt.undodir = '~/.vim/undo//'
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 
 vim.opt.history = 50  --   keep 50 lines of command line history
 vim.opt.ruler = true         -- show the cursor position all the time
 vim.opt.title = true
 vim.opt.autoread = true
--- vim.opt.shortmess = vim.opt.shortmess .. 'c'
+vim.opt.shortmess:append('c')
 vim.opt.foldmethod = 'expr'
 
 -- Hybrid linenums
@@ -308,7 +308,7 @@ return require('packer').startup(function(use)
     config = function()
         require'nvim-treesitter.configs'.setup {
           -- A list of parser names, or "all"
-          ensure_installed = { "c", "lua", "rust", "typescript", "javascript" },
+          ensure_installed = { "c", "lua", "rust", "typescript", "javascript", "tsx" },
           sync_install = false,
           auto_install = true,
           ignore_install = {},
