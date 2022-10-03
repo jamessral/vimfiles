@@ -193,6 +193,21 @@ vim.api.nvim_set_keymap('t', '<M-l>', '<C-\\><C-N><C-w>l', {noremap = true})
 vim.api.nvim_set_keymap('n', '<F5>', ':lua SwitchTheme()<cr>', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>z', ':Goyo<cr>', {noremap = true, silent = true})
 
+-- LSP Keys
+local bufopts = { noremap=true, silent=true, buffer=bufnr }
+vim.api.nvim_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', bufopts)
+vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', bufopts)
+vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', bufopts)
+vim.api.nvim_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', bufopts)
+vim.api.nvim_set_keymap('n', '<space>K', '<cmd>lua vim.lsp.buf.signature_help()<cr>', bufopts)
+vim.api.nvim_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<cr>', bufopts)
+vim.api.nvim_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<cr>', bufopts)
+vim.api.nvim_set_keymap('n', '<space>D', '<cmd> lua vim.lsp.buf.type_definition()<cr>', bufopts)
+vim.api.nvim_set_keymap('n', '<space>rn', '<cmd> lua vim.lsp.buf.rename()<cr>', bufopts)
+vim.api.nvim_set_keymap('n', '<space>ca', '<cmd> lua vim.lsp.buf.code_action()<cr>', bufopts)
+vim.api.nvim_set_keymap('n', 'gr', '<cmd> lua vim.lsp.buf.references()<cr>', bufopts)
+vim.api.nvim_set_keymap('n', '<space>f', '<cmd> lua vim.lsp.buf.formatting()<cr>', bufopts)
+
 -- For Utils
 vim.api.nvim_set_keymap('i', '<C-i><C-n>', '<ESC> :lua PrintNote()<cr>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>in', '<ESC> :lua PrintNote()<cr>', {noremap = true})
@@ -253,7 +268,7 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
+function lsp_attach(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -404,6 +419,8 @@ return require('packer').startup(function(use)
           'neovim/nvim-lspconfig',
           config = function() 
               require'lspconfig'.eslint.setup{}
+              require'lspconfig'.typescript.setup{}
+              require'lspconfig'.tsserver.setup{}
           end
       })
   use (
@@ -463,12 +480,11 @@ use({
 
             local lspconfig = require('lspconfig')
 
-
             -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
             local servers = { 'clangd', 'rust_analyzer', 'tsserver' }
             for _, lsp in ipairs(servers) do
                 lspconfig[lsp].setup {
-                    on_attach = on_attach,
+                    on_attach = lsp_attach,
                     flags = lsp_flags,
                     capabilities = capabilities,
                 }
