@@ -218,9 +218,31 @@ vim.api.nvim_set_keymap('n', '<leader>gc', ':Gcommit<cr>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>ga', ':Gwrite<cr>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>gd', ':Gdiff<cr>', {noremap = true})
 
---if vim.api.executable('ag') then
---    vim.g.ackprg = 'ag -vimgrep'
---end
+
+-- FZF
+vim.cmd [[
+if executable('ag')
+    let g:ackprg = 'ag -vimgrep'
+end
+
+let $FZF_DEFAULT_COMMAND = 'ag -l'
+]]
+
+-- Filetype defaults
+vim.cmd [[
+autocmd! FileType lua setlocal tabstop=4 shiftwidth=4
+autocmd! FileType c setlocal tabstop=4 shiftwidth=4 noexpandtab commentstring=//\ %s
+autocmd! FileType cpp setlocal tabstop=4 shiftwidth=4 noexpandtab commentstring=//\ %s
+autocmd! BufRead,BufNewFile,BufEnter vue syntax sync fromstart
+let g:vue_disable_pre_processors=1
+autocmd! BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.c setlocal tabstop=4 shiftwidth=4
+autocmd! BufNewFile,BufRead *.js setlocal tabstop=2 shiftwidth=2
+autocmd! BufNewFile,BufRead *.jsx setlocal tabstop=2 shiftwidth=2
+autocmd! BufNewFile,BufRead *.ts setlocal filetype=typescript
+autocmd! BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
+]]
+
 
 -- LSP
 local opts = { noremap=true, silent=true }
