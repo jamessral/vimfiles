@@ -180,6 +180,7 @@ vim.api.nvim_set_keymap('v', '>', '>gv', {noremap = true})
 
 vim.api.nvim_set_keymap('n', '<leader>ev', ':e $MYVIMRC<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>rv', ':so $MYVIMRC<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>F', ':Prettier<cr>', {noremap = true, silent = true})
 
 vim.api.nvim_set_keymap('n', '<cr>', ':w<cr>', {noremap = true})
 
@@ -204,16 +205,17 @@ vim.api.nvim_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_fo
 vim.api.nvim_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<cr>', bufopts)
 vim.api.nvim_set_keymap('n', '<space>D', '<cmd> lua vim.lsp.buf.type_definition()<cr>', bufopts)
 vim.api.nvim_set_keymap('n', '<space>rn', '<cmd> lua vim.lsp.buf.rename()<cr>', bufopts)
-vim.api.nvim_set_keymap('n', '<space>ca', '<cmd> lua vim.lsp.buf.code_action()<cr>', bufopts)
+vim.api.nvim_set_keymap('n', '<space>ac', '<cmd> lua vim.lsp.buf.code_action()<cr>', bufopts)
 vim.api.nvim_set_keymap('n', 'gr', '<cmd> lua vim.lsp.buf.references()<cr>', bufopts)
 vim.api.nvim_set_keymap('n', '<space>f', '<cmd> lua vim.lsp.buf.formatting()<cr>', bufopts)
 
 -- For Utils
 vim.api.nvim_set_keymap('i', '<C-i><C-n>', '<ESC> :lua PrintNote()<cr>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>in', '<ESC> :lua PrintNote()<cr>', {noremap = true})
+-- vim.api.nvim_set_keymap('n', '<leader>in', '<ESC> :lua PrintNote()<cr>', {noremap = true})
 vim.api.nvim_set_keymap('i', '<C-i><C-t>', '<ESC> :lua PrintTodo()<cr>', {noremap = true})
-vim.api.nvim_set_keymap('i', '<leader>it', '<ESC> :lua PrintTodo()<cr>', {noremap = true})
+-- vim.api.nvim_set_keymap('i', '<leader>it', '<ESC> :lua PrintTodo()<cr>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<C-p>', ':Telescope find_files<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<C-g>', ':Telescope live_grep<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<C-b>', ':Telescope buffers<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<F2>', ':lua ToggleLines()<CR>', {noremap = true})
 
@@ -420,7 +422,6 @@ return require('packer').startup(function(use)
           'neovim/nvim-lspconfig',
           config = function() 
               require'lspconfig'.eslint.setup{}
-              require'lspconfig'.typescript.setup{}
               require'lspconfig'.tsserver.setup{}
           end
       })
@@ -435,46 +436,51 @@ return require('packer').startup(function(use)
                           require('luasnip').lsp_expand(args.body)
                       end,
                   },
-          sources = {
-              { name = 'nvim_lsp' },
-              { name = 'luasnip' },
-          },
-      }
+                  mapping = {
+                      ["<C-p>"] = cmp.mapping.select_prev_item(),
+                      ["<C-n>"] = cmp.mapping.select_next_item(),
+                  },
+                  sources = {
+                      { name = 'nvim_lsp' },
+                      { name = 'luasnip' },
+                  },
+              }
+          end
+      })
+  use({
+          'hrsh7th/cmp-nvim-lsp',
+          config = function() 
+              local capabilities = vim.lsp.protocol.make_client_capabilities()
+              capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+              local lspconfig = require('lspconfig')
+
+              -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
+              local servers = { 'clangd', 'rust_analyzer', 'tsserver' }
+              for _, lsp in ipairs(servers) do
+                  lspconfig[lsp].setup {
+                      on_attach = lsp_attach,
+                      flags = lsp_flags,
+                      capabilities = capabilities,
+                  }
+              end
+          end
+      })
+  use({'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp'})
+  use 'rafamadriz/friendly-snippets'
+  use({'L3MON4D3/LuaSnip',
+          config = function()
+              local luasnip = require 'luasnip'
+              require("luasnip.loaders.from_vscode").lazy_load()
+              local has_words_before = function()
+                  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+                  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+              end
+          end
+      })
+  use 'MunifTanjim/prettier.nvim'
+  if packer_bootstrap then
+      require('packer').sync()
   end
-})
-use({
-        'hrsh7th/cmp-nvim-lsp',
-        config = function() 
-            local capabilities = vim.lsp.protocol.make_client_capabilities()
-            capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-
-            local lspconfig = require('lspconfig')
-
-            -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-            local servers = { 'clangd', 'rust_analyzer', 'tsserver' }
-            for _, lsp in ipairs(servers) do
-                lspconfig[lsp].setup {
-                    on_attach = lsp_attach,
-                    flags = lsp_flags,
-                    capabilities = capabilities,
-                }
-            end
-        end
-    })
-use({'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp'})
-use 'rafamadriz/friendly-snippets'
-use({'L3MON4D3/LuaSnip',
-        config = function()
-            local luasnip = require 'luasnip'
-            require("luasnip.loaders.from_vscode").lazy_load()
-            local has_words_before = function()
-                local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-                return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-            end
-        end
-    })
-if packer_bootstrap then
-    require('packer').sync()
-end
 end)
 
