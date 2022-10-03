@@ -198,8 +198,8 @@ vim.api.nvim_set_keymap('i', '<C-i><C-n>', '<ESC> :lua PrintNote()<cr>', {norema
 vim.api.nvim_set_keymap('n', '<leader>in', '<ESC> :lua PrintNote()<cr>', {noremap = true})
 vim.api.nvim_set_keymap('i', '<C-i><C-t>', '<ESC> :lua PrintTodo()<cr>', {noremap = true})
 vim.api.nvim_set_keymap('i', '<leader>it', '<ESC> :lua PrintTodo()<cr>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<C-p>', ':Files<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<C-b>', ':Buffers<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<C-p>', ':Telescope find_files<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<C-b>', ':Telescope buffers<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<F2>', ':lua ToggleLines()<CR>', {noremap = true})
 
 -- Test Runner
@@ -326,6 +326,39 @@ return require('packer').startup(function(use)
   use {'fatih/vim-go', run = ':GoUpdateBinaries' }
   use {'junegunn/fzf', dir = '~/.fzf', run = './install --all' }
   use 'junegunn/fzf.vim'
+  use({
+          'nvim-telescope/telescope.nvim',
+          config = function()
+              require('telescope').setup{
+                  defaults = {
+                      mappings = {
+                          i = {
+                              -- map actions.which_key to <C-h> (default: <C-/>)
+                              -- actions.which_key shows the mappings for your picker,
+                              -- e.g. git_{create, delete, ...}_branch for the git_branches picker
+                              ["<C-h>"] = "which_key"
+                          }
+                      }
+                  },
+                  pickers = {
+                      -- Default configuration for builtin pickers goes here:
+                      -- picker_name = {
+                      --   picker_config_key = value,
+                      --   ...
+                      -- }
+                      -- Now the picker_config_key will be applied every time you call this
+                      -- builtin picker
+                  },
+                  extensions = {
+                      -- Your extension configuration goes here:
+                      -- extension_name = {
+                      --   extension_config_key = value,
+                      -- }
+                      -- please take a look at the readme of the extension you want to configure
+                  }
+              }
+          end
+      })
   use 'scrooloose/nerdcommenter'
   use 'Raimondi/delimitMate'
   use 'tpope/vim-fugitive'
@@ -344,94 +377,94 @@ return require('packer').startup(function(use)
   use 'danro/rename.vim'
   use 'nvim-lua/plenary.nvim'
   use({
-    'neovim/nvim-lspconfig',
-    config = function() 
-      require'lspconfig'.eslint.setup{}
-    end
-  })
+          'neovim/nvim-lspconfig',
+          config = function() 
+              require'lspconfig'.eslint.setup{}
+          end
+      })
   use (
-  {'hrsh7th/nvim-cmp',
-  config = function()
-    local cmp = require 'cmp'
-    cmp.setup {
-      snippet = {
-        expand = function(args)
-          luasnip.lsp_expand(args.body)
-        end,
-      },
-      mapping = cmp.mapping.preset.insert({
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<CR>'] = cmp.mapping.confirm {
-          behavior = cmp.ConfirmBehavior.Replace,
-          select = true,
-        },
-        ["<Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item()
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          elseif has_words_before() then
-            cmp.complete()
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
+      {'hrsh7th/nvim-cmp',
+          config = function()
+              local cmp = require 'cmp'
+              cmp.setup {
+                  snippet = {
+                      expand = function(args)
+                          luasnip.lsp_expand(args.body)
+                      end,
+                  },
+                  mapping = cmp.mapping.preset.insert({
+                          ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+                          ['<C-f>'] = cmp.mapping.scroll_docs(4),
+                          ['<C-Space>'] = cmp.mapping.complete(),
+                          ['<CR>'] = cmp.mapping.confirm {
+                              behavior = cmp.ConfirmBehavior.Replace,
+                              select = true,
+                          },
+                          ["<Tab>"] = cmp.mapping(function(fallback)
+                              if cmp.visible() then
+                                  cmp.select_next_item()
+                              elseif luasnip.expand_or_jumpable() then
+                                  luasnip.expand_or_jump()
+                              elseif has_words_before() then
+                                  cmp.complete()
+                              else
+                                  fallback()
+                              end
+                          end, { "i", "s" }),
 
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.jumpable(-1) then
-            luasnip.jump(-1)
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-      }),
-      sources = {
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-      },
-    }
+                      ["<S-Tab>"] = cmp.mapping(function(fallback)
+                          if cmp.visible() then
+                              cmp.select_prev_item()
+                          elseif luasnip.jumpable(-1) then
+                              luasnip.jump(-1)
+                          else
+                              fallback()
+                          end
+                      end, { "i", "s" }),
+              }),
+          sources = {
+              { name = 'nvim_lsp' },
+              { name = 'luasnip' },
+          },
+      }
 
 
   end 
 })
 use({
-  'hrsh7th/cmp-nvim-lsp',
-  config = function() 
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+        'hrsh7th/cmp-nvim-lsp',
+        config = function() 
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
-    local lspconfig = require('lspconfig')
+            local lspconfig = require('lspconfig')
 
 
-    -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-    local servers = { 'clangd', 'rust_analyzer', 'tsserver' }
-    for _, lsp in ipairs(servers) do
-      lspconfig[lsp].setup {
-        on_attach = on_attach,
-        flags = lsp_flags,
-        capabilities = capabilities,
-      }
-    end
-  end
-})
+            -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
+            local servers = { 'clangd', 'rust_analyzer', 'tsserver' }
+            for _, lsp in ipairs(servers) do
+                lspconfig[lsp].setup {
+                    on_attach = on_attach,
+                    flags = lsp_flags,
+                    capabilities = capabilities,
+                }
+            end
+        end
+    })
 use 'saadparwaiz1/cmp_luasnip'
 use 'rafamadriz/friendly-snippets'
 use({'L3MON4D3/LuaSnip',
-config = function()
-  local luasnip = require 'luasnip'
-  require("luasnip.loaders.from_vscode").lazy_load()
-  local has_words_before = function()
-    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-  end
-end
-})
+        config = function()
+            local luasnip = require 'luasnip'
+            require("luasnip.loaders.from_vscode").lazy_load()
+            local has_words_before = function()
+                local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+                return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+            end
+        end
+    })
 if packer_bootstrap then
-  require('packer').sync()
+    require('packer').sync()
 end
 end)
 
