@@ -196,6 +196,9 @@ vim.api.nvim_set_keymap('n', '<leader>z', ':Goyo<cr>', {noremap = true, silent =
 
 -- DAP Debugging
 vim.api.nvim_set_keymap('n', '<F8>', ':lua require"dap".toggle_breakpoint()<cr>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<F9>', ':lua require"dap".continue()<cr>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<F10>', ':lua require"dap".step_into()<cr>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', 'S-<F10>', ':lua require"dap".step_over()<cr>', {noremap = true, silent = true})
 
 -- LSP Keys
 local bufopts = { noremap=true, silent=true, buffer=bufnr }
