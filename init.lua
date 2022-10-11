@@ -194,6 +194,9 @@ vim.api.nvim_set_keymap('t', '<M-l>', '<C-\\><C-N><C-w>l', {noremap = true})
 vim.api.nvim_set_keymap('n', '<F5>', ':lua SwitchTheme()<cr>', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>z', ':Goyo<cr>', {noremap = true, silent = true})
 
+-- DAP Debugging
+vim.api.nvim_set_keymap('n', '<F8>', ':lua require"dap".toggle_breakpoint()<cr>', {noremap = true, silent = true})
+
 -- LSP Keys
 local bufopts = { noremap=true, silent=true, buffer=bufnr }
 vim.api.nvim_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', bufopts)
@@ -479,6 +482,7 @@ return require('packer').startup(function(use)
           end
       })
   use 'MunifTanjim/prettier.nvim'
+  use 'mfussenegger/nvim-dap'
   if packer_bootstrap then
       require('packer').sync()
   end
