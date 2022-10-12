@@ -89,7 +89,7 @@ vim.g.gruvbox_contrast_light = 'hard'
 
 vim.g['test#strategy'] = "neovim"
 vim.g['test#preserve_screen'] = 1
-vim.g['test#javascript#jest#executable'] = 'yarn test'
+vim.g['test#javascript#jest#executable'] = 'yarn jest'
 vim.g['test#javascript#jest#file_pattern'] = '[**.jest.js | **.test.js]'
 vim.g['test#typescript#jest#file_pattern'] = '[**.jest.ts | **.test.ts]'
 
@@ -117,7 +117,7 @@ current_theme = 'dark'
 function LoadDark()
     current_theme = 'dark'
     vim.cmd [[ set background=dark ]]
-    vim.cmd [[ colorscheme poimandres ]]
+    vim.cmd [[ colorscheme ir_black ]]
     -- vim.cmd [[ highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan]]
     -- vim.cmd [[ highlight Comment cterm=italic gui=italic ]]
 end
@@ -153,8 +153,7 @@ function PrintTodo()
     vim.cmd [[ :startinsert! ]]
 end
 function CleanBuffers()
-    vim.cmd [[ :BufOnly ]]
-    vim.cmd [[ :bd ]]
+    vim.cmd [[ bufdo bd ]]
 end
 
 function ToggleLines()
@@ -485,7 +484,39 @@ return require('packer').startup(function(use)
           end
       })
   use 'MunifTanjim/prettier.nvim'
-  use 'mfussenegger/nvim-dap'
+  use {
+      "mfussenegger/nvim-dap",
+      opt = true,
+      module = { "dap" },
+      requires = {
+          "Pocco81/dap-buddy.nvim",
+          "nvim-telescope/telescope-dap.nvim",
+      },
+      config = function()
+          local dap = require "dap"
+
+          dap.adapters.node2 = {
+              type = 'executable',
+              command = 'node',
+              args = {
+                  vim.fn.stdpath("data") .. "/dapinstall/jsnode_dbg/" ..
+                  '/vscode-node-debug2/out/src/nodeDebug.js'
+              }
+          }
+
+          dap.configurations.javascript = {
+              {
+                  type = 'node2',
+                  request = 'launch',
+                  program = '${workspaceFolder}/${file}',
+                  cwd = vim.fn.getcwd(),
+                  sourceMaps = true,
+                  protocol = 'inspector',
+                  console = 'integratedTerminal'
+              }
+          }
+      end,
+  }
   if packer_bootstrap then
       require('packer').sync()
   end
