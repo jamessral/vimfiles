@@ -99,7 +99,8 @@ vim.g.netrw_browse_split = 0
 vim.g.netrw_altv = 1          -- open splits to the right
 vim.g.netrw_liststyle = 3     -- tree view
 vim.g.netrw_fastbrowse = 0
-vim.g.netrw_winsize = 15
+vim.g.netrw_winsize = 25
+
 vim.g.gitgutter_realtime = 0
 vim.g.gitgutter_eager = 0
 --vim.g.android_sdk_path = vim.api.expand('$ANDROID_SDK_ROOT')
@@ -232,13 +233,11 @@ vim.api.nvim_set_keymap('n', '<leader><leader>L', ':TestLast<CR>', {noremap = tr
 vim.api.nvim_set_keymap('n', '<leader><leader>G', ':TestVisit<CR>', {noremap = true})
 
 -- Vaffle
-vim.api.nvim_set_keymap('n', '-', ':Vaffle %<cr>', {noremap = true})
+vim.api.nvim_set_keymap('n', '-', ':Lexplore %:p:h<cr>', {noremap = true})
 
 -- Git
-vim.api.nvim_set_keymap('n', '<leader>gs', ':Git<cr>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>gc', ':Gcommit<cr>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>ga', ':Gwrite<cr>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>gd', ':Gdiff<cr>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>gs', ':Neogit<cr>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>gc', ':Neogit commit<cr>', {noremap = true})
 
 
 -- FZF
@@ -347,7 +346,7 @@ return require('packer').startup(function(use)
   use 'mattn/emmet-vim'
   use 'sheerun/vim-polyglot'
   use 'lepture/vim-jinja'
-  use 'cocopon/vaffle.vim'
+  -- use 'cocopon/vaffle.vim'
   use 'jpalardy/vim-slime'
   use 'vimwiki/vimwiki'
   use 'rbgrouleff/bclose.vim'
@@ -407,7 +406,15 @@ return require('packer').startup(function(use)
           })
       use 'scrooloose/nerdcommenter'
       use 'Raimondi/delimitMate'
-      use 'tpope/vim-fugitive'
+      -- use 'tpope/vim-fugitive'
+      use({'TimUntersberger/neogit',
+              requires = 'nvim-lua/plenary.nvim',
+              config = function()
+                  local neogit = require('neogit')
+
+                  neogit.setup {}
+              end
+          })
       use 'airblade/vim-gitgutter'
       use 'preservim/vim-pencil'
       use 'tpope/vim-markdown'
