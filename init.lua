@@ -233,7 +233,7 @@ vim.api.nvim_set_keymap('n', '<leader><leader>L', ':TestLast<CR>', {noremap = tr
 vim.api.nvim_set_keymap('n', '<leader><leader>G', ':TestVisit<CR>', {noremap = true})
 
 -- Vaffle
-vim.api.nvim_set_keymap('n', '-', ':Lexplore %:p:h<cr>', {noremap = true})
+vim.api.nvim_set_keymap('n', '-', ':Vaffle %<cr>', {noremap = true})
 
 -- Git
 vim.api.nvim_set_keymap('n', '<leader>gs', ':Neogit<cr>', {noremap = true})
@@ -346,7 +346,7 @@ return require('packer').startup(function(use)
   use 'mattn/emmet-vim'
   use 'sheerun/vim-polyglot'
   use 'lepture/vim-jinja'
-  -- use 'cocopon/vaffle.vim'
+  use 'cocopon/vaffle.vim'
   use 'jpalardy/vim-slime'
   use 'vimwiki/vimwiki'
   use 'rbgrouleff/bclose.vim'
