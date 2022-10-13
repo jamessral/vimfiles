@@ -236,8 +236,10 @@ vim.api.nvim_set_keymap('n', '<leader><leader>G', ':TestVisit<CR>', {noremap = t
 vim.api.nvim_set_keymap('n', '-', ':Vaffle %<cr>', {noremap = true})
 
 -- Git
-vim.api.nvim_set_keymap('n', '<leader>gs', ':Neogit<cr>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>gc', ':Neogit commit<cr>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>gs', ':Git<cr>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>gc', ':Gcommit<cr>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>ga', ':Gwrite<cr>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>gd', ':Gdiff<cr>', {noremap = true})
 
 
 -- FZF
@@ -406,15 +408,7 @@ return require('packer').startup(function(use)
           })
       use 'scrooloose/nerdcommenter'
       use 'Raimondi/delimitMate'
-      -- use 'tpope/vim-fugitive'
-      use({'TimUntersberger/neogit',
-              requires = 'nvim-lua/plenary.nvim',
-              config = function()
-                  local neogit = require('neogit')
-
-                  neogit.setup {}
-              end
-          })
+      use 'tpope/vim-fugitive'
       use 'airblade/vim-gitgutter'
       use 'preservim/vim-pencil'
       use 'tpope/vim-markdown'
