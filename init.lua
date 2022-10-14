@@ -118,7 +118,7 @@ current_theme = 'dark'
 function LoadDark()
     current_theme = 'dark'
     vim.cmd [[ set background=dark ]]
-    vim.cmd [[ colorscheme Monokai ]]
+    vim.cmd [[ colorscheme molokai ]]
     -- vim.cmd [[ highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan]]
     -- vim.cmd [[ highlight Comment cterm=italic gui=italic ]]
 end
@@ -174,15 +174,15 @@ vim.api.nvim_set_keymap('n', '<BS>', '<C-w>h', {noremap = true})
 vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', {noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>T', ':tabe<cr>', {noremap = true})
 
-vim.api.nvim_set_keymap('n', '<leader>/', ':nohlsearch<CR>', {})
+vim.api.nvim_set_keymap('n', '<leader>/', ':nohlsearch<CR>', {silent = true})
 vim.api.nvim_set_keymap('v', '<', '<gv', {noremap = true})
 vim.api.nvim_set_keymap('v', '>', '>gv', {noremap = true})
 
-vim.api.nvim_set_keymap('n', '<leader>ev', ':e $MYVIMRC<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>rv', ':so $MYVIMRC<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>ev', ':e $MYVIMRC<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>rv', ':so $MYVIMRC<CR>', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>F', ':Prettier<cr>', {noremap = true, silent = true})
 
-vim.api.nvim_set_keymap('n', '<cr>', ':w<cr>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<cr>', ':w<cr>', {noremap = true, silent = true})
 
 -- For navigating even in Nvim terminal
 vim.api.nvim_set_keymap('t', '<M-h>', '<C-\\><C-N><C-w>h', {noremap = true})
