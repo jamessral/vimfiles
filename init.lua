@@ -17,7 +17,8 @@ vim.opt.termguicolors = true
 vim.opt.wildmenu = true
 vim.opt.wildignore:append('*/tmp/*,*.so,*.swp,*.zip,*/.tmp/*,*/.sass-cache/*,*/node_modules/*,*.keep,*.DS_Store,*/.git/*,*/__pychache__/*')
 vim.opt.mouse = 'a'
-vim.opt.guicursor = 'n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50'
+-- vim.opt.guicursor = 'n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50'
+vim.opt.guicursor = ''
 --vim.opt.completeopt = 'noinsert,menunone,noselect'
 vim.opt.signcolumn = 'yes'
 
