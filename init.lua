@@ -406,6 +406,7 @@ return require('packer').startup(function(use)
       use 'tpope/vim-endwise'
       use 'tpope/vim-surround'
       use 'tpope/vim-commentary'
+      use 'Olical/conjure'
       use 'tbastos/vim-lua'
       use 'janko-m/vim-test'
       use {'Shougo/vimproc.vim', run = 'make' }
