@@ -318,16 +318,6 @@ local packer_bootstrap = ensure_packer()
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'flazz/vim-colorschemes'
-  use { 
-      'olivercederborg/poimandres.nvim',
-      config = function()
-          require('poimandres').setup {
-              -- leave this setup function empty for default config
-              -- or refer to the configuration section
-              -- for configuration options
-          }
-      end
-  }
   use { 'nvim-treesitter/nvim-treesitter',
       config = function()
           require'nvim-treesitter.configs'.setup {
