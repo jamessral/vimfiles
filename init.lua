@@ -93,7 +93,7 @@ current_theme = 'dark'
 function LoadDark()
     current_theme = 'dark'
     vim.cmd [[ set background=dark ]]
-    vim.cmd [[ colorscheme gruvbox ]]
+    vim.cmd [[ colorscheme poimandres ]]
     -- vim.cmd [[ highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan]]
     -- vim.cmd [[ highlight Comment cterm=italic gui=italic ]]
 end
