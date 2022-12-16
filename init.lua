@@ -125,7 +125,7 @@ function LoadDark()
 end
 function LoadLight()
     current_theme = 'light'
-    vim.cmd [[ colorscheme Tomorrow ]]
+    vim.cmd [[ colorscheme basic-light ]]
     vim.cmd [[ set background=light ]]
     -- vim.cmd [[ highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan]]
     -- vim.cmd [[ highlight Comment cterm=italic gui=italic ]]
