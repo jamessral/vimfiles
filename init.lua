@@ -119,13 +119,13 @@ current_theme = 'dark'
 function LoadDark()
     current_theme = 'dark'
     vim.cmd [[ set background=dark ]]
-    vim.cmd [[ colorscheme molokai ]]
+    vim.cmd [[ colorscheme gruvbox ]]
     -- vim.cmd [[ highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan]]
     -- vim.cmd [[ highlight Comment cterm=italic gui=italic ]]
 end
 function LoadLight()
     current_theme = 'light'
-    vim.cmd [[ colorscheme PaperColor ]]
+    vim.cmd [[ colorscheme gruvbox ]]
     vim.cmd [[ set background=light ]]
     -- vim.cmd [[ highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan]]
     -- vim.cmd [[ highlight Comment cterm=italic gui=italic ]]
@@ -139,7 +139,7 @@ function SwitchTheme()
     end
 end
 
-LoadDark()
+LoadLight()
 
 -- Utilities
 function PrintNote()
@@ -318,6 +318,16 @@ local packer_bootstrap = ensure_packer()
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'flazz/vim-colorschemes'
+  use { 
+      'olivercederborg/poimandres.nvim',
+      config = function()
+          require('poimandres').setup {
+              -- leave this setup function empty for default config
+              -- or refer to the configuration section
+              -- for configuration options
+          }
+      end
+  }
   use { 'nvim-treesitter/nvim-treesitter',
       config = function()
           require'nvim-treesitter.configs'.setup {
@@ -406,7 +416,6 @@ return require('packer').startup(function(use)
       use 'tpope/vim-endwise'
       use 'tpope/vim-surround'
       use 'tpope/vim-commentary'
-      use 'Olical/conjure'
       use 'tbastos/vim-lua'
       use 'janko-m/vim-test'
       use {'Shougo/vimproc.vim', run = 'make' }
@@ -448,7 +457,7 @@ return require('packer').startup(function(use)
               'hrsh7th/cmp-nvim-lsp',
               config = function() 
                   local capabilities = vim.lsp.protocol.make_client_capabilities()
-                  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+                  capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
                   local lspconfig = require('lspconfig')
 
