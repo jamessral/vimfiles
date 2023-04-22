@@ -1,21 +1,44 @@
 -- Options
+-- vim.opt.nocompatible = true
+-- vim.opt.noswapfile = true
+-- vim.opt.nomodeline = true
+-- vim.opt.ttimeout = true
+-- vim.opt.ttimeoutlen = 0
+-- vim.opt.matchtime = 0
+-- vim.opt.encoding = UTF-8
+-- vim.opt.ttyfast = true
+-- vim.opt.number = true
 vim.opt.path:append('**')
+-- display incomplete commands
+-- vim.opt.showcmd = true
+-- vim.opt.cmdheight = 1
+-- vim.opt.ttyfast = true
 vim.opt.termguicolors = true
 vim.opt.wildmenu = true
 vim.opt.wildignore:append('*/tmp/*,*.so,*.swp,*.zip,*/.tmp/*,*/.sass-cache/*,*/node_modules/*,*.keep,*.DS_Store,*/.git/*,*/__pychache__/*')
 vim.opt.mouse = 'a'
+-- vim.opt.guicursor = 'n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50'
 vim.opt.guicursor = ''
+--vim.opt.completeopt = 'noinsert,menunone,noselect'
 vim.opt.signcolumn = 'yes'
 
 -- matching brace/parenthesis/etc.
 vim.opt.showmatch = true
+-- http://nvie.com/posts/how-i-boosted-my-vim/
 vim.opt.hidden = true
 
 -- GUI Settings
 vim.opt.guifont = 'Liberation Mono:h10'
+-- vim.opt.guioptions = vim.opt.guioptions - 'l'
+-- vim.opt.guioptions = vim.opt.guioptions - 'r'
+-- vim.opt.guioptions = vim.opt.guioptions - 'T'
+-- vim.opt.guioptions = vim.opt.guioptions - 'R'
+-- vim.opt.guioptions = vim.opt.guioptions - 'm'
+-- vim.opt.guioptions = vim.opt.guioptions - 'L'
 vim.opt.linespace=3
 
 -- Whitespace
+--vim.opt.nowrap = true                     -- don't wrap lines
 vim.opt.tabstop=2 
 vim.opt.shiftwidth=2      -- a tab is four spaces (or vim.opt.this to 4)
 vim.opt.expandtab = true                   -- use spaces, not tabs (optional)
@@ -86,20 +109,23 @@ vim.g.goyo_width = 120
 vim.g.markdown_fenced_languages = {'ruby','erb=eruby','javascript','sh'}
 vim.g.vimwiki_folding = 'expr'
 
+
 -- UI
+
 -- vim.cmd [[ highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan ]]
 -- vim.cmd [[ highlight Comment cterm=italic gui=italic ]]
+
 current_theme = 'dark'
 function LoadDark()
     current_theme = 'dark'
     vim.cmd [[ set background=dark ]]
-    vim.cmd [[ colorscheme poimandres ]]
+    vim.cmd [[ colorscheme molokai ]]
     -- vim.cmd [[ highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan]]
     -- vim.cmd [[ highlight Comment cterm=italic gui=italic ]]
 end
 function LoadLight()
     current_theme = 'light'
-    vim.cmd [[ colorscheme basic-light ]]
+    vim.cmd [[ colorscheme PaperColor ]]
     vim.cmd [[ set background=light ]]
     -- vim.cmd [[ highlight Pmenu ctermbg=DarkCyan guibg=DarkCyan]]
     -- vim.cmd [[ highlight Comment cterm=italic gui=italic ]]
@@ -113,7 +139,7 @@ function SwitchTheme()
     end
 end
 
-LoadLight()
+LoadDark()
 
 -- Utilities
 function PrintNote()
@@ -192,7 +218,9 @@ vim.api.nvim_set_keymap('n', '<space>f', '<cmd> lua vim.lsp.buf.formatting()<cr>
 
 -- For Utils
 vim.api.nvim_set_keymap('i', '<C-i><C-n>', '<ESC> :lua PrintNote()<cr>', {noremap = true})
+-- vim.api.nvim_set_keymap('n', '<leader>in', '<ESC> :lua PrintNote()<cr>', {noremap = true})
 vim.api.nvim_set_keymap('i', '<C-i><C-t>', '<ESC> :lua PrintTodo()<cr>', {noremap = true})
+-- vim.api.nvim_set_keymap('i', '<leader>it', '<ESC> :lua PrintTodo()<cr>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<C-p>', ':Telescope find_files<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<C-g>', ':Telescope live_grep<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<C-b>', ':Telescope buffers<CR>', {noremap = true})
@@ -290,12 +318,6 @@ local packer_bootstrap = ensure_packer()
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'flazz/vim-colorschemes'
-  use { 
-      'olivercederborg/poimandres.nvim',
-      config = function()
-          require('poimandres').setup { }
-      end
-  }
   use { 'nvim-treesitter/nvim-treesitter',
       config = function()
           require'nvim-treesitter.configs'.setup {
@@ -327,167 +349,167 @@ return require('packer').startup(function(use)
   use 'machakann/vim-highlightedyank'
   use 'vim-scripts/utl.vim'
   use 'tpope/vim-repeat'
-  use 'tpope/vim-rails'
-  use 'junegunn/goyo.vim'
-  use 'christoomey/vim-tmux-navigator'
-  use 'editorconfig/editorconfig-vim'
-  use 'lervag/vimtex'
-  use 'pangloss/vim-javascript'
-  use 'leafgarland/typescript-vim'
-  use 'maxmellon/vim-jsx-pretty'
-  use 'jparise/vim-graphql'
-  use 'HerringtonDarkholme/yats.vim'
-  use 'roxma/nvim-yarp'
-  use 'leshill/vim-json'
-  use {'fatih/vim-go', run = ':GoUpdateBinaries' }
-  use {'junegunn/fzf', dir = '~/.fzf', run = './install --all' }
-  use 'junegunn/fzf.vim'
-  use({
-          'nvim-telescope/telescope.nvim',
-          config = function()
-              require('telescope').setup{
-                  defaults = {
-                      mappings = {
-                          i = {
-                              -- map actions.which_key to <C-h> (default: <C-/>)
-                              -- actions.which_key shows the mappings for your picker,
-                              -- e.g. git_{create, delete, ...}_branch for the git_branches picker
-                              ["<C-h>"] = "which_key"
+      use 'tpope/vim-rails'
+      use 'junegunn/goyo.vim'
+      use 'christoomey/vim-tmux-navigator'
+      use 'editorconfig/editorconfig-vim'
+      use 'lervag/vimtex'
+      use 'pangloss/vim-javascript'
+      use 'leafgarland/typescript-vim'
+      use 'maxmellon/vim-jsx-pretty'
+      use 'jparise/vim-graphql'
+      use 'HerringtonDarkholme/yats.vim'
+      use 'roxma/nvim-yarp'
+      use 'leshill/vim-json'
+      use {'fatih/vim-go', run = ':GoUpdateBinaries' }
+      use {'junegunn/fzf', dir = '~/.fzf', run = './install --all' }
+      use 'junegunn/fzf.vim'
+      use({
+              'nvim-telescope/telescope.nvim',
+              config = function()
+                  require('telescope').setup{
+                      defaults = {
+                          mappings = {
+                              i = {
+                                  -- map actions.which_key to <C-h> (default: <C-/>)
+                                  -- actions.which_key shows the mappings for your picker,
+                                  -- e.g. git_{create, delete, ...}_branch for the git_branches picker
+                                  ["<C-h>"] = "which_key"
+                              }
                           }
+                      },
+                      pickers = {
+                          -- Default configuration for builtin pickers goes here:
+                          -- picker_name = {
+                              --   picker_config_key = value,
+                              --   ...
+                          -- }
+                          -- Now the picker_config_key will be applied every time you call this
+                          -- builtin picker
+                      },
+                      extensions = {
+                          -- Your extension configuration goes here:
+                          -- extension_name = {
+                              --   extension_config_key = value,
+                          -- }
+                          -- please take a look at the readme of the extension you want to configure
                       }
-                  },
-                  pickers = {
-                      -- Default configuration for builtin pickers goes here:
-                      -- picker_name = {
-                          --   picker_config_key = value,
-                          --   ...
-                      -- }
-                      -- Now the picker_config_key will be applied every time you call this
-                      -- builtin picker
-                  },
-                  extensions = {
-                      -- Your extension configuration goes here:
-                      -- extension_name = {
-                          --   extension_config_key = value,
-                      -- }
-                      -- please take a look at the readme of the extension you want to configure
-                  }
-              }
-          end
-      })
-  use 'scrooloose/nerdcommenter'
-  use 'Raimondi/delimitMate'
-  use 'tpope/vim-fugitive'
-  use 'airblade/vim-gitgutter'
-  use 'preservim/vim-pencil'
-  use 'tpope/vim-markdown'
-  use 'tpope/vim-endwise'
-  use 'tpope/vim-surround'
-  use 'tpope/vim-commentary'
-  use 'tbastos/vim-lua'
-  use 'janko-m/vim-test'
-  use {'Shougo/vimproc.vim', run = 'make' }
-  -- Lazy loading:
-  -- Load on specific commands
-  use {'tpope/vim-dispatch', opt = true, cmd = {'Dispatch', 'Make', 'Focus', 'Start'}}
-  use 'danro/rename.vim'
-  use 'nvim-lua/plenary.nvim'
-  use({
-          'neovim/nvim-lspconfig',
-          config = function() 
-              require'lspconfig'.eslint.setup{}
-              require'lspconfig'.tsserver.setup{}
-          end
-      })
-  use (
-      {'hrsh7th/nvim-cmp',
-          requires = {'L3MON4D3/LuaSnip'},
-          config = function()
-              local cmp = require 'cmp'
-              cmp.setup {
-                  snippet = {
-                      expand = function(args)
-                          require('luasnip').lsp_expand(args.body)
-                      end,
-                  },
-                  mapping = {
-                      ["<C-p>"] = cmp.mapping.select_prev_item(),
-                      ["<C-n>"] = cmp.mapping.select_next_item(),
-                  },
-                  sources = {
-                      { name = 'nvim_lsp' },
-                      { name = 'luasnip' },
-                  },
-              }
-          end
-      })
-  use({
-          'hrsh7th/cmp-nvim-lsp',
-          config = function() 
-              local capabilities = vim.lsp.protocol.make_client_capabilities()
-              capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
-              local lspconfig = require('lspconfig')
-
-              -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-              local servers = { 'clangd', 'rust_analyzer', 'tsserver' }
-              for _, lsp in ipairs(servers) do
-                  lspconfig[lsp].setup {
-                      on_attach = lsp_attach,
-                      flags = lsp_flags,
-                      capabilities = capabilities,
                   }
               end
-          end
-      })
-  use({'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp'})
-  use 'rafamadriz/friendly-snippets'
-  use({'L3MON4D3/LuaSnip',
-          config = function()
-              local luasnip = require 'luasnip'
-              require("luasnip.loaders.from_vscode").lazy_load()
-              local has_words_before = function()
-                  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-                  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+          })
+      use 'scrooloose/nerdcommenter'
+      use 'Raimondi/delimitMate'
+      use 'tpope/vim-fugitive'
+      use 'airblade/vim-gitgutter'
+      use 'preservim/vim-pencil'
+      use 'tpope/vim-markdown'
+      use 'tpope/vim-endwise'
+      use 'tpope/vim-surround'
+      use 'tpope/vim-commentary'
+      use 'tbastos/vim-lua'
+      use 'janko-m/vim-test'
+      use {'Shougo/vimproc.vim', run = 'make' }
+      -- Lazy loading:
+      -- Load on specific commands
+      use {'tpope/vim-dispatch', opt = true, cmd = {'Dispatch', 'Make', 'Focus', 'Start'}}
+      use 'danro/rename.vim'
+      use 'nvim-lua/plenary.nvim'
+      use({
+              'neovim/nvim-lspconfig',
+              config = function() 
+                  require'lspconfig'.eslint.setup{}
+                  require'lspconfig'.tsserver.setup{}
               end
-          end
-      })
-  use 'MunifTanjim/prettier.nvim'
-  use {
-      "mfussenegger/nvim-dap",
-      opt = true,
-      module = { "dap" },
-      requires = {
-          "Pocco81/dap-buddy.nvim",
-          "nvim-telescope/telescope-dap.nvim",
-      },
-      config = function()
-          local dap = require "dap"
+          })
+      use (
+          {'hrsh7th/nvim-cmp',
+              requires = {'L3MON4D3/LuaSnip'},
+              config = function()
+                  local cmp = require 'cmp'
+                  cmp.setup {
+                      snippet = {
+                          expand = function(args)
+                              require('luasnip').lsp_expand(args.body)
+                          end,
+                      },
+                      mapping = {
+                          ["<C-p>"] = cmp.mapping.select_prev_item(),
+                          ["<C-n>"] = cmp.mapping.select_next_item(),
+                      },
+                      sources = {
+                          { name = 'nvim_lsp' },
+                          { name = 'luasnip' },
+                      },
+                  }
+              end
+          })
+      use({
+              'hrsh7th/cmp-nvim-lsp',
+              config = function() 
+                  local capabilities = vim.lsp.protocol.make_client_capabilities()
+                  capabilities = require('cmp_nvim_lsp').default_capatilities(capabilities)
 
-          dap.adapters.node2 = {
-              type = 'executable',
-              command = 'node',
-              args = {
-                  vim.fn.stdpath("data") .. "/dapinstall/jsnode_dbg/" ..
-                  '/vscode-node-debug2/out/src/nodeDebug.js'
-              }
-          }
+                  local lspconfig = require('lspconfig')
 
-          dap.configurations.javascript = {
-              {
-                  type = 'node2',
-                  request = 'launch',
-                  program = '${workspaceFolder}/${file}',
-                  cwd = vim.fn.getcwd(),
-                  sourceMaps = true,
-                  protocol = 'inspector',
-                  console = 'integratedTerminal'
+                  -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
+                  local servers = { 'clangd', 'rust_analyzer', 'tsserver' }
+                  for _, lsp in ipairs(servers) do
+                      lspconfig[lsp].setup {
+                          on_attach = lsp_attach,
+                          flags = lsp_flags,
+                          capabilities = capabilities,
+                      }
+                  end
+              end
+          })
+      use({'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp'})
+      use 'rafamadriz/friendly-snippets'
+      use({'L3MON4D3/LuaSnip',
+              config = function()
+                  local luasnip = require 'luasnip'
+                  require("luasnip.loaders.from_vscode").lazy_load()
+                  local has_words_before = function()
+                      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+                      return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+                  end
+              end
+          })
+      use 'MunifTanjim/prettier.nvim'
+      use {
+          "mfussenegger/nvim-dap",
+          opt = true,
+          module = { "dap" },
+          requires = {
+              "Pocco81/dap-buddy.nvim",
+              "nvim-telescope/telescope-dap.nvim",
+          },
+          config = function()
+              local dap = require "dap"
+
+              dap.adapters.node2 = {
+                  type = 'executable',
+                  command = 'node',
+                  args = {
+                      vim.fn.stdpath("data") .. "/dapinstall/jsnode_dbg/" ..
+                      '/vscode-node-debug2/out/src/nodeDebug.js'
+                  }
               }
-          }
-      end,
-  }
-  if packer_bootstrap then
-      require('packer').sync()
-  end
-end)
+
+              dap.configurations.javascript = {
+                  {
+                      type = 'node2',
+                      request = 'launch',
+                      program = '${workspaceFolder}/${file}',
+                      cwd = vim.fn.getcwd(),
+                      sourceMaps = true,
+                      protocol = 'inspector',
+                      console = 'integratedTerminal'
+                  }
+              }
+          end,
+      }
+      if packer_bootstrap then
+          require('packer').sync()
+      end
+  end)
 
